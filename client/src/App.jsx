@@ -11,7 +11,7 @@ import Sales from './views/Sales/Sales'
 import { Routes, Route } from 'react-router-dom'
 import './App.css'
 
-// CONSULTAR RUTAS DEFINIDAS POR EL BACK - PDTE AJUSTAR!!
+// CONSULTAR RUTAS DEFINIDAS POR EL BACK - PDTE AJUSTAR!
 
 const App = () => {
   return (
