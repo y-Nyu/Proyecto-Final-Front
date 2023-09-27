@@ -1,0 +1,97 @@
+.container.about {
+    background-image: url(../../assets/logo/Logo.png);/* No me deja ver la imagen de fondo */
+}
+
+.imageCheck{
+    width: 50px;
+    height: 50px;
+    margin-left: 0.5em;
+  }
+
+.image {
+    max-width: 230px; 
+    height: 230px;
+    padding: 10px;
+    border-radius: 20px;
+    display: block;
+    transition: all 0.2s ease;
+  }
+
+  .name {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 0;
+    text-align: center;
+  }
+  
+  .proyecto-contenedor {
+    padding-top: 60px;
+    margin-bottom: 40px;
+  }
+  
+  .overlay {
+    transition: all 0.2s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .overlay .iconos-contenedor {
+    display:block;
+  }
+  .overlay i {
+    color: black;
+    font-size: 60px;
+    margin: 10px;
+  }
+  
+  .overlay p {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 0;
+    text-align: center;
+  }
+  
+  .centeredParagraph {
+    text-align: center;
+    margin: 0;
+  }
+  
+  .iconos.contenedor {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+  }
+  
+  .iconos-contenedor a {
+    margin: 5px; 
+  }
+  
+  .proyecto {
+    position: relative;
+  }
+  
+  .proyecto:hover img {
+    opacity: 0.2;
+  }
+  
+  .proyecto:hover .overlay {
+    opacity: 1;
+    cursor: pointer;
+  }
+  
+  /* Adaptable responsivo */
+  
+  @media screen and (max-width: 400px) {
+    .overlay p {
+      font-size: 18px;
+    }
+  
+    .overlay i {
+      font-size: 40px;
+    }
+  }
+  
