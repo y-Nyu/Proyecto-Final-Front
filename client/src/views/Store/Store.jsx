@@ -14,9 +14,6 @@ const Store = () => {
 
     return(
         <div>
-            <div className="container">
-                Hola
-            </div>
             <p>Esta es la tienda</p>
             <h4>Filtros y Ordenamientos</h4>
             <div>
