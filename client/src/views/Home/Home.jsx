@@ -5,7 +5,7 @@ const Home = () => {
     return(
         <div>
             <img src="src\images\banner.png" alt="Banner Home"/>
-            <Cards/>
+            {/* <Cards/> */}
         </div>
     )
 }

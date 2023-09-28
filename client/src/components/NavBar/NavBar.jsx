@@ -24,7 +24,7 @@ const NavBar = ({userId, userImage}) => {
 
                         <ul className="navbar-nav d-flex justify-content-center align-items-center">
                             <li className="nav-item">
-                                <a className="nav-link" onClick={() => navigate('/home')}>Home</a>
+                                <a className="nav-link" onClick={() => navigate('/')}>Home</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" onClick={() => navigate('/store')}>Tienda</a>
