@@ -263,6 +263,7 @@ const initialState = {
       active: true,
     },
   ],
+  sortedProducts: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -286,6 +287,20 @@ const rootReducer = (state = initialState, action) => {
           product.name.toUpperCase().includes(action.payload.toUpperCase())
         ),
       };
+    case "ORDERED": {
+      const sortedProducts = [...state.allProducts].sort((a, b) => {
+        if (action.payload) {
+          return a.name.localeCompare(b.name);
+        } else {
+          return b.name.localeCompare(a.name);
+        }
+      });
+      console.log(sortedProducts);
+      return {
+        ...state,
+        allProducts: sortedProducts,
+      };
+    }
     default:
       return {
         ...state,
