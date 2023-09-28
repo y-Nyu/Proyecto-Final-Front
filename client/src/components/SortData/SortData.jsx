@@ -1,11 +1,14 @@
-// Filtro por categoria y (extra: rango de precio)
+import React, { useState } from 'react';
 
-const SortData = () => {
-    return(
-        <div>
+function SortData() {
+  const [sortedData, setSortedData] = useState([]);
 
-        </div>
-    )
+  return (
+    <div></div>
+  );
 }
 
 export default SortData;
+
+//Dentro de la función SortData, puedes agregar la lógica necesaria para clasificar tus datos según tus requisitos específicos.
+
