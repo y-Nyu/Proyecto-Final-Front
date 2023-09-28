@@ -13,18 +13,18 @@ const reducer = (state = initialState, action) => {
         case GET_PRODUCTS:
             return {
                 ...state,
-                products: [action.payload],
-                productsCopy: [action.payload]
+                products: action.payload,
+                productsCopy: action.payload
             };
         case GET_PRODUCTS_CATEGORIES:
             return {
                 ...state,
-                categories: [action.payload]
+                categories: action.payload
             };
         case GET_PRODUCT_NAME:
             return {
                 ...state,
-                products: [action.payload]
+                products: action.payload
             };
         case GET_PRODUCT_ID:
             return {
@@ -34,7 +34,7 @@ const reducer = (state = initialState, action) => {
         case CREATE_PRODUCT:
             return {
                 ...state,
-                products: [action.payload]
+                products: action.payload
             };
         default:
             return {...state}

@@ -1,10 +1,10 @@
 import { GET_PRODUCTS, GET_PRODUCT_NAME, GET_PRODUCT_ID, GET_PRODUCTS_CATEGORIES, CREATE_PRODUCT } from "./action-types";
-
+import axios from "axios";
 
 export const getAllProducts = () => {
     return async (dispatch) => {
         try {
-            // const { data } = await xxxx.get('xxxx');
+            const { data } = await axios.get('https://pf-back-deploy.onrender.com/product');
 
             dispatch({
                 type: GET_PRODUCTS,
@@ -20,7 +20,7 @@ export const getAllProducts = () => {
 export const getProductByName = (name) => {
     return async (dispatch) => {
         try {
-            // const { data } = await xxxx.get(`xxxx${name}`);
+            const { data } = await axios.get(`https://pf-back-deploy.onrender.com/product?name=${name}`);
 
             dispatch({
                 type: GET_PRODUCT_NAME,
@@ -36,7 +36,7 @@ export const getProductByName = (name) => {
 export const getProductByID = (id) => {
     return async (dispatch) => {
         try {
-            // const { data } = await xxxx.get(`xxxx${id}`);
+            const { data } = await axios.get(`https://pf-back-deploy.onrender.com/product/${id}`);
 
             dispatch({
                 type: GET_PRODUCT_ID,
@@ -52,7 +52,7 @@ export const getProductByID = (id) => {
 export const getCategories = () => {
     return async (dispatch) => {
         try {
-            // const { data } = await xxxx.get('xxxx');
+            const { data } = await axios.get('https://pf-back-deploy.onrender.com/category');
 
             dispatch({
                 type: GET_PRODUCTS_CATEGORIES,
@@ -68,7 +68,7 @@ export const getCategories = () => {
 export const createProduct = (body) => {
     return async (dispatch) => {
         try {
-            // const { data } = await xxxx.post('xxxx', body);
+            const { data } = await axios.post('https://pf-back-deploy.onrender.com/product', body);
 
             dispatch({
                 type: CREATE_PRODUCT,
