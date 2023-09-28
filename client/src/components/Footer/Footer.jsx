@@ -2,7 +2,7 @@ import style from "./Footer.module.css";
 
 const Footer = () => {
   return (
-    <div className={`mb-2 bg-primary ${style.footer}`}>
+    <div className={`mb-2 bg-info ${style.footer}`}>
       <footer className={`container text-center ${style.footerContainer}`}>
         <div className="row">
           <div className={`col-12 col-md-3 ${style.columna}`}>
