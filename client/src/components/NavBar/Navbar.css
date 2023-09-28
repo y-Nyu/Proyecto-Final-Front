@@ -1,0 +1,41 @@
+.navbar {
+    padding: 2rem;
+    background-color: #E5F2FB;
+  }
+  
+  .nav-item {
+    margin-left: 30px;
+  }
+  
+  .navbar-collapse {
+    align-items: center;
+    justify-content: space-between;
+  }
+  .navbar-nav .nav-item .nav-link:first-child {
+    flex: 0 0 auto; /* Evita que el primer div crezca o se contraiga */
+    width: auto; /* Permite que el ancho del primer div se ajuste automáticamente */
+    }
+
+  .nav-item .nav-link:hover {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: #6489D8;
+  }
+  
+/* Buttons */
+  .d-flex .btn {
+    background-color: #6489D8;
+    color: white;
+    border: none;
+    margin-left: 10px;
+  }
+  
+  .d-flex .btn:hover {
+    transition: background-color 0.3s ease;
+    background-color: #143c93;
+  }
+  
+  .d-flex .icon {
+    /* background-color: white; */
+    color: rgb(221, 7, 7);
+  }
