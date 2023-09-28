@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, GET_PRODUCT_NAME, GET_PRODUCT_ID, GET_PRODUCTS_CATEGORIES, CREATE_PRODUCT } from "../action-types";
+import { GET_PRODUCTS, GET_PRODUCT_NAME, GET_PRODUCT_ID, GET_PRODUCTS_CATEGORIES, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT } from "../action-types";
 import axios from "axios";
 
 export const getAllProducts = () => {
@@ -80,3 +80,36 @@ export const createProduct = (body) => {
         }
     }
 };
+
+export const updateProduct = (id, body) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.put(`https://pf-back-deploy.onrender.com/product/${id}`, body);
+
+            dispatch({
+                type: UPDATE_PRODUCT,
+                payload: data
+            });
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+};
+
+export const deleteProduct = (id) => {
+    return async (dispatch) => {
+        try {
+            await axios.delete(`https://pf-back-deploy.onrender.com/product/${id}`);
+
+            dispatch({
+                type: DELETE_PRODUCT,
+                payload: id
+            });
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+};
+

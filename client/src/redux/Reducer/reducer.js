@@ -1,11 +1,12 @@
-import { GET_PRODUCTS, GET_PRODUCT_NAME, GET_PRODUCT_ID, GET_PRODUCTS_CATEGORIES, CREATE_PRODUCT } from "../Actions/action-types";
+import { GET_PRODUCTS, GET_PRODUCT_NAME, GET_PRODUCT_ID, GET_PRODUCTS_CATEGORIES, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT } from "../Actions/action-types";
 
 
 
 const initialState = {
     products: [],
     productsCopy: [],
-    categories: []
+    categories: [],
+    updatedProduct: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -36,6 +37,20 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 products: action.payload
             };
+        case UPDATE_PRODUCT:
+            state.updatedProduct = action.payload;
+
+            return {
+                ...state
+            };
+        case DELETE_PRODUCT:
+            const productToDelete = action.payload;
+            const fileteredProducts = state.products.filter((product) => product.id !== productToDelete);
+
+            return {
+                ...state,
+                products: fileteredProducts
+            }
         default:
             return {...state}
     }
