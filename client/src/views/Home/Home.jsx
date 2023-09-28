@@ -1,7 +1,11 @@
+import Cards from '../../components/Cards/Cards'
+// import '/Home.css'
+
 const Home = () => {
     return(
         <div>
-            <p>Este es el Home</p>
+            <img src="src\images\banner.png" alt="Banner Home"/>
+            <Cards/>
         </div>
     )
 }
