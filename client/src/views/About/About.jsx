@@ -5,11 +5,12 @@ import imageAndres from "../../assets/aboutProfileImages/Andres.jpg";
 import imageLucas from "../../assets/aboutProfileImages/Lucas.jpg";
 import imageFlor from "../../assets/aboutProfileImages/Flor.jpg";
 import imageIñaki from "../../assets/aboutProfileImages/Iñaki.jpg";
+import imageRodri from "../../assets/aboutProfileImages/agent.jpg";
 import style from "./About.module.css";
 
 const About = () => {
   return (
-    <div className={`container text-center ${style.container.about}`}>
+    <div className={`container text-center ${style.containerAbout}`}>
       <div className="row m-2 d-flex flex-column">
         <h2 className="mt-3 text-center text-uppercase">
           Te presentamos al equipo de desarrollo
@@ -33,157 +34,245 @@ const About = () => {
           </em>
         </h5>
       </div>
-
-      <div className="row">
-        {/* Integrante1 */}
-        <div className="col-12 col-md-6 col-lg-3">
-          <div className={`proyecto ${style.proyecto}`}>
-            <img
-              className={`object-cover w-100 shadow-md ${style.image}`}
-              src={imageFran}
-              alt="Franco"
-            />
-            <div className={`overlay ${style.overlay}`}>  
-              <p className={`text-center ${style.centeredParagraph} ${style.name}`}>Franco</p>
-              <div className="iconos-contenedor text-center">
-            <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
-              <i className="bi bi-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
-              <i className="bi bi-linkedin"></i>
-            </a>
-            </div>
-            </div>
-          </div>
-        </div>
-        {/* Integrante2 */}
-        <div className="col-12 col-md-6 col-lg-3">
-          <div className={`proyecto ${style.proyecto}`}>
-            <img
-              className={`object-cover w-100 shadow-md ${style.image}`}
-              src={imageIñaki}
-              alt="Iñaki"
-            />
-            <div className={`overlay ${style.overlay}`}>
-              <p className={style.centeredParagraph}>Iñaki</p>
-              <div className="iconos-contenedor">
-            <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
-              <i className="bi bi-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
-              <i className="bi bi-linkedin"></i>
-            </a>
-            </div>
-            </div>
-          </div>
-        </div>
-        {/* Integrante3 */}
-        <div className="col-12 col-md-6 col-lg-3">
-          <div className={`proyecto ${style.proyecto}`}>
-            <img
-              className={`object-cover w-100 shadow-md ${style.image}`}
-              src={imageFlor}
-              alt="Flor"
-            />
-            <div className={`overlay ${style.overlay}`}>
-              <p className={style.centeredParagraph}>Florencia</p>
-              <div className="iconos-contenedor">
-            <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
-              <i className="bi bi-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
-              <i className="bi bi-linkedin"></i>
-            </a>
-            </div>
-            </div>
-          </div>
-        </div>
-        {/* Integrante4 */}
-        <div className="col-12 col-md-6 col-lg-3">
-          <div className={`proyecto ${style.proyecto}`}>
-            <img
-              className={`object-cover w-100 shadow-md ${style.image}`}
-              src={imageLucas}
-              alt="Lucas"
-            />
-            <div className={`overlay ${style.overlay}`}>
-              <p className={style.centeredParagraph}>Lucas</p>
-              <div className={`iconos-contenedor${style.iconos.contenedor}`}>
-            <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
-              <i className="bi bi-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
-              <i className="bi bi-linkedin"></i>
-            </a>
-            </div>
-            </div>
-          </div>
-        </div>
-        {/* Integrante5 */}
-        <div className="col-12 col-md-6 col-lg-3">
-          <div className={`proyecto ${style.proyecto}`}>
-            <img
-              className={`object-cover w-100 shadow-md ${style.image}`}
-              src={imageAndres}
-              alt="Andres"
-            />
-            <div className={`overlay ${style.overlay}`}>
-              <p className={style.centeredParagraph}>Andres</p>
-              <div className="iconos-contenedor">
-            <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
-              <i className="bi bi-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
-              <i className="bi bi-linkedin"></i>
-            </a>
-            </div>
-            </div>
-          </div>
-        </div>
-        {/* Integrante6 */}
-        <div className="col-12 col-md-6 col-lg-3">
-          <div className={`proyecto ${style.proyecto}`}>
-            <img
-              className={`object-cover w-100 shadow-md ${style.image}`}
-              src={imageWalter}
-              alt="Walter"
-            />
-            <div className={`overlay ${style.overlay}`}>
-              <p className={style.centeredParagraph}>Walter</p>
-              <div className="iconos-contenedor">
-            <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
-              <i className="bi bi-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
-              <i className="bi bi-linkedin"></i>
-            </a>
+      <div className="container proyecto-contenedor">
+        <div className="row">
+          {/* Integrante1 */}
+          <div className="col-12 col-md-6 col-lg-3">
+            <div className={`proyecto ${style.proyecto}`}>
+              <img
+                className={`object-cover w-100 shadow-md ${style.image}`}
+                src={imageFran}
+                alt="Franco"
+              />
+              <div className={`overlay ${style.overlay}`}>
+                <p
+                  className={`text-center ${style.centeredParagraph} ${style.name}`}
+                >
+                  Franco
+                </p>
+                <div className={`iconos-contenedor ${style.iconosContenedor}`}>
+                  <a
+                    href="https://github.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="bi bi-github"></i>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/fran-seba-rosales212730/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="bi bi-linkedin"></i>
+                  </a>
+                </div>
               </div>
+            </div>
+          </div>
+          {/* Integrante2 */}
+          <div className="col-12 col-md-6 col-lg-3">
+            <div className={`proyecto ${style.proyecto}`}>
+              <img
+                className={`object-cover w-100 shadow-md ${style.image}`}
+                src={imageIñaki}
+                alt="Iñaki"
+              />
+              <div className={`overlay ${style.overlay}`}>
+                <p className={style.centeredParagraph}>Iñaki</p>
+                <div className={`iconos-contenedor ${style.iconosContenedor}`}>
+                  <a
+                    href="https://github.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="bi bi-github"></i>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="bi bi-linkedin"></i>
+                  </a>
+                </div>
               </div>
-          </div>
-        </div>
-        {/* Integrante7 */}
-        <div className="col-12 col-md-6 col-lg-3">
-          <div className={`proyecto ${style.proyecto}`}>
-            <img
-              className={`object-cover w-100 shadow-md ${style.image}`}
-              src={imageMeli}
-              alt="Meli"
-            />
-            <div className={`overlay ${style.overlay}`}>
-              <p className={style.centeredParagraph}>Melissa</p>
-              <div className="iconos-contenedor">
-            <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
-              <i className="bi bi-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
-              <i className="bi bi-linkedin"></i>
-            </a>
-            </div>
             </div>
           </div>
+          {/* Integrante3 */}
+          <div className="col-12 col-md-6 col-lg-3">
+            <div className={`proyecto ${style.proyecto}`}>
+              <img
+                className={`object-cover w-100 shadow-md ${style.image}`}
+                src={imageFlor}
+                alt="Flor"
+              />
+              <div className={`overlay ${style.overlay}`}>
+                <p className={style.centeredParagraph}>Florencia</p>
+                <div className={`iconos-contenedor ${style.iconosContenedor}`}>
+                  <a
+                    href="https://github.com/FlorenciaHuespe"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="bi bi-github"></i>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/florencia-huespe-6587441b5/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="bi bi-linkedin"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Integrante4 */}
+          <div className="col-12 col-md-6 col-lg-3">
+            <div className={`proyecto ${style.proyecto}`}>
+              <img
+                className={`object-cover w-100 shadow-md ${style.image}`}
+                src={imageLucas}
+                alt="Lucas"
+              />
+              <div className={`overlay ${style.overlay}`}>
+                <p className={style.centeredParagraph}>Lucas</p>
+                <div className={`iconos-contenedor ${style.iconosContenedor}`}>
+                  <a
+                    href="https://github.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="bi bi-github"></i>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="bi bi-linkedin"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Integrante5 */}
+          <div className="col-12 col-md-6 col-lg-3">
+            <div className={`proyecto ${style.proyecto}`}>
+              <img
+                className={`object-cover w-100 shadow-md ${style.image}`}
+                src={imageAndres}
+                alt="Andres"
+              />
+              <div className={`overlay ${style.overlay}`}>
+                <p className={style.centeredParagraph}>Andrés</p>
+                <div className={`iconos-contenedor ${style.iconosContenedor}`}>
+                  <a
+                    href="https://github.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="bi bi-github"></i>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="bi bi-linkedin"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Integrante6 */}
+          <div className="col-12 col-md-6 col-lg-3">
+            <div className={`proyecto ${style.proyecto}`}>
+              <img
+                className={`object-cover w-100 shadow-md ${style.image}`}
+                src={imageWalter}
+                alt="Walter"
+              />
+              <div className={`overlay ${style.overlay}`}>
+                <p className={style.centeredParagraph}>Walter</p>
+                <div className={`iconos-contenedor ${style.iconosContenedor}`}>
+                  <a
+                    href="https://github.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="bi bi-github"></i>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/walter-horst-52b112276/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="bi bi-linkedin"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Integrante7 */}
+          <div className="col-12 col-md-6 col-lg-3">
+            <div className={`proyecto ${style.proyecto}`}>
+              <img
+                className={`object-cover w-100 shadow-md ${style.image}`}
+                src={imageMeli}
+                alt="Meli"
+              />
+              <div className={`overlay ${style.overlay}`}>
+                <p className={style.centeredParagraph}>Melissa</p>
+                <div className={`iconos-contenedor ${style.iconosContenedor}`}>
+                  <a
+                    href="https://github.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="bi bi-github"></i>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="bi bi-linkedin"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Integrante8 */}
+          <div className="col-12 col-md-6 col-lg-3">
+            <div className={`proyecto ${style.proyecto}`}>
+              <img
+                className={`object-cover w-100 shadow-md ${style.image}`}
+                src={imageRodri}
+                alt="Meli"
+              />
+              <div className={`overlay ${style.overlay}`}>
+                <p className={style.centeredParagraph}>Rodrigo</p>
+                <div className={`iconos-contenedor ${style.iconosContenedor}`}>
+                  <a
+                    href="https://github.com/y-Nyu"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="bi bi-github"></i>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/orellana-rodrigo/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="bi bi-linkedin"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        {/* Integrante8 */}
-        {/* <div className="col-12 col-md-6 col-lg-4">Rodrigo</div> */}
       </div>
     </div>
   );
