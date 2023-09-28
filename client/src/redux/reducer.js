@@ -1,4 +1,6 @@
 const initialState = {
+    users: [],
+    usersCopy: [],
     items: [],
     itemsCopy: []
 }
