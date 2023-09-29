@@ -109,7 +109,7 @@ const About = () => {
             />
             <div className={`overlay ${style.overlay}`}>
               <p className={style.centeredParagraph}>Lucas</p>
-              <div className={`iconos-contenedor${style.iconos.contenedor}`}>
+              <div className={`iconos-contenedor${style.iconosContenedor}`}>
             <a href="https://github.com/GreenCheeseWheel" target="_blank" rel="noopener noreferrer">
               <i className="bi bi-github"></i>
             </a>
