@@ -1,5 +1,8 @@
-.container.about {
-    background-image: url(../../assets/logo/Logo.png);/* No me deja ver la imagen de fondo */
+.containerAbout {
+  background-image: url(../../assets/logo/Logo.png);
+  background-repeat: no-repeat;
+  background-position: center center; 
+  background-size:contain; 
 }
 
 .imageCheck{
@@ -27,6 +30,7 @@
   .proyecto-contenedor {
     padding-top: 60px;
     margin-bottom: 40px;
+    text-align: center;
   }
   
   .overlay {
@@ -37,6 +41,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrar horizontalmente */
+    justify-content: center; /* Centrar verticalmente */
+    text-align: center; /* Centrar el texto */
   }
 
   .overlay .iconos-contenedor {
@@ -60,16 +69,17 @@
     margin: 0;
   }
   
-  .iconos.contenedor {
+  .iconosContenedor {
     display: flex;
-    flex-direction: column; 
-    align-items: center;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
   }
   
-  .iconos-contenedor a {
-    margin: 5px; 
+  .iconosContenedor a {
+    margin: 5px;
+    font-size: 24px; /* Tamaño de fuente ajustable */
   }
-  
+   
   .proyecto {
     position: relative;
   }
@@ -94,4 +104,66 @@
       font-size: 40px;
     }
   }
+
+  @media screen and (max-width: 767px) {
+    .image {
+      max-width: 700px; 
+      height: 700px;
+      padding: 10px;
+      border-radius: 20px;
+      display: block;
+      justify-content: center; /* Centrar horizontalmente */
+      align-items: center; /* Centrar verticalmente */
+      transition: all 0.2s ease;
+    }
+    .containerAbout {
+      background-image: url();
+      background-repeat: no-repeat;
+      background-position: center center; 
+      background-size:contain; 
+    }
+    .centeredParagraph {
+      text-align: center;
+      margin: 0;
+    }
+    
+    .iconosContenedor {
+      display: flex;
+      justify-content: center; /* Centrar horizontalmente */
+      align-items: center; /* Centrar verticalmente */
+    }
+    
+  }
+
+  @media screen and (max-width: 992px) {
+    .image {
+      max-width: 400px; 
+      height: 400px;
+      padding: 10px;
+      border-radius: 20px;
+      display: block;
+      justify-content: center; /* Centrar horizontalmente */
+      align-items: center; /* Centrar verticalmente */
+      transition: all 0.2s ease;
+    }
+    .containerAbout {
+      background-image: url();
+      background-repeat: no-repeat;
+      background-position: center center; 
+      background-size:contain; 
+    }
+    .centeredParagraph {
+      text-align: center;
+      margin: 0;
+    }
+    
+    .iconosContenedor {
+      display: flex;
+      justify-content: center; /* Centrar horizontalmente */
+      align-items: center; /* Centrar verticalmente */
+    }
+    
+  }
+
+
   

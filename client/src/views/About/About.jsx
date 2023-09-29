@@ -10,7 +10,7 @@ import style from "./About.module.css";
 
 const About = () => {
   return (
-    <div className={`container text-center ${style.container.about}`}>
+    <div className={`container text-center ${style.containerAbout}`}>
       <div className="row m-2 d-flex flex-column">
         <h2 className="mt-3 text-center text-uppercase">
           Te presentamos al equipo de desarrollo
