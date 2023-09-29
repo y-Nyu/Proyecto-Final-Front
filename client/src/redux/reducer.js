@@ -266,7 +266,7 @@ const initialState = {
   sortedProducts: [],
 };
 
-const rootReducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "SET_SEARCH_TYPE":
       return { ...state, searchType: action.payload.component };
@@ -308,4 +308,4 @@ const rootReducer = (state = initialState, action) => {
   }
 };
 
-export default rootReducer;
+export default reducer;
