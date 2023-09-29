@@ -7,7 +7,7 @@ import store from './redux/store.js';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import './index.css'
 import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap-icons/font/bootstrap-icons.css';
+//import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 ReactDOM.createRoot(document.getElementById('root')).render(

@@ -10,14 +10,10 @@ import Users from './views/Users/Users'
 import Sales from './views/Sales/Sales'
 import { Routes, Route } from 'react-router-dom'
 import './App.css'
-import SortData from './components/SortData/SortData'
 
 const App = () => {
   return (
-    <>
-      <SortData/>
-    </>
-    <div>
+    <div>           
       {location.pathname !== '/loginRegister' && <NavBar />}
       <Routes>
           <Route path='/' element={<Home/>} />

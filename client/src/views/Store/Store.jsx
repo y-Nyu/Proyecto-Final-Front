@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Cards from "../../components/Cards/Cards";
 import { getAllProducts } from "../../redux/Actions/Products/productsActions";
+import Filters from '../../components/Filters/Filters'
 
 const Store = () => {
     const dispatch = useDispatch();
@@ -14,8 +15,8 @@ const Store = () => {
 
     return(
         <div>
-            <p>Esta es la tienda</p>
             <h4>Filtros y Ordenamientos</h4>
+            <Filters/>
             <div>
                 <Cards products={allProducts}/>
             </div>
