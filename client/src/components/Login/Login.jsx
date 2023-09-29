@@ -55,25 +55,6 @@ const Login = () => {
     onSuccess: (codeResponse) => console.log(codeResponse),
   });
 
-  // const login = useGoogleLogin({
-  //     onSuccess: async (response) => {
-  //         try {
-  //             const res = await axios.get(
-  //                 'https://www.googleapis.com/auth/userinfo',
-  //                 {
-  //                     headers: {
-  //                         Authorization: `Bearer ${response.access_token}`
-  //                     }
-  //                 }
-  //             )
-  //             console.log(res);
-  //         }catch(err) {
-  //             console.log(err);
-  //         }
-  //     }
-  //   });
-
-  // Pdte deshabilitar botón submit cuando surja un error
   return (
     <div className="container">
       <div className="col-md-12">
