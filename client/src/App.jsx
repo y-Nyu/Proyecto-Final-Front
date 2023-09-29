@@ -16,7 +16,7 @@ import { Routes, Route } from 'react-router-dom'
 
 const App = () => {
   return (
-    <div>
+    <div>           
       {location.pathname !== '/loginRegister' && <NavBar />}
       <Routes>
           <Route path='/' element={<Home/>} />

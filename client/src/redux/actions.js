@@ -4,7 +4,7 @@ import axios from 'axios';
 export const usersCreate = (user) => {
     return async function () {
         try {
-            await axios.post('http://localhost:3001/users', user)
+            await axios.post('https://pf-back-deploy.onrender.com/users', user)
         } catch (error) {
             alert(error.response.data)
         }
@@ -14,7 +14,7 @@ export const usersCreate = (user) => {
 export const userLogin = (loginData) => {
     return async function () {
         try {
-            await axios.post('http://localhost:3001/login', loginData)
+            await axios.post('https://pf-back-deploy.onrender.com/login', loginData)
         } catch (error) {
             alert(error.response.data)
         }

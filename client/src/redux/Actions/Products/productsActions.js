@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, GET_PRODUCT_NAME, GET_PRODUCT_ID, GET_PRODUCTS_CATEGORIES, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT } from "../action-types";
+import { GET_PRODUCTS, GET_PRODUCT_NAME, GET_PRODUCT_ID, GET_PRODUCTS_CATEGORIES, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, GET_FILTERED_PRODUCTS } from "../action-types";
 import axios from "axios";
 
 export const getAllProducts = () => {
@@ -113,3 +113,20 @@ export const deleteProduct = (id) => {
     }
 };
 
+export const filterProducts = (filter) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(`https://pf-back-deploy.onrender.com/product?category=${filter}`);
+
+            dispatch({
+                type: GET_FILTERED_PRODUCTS,
+                payload: data
+            })
+            console.log('DATA');
+            console.log(data);
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+} 
