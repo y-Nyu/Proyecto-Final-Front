@@ -1,13 +1,19 @@
 
-footer{
+/* footer{
     min-height: 60px;
     padding: 40px 40px 60px 40px;
   }
   
-.footer .row div{
-  height: 250px;
+.footer {
+  background-color: #6489D8;
 }
 
+.footer .row div{
+  height: 250px;
+} */
+.footer {
+  flex-shrink: 0;
+}
 .titulo {
 font-size: 18px;
 font-weight: bold;

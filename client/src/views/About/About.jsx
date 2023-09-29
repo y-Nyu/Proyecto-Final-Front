@@ -5,6 +5,7 @@ import imageAndres from "../../assets/aboutProfileImages/Andres.jpg";
 import imageLucas from "../../assets/aboutProfileImages/Lucas.jpg";
 import imageFlor from "../../assets/aboutProfileImages/Flor.jpg";
 import imageIñaki from "../../assets/aboutProfileImages/Iñaki.jpg";
+import imageRodri from "../../assets/aboutProfileImages/ah.jpg";
 import style from "./About.module.css";
 
 const About = () => {
@@ -46,10 +47,10 @@ const About = () => {
             <div className={`overlay ${style.overlay}`}>  
               <p className={`text-center ${style.centeredParagraph} ${style.name}`}>Franco</p>
               <div className="iconos-contenedor text-center">
-            <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/Franco2730" target="_blank" rel="noopener noreferrer">
               <i className="bi bi-github"></i>
             </a>
-            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.linkedin.com/in/fran-seba-rosales212730/" target="_blank" rel="noopener noreferrer">
               <i className="bi bi-linkedin"></i>
             </a>
             </div>
@@ -67,7 +68,7 @@ const About = () => {
             <div className={`overlay ${style.overlay}`}>
               <p className={style.centeredParagraph}>Iñaki</p>
               <div className="iconos-contenedor">
-            <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/IEchaburu" target="_blank" rel="noopener noreferrer">
               <i className="bi bi-github"></i>
             </a>
             <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
@@ -109,7 +110,7 @@ const About = () => {
             <div className={`overlay ${style.overlay}`}>
               <p className={style.centeredParagraph}>Lucas</p>
               <div className={`iconos-contenedor${style.iconos.contenedor}`}>
-            <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/GreenCheeseWheel" target="_blank" rel="noopener noreferrer">
               <i className="bi bi-github"></i>
             </a>
             <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
@@ -130,7 +131,7 @@ const About = () => {
             <div className={`overlay ${style.overlay}`}>
               <p className={style.centeredParagraph}>Andres</p>
               <div className="iconos-contenedor">
-            <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/andrezcom" target="_blank" rel="noopener noreferrer">
               <i className="bi bi-github"></i>
             </a>
             <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
@@ -151,10 +152,10 @@ const About = () => {
             <div className={`overlay ${style.overlay}`}>
               <p className={style.centeredParagraph}>Walter</p>
               <div className="iconos-contenedor">
-            <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/WalterHorst" target="_blank" rel="noopener noreferrer">
               <i className="bi bi-github"></i>
             </a>
-            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.linkedin.com/in/walter-horst-52b112276/" target="_blank" rel="noopener noreferrer">
               <i className="bi bi-linkedin"></i>
             </a>
               </div>
@@ -172,7 +173,7 @@ const About = () => {
             <div className={`overlay ${style.overlay}`}>
               <p className={style.centeredParagraph}>Melissa</p>
               <div className="iconos-contenedor">
-            <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/mmonroy94" target="_blank" rel="noopener noreferrer">
               <i className="bi bi-github"></i>
             </a>
             <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
@@ -183,7 +184,26 @@ const About = () => {
           </div>
         </div>
         {/* Integrante8 */}
-        {/* <div className="col-12 col-md-6 col-lg-4">Rodrigo</div> */}
+        <div className="col-12 col-md-6 col-lg-3">
+          <div className={`proyecto ${style.proyecto}`}>
+            <img
+              className={`object-cover w-100 shadow-md ${style.image}`}
+              src={imageRodri}
+              alt="Rodri"
+            />
+            <div className={`overlay ${style.overlay}`}>
+              <p className={style.centeredParagraph}>Rodrigo</p>
+              <div className="iconos-contenedor">
+            <a href="https://github.com/y-Nyu" target="_blank" rel="noopener noreferrer">
+              <i className="bi bi-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/orellana-rodrigo" target="_blank" rel="noopener noreferrer">
+              <i className="bi bi-linkedin"></i>
+            </a>
+            </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

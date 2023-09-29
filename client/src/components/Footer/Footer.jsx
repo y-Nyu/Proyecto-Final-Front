@@ -2,8 +2,14 @@ import style from "./Footer.module.css";
 
 const Footer = () => {
   return (
-    <div className={`mb-2 bg-primary ${style.footer}`}>
-      <footer className={`container text-center ${style.footerContainer}`}>
+    // <footer className="footer bg-dark text-light text-center py-3">
+    // <div className="container">
+    //   <p>&copy; {new Date().getFullYear()} Mi Sitio Web</p>
+    // </div>
+    // </footer>
+    
+    <div className={`mb-2  ${style.footer}`}>
+      <footer className={`footer bg-dark text-white text-center py-3 ${style.footerContainer}`}>
         <div className="row">
           <div className={`col-12 col-md-3 ${style.columna}`}>
             <p className={`titulo ${style.titulo}`}>Contacto</p>
