@@ -7,7 +7,6 @@ import {
 } from "../../redux/actions";
 
 function Searchbar(component) {
-  
   const dispatch = useDispatch();
   const searchType = useSelector((state) => state.searchType);
   const [info, setInfo] = useState("");
