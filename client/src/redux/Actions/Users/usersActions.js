@@ -1,4 +1,4 @@
-import { GET_USERS, GET_USER_ID, CREATE_USER, UPDATE_USER, DELETE_PRODUCT, DELETE_USER } from "../action-types";
+import { GET_USERS, GET_USER_ID, CREATE_USER, UPDATE_USER, DELETE_USER } from "../action-types";
 import axios from "axios";
 
 export const getAllUsers = () => {
