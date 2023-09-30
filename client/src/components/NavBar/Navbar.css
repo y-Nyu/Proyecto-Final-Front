@@ -39,3 +39,12 @@
     /* background-color: white; */
     color: rgb(221, 7, 7);
   }
+
+  .navbar-brand {
+    transition: transform 0.3s; /* Agrega una transición para la animación */
+  }
+  
+  .navbar-brand:hover {
+    transform: scale(1.1); /* Escala ligeramente el elemento al hacer hover */
+  }
+  

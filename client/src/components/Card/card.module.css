@@ -1,3 +1,75 @@
+/* Establece un tamaño fijo para todas las cartas */
+.thumb-wrapper {
+  width: 250px;
+  padding: 10px;
+  margin: 10px;
+  background: #eeeded;
+  border-radius: 6px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Establece un tamaño fijo para las imágenes dentro de las cartas */
+.thumb-wrapper .img-box {
+  height: 150px; /* Cambia el valor según tus necesidades */
+  overflow: hidden;
+}
+
+/* Asegura que todas las imágenes tengan el mismo tamaño */
+.thumb-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Agrega la animación de hover */
+.thumb-wrapper:hover {
+  transform: scale(1.05); /* Escala ligeramente la carta al hacer hover */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Añade una sombra más pronunciada al hacer hover */
+}
+
+/* Agrega otros estilos según tus necesidades */
+.thumb-wrapper h4 {
+  font-size: 18px;
+}
+
+.thumb-wrapper p.item-price {
+  font-size: 13px;
+  padding: 2px 0;
+}
+
+.thumb-wrapper .btn {
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: bold;
+  background: none;
+  border: 1px solid #7c8cd4;
+  padding: 6px 14px;
+  margin-top: 5px;
+  line-height: 16px;
+  border-radius: 20px;
+}
+
+.thumb-wrapper .btn:hover,
+.thumb-wrapper .btn:focus {
+  color: #fff;
+  background: #7c8cd4;
+  box-shadow: none;
+}
+
+.thumb-wrapper .btn i {
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.thumb-wrapper .fa-heart {
+  color: red;
+}
+
+// COPY
 body {
     background: #b5b8b9;
     font-family: "Open Sans", sans-serif;
