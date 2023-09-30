@@ -1,4 +1,13 @@
-import { GET_PRODUCTS, GET_PRODUCT_NAME, GET_PRODUCT_ID, GET_PRODUCTS_CATEGORIES, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, GET_FILTERED_PRODUCTS } from "../action-types";
+import { GET_PRODUCTS, 
+    GET_PRODUCT_NAME, 
+    GET_PRODUCT_ID, 
+    GET_PRODUCTS_CATEGORIES, 
+    CREATE_PRODUCT, 
+    UPDATE_PRODUCT, 
+    DELETE_PRODUCT, 
+    GET_FILTERED_PRODUCTS 
+} from "../action-types";
+
 import axios from "axios";
 
 export const getAllProducts = () => {

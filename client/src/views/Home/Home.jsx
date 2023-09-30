@@ -2,7 +2,7 @@ import './Home.css'
 
 const Home = () => {
     return(
-            <section class="hero align-items-stretch">
+            <section className="hero align-items-stretch">
                 <div>
                     <img src="src\images\banner.png" alt="Banner Home"/>
                     <h1>

@@ -1,5 +1,4 @@
-/* Establece un tamaño fijo para todas las cartas */
-.thumb-wrapper {
+/* .thumb-wrapper {
   width: 250px;
   padding: 10px;
   margin: 10px;
@@ -11,26 +10,22 @@
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-/* Establece un tamaño fijo para las imágenes dentro de las cartas */
 .thumb-wrapper .img-box {
-  height: 150px; /* Cambia el valor según tus necesidades */
+  height: 150px;
   overflow: hidden;
 }
 
-/* Asegura que todas las imágenes tengan el mismo tamaño */
 .thumb-wrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* Agrega la animación de hover */
 .thumb-wrapper:hover {
-  transform: scale(1.05); /* Escala ligeramente la carta al hacer hover */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Añade una sombra más pronunciada al hacer hover */
+  transform: scale(1.05); 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Agrega otros estilos según tus necesidades */
 .thumb-wrapper h4 {
   font-size: 18px;
 }
@@ -67,9 +62,8 @@
 
 .thumb-wrapper .fa-heart {
   color: red;
-}
+} */
 
-// COPY
 body {
     background: #b5b8b9;
     font-family: "Open Sans", sans-serif;
