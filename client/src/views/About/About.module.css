@@ -94,7 +94,6 @@
     cursor: pointer;
   }
   
-  
   @media screen and (max-width: 400px) {
     .overlay p {
       font-size: 18px;
@@ -163,8 +162,4 @@
       align-items: center; /* Centrar verticalmente */
     }
     
-  }
-
-
-
-  
+  }  

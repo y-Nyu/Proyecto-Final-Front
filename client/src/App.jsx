@@ -5,12 +5,17 @@ import About from "./views/About/About";
 import LoginRegister from "./views/LoginRegister/LoginRegister";
 import AccountDetail from "./views/AccountDetail/AccountDetail";
 import Store from "./views/Store/Store";
+
 import Detail from "./components/detail/Detail";
+
+import Detail from "./views/Detail/Detail";
+
 import Faq from "./views/Faq/faq";
 import Privacy from "./views/PrivacyP/Privacy";
 import Users from "./views/Users/Users";
 import Sales from "./views/Sales/Sales";
 import { Routes, Route } from "react-router-dom";
+import FormProduct from "./components/FomProducto/FormProduct";
 // import './App.css'
 
 const App = () => {
@@ -18,6 +23,7 @@ const App = () => {
     <div>
       {location.pathname !== "/loginRegister" && <NavBar />}
       <Routes>
+        <Route path="/form" element={<FormProduct></FormProduct>}></Route>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/loginRegister" element={<LoginRegister />} />
