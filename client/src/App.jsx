@@ -5,7 +5,11 @@ import About from "./views/About/About";
 import LoginRegister from "./views/LoginRegister/LoginRegister";
 import AccountDetail from "./views/AccountDetail/AccountDetail";
 import Store from "./views/Store/Store";
+
+import Detail from "./components/detail/Detail";
+
 import Detail from "./views/Detail/Detail";
+
 import Faq from "./views/Faq/faq";
 import Privacy from "./views/PrivacyP/Privacy";
 import Users from "./views/Users/Users";
