@@ -264,6 +264,7 @@ const initialState = {
     },
   ],
   sortedProducts: [],
+  
 };
 
 const reducer = (state = initialState, action) => {
@@ -301,6 +302,7 @@ const reducer = (state = initialState, action) => {
         allProducts: sortedProducts,
       };
     }
+
     default:
       return {
         ...state,
