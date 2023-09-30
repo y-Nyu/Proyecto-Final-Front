@@ -32,7 +32,7 @@ const Register = () => {
             [name]: value,
         });
             setErrors(newErrors);
-        }
+    }
     
 
     const dispatch = useDispatch()

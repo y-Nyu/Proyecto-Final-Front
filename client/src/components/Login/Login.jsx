@@ -13,6 +13,7 @@ import axios from "axios";
 // pendiente, crear action-type y action para enviar info al back
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [data, setData] = useState({
     email: "",
@@ -47,7 +48,6 @@ const Login = () => {
     return disabledAux;
   };
 
-  const dispatch = useDispatch();
   const handleSubmit = (ev) => {
     ev.preventDefault();
     
