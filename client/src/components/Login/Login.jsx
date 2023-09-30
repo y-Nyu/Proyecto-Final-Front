@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import { GoogleLogin } from '@react-oauth/google';
 // import jwt_decode from "jwt-decode";
 import { validateLogin } from "../../Validate";
 import { useGoogleLogin } from "@react-oauth/google";
-import { userLogin } from "../../redux/actions";
+import { createUserRole, userLogin } from "../../redux/actions";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
 
 // EXTRA: Recuperación de contraseña
 // pendiente, crear action-type y action para enviar info al back
 const Login = () => {
+  const navigate = useNavigate();
+
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -45,14 +48,34 @@ const Login = () => {
   };
 
   const dispatch = useDispatch();
-  const handleSubmit = () => {
-    dispatch(userLogin(data));
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+    
+    // Envio la request de Login
+    // Si sale bien, guardo el token en sessionStorage
+    // y navego a home.
+    // En caso contrario se muestra una alerta con el mensaje de error
+    axios.post("http://localhost:3001/login", data)
+      .then(usrRes => {
+
+        // Rol debería ser guardado en estado global
+        // para chequear luego si el usuario tiene acceso a las paginas de admin o no
+        const {rol, token} = usrRes.data;
+        
+        // Setteamos el token
+        sessionStorage.setItem("jwt_session", token);
+        dispatch(createUserRole(rol));
+        navigate("/home");
+      })
+      .catch(error => alert(error.response.data.error))
   };
 
-  // user que recibe debe quedar almacenado en localStorage
 
+  // user que recibe debe quedar almacenado en localStorage
   const login = useGoogleLogin({
-    onSuccess: (codeResponse) => console.log(codeResponse),
+    onSuccess: (codeResponse) => {
+      axios.post("http://localhost:3001/login-google",{google_token: codeResponse.access_token})
+    },
   });
 
   // const login = useGoogleLogin({
@@ -67,7 +90,8 @@ const Login = () => {
   //                 }
   //             )
   //             console.log(res);
-  //         }catch(err) {
+  //         }
+  //         catch(err) {
   //             console.log(err);
   //         }
   //     }
@@ -114,15 +138,14 @@ const Login = () => {
 
           <div className="row">
             <div className="col-6">
-              <NavLink to={"/home"}>
+              
                 <button
-                  type="submit"
                   disabled={disableByEmptyProps()}
                   className="btn btn-primary"
                 >
                   Iniciar sesión
                 </button>
-              </NavLink>
+    
             </div>
           </div>
         </form>
