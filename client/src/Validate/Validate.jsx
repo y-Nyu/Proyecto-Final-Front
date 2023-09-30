@@ -12,8 +12,13 @@ export const ValidateProduct = (data) => {
   if (data.category === "Seleccione") {
     errors.category = "Seleccione una categoria";
   }
+
+  if (data.description === "" || data.description.length < 10) {
+    errors.description = "Ingese detalle de producto mayor a 10 caracteres";
+  // Ver diferencia
   if (data.detail === "" || data.detail.length < 10) {
     errors.detail = "Ingese detalle de producto mayor a 10 caracteres";
+
   }
   if (data.price.trim() === "") {
     errors.price = "Ingrese precio";

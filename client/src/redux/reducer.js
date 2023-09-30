@@ -268,6 +268,8 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case "GET_PRODUCTS":
+      return { ...state, allProducts: action.payload };
     case "SET_SEARCH_TYPE":
       return { ...state, searchType: action.payload.component };
     case "SEARCH_USERS":
