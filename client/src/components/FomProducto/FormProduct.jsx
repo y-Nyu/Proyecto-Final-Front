@@ -97,7 +97,6 @@ const FormProduct = () => {
         <label htmlFor="name">Name:</label>
         <input type="text" name="name" onChange={handleChange} />
         {errors.name ? <p>{errors.name}</p> : null}
-
         <label htmlFor="brand">Brand</label>
         <input type="text" name="brand" onChange={handleChange} />
         {errors.brand ? <p>{errors.brand}</p> : null}
@@ -124,7 +123,6 @@ const FormProduct = () => {
         {data.image && (
           <img src={data.image} alt={data.name} className="imagePreview" />
         )}
-
         <div>
           <button type="submit" disabled={!isFormValid()}>
             Add Product
