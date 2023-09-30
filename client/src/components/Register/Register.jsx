@@ -1,11 +1,13 @@
+import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { usersCreate } from "../../redux/actions";
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { validateRegister } from "../../Validate";
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 const Register = () => {
+    const navigate = useNavigate();
+
     const [data,setData] = useState({
         name:'',
         email: '',
@@ -34,8 +36,18 @@ const Register = () => {
     
 
     const dispatch = useDispatch()
-    const register = () => {
-        dispatch(usersCreate(data))
+    const register = (ev) => {
+        ev.preventDefault();
+
+        axios.post("http://localhost:3001/users", data)
+            .then(res => {
+                const {rol, token} = res.data;
+                sessionStorage.setItem("jwt_session", token);
+                dispatch(createUserRole(rol));
+                navigate("/home");
+            })
+            .catch(error => alert(error.response.data.error));
+
     }
     
     return(
@@ -75,7 +87,7 @@ const Register = () => {
                 </div>
                 
 
-                <NavLink to={'/home'}><button>Registrarme</button></NavLink>
+                <button>Registrarme</button>
             </form>
         </div>
     )
