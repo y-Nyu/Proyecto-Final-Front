@@ -97,9 +97,6 @@ const Register = ({ toggleComponent }) => {
                         </div>
                     </div>
                 </div>
-
-
-                <button>Registrarme</button>
             </form>
         </div>
     )

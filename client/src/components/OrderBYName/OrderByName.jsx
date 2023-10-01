@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { ordered } from "../../../src/redux/actions";
+import { ordered } from '../../redux/Actions/Products/productsActions'
 
 function OrderByName() {
   const [boolean, setBoolean] = useState(false);

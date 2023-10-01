@@ -12,13 +12,12 @@ const Filters = () => {
     const allCategories = useSelector(state=>state.categories)
 
     const handleFilter = (event) => {
-        const { name, value } = event.target
-        if(name === 'filterByCategory'){
-            dispatch(filterProducts(value))
-        }else{
-            dispatch(clearFilters(value))
-        }
-        
+            dispatch(filterProducts(event.target.value))
+        } 
+
+    const showAll = () => {
+            dispatch(clearFilters())
+
     }
 
     return(
@@ -26,11 +25,11 @@ const Filters = () => {
             <p>Filtrar por categoria: </p>
 
             <select onChange={handleFilter}>
-                <option value={''} name='filterByCategory'>-- Categoria --</option>
+                <option value={''}>-- Categoria --</option>
                 {allCategories.map(category=><option value={category.name} key={category.id}>{category.name}</option>)}
             </select>
 
-            <button onChange={handleFilter} name='clearFilters'> Restablecer filtros </button>
+            <button onClick={showAll}> Restablecer filtros </button>
 
         </div>
     )
