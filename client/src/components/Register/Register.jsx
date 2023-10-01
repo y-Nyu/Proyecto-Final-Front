@@ -1,10 +1,14 @@
+import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 import { validateRegister } from "../../Validate";
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import style from './Register.module.css';
 
 const Register = ({ toggleComponent }) => {
+    const navigate = useNavigate();
+
     const [data,setData] = useState({
         name:'',
         email: '',
@@ -29,19 +33,14 @@ const Register = ({ toggleComponent }) => {
             [name]: value,
         });
             setErrors(newErrors);
-        }
+    }
     
 
     const dispatch = useDispatch()
-    
-    // const register = () => {
-    //     dispatch(usersCreate(data))
-    // }
-
     const register = (ev) => {
         ev.preventDefault();
 
-        axios.post("https://pf-back-deploy.onrender.com/users", data)
+        axios.post("http://localhost:3001/users", data)
             .then(res => {
                 const {rol, token} = res.data;
                 sessionStorage.setItem("jwt_session", token);
@@ -49,6 +48,7 @@ const Register = ({ toggleComponent }) => {
                 navigate("/home");
             })
             .catch(error => alert(error.response.data.error));
+
     }
     
     return(
@@ -99,6 +99,7 @@ const Register = ({ toggleComponent }) => {
                 </div>
 
 
+                <button>Registrarme</button>
             </form>
         </div>
     )
