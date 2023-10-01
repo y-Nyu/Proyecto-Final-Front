@@ -1,18 +1,7 @@
-
-/* footer{
-    min-height: 60px;
-    padding: 40px 40px 60px 40px;
-  }
-  
-.footer {
-  background-color: #6489D8;
-}
-
-.footer .row div{
-  height: 250px;
-} */
 .footer {
   flex-shrink: 0;
+  background-color: #E5F2FB;
+
 }
 .titulo {
 font-size: 18px;
@@ -35,13 +24,13 @@ margin: 10px 0;
   justify-content: center;
   padding: 2px;
   margin: 5px;
-  border: 2px solid white;
+  border: 2px solid black;
   border-radius: 30%;
   transition: all 0.2s ease-in;
   }
   
   .iconosRedesSociales i {
-    color: white;
+    color:black;
     font-size: 1.5rem;
     transition: all 0.2s ease-in;
     padding: 8px 19px;
@@ -53,7 +42,7 @@ margin: 10px 0;
   }
   
   .iconosRedesSociales a:hover i {
-    color: black;
+    color: white;
   }
 
   .link a {

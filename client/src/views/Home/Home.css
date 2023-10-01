@@ -3,7 +3,6 @@ section {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: red;
 }
 h1 {
     font-size: 2.5rem;
@@ -15,3 +14,14 @@ h1 {
 .imagen {
     display: inline-block;
 }
+.marcas-text {
+    font-size: 35px; 
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+
+  .custom-h5 {
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 30px; 
+    color:rgb(94, 87, 202);
+  }
+  
