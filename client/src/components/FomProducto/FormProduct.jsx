@@ -4,6 +4,7 @@ import { ValidateProduct } from "../../Validate/Validate";
 import { getCategories } from "../../redux/Actions/Products/productsActions";
 import axios from "axios";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import style from './FormProduct.module.css'
 
 const FormProduct = () => {
   const dispatch = useDispatch();
@@ -142,13 +143,13 @@ const FormProduct = () => {
           </div>
         </div>
 
-        <div className="mb-4 pt-4">
+        {/*<div className="mb-4 pt-4">
           <label htmlFor="stock" className="form-label">Stock / Inventario</label>
-          {/* <input type="text" name="stock" onChange={handleChange} className="form-control"/>
+           <input type="text" name="stock" onChange={handleChange} className="form-control"/>
           <div className="error-container">
             {errors.stock ? <p className={style["error-text"]}>{errors.stock}</p> : <p className={style["error-text"]}></p>}
-          </div> */}
-        </div>
+          </div> 
+        </div>*/}
 
         <div className="mb-4 pt-4">
           {/* PENDIENTE APLICAR ESTILOS DE BOOTSTRAP*/}
