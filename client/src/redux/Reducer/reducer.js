@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, GET_PRODUCT_NAME, GET_PRODUCT_ID, GET_PRODUCTS_CATEGORIES, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, GET_FILTERED_PRODUCTS } from "../Actions/action-types";
+import { GET_PRODUCTS, GET_PRODUCT_NAME, GET_PRODUCT_ID, GET_PRODUCTS_CATEGORIES, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, GET_FILTERED_PRODUCTS, CLEAR_FILTERS } from "../Actions/action-types";
 
 const initialState = {
     products: [],
@@ -57,6 +57,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 products: action.payload
             };
+        case CLEAR_FILTERS:
+            return {
+                ...state,
+                products: [...state.productsCopy]
+            }
         default:
             return {...state}
     }
