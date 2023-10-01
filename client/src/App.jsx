@@ -17,7 +17,7 @@ import FormProduct from "./components/FomProducto/FormProduct";
 const App = () => {
   return (
     <div>
-      {location.pathname !== "/loginRegister" && <NavBar />}
+      <NavBar />
       <Routes>
         <Route path="/form" element={<FormProduct></FormProduct>}></Route>
         <Route path="/" element={<Home />} />
