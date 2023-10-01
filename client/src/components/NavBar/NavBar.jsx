@@ -14,11 +14,12 @@ const NavBar = ({ userId, userImage }) => {
   return (
     <div>
       {console.log(login)}
-      <nav className="navbar navbar-expand-md navbar-light">
+      <nav className="navbar navbar-expand-md">
         <div className="container-fluid">
           <Link to="/" className="navbar-brand">
             <img
               src="src/images/Logo1.png"
+              className="nav_logo"
               width="60"
               alt="Logo de la página"
             />
