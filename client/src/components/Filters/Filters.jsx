@@ -30,7 +30,6 @@ const Filters = () => {
             </select>
 
             <button onClick={showAll}> Restablecer filtros </button>
-
         </div>
     )
 }
