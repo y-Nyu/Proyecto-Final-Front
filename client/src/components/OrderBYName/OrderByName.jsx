@@ -7,9 +7,9 @@ function OrderByName() {
   const dispatch = useDispatch();
 
   const handleButton = () => {
-    const order = !boolean;
-    setBoolean(order);
-    dispatch(ordered(order));
+    const order = !boolean
+    setBoolean(order)
+    dispatch(ordered(order))
   };
 
   return (
@@ -17,7 +17,7 @@ function OrderByName() {
       <h4>Orden Alfabético</h4>
       <button onClick={handleButton}>{boolean ? "Z -> A" : "A -> Z"}</button>
     </div>
-  );
-}
+  )
+};
 
 export default OrderByName;

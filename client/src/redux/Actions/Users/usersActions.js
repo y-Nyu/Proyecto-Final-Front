@@ -10,11 +10,11 @@ export const usersCreate = (user) => {
             alert(error.response.data)
         }
     }
-}
+};
 
 export const createUserRole = (rol) => {
     return {type: "ROLE",payload: rol};
-}
+};
 
 export const userLogin = (loginData) => {
     return async function () {
@@ -27,12 +27,12 @@ export const userLogin = (loginData) => {
             alert(error.response.data)
         }
     }
-}
+};
 
 export const searchUsers = (searched) => {
-    return { type: SEARCH_USERS, payload: searched };
-  };
+    return { type: SEARCH_USERS, payload: searched }
+};
   
-  export const setSearchType = (searchType) => {
-    return { type: SET_SEARCH_TYPE, payload: searchType };
-  };
+export const setSearchType = (searchType) => {
+    return { type: SET_SEARCH_TYPE, payload: searchType }
+};

@@ -24,6 +24,6 @@ const LoginRegister = () => {
             </div>
         </div>
     )
-}
+};
 
 export default LoginRegister;

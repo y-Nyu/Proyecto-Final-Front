@@ -1,6 +1,7 @@
 import NavBar from './components/NavBar/NavBar'
 import Footer from './components/Footer/Footer'
 import FormProduct from "./components/FomProducto/FormProduct";
+import FormUser from './components/FormUser/FormUser';
 import Home from './views/Home/Home'
 import About from './views/About/About'
 import LoginRegister from './views/LoginRegister/LoginRegister'
@@ -12,7 +13,6 @@ import Privacy from "./views/PrivacyP/Privacy";
 import Users from './views/Users/Users'
 import Sales from './views/Sales/Sales'
 import { Routes, Route } from 'react-router-dom'
-import { useState } from 'react';
 import './App.css'
 
 // CONSULTAR RUTAS DEFINIDAS POR EL BACK - PDTE AJUSTAR!!
@@ -24,8 +24,9 @@ const App = () => {
     <div>
       <NavBar />
       <Routes>
-        <Route path="/form" element={<FormProduct></FormProduct>}></Route>
         <Route path="/" element={<Home />} />
+        <Route path="/formProduct" element={<FormProduct/>}></Route>
+        <Route path='/formUser' element={<FormUser/>}></Route>
         <Route path="/about" element={<About />} />
         <Route path="/loginRegister" element={<LoginRegister />} />
         <Route path="/accountDetail/:id" element={<AccountDetail />} />
@@ -39,7 +40,7 @@ const App = () => {
         <Route path="/adminUsers" element={<Users />} />
         <Route path="/adminSales" element={<Sales />} />
       </Routes>
-      <Footer  />
+      <Footer/>
     </div>
   );
 };

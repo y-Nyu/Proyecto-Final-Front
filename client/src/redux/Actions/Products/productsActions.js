@@ -17,7 +17,7 @@ export const getAllProducts = () => {
     try {
       const { data } = await axios.get(
         "https://pf-back-deploy.onrender.com/product"
-      );
+      )
 
       dispatch({
         type: GET_PRODUCTS,
@@ -26,7 +26,7 @@ export const getAllProducts = () => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }
 };
 
 export const getProductByName = (name) => {
@@ -34,16 +34,16 @@ export const getProductByName = (name) => {
     try {
       const { data } = await axios.get(
         `https://pf-back-deploy.onrender.com/product?name=${name}`
-      );
+      )
 
       dispatch({
         type: GET_PRODUCT_NAME,
         payload: data,
-      });
+      })
     } catch (error) {
       console.log(error);
     }
-  };
+  }
 };
 
 export const getProductByID = (id) => {
@@ -51,16 +51,16 @@ export const getProductByID = (id) => {
     try {
       const { data } = await axios.get(
         `https://pf-back-deploy.onrender.com/product/${id}`
-      );
+      )
 
       dispatch({
         type: GET_PRODUCT_ID,
         payload: data,
-      });
+      })
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 };
 
 export const getCategories = () => {
@@ -73,11 +73,11 @@ export const getCategories = () => {
       dispatch({
         type: GET_PRODUCTS_CATEGORIES,
         payload: data,
-      });
+      })
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 };
 
 export const createProduct = (body) => {
@@ -91,11 +91,11 @@ export const createProduct = (body) => {
       dispatch({
         type: CREATE_PRODUCT,
         payload: data,
-      });
+      })
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 };
 
 export const updateProduct = (id, body) => {
@@ -104,8 +104,7 @@ export const updateProduct = (id, body) => {
       const { data } = await axios.put(
         `https://pf-back-deploy.onrender.com/product/${id}`,
         body
-      );
-
+      )
       dispatch({
         type: UPDATE_PRODUCT,
         payload: data,
@@ -119,16 +118,16 @@ export const updateProduct = (id, body) => {
 export const deleteProduct = (id) => {
   return async (dispatch) => {
     try {
-      await axios.delete(`https://pf-back-deploy.onrender.com/product/${id}`);
+      await axios.delete(`https://pf-back-deploy.onrender.com/product/${id}`)
 
       dispatch({
         type: DELETE_PRODUCT,
         payload: id,
-      });
+      })
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 };
 
 export const filterProducts = (filter) => {
@@ -136,17 +135,16 @@ export const filterProducts = (filter) => {
     try {
       const { data } = await axios.get(
         `https://pf-back-deploy.onrender.com/product?category=${filter}`
-      );
-
+      )
             dispatch({
                 type: GET_FILTERED_PRODUCTS,
                 payload: data
             })
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     }
-} 
+};
 
 export const clearFilters = () => {
     return async (dispatch) => {
@@ -156,13 +154,13 @@ export const clearFilters = () => {
             alert(error.response.data) 
         }
     }
-}
+};
 
 export const searchProducts = (searched) => {
     return { type: SEARCH_PRODUCTS, payload: searched };
-  };
+};
 
-  export const ordered = (order) => {
-    return { type: ORDERED, payload: order };
-  };
+export const ordered = (order) => {
+  return { type: ORDERED, payload: order }
+};
   

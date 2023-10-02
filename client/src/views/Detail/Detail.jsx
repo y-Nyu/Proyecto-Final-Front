@@ -14,8 +14,8 @@ const Detail = () => {
         SetproductId(data);
       })
       .catch((error) => {
-        alert("Error al obtener los detalles de videogame:", error);
-      });
+        alert("Error al obtener los detalles del producto:", error)
+      })
   }, [id]);
 
   return (
@@ -33,7 +33,7 @@ const Detail = () => {
         <h3 className="product-price">{productId.price}</h3>
       </div>
     </div>
-  );
+  )
 };
 
 export default Detail;

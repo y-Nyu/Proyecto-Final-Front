@@ -17,7 +17,7 @@ const Store = () => {
   const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
-    dispatch(getAllProducts());
+    dispatch(getAllProducts())
   }, [dispatch]);
 
   useEffect(() => {

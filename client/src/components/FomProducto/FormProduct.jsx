@@ -22,7 +22,7 @@ const FormProduct = () => {
     description: "",
     price: "",
   });
-  console.log(data);
+
   const [errors, setErrors] = useState({
     name: "Ingrese nombre menor a 20 caracteres",
     brand: "Ingrese marca menor a 20 caracteres",

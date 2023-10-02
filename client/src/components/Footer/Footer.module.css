@@ -1,7 +1,6 @@
 .footer {
   flex-shrink: 0;
   background-color: #E5F2FB;
-
 }
 .titulo {
 font-size: 18px;
@@ -46,6 +45,7 @@ margin: 10px 0;
   }
 
   .link a {
+    cursor: pointer;
     color: black !important; /* Usamos !important para dar prioridad */
   }
 

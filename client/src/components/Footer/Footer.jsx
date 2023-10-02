@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import style from "./Footer.module.css";
 
 const Footer = () => {
+  const navigate = useNavigate();
+
   return (
     <div className={`mb-2 ${style.footer}`}>
       <footer className={`container text-center ${style.footerContainer}`}>
@@ -47,8 +50,8 @@ const Footer = () => {
           </div>
           <div className={`col-12 col-md-3 ${style.columna}`}>
             <p className={`titulo ${style.titulo}`}>Información</p>
-            <p className={`link ${style.link}`}><a href="/preguntas-frecuentes">Preguntas frecuentes</a></p>
-            <p className={`link ${style.link}`}><a href="/politica-de-privacidad">Política de privacidad</a></p>
+            <p className={`link ${style.link}`}><a onClick={() => navigate("/preguntas-frecuentes")} >Preguntas frecuentes</a></p>
+            <p className={`link ${style.link}`}><a onClick={() => navigate("/politica-de-privacidad")} >Política de privacidad</a></p>
           </div>
           <div className={`col-12 col-md-3 ${style.columna}`}>
             <p className={`titulo ${style.titulo}`}>Ubicación <i className="bi bi-geo-alt-fill"></i></p>

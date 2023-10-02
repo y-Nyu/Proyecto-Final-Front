@@ -1,4 +1,4 @@
-/* .thumb-wrapper {
+.thumb-wrapper {
   width: 250px;
   padding: 10px;
   margin: 10px;
@@ -62,7 +62,7 @@
 
 .thumb-wrapper .fa-heart {
   color: red;
-} */
+}
 
 body {
     background: #b5b8b9;

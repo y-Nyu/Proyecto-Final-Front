@@ -1,6 +1,6 @@
 import Card from "../Card/Card";
 import { useEffect, useState } from "react";
- import style from "./cards.module.css";
+import style from "./Cards.module.css";
 
 
 const Cards = ({ products }) => {
@@ -18,7 +18,8 @@ const Cards = ({ products }) => {
     return(
         <div className={style["container"]}>
             <div className="row row-cols-4 g-4">             
-                { dataLoaded ? (
+                { dataLoaded 
+                ? (
                     products?.map((product) => {
                         return (
                             <Card
@@ -30,13 +31,12 @@ const Cards = ({ products }) => {
                             />
                         )
                     })
-                    ) :
-                    <h1>Cargando...</h1>
-                    
+                    )
+                : <h1>Cargando...</h1>
                 }
             </div>
         </div>
     )
-}
+};
 
 export default Cards;

@@ -1,5 +1,3 @@
-import React from "react";
-
 const Pagination = (props) => {
   return (
     <nav aria-label="Page navigation example">
@@ -33,7 +31,7 @@ const Pagination = (props) => {
         </li>
       </ul>
     </nav>
-  );
+  )
 };
 
 export default Pagination;

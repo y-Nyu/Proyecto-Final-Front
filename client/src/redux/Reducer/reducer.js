@@ -19,10 +19,8 @@ const initialState = {
     userRole: "USER",
     allUsers: [],
     searchType: "users",
-}
+};
 
-console.log('PRODUCTS');
-console.log(initialState.products);
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -84,7 +82,6 @@ const reducer = (state = initialState, action) => {
             return { ...state, searchType: action.payload.component };
 
           case "SEARCH_USERS":
-            console.log("en reducer users: " + action.payload + state.products);
             return {
               ...state,
               products: state.allUsers.filter((user) =>
@@ -92,8 +89,6 @@ const reducer = (state = initialState, action) => {
               ),
             };
           case "SEARCH_PRODUCTS":
-            console.log(state.products);
-            console.log(action.payload);
             return {
               ...state,
               products: state.allProducts.filter((product) =>
@@ -108,17 +103,15 @@ const reducer = (state = initialState, action) => {
                 return b.name.localeCompare(a.name);
               }
             });
-            console.log(sortedProducts);
             return {
               ...state,
               products: sortedProducts,
             };
           }
-        
         default:
             return {...state}
     }
-}
+};
 
 export default reducer;
 

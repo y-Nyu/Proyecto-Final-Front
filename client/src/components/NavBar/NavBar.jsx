@@ -11,6 +11,7 @@ const NavBar = ({ userId, userImage }) => {
   const handleLogin = () => {
     loginState(!login);
   };
+  
   return (
     <div>
       <nav className="navbar navbar-expand-md">
@@ -67,11 +68,18 @@ const NavBar = ({ userId, userImage }) => {
             ) : (
               <>
                 <button className="btn cart always-visible" type="submit">
-                  {login ? (
-                    <img src="src\images\Logo1.png" />
-                  ) : (
-                    <i className="bi bi-person-circle"></i>
-                  )}
+                  
+                  {
+                    login 
+                    ? 
+                    <Link to={`/accountDetail/${userId}`} >
+                      (<img src="src\images\Logo1.png" />)
+                    </Link>
+                    : 
+                    <Link to={`/accountDetail/${userId}`}>
+                      (<i className="bi bi-person-circle"></i>)
+                    </Link>
+                  }
                 </button>
                 <button
                   className="btn"

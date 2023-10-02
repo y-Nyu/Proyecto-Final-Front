@@ -15,7 +15,7 @@ const Register = ({ toggleComponent }) => {
         celular: '',
         password:'',
         passwordConfirmation: ''
-    })
+    });
 
     const [errors, setErrors] = useState({
         name:'',
@@ -23,17 +23,17 @@ const Register = ({ toggleComponent }) => {
         celular: '',
         password: '',
         passwordConfirmation: ''
-    })
+    });
 
     const handleChange = (event) => {
-        const { name, value } = event.target;
+        const { name, value } = event.target
         setData({...data, [name]:value})
         const newErrors = validateRegister({
             ...data,
             [name]: value,
-        });
-            setErrors(newErrors);
-    }
+        })
+            setErrors(newErrors)
+    };
     
 
     const dispatch = useDispatch()
@@ -42,14 +42,13 @@ const Register = ({ toggleComponent }) => {
 
         axios.post("http://localhost:3001/users", data)
             .then(res => {
-                const {rol, token} = res.data;
-                sessionStorage.setItem("jwt_session", token);
+                const {rol, token} = res.data
+                sessionStorage.setItem("jwt_session", token)
                 dispatch(createUserRole(rol));
-                navigate("/home");
+                navigate("/home")
             })
-            .catch(error => alert(error.response.data.error));
-
-    }
+            .catch(error => alert(error.response.data.error))
+    };
     
     return(
         <div className="container">
@@ -100,6 +99,6 @@ const Register = ({ toggleComponent }) => {
             </form>
         </div>
     )
-}
+};
 
 export default Register;
