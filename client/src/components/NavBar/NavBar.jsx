@@ -13,7 +13,6 @@ const NavBar = ({ userId, userImage }) => {
   };
   return (
     <div>
-      {console.log(login)}
       <nav className="navbar navbar-expand-md">
         <div className="container-fluid">
           <Link to="/" className="navbar-brand">
@@ -43,7 +42,8 @@ const NavBar = ({ userId, userImage }) => {
             </li>
           </ul>
           <div className={`d-flex ${login ? "" : "always-visible"}`}>
-            {login ? (
+            {login
+            ? (
               <>
                 <button
                   className="btn"

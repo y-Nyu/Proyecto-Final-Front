@@ -8,7 +8,7 @@ const LoginRegister = () => {
     const [showLogin, setShowLogin] = useState(true);
 
     const toggleComponent = () => {
-      setShowLogin((prevShowLogin) => !prevShowLogin);
+      setShowLogin(!showLogin);
     };
 
     return(
@@ -18,7 +18,7 @@ const LoginRegister = () => {
                 <div className="col-md-6">
                     {showLogin 
                     ? (<Login showRegister={!showLogin} toggleComponent={toggleComponent} />) 
-                    :  (<Register showLogin={showLogin} toggleComponent={toggleComponent} />)
+                    : (<Register showLogin={showLogin} toggleComponent={toggleComponent} />)
                     }
                 </div>
             </div>
