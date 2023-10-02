@@ -8,6 +8,7 @@ import style from './FormProduct.module.css'
 
 const FormProduct = () => {
   const dispatch = useDispatch();
+  const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
     dispatch(getCategories());
@@ -54,6 +55,7 @@ const FormProduct = () => {
     } else {
       console.error("Error al cargar la imagen a Cloudinary");
     }
+    isFormValid();
   };
 
   const submitHandler = (event) => {
@@ -85,11 +87,12 @@ const FormProduct = () => {
       [name]: value,
     });
     setErrors(newErrors);
+    isFormValid();
   };
 
   // La función isFormValid verifica si no hay mensajes de error en el estado `errors`.
-  const isFormValid = () => {
-    return Object.values(errors).every((error) => error === "");
+ const isFormValid = () => {
+    setIsValid(Object.values(errors).every((error) => error === ""))
   };
 
   return (
@@ -162,7 +165,7 @@ const FormProduct = () => {
 
 
         <div>
-          <button type="submit" disabled={!isFormValid()} className='btn btn-outline-primary w-100 my-1'>
+          <button type="submit" disabled={!isValid} className='btn btn-outline-primary w-100 my-1'>
             Crear producto
           </button>
           <h2></h2>

@@ -17,7 +17,14 @@ const Store = () => {
   const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
-    dispatch(getAllProducts())
+    // Esto preserva los filtros, aunque
+    // no evita que los elementos <select> en filters
+    // se reseteen
+    if(allProducts.length == 0)
+    {
+      dispatch(getAllProducts());
+    }
+    
   }, [dispatch]);
 
   useEffect(() => {

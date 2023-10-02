@@ -136,14 +136,20 @@ export const filterProducts = (filter) => {
       const { data } = await axios.get(
         `https://pf-back-deploy.onrender.com/product${filter}`
       )
-            dispatch({
-                type: GET_FILTERED_PRODUCTS,
-                payload: data
-            })
-        } catch (error) {
-            console.log(error)
-        }
-    }
+      if(typeof data === 'string') {
+        dispatch({
+          type: GET_FILTERED_PRODUCTS,
+          payload: []
+      })
+      }
+        dispatch({
+            type: GET_FILTERED_PRODUCTS,
+            payload: data
+        })
+      } catch (error) {
+          console.log(error)
+      }
+  }
 };
 
 export const clearFilters = () => {

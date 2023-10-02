@@ -13,14 +13,14 @@ const Cards = ({ products }) => {
             setDataLoaded(false);
         }
       }, [products]);
-    
-      // ESTA CLASS "row row-cols-4 g-4" PERMITE QUE SE LIMITEN 4 CARDS(COLUMNAS) POR FILA
+    console.log('productos Card' + products);
+
     return(
         <div className={style["container"]}>
             <div className="row row-cols-4 g-4">             
                 { dataLoaded 
                 ? (
-                    products?.map((product) => {
+                    Array.isArray(products) &&  products.map((product) => {
                         return (
                             <Card
                                 key={product.id}

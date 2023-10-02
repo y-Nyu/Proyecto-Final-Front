@@ -1,5 +1,14 @@
 export const ValidateProduct = (data) => {
-  let errors = {};
+  const errors = {
+    name: "",
+    brand: "",
+    category: "",
+    description: "",
+    price: "",
+    stock: "",
+  };
+
+  console.log("DATA IMAGE VALIDATE: " + data.image);
   if (data.name === "" || data.name.length > 20 || data.name.length < 3) {
     errors.name = "Ingese nombre menor a 20 caracteres";
   }
@@ -19,11 +28,13 @@ export const ValidateProduct = (data) => {
     } else if (isNaN(Number(data.price))) {
       errors.price = "Stock debe ser un número";
     }
+    /*
     if (data.stock.trim() === "") {
       errors.stock = "Ingrese stock";
     } else if (isNaN(Number(data.stock))) {
       errors.stock = "Stock debe ser un número";
     }
+    */
     if (/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/.test(data.email)) {
       errors.email = "Ingrese una email valido";
     }
@@ -37,9 +48,10 @@ export const ValidateProduct = (data) => {
     } else if (errors.password.length < 6 || errors.password.length > 10) {
       errors.password = "Requiere entre 6 y 10 caracteres";
     }
-
-  return errors;
+ 
   }
+
+  return new Object(errors);
 }
 
 export const ValidateUser = (data) => {
