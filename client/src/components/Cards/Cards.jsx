@@ -1,7 +1,7 @@
 import Card from "../Card/Card";
 import { useEffect, useState } from "react";
 import style from "./Cards.module.css";
-
+import PuffLoader from "react-spinners/PuffLoader";
 
 const Cards = ({ products }) => {
     const [dataLoaded, setDataLoaded] = useState(false);
@@ -32,7 +32,8 @@ const Cards = ({ products }) => {
                         )
                     })
                     )
-                : <h1>Cargando...</h1>
+                : 
+                <PuffLoader size={150} data-testid="loader" />
                 }
             </div>
         </div>

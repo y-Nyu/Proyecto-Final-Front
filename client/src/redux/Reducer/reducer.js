@@ -7,7 +7,11 @@ import { GET_PRODUCTS,
   DELETE_PRODUCT, 
   GET_FILTERED_PRODUCTS, 
   CLEAR_FILTERS, 
-  ROLE 
+  ROLE, 
+  SET_SEARCH_TYPE,
+  SEARCH_USERS,
+  SEARCH_PRODUCTS,
+  ORDERED
 } from "../Actions/action-types";
 
 const initialState = {
@@ -74,28 +78,25 @@ const reducer = (state = initialState, action) => {
             }
         case ROLE:
             return {...state, userRole: action.payload};
-      
-          case "GET_PRODUCTS":
-            return { ...state, allProducts: action.payload };
 
-          case "SET_SEARCH_TYPE":
-            return { ...state, searchType: action.payload.component };
-
-          case "SEARCH_USERS":
+          case SET_SEARCH_TYPE:
+            return { ...state, searchType: action.payload.component 
+            };
+          case SEARCH_USERS:
             return {
               ...state,
               products: state.allUsers.filter((user) =>
                 user.name.toUpperCase().includes(action.payload.toUpperCase())
               ),
             };
-          case "SEARCH_PRODUCTS":
+          case SEARCH_PRODUCTS:
             return {
               ...state,
-              products: state.allProducts.filter((product) =>
+              products: state.productsCopy.filter((product) =>
                 product.name.toUpperCase().includes(action.payload.toUpperCase())
               ),
             };
-          case "ORDERED": {
+          case ORDERED: {
             const sortedProducts = [...state.products].sort((a, b) => {
               if (action.payload) {
                 return a.name.localeCompare(b.name);
