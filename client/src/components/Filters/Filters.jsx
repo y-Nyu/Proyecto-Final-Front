@@ -24,7 +24,14 @@ const Filters = () => {
     const handleFilter = (event) => {
         const {name, value} = event.target
         if(name === 'filter') {
-            dispatch(filterProducts(value))
+            setFilters(prev => {
+                return {
+                    ...prev,
+                    category: value
+                }
+            })
+            const filterString = createFilterString({...filters, category: value});
+            dispatch(filterProducts(filterString))
         }
         else dispatch(clearFilters())
     };
@@ -42,12 +49,8 @@ const Filters = () => {
                 filtersArr.push("" + key + "=" + filters_obj[key]);
             }
         }
-
         let filterString = "?";
-
-
         filterString += filtersArr.join("&");
-
         return filtersArr.length ? filterString : "";
     }
 
