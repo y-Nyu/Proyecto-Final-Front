@@ -1,6 +1,7 @@
 import NavBar from './components/NavBar/NavBar'
 import Footer from './components/Footer/Footer'
 import Pagination from "./components/Pagination/Pagination";
+import FormProduct from "./components/FomProducto/FormProduct";
 import Home from './views/Home/Home'
 import About from './views/About/About'
 import LoginRegister from './views/LoginRegister/LoginRegister'
@@ -12,9 +13,8 @@ import Privacy from "./views/PrivacyP/Privacy";
 import Users from './views/Users/Users'
 import Sales from './views/Sales/Sales'
 import { Routes, Route } from 'react-router-dom'
-import FormProduct from "./components/FomProducto/FormProduct";
-import './App.css'
 import { useState } from 'react';
+import './App.css'
 
 // CONSULTAR RUTAS DEFINIDAS POR EL BACK - PDTE AJUSTAR!!
 const DATOS_API = [

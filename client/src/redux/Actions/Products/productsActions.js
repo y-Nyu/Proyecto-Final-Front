@@ -1,4 +1,15 @@
-import { GET_PRODUCTS, GET_PRODUCT_NAME, GET_PRODUCT_ID, GET_PRODUCTS_CATEGORIES, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, GET_FILTERED_PRODUCTS,CLEAR_FILTERS, SEARCH_PRODUCTS, ORDERED } from "../action-types";
+import { GET_PRODUCTS, 
+    GET_PRODUCT_NAME, 
+    GET_PRODUCT_ID, 
+    GET_PRODUCTS_CATEGORIES, 
+    CREATE_PRODUCT, 
+    UPDATE_PRODUCT, 
+    DELETE_PRODUCT, 
+    GET_FILTERED_PRODUCTS,
+    CLEAR_FILTERS, 
+    SEARCH_PRODUCTS, 
+    ORDERED 
+} from "../action-types";
 import axios from "axios";
 
 export const getAllProducts = () => {
@@ -122,9 +133,6 @@ export const filterProducts = (filter) => {
                 type: GET_FILTERED_PRODUCTS,
                 payload: data
             })
-            console.log('DATA');
-            console.log(data);
-
         } catch (error) {
             console.log(error);
         }
