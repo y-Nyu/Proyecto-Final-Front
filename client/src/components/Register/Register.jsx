@@ -1,11 +1,14 @@
+import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { usersCreate } from "../../redux/actions";
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { validateRegister } from "../../Validate";
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import style from './Register.module.css';
 
-const Register = () => {
+const Register = ({ toggleComponent }) => {
+    const navigate = useNavigate();
+
     const [data,setData] = useState({
         name:'',
         email: '',
@@ -30,52 +33,73 @@ const Register = () => {
             [name]: value,
         });
             setErrors(newErrors);
-        }
+    }
     
 
     const dispatch = useDispatch()
-    const register = () => {
-        dispatch(usersCreate(data))
+    const register = (ev) => {
+        ev.preventDefault();
+
+        axios.post("http://localhost:3001/users", data)
+            .then(res => {
+                const {rol, token} = res.data;
+                sessionStorage.setItem("jwt_session", token);
+                dispatch(createUserRole(rol));
+                navigate("/home");
+            })
+            .catch(error => alert(error.response.data.error));
+
     }
     
     return(
-        <div>
-            <form onSubmit={register} className="col-md-12">
+        <div className="container">
+            <h3 className='fw-bold text-center pt-3'>Crear nueva cuenta</h3>
+            <form onSubmit={register} className="col">
 
-                <h2>Crear nueva cuenta</h2>
-                <div className="form-floating">
-                    <input onChange={handleChange} type='text' name='name' value={data.name} className="form-control" id="floatingInput" placeholder="Nombre"/>
-                    <label className="floatingInput">Nombre</label>
+                <div className="mb-4 pt-1">
+                    <label className="form-label">Nombre</label>
+                    <input onChange={handleChange} type='text' name='name' value={data.name} placeholder="Ingresa tu nombre" className="form-control"/>
+                    {errors.name ? <p className={style["error-text"]}>{errors.name}</p> : <p className={style["error-text"]}></p>}
                 </div>
-                {errors.name ? <p>{errors.name}</p> : null}
 
-                <div className="form-floating">
-                    <input onChange={handleChange} type='email' name='email' value={data.email} className="form-control" id="floatingInput" placeholder="Correo electrónico"/>
-                    <label className="floatingInput">Correo electrónico</label>
+                <div className="mb-4 pt-1">
+                    <label className="form-label">Correo electrónico</label>
+                    <input onChange={handleChange} type='email' name='email' value={data.email} placeholder="ejemplo@correo.com" className="form-control"/>
+                    {errors.email ? <p className={style["error-text"]}>{errors.email}</p> : <p className={style["error-text"]}></p>}
                 </div>
-                {errors.email ? <p>{errors.email}</p> : null}
 
-                <div className="form-floating">
-                    <input onChange={handleChange} type='text' name='celular' value={data.celular} className="form-control"  id="floatingInput" placeholder="Celular"/>
-                    <label className="floatingInput">Celular</label>
-                    {errors.celular ? <p>{errors.celular}</p> : null}
+                <div className="mb-4 pt-1">
+                    <label className="form-label">Celular</label>
+                    <input onChange={handleChange} type='text' name='celular' value={data.celular} placeholder="Ingresa un número de 11 dígitos" className="form-control"/>
+                    {errors.celular ? <p className={style["error-text"]}>{errors.celular}</p> : <p className={style["error-text"]}></p>}
                 </div>
                 
-
-                <div className="form-floating">
-                    <input onChange={handleChange} type='password' name='password' value={data.password} className="form-control" id="floatingInput" placeholder="Contraseña"/>
-                    <label className="floatingInput">Contraseña</label>
-                    {errors.password ? <p>{errors.password}</p> : null}
+                <div className="mb-4 pt-1">
+                    <label className="form-label">Contraseña</label>
+                    <input onChange={handleChange} type='password' name='password' value={data.password} placeholder="Contraseña" className="form-control"/>
+                    {errors.password ? <p className={style["error-text"]}>{errors.password}</p> : <p className={style["error-text"]}></p>}
                 </div>
 
-                <div className="form-floating">
-                    <input onChange={handleChange} type='password' name='passwordConfirmation' className="form-control" id="floatingInput" placeholder="Confirmar contraseña"/>
+                <div className="mb-4 pt-1">
                     <label className='form-label'>Confirmar contraseña</label>
-                    {errors.passwordConfirmation ? <p>{errors.passwordConfirmation}</p> : null}
-                </div>
-                
+                    <input onChange={handleChange} type='password' name='passwordConfirmation' placeholder="Ingresa nuevamente tu contraseña"  className="form-control"/>
+                    {errors.passwordConfirmation ? <p className={style["error-text"]}>{errors.passwordConfirmation}</p> : <p className={style["error-text"]}></p>}
+                </div>                
 
-                <NavLink to={'/home'}><button>Registrarme</button></NavLink>
+                <div className="container w-100 py-2">
+                    <div className='row'>
+                        <div className="col">
+                        <button type="submit" className='btn btn-outline-primary w-100 my-1'>Registrarme</button>
+                        </div>
+
+                        <div className="col">
+                            <button onClick={toggleComponent}  className='btn btn-outline-primary custom-button-height w-100 my-1'>Ya tengo una cuenta creada</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <button>Registrarme</button>
             </form>
         </div>
     )

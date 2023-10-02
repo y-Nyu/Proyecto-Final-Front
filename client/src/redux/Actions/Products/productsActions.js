@@ -136,15 +136,25 @@ export const filterProducts = (filter) => {
         `https://pf-back-deploy.onrender.com/product?category=${filter}`
       );
 
-      dispatch({
-        type: GET_FILTERED_PRODUCTS,
-        payload: data,
-      });
-      console.log("DATA");
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
+            dispatch({
+                type: GET_FILTERED_PRODUCTS,
+                payload: data
+            })
+            console.log('DATA');
+            console.log(data);
 
+        } catch (error) {
+            console.log(error);
+        }
+    }
+} 
+
+export const clearFilters = () => {
+    return async (dispatch) => {
+        try {
+            dispatch({ type:CLEAR_FILTERS })
+        }catch (error) {
+            alert(error.response.data) 
+        }
+    }
+}

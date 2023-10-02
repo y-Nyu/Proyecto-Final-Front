@@ -1,7 +1,10 @@
+import { ROLE } from "./action-types";
+
 const initialState = {
   searchType: "users",
   products: [],
   users: [],
+    userRole: "USER",
   allUsers: [],
   allProducts: [
     {
@@ -269,6 +272,11 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+        case ROLE:
+            return {...state, userRole: action.payload};
+
+    case "GET_PRODUCTS":
+      return { ...state, allProducts: action.payload };
     case "SET_SEARCH_TYPE":
       return { ...state, searchType: action.payload.component };
     case "SEARCH_USERS":
