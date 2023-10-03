@@ -20,11 +20,9 @@ const Store = () => {
     // Esto preserva los filtros, aunque
     // no evita que los elementos <select> en filters
     // se reseteen
-    if(allProducts.length == 0)
-    {
+    if (allProducts.length == 0) {
       dispatch(getAllProducts());
     }
-    
   }, [dispatch]);
 
   useEffect(() => {
@@ -36,7 +34,12 @@ const Store = () => {
   }, [allProducts, currentPage]);
 
   const nextHandler = () => {
-    setCurrentPage(currentPage + 1);
+    const startIndex = (currentPage + 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+
+    if (startIndex < allProducts.length) {
+      setCurrentPage(currentPage + 1);
+    }
   };
 
   const prevHandler = () => {
@@ -49,7 +52,7 @@ const Store = () => {
     <div>
       <Searchbar />
       <Filters />
-            <OrderByName/>
+      <OrderByName />
       <div>
         <Pagination
           currentPage={currentPage}

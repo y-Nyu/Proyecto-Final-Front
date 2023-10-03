@@ -22,7 +22,7 @@ const Pagination = (props) => {
           }`}
         >
           <button
-            className="page-link"
+            className="page-link "
             onClick={props.nextHandler}
             aria-label="Next"
           >
