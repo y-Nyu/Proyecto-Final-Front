@@ -17,11 +17,6 @@ import './App.css'
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-// CONSULTAR RUTAS DEFINIDAS POR EL BACK - PDTE AJUSTAR!!
-
-const App = () => {
-
-
 
 // CONSULTAR RUTAS DEFINIDAS POR EL BACK - PDTE AJUSTAR!!
 
