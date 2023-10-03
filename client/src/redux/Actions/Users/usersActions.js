@@ -1,16 +1,5 @@
 import axios from 'axios';
 
-//Pdte config de error, cambiar alert por componente
-export const usersCreate = (user) => {
-    return async function () {
-        try {
-            await axios.post('http://localhost:3001/users', user)
-        } catch (error) {
-            alert(error.response.data)
-        }
-    }
-}
-
 export const createUserRole = (rol) => {
     return {type: "ROLE",payload: rol};
 }

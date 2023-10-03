@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { validateRegister } from "../../Validate";
+import { createUserRole } from "../../redux/Actions/Users/usersActions";
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import style from './Register.module.css';
 
@@ -34,20 +35,21 @@ const Register = ({ toggleComponent }) => {
         });
             setErrors(newErrors);
     }
-    
+
 
     const dispatch = useDispatch()
     const register = (ev) => {
         ev.preventDefault();
-
-        axios.post("http://localhost:3001/users", data)
+        // Omitir la propiedad passwordConfirmation
+        const { passwordConfirmation, ...postData } = data; 
+        axios.post("https://pf-back-deploy.onrender.com/users", postData)
             .then(res => {
                 const {rol, token} = res.data;
                 sessionStorage.setItem("jwt_session", token);
                 dispatch(createUserRole(rol));
                 navigate("/home");
             })
-            .catch(error => alert(error.response.data.error));
+            .catch(error => alert(error.message));
 
     }
     
@@ -98,8 +100,6 @@ const Register = ({ toggleComponent }) => {
                     </div>
                 </div>
 
-
-                <button>Registrarme</button>
             </form>
         </div>
     )
