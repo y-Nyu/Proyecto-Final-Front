@@ -1,0 +1,22 @@
+.card {
+  background-color: #eeeded;
+  /* Establece el color de fondo */
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 400px;
+  /* Ajusta el ancho según tus preferencias */
+  margin: 0 auto;
+  /* Centra la carta horizontalmente */
+  font-family: 'Patrick Hand', cursive;
+  /* Aplica la fuente "Patrick Hand" o la que prefieras */
+}
+
+
+.card img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+}
