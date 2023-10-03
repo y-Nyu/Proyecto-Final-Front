@@ -55,6 +55,10 @@ const App = () => {
   }, [location, userRole]);
 
 
+
+// CONSULTAR RUTAS DEFINIDAS POR EL BACK - PDTE AJUSTAR!!
+
+const App = () => {
   return (
     <div>
       <NavBar />

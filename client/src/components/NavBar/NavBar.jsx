@@ -117,4 +117,5 @@ const NavBar = ({ userId, userImage }) => {
   );
 };
 
+
 export default NavBar;
