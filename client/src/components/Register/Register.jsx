@@ -7,6 +7,7 @@ import { createUserRole } from "../../redux/Actions/Users/usersActions";
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import style from './Register.module.css';
 
+
 const Register = ({ toggleComponent }) => {
     const navigate = useNavigate();
 
@@ -40,18 +41,16 @@ const Register = ({ toggleComponent }) => {
     const dispatch = useDispatch()
     const register = (ev) => {
         ev.preventDefault();
-        // Omitir la propiedad passwordConfirmation
-        const { passwordConfirmation, ...postData } = data; 
-        axios.post("https://pf-back-deploy.onrender.com/users", postData)
+
+        axios.post("https://pf-back-deploy.onrender.com/users", data)
             .then(res => {
                 const {rol, token} = res.data
                 sessionStorage.setItem("jwt_session", token)
                 dispatch(createUserRole(rol));
-                navigate("/home")
+                navigate("/")
             })
-            .catch(error => alert(error.message));
-
-    }
+            .catch(error => alert(error.message))
+    };
     
     return(
         <div className="container">

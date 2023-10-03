@@ -12,6 +12,7 @@ import style from './Login.module.css';
 
 // EXTRA: Recuperación de contraseña
 // pendiente, crear action-type y action para enviar info al back
+
 const Login = ({ toggleComponent }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -70,15 +71,18 @@ const Login = ({ toggleComponent }) => {
         // Setteamos el token
         sessionStorage.setItem("jwt_session", token);
         dispatch(createUserRole(rol));
-        navigate("/home");
+        navigate("/");
       })
-      .catch(error => alert(error.response.data.error))
+      .catch(error => {
+        console.log(error);
+        alert(error.response.data.error)
+      })
   };
 
   // user que recibe debe quedar almacenado en localStorage
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
-      axios.post("http://localhost:3001/login-google",{google_token: codeResponse.access_token})
+      axios.post("https://pf-back-deploy.onrender.com/login-google",{google_token: codeResponse.access_token})
     },
   });
 
@@ -156,68 +160,3 @@ const Login = ({ toggleComponent }) => {
 };
 
 export default Login;
-
-
-// return (
-//   <div className="container">
-//     <div className="col-md-12">
-//       <form onSubmit={handleSubmit}>
-//         <h2>Inicio de sesión</h2>
-
-//         <div className="mb-3">
-//           <label htmlFor="emailInput" className="form-label">
-//             Correo electrónico
-//           </label>
-//           <input
-//             onChange={handleChange}
-//             type="email"
-//             name="email"
-//             className="form-control"
-//             id="emailInput"
-//             placeholder="ejemplo@correo.com"
-//             value={data.email}
-//           />
-//           {errors.email ? <p>{errors.email}</p> : null}
-//         </div>
-
-//         <div className="mb-3">
-//           <label htmlFor="passwordInput" className="form-label">
-//             Contraseña
-//           </label>
-//           <input
-//             onChange={handleChange}
-//             type="password"
-//             name="password"
-//             className="form-control"
-//             id="passwordInput"
-//             placeholder="Ingresa tu contraseña"
-//             value={data.password}
-//           />
-//           {errors.password ? <p>{errors.password}</p> : null}
-//         </div>
-
-//         <div className="row">
-//           <div className="col-6">
-//             <NavLink to={"/home"}>
-//               <button
-//                 type="submit"
-//                 disabled={disableByEmptyProps()}
-//                 className="btn btn-primary"
-//               >
-//                 Iniciar sesión
-//               </button>
-//             </NavLink>
-//           </div>
-//         </div>
-//       </form>
-
-//       <button onClick={() => login()}> Iniciar sesión con Google </button>
-//     </div>
-//   </div>
-// );
-
-
-
-
-
-

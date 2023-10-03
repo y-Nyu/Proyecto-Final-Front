@@ -20,7 +20,7 @@ const initialState = {
     categories: [],
     updatedProduct: [],
     users: [],
-    userRole: "USER",
+    userRole: "",
     allUsers: [],
     searchType: "users",
 };

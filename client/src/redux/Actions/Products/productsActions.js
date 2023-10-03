@@ -15,8 +15,15 @@ import axios from "axios";
 export const getAllProducts = () => {
   return async (dispatch) => {
     try {
+      console.log(sessionStorage.getItem("jwt_session"))
       const { data } = await axios.get(
-        "https://pf-back-deploy.onrender.com/product"
+        "https://pf-back-deploy.onrender.com/product",
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("jwt_session"),
+          },
+          
+        }
       )
 
       dispatch({
@@ -33,7 +40,12 @@ export const getProductByName = (name) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        `https://pf-back-deploy.onrender.com/product?name=${name}`
+        `https://pf-back-deploy.onrender.com/product?name=${name}`,
+        {
+          headers: {
+            Authorization:"Bearer " + sessionStorage.getItem("jwt_session"),
+          }
+        }
       )
 
       dispatch({
@@ -50,7 +62,12 @@ export const getProductByID = (id) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        `https://pf-back-deploy.onrender.com/product/${id}`
+        `https://pf-back-deploy.onrender.com/product/${id}`,
+        {
+          headers: {
+            Authorization:"Bearer " + sessionStorage.getItem("jwt_session"),
+          }
+        }
       )
 
       dispatch({
@@ -67,7 +84,12 @@ export const getCategories = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        "https://pf-back-deploy.onrender.com/category"
+        "https://pf-back-deploy.onrender.com/category",
+        {
+          headers: {
+            Authorization:"Bearer " + sessionStorage.getItem("jwt_session"),
+          }
+        }
       );
 
       dispatch({
@@ -85,7 +107,12 @@ export const createProduct = (body) => {
     try {
       const { data } = await axios.post(
         "https://pf-back-deploy.onrender.com/product",
-        body
+        body,
+        {
+          headers: {
+            Authorization:"Bearer " + sessionStorage.getItem("jwt_session"),
+          }
+        },
       );
 
       dispatch({
@@ -103,7 +130,12 @@ export const updateProduct = (id, body) => {
     try {
       const { data } = await axios.put(
         `https://pf-back-deploy.onrender.com/product/${id}`,
-        body
+        body,
+        {
+          headers: {
+            Authorization:"Bearer " + sessionStorage.getItem("jwt_session"),
+          }
+        },
       )
       dispatch({
         type: UPDATE_PRODUCT,
@@ -118,7 +150,13 @@ export const updateProduct = (id, body) => {
 export const deleteProduct = (id) => {
   return async (dispatch) => {
     try {
-      await axios.delete(`https://pf-back-deploy.onrender.com/product/${id}`)
+      await axios.delete(`https://pf-back-deploy.onrender.com/product/${id}`,
+      {
+        headers: {
+          Authorization:"Bearer " + sessionStorage.getItem("jwt_session"),
+        }
+      }
+      )
 
       dispatch({
         type: DELETE_PRODUCT,
@@ -134,8 +172,14 @@ export const filterProducts = (filter) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        `https://pf-back-deploy.onrender.com/product${filter}`
+        `https://pf-back-deploy.onrender.com/product${filter}`,
+        {
+          headers: {
+            Authorization:"Bearer " + sessionStorage.getItem("jwt_session"),
+          }
+        },
       )
+
       if(typeof data === 'string') {
         dispatch({
           type: GET_FILTERED_PRODUCTS,
