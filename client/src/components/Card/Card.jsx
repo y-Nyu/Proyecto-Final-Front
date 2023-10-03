@@ -1,23 +1,30 @@
+import React from "react";
 import { Link } from "react-router-dom";
-import style from "./Card.module.css";
+import style from "./card.module.css";
 
-
-const Card = ({ id, image, name, price}) => {
+const Card = ({ id, image, name, price }) => {
   return (
-    <Link to={`/detail/${id}`} className={style["col"]}>
-      <div className={style["thumb-wrapper"]}>
-        <span className={style["wish-icon"]}><i className={style["fa-heart"]}>♡</i></span>
-        <div className={style["img-box"]}>
-          <img src={image} className={style["img-fluid"]} alt={name}/>
+    <div className={`card ${style.customCard}`} style={{ width: "18rem" }}>
+      <i className={`bi bi-balloon-heart ${style.heart}`}></i>
+      <img src={image} className={`card-img-top ${style.cardImage}`} alt={name} />
+      <div className={`card-body ${style.customCardBody}`}>
+        <div className={`text-center mb-3 ${style.nameAndPrice}`}>
+          <h5 className={`card-title ${style.customCardTitle}`}>{name}</h5>
+          <p className={`card-text ${style.customCardText}`}> <strong> Precio: $ {price}</strong></p>
         </div>
-        <div className={style["thumb-content"]}>
-          <h4>{name}</h4>
-          <p className={style["item-price"]}>${price}</p>
+        <div className={`text-center ${style.centeredButton}`}>
+          <Link to={`/detail/${id}`}>
+            <button className={`btn ${style.cardButton}`}>
+            <ins>Más info</ins>
+            </button>
+          </Link>
         </div>
-        <button className={style["btn"]}>Agregar al Carrito</button>
       </div>
-    </Link>
-  )
+    </div>
+  );
 };
 
 export default Card;
+
+
+
