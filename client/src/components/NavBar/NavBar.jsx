@@ -65,7 +65,6 @@ const NavBar = ({ userId, userImage }) => {
                 <button
                   className="btn"
                   onClick={() => {
-                    handleLogin();
                     navigate("/loginRegister");
                   }}
                 >
@@ -74,7 +73,6 @@ const NavBar = ({ userId, userImage }) => {
                 <button
                   className="btn"
                   onClick={() => {
-                    handleLogin();
                     navigate("/loginRegister");
                   }}
                 >
