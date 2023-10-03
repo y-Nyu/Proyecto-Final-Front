@@ -17,7 +17,7 @@ export const getAllProducts = () => {
     try {
       console.log(sessionStorage.getItem("jwt_session"))
       const { data } = await axios.get(
-        "http://localhost:3001/product",
+        "https://pf-back-deploy.onrender.com/product",
         {
           headers: {
             Authorization: "Bearer " + sessionStorage.getItem("jwt_session"),
@@ -84,7 +84,7 @@ export const getCategories = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        "http://localhost:3001/category",
+        "https://pf-back-deploy.onrender.com/category",
         {
           headers: {
             Authorization:"Bearer " + sessionStorage.getItem("jwt_session"),
@@ -172,7 +172,7 @@ export const filterProducts = (filter) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:3001/product${filter}`,
+        `https://pf-back-deploy.onrender.com/product${filter}`,
         {
           headers: {
             Authorization:"Bearer " + sessionStorage.getItem("jwt_session"),

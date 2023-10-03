@@ -60,7 +60,7 @@ const Login = ({ toggleComponent }) => {
     // Si sale bien, guardo el token en sessionStorage y navego a home.
     // En caso contrario se muestra una alerta con el mensaje de error
     // deploy https://pf-back-deploy.onrender.com local http://localhost:3001
-    axios.post("http://localhost:3001/login", data)
+    axios.post("https://pf-back-deploy.onrender.com/login", data)
       .then(usrRes => {
 
         // Rol debería ser guardado en estado global
@@ -81,8 +81,7 @@ const Login = ({ toggleComponent }) => {
   // user que recibe debe quedar almacenado en localStorage
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
-      console.log("CodeREsponse: " + JSON.stringify(codeResponse));
-      axios.post("http://localhost:3001/login-google",{google_token: codeResponse.access_token})
+      axios.post("https://pf-back-deploy.onrender.com/login-google",{google_token: codeResponse.access_token})
     },
   });
 
