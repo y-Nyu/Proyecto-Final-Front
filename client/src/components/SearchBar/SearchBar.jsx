@@ -1,4 +1,4 @@
-import  style from "./Searchbar.module.css";
+import style from "./Searchbar.module.css"; 
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getProductByName } from "../../redux/Actions/Products/productsActions";
@@ -9,6 +9,7 @@ function Searchbar() {
   const [name, setName] = useState("");
 
   const handleChange = (event) => {
+    event.preventDefault();
     setName(event.target.value);
   };
 
@@ -19,8 +20,8 @@ function Searchbar() {
   };
 
   return (
-    <div className="container mt-3">
-      <div className="input-group mb-3">
+    <div className={`container mt-3 ${style.searchContainer}`}>
+      <div className={`input-group mb-3 ${style.inputGroup}`}>
         <input
           type="search"
           className={`form-control ${style.searchInput}`}
@@ -32,7 +33,7 @@ function Searchbar() {
           }}
           value={name}
         />
-        <div className="input-group-append">
+        <div className={`input-group-append ${style.buttonGroup}`}>
           <button
             className={`btn ${style.btnCustom}`}
             type="button"
@@ -50,6 +51,7 @@ function Searchbar() {
 }
 
 export default Searchbar;
+
 
 // function Searchbar(component) {
 //  const dispatch = useDispatch();
