@@ -57,13 +57,13 @@ export const ValidateProduct = (data) => {
 export const ValidateUser = (data) => {
   let errors = {};
   if (data.name === "" || data.name.length > 20 || data.name.length < 3) {
-    errors.name = "Ingese nombre menor a 20 caracteres";
+    errors.name = "Ingresa un nombre de mínimo 3 y máximo 20 caracteres";
   }
   if (/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/.test(data.email)) {
-    errors.email = "Ingrese una email valido";
+    errors.email = "Ingresa un email valido - ejemplo@correo.com";
   }
-  if (errors.cellphone === "") {
-    errors.cellphone = "Ingrese una numero celular";
+  if (errors.celular === "") {
+    errors.celular = "Ingresa un número celular de 11 dígitos";
   }
   if (!/(?=.*[a-z])/.test(errors.password)) {
     errors.password = "Requiere una letra minuscula";
