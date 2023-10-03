@@ -12,7 +12,7 @@ const NavBar = ({ userId, userImage }) => {
   const handleLogin = () => {
     loginState(!login);
   };
-  
+
   return (
     <div>
       <nav className="navbar navbar-expand-md">
