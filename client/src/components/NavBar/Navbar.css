@@ -1,7 +1,7 @@
 .navbar {
-    padding: 0 100px;
+    padding: 0 150px;
     background-color: #E5F2FB;
-    height: 70px;
+    height: 80px;
   }
   .nav-item {
     margin-left: 30px;
@@ -22,6 +22,15 @@
     color: #6489D8;
   }
   
+  .nav_logo {
+    width: 90px; /* Ajusta el tamaño del logo según tus necesidades */
+    transition: transform 0.8s; /* Agrega una transición suave */
+  }
+  
+  .custom-icon {
+    color: white;
+  }
+
 /* Buttons */
   .d-flex .btn {
     background-color: #6489D8;
@@ -36,7 +45,8 @@
   
   .d-flex .btn:hover {
     transition: background-color 0.3s ease;
-    background-color: #143c93;
+    background-color: white;
+    border: 1px solid #6489D8;
   }
 
   .navbar-brand {
@@ -46,4 +56,9 @@
   .navbar-brand:hover {
     transform: scale(1.1);
   }
-  
+  .custom-icon:hover {
+    color: black; 
+  }
+  .nav_logo:hover {
+    transform: rotate(360deg); /* Rota 360 grados al pasar el mouse */
+  }

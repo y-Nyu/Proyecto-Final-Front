@@ -1,38 +1,55 @@
+import  style from "./Searchbar.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getProductByName } from '../../redux/Actions/Products/productsActions';
+import { getProductByName } from "../../redux/Actions/Products/productsActions";
 // import { searchUsers, setSearchType } from '../../redux/Actions/Users/usersActions';
 
 function Searchbar() {
-  const dispatch = useDispatch()
-  const [name, setName] = useState()
-  
-  
+  const dispatch = useDispatch();
+  const [name, setName] = useState("");
+
   const handleChange = (event) => {
-      event.preventDefault()
-      setName(event.target.value)
+    setName(event.target.value);
   };
-  
+
   const handleSearch = (event) => {
-      event.preventDefault()
-      dispatch(getProductByName(name))
-      setName("")
+    event.preventDefault();
+    dispatch(getProductByName(name));
+    setName("");
   };
-  
+
   return (
-      <div>
-          <h4>Buscar Producto</h4>
-          <input onChange={(event) => {handleChange(event)}} type="search" value={name}/>
-          <button onClick={(event) => {handleSearch(event)}}>Buscar{""}</button>
+    <div className="container mt-3">
+      <div className="input-group mb-3">
+        <input
+          type="search"
+          className={`form-control ${style.searchInput}`}
+          placeholder="Buscar producto"
+          aria-label="Buscar producto"
+          aria-describedby="button-addon2"
+          onChange={(event) => {
+            handleChange(event);
+          }}
+          value={name}
+        />
+        <div className="input-group-append">
+          <button
+            className={`btn ${style.btnCustom}`}
+            type="button"
+            id="button-addon2"
+            onClick={(event) => {
+              handleSearch(event);
+            }}
+          >
+            <i className="bi bi-search"></i>
+          </button>
+        </div>
       </div>
-  )
-};
+    </div>
+  );
+}
 
 export default Searchbar;
-
-
-
-
 
 // function Searchbar(component) {
 //  const dispatch = useDispatch();

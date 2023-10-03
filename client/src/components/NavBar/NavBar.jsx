@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { useState } from "react";
+import imagelogo from "../../assets/logo/Logo.png";
 
 const NavBar = ({ userId, userImage }) => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const NavBar = ({ userId, userImage }) => {
         <div className="container-fluid">
           <Link to="/" className="navbar-brand">
             <img
-              src="src/images/Logo1.png"
+              src={imagelogo}
               className="nav_logo"
               width="60"
               alt="Logo de la página"
@@ -73,11 +74,11 @@ const NavBar = ({ userId, userImage }) => {
                     login 
                     ? 
                     <Link to={`/accountDetail/${userId}`} >
-                      (<img src="src\images\Logo1.png" />)
+                      (<img src={imagelogo} />)
                     </Link>
                     : 
                     <Link to={`/accountDetail/${userId}`}>
-                      (<i className="bi bi-person-circle"></i>)
+                      <i className="bi bi-person-circle custom-icon"></i>
                     </Link>
                   }
                 </button>
