@@ -12,7 +12,7 @@ const NavBar = ({ userId, userImage }) => {
   const handleLogin = () => {
     loginState(!login);
   };
-
+  
   return (
     <div>
       <nav className="navbar navbar-expand-md">
@@ -69,9 +69,8 @@ const NavBar = ({ userId, userImage }) => {
             ) : (
               <>
                 <button className="btn cart always-visible" type="submit">
-                  
                   {
-                    login 
+                    login
                     ? 
                     <Link to={`/accountDetail/${userId}`} >
                       (<img src={imagelogo} />)
@@ -86,7 +85,7 @@ const NavBar = ({ userId, userImage }) => {
                   className="btn"
                   onClick={() => {
                     handleLogin();
-                    navigate("/loginRegister");
+                    navigate("/home");
                   }}
                 >
                   Cerrar Sesión
