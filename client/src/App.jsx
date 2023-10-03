@@ -21,39 +21,6 @@ import { useSelector } from 'react-redux';
 
 const App = () => {
 
-  const userRole = useSelector(state => state.userRole);
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const handleAuth = (token) => {
-    if(!token && location.pathname != "/loginRegister")
-    {
-      navigate("/loginRegister");
-      return false;
-    }
-
-    return true;
-  }
-
-  // Esto es autenticación y autorización
-  useEffect(() => {
-   
-    const token = sessionStorage.getItem("jwt_session");
-    const isLogged = handleAuth(token);
-    
-    // Chequea si el usuario está loggeado
-    if(isLogged)
-    {
-      // Si está loggeado e intenta acceder a una página del admin:
-      if(location.pathname.includes("admin") && userRole != "ADMIN")
-      {
-        // Si no es admin es rechazado
-        navigate("/");
-      }
-    }
-
-  }, [location, userRole]);
-
 
   return (
     <div>

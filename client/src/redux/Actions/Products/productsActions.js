@@ -17,13 +17,7 @@ export const getAllProducts = () => {
     try {
       console.log(sessionStorage.getItem("jwt_session"))
       const { data } = await axios.get(
-        "https://pf-back-deploy.onrender.com/product",
-        {
-          headers: {
-            Authorization: "Bearer " + sessionStorage.getItem("jwt_session"),
-          },
-          
-        }
+        "https://pf-back-deploy.onrender.com/product"
       )
 
       dispatch({
@@ -41,11 +35,6 @@ export const getProductByName = (name) => {
     try {
       const { data } = await axios.get(
         `https://pf-back-deploy.onrender.com/product?name=${name}`,
-        {
-          headers: {
-            Authorization:"Bearer " + sessionStorage.getItem("jwt_session"),
-          }
-        }
       )
 
       dispatch({
@@ -63,11 +52,6 @@ export const getProductByID = (id) => {
     try {
       const { data } = await axios.get(
         `https://pf-back-deploy.onrender.com/product/${id}`,
-        {
-          headers: {
-            Authorization:"Bearer " + sessionStorage.getItem("jwt_session"),
-          }
-        }
       )
 
       dispatch({
@@ -85,11 +69,6 @@ export const getCategories = () => {
     try {
       const { data } = await axios.get(
         "https://pf-back-deploy.onrender.com/category",
-        {
-          headers: {
-            Authorization:"Bearer " + sessionStorage.getItem("jwt_session"),
-          }
-        }
       );
 
       dispatch({
@@ -172,12 +151,7 @@ export const filterProducts = (filter) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        `https://pf-back-deploy.onrender.com/product${filter}`,
-        {
-          headers: {
-            Authorization:"Bearer " + sessionStorage.getItem("jwt_session"),
-          }
-        },
+        `https://pf-back-deploy.onrender.com/product${filter}`
       )
 
       if(typeof data === 'string') {
