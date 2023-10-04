@@ -43,3 +43,7 @@
   padding: .5rem 1rem;
   cursor: pointer;
 }
+
+.heart {
+  text-align: center;
+}
