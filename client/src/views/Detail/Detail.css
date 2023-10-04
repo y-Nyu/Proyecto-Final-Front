@@ -1,22 +1,54 @@
 .card {
-  background-color: #eeeded;
-  /* Establece el color de fondo */
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  width: 400px;
-  /* Ajusta el ancho según tus preferencias */
-  margin: 0 auto;
-  /* Centra la carta horizontalmente */
-  font-family: 'Patrick Hand', cursive;
-  /* Aplica la fuente "Patrick Hand" o la que prefieras */
+    font-family: 'Times New Roman', Times, serif;
+    border: none;
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+
+.product-name {
+  font-size: 36px;
+  font-weight: bold;
+  color: #2315a1;
 }
 
+.product-brand {
+  font-size: 24px;
+  color: #666;
+}
 
-.card img {
-  max-width: 100%;
-  height: auto;
-  margin-top: 10px;
+.product-category {
+  font-size: 20px;
+  color: #888;
+}
+
+.product-description {
+  font-size: 18px;
+  color: #777;
+}
+
+.product-price {
+  font-size: 28px;
+  color: #2315a1;
+}
+
+.btn {
+  background-color: #6489D8 !important;
+  color: white !important;
+  margin: 10px !important;
+}
+
+.ml-2 {
+ font-family: 'Times New Roman', Times, serif;
+ width: 50px;
+ border-radius: 0.8px;
+ text-align: center;
+ border: 2px solid navy;
+ border-radius: 5px;
+ padding: 3.5px; 
+ width: 50px;
 }

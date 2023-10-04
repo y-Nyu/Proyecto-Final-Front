@@ -1,3 +1,8 @@
+.center-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .navbar {
     padding: 0 150px;
     background-color: #E5F2FB;
@@ -60,5 +65,11 @@
     color: black; 
   }
   .nav_logo:hover {
-    transform: rotate(360deg); /* Rota 360 grados al pasar el mouse */
+    transform: rotate(360deg); 
+  }
+
+  @media (max-width: 576px) {
+    .navbar-custom-height {
+      height: 270px;
+    }
   }
