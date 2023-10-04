@@ -12,3 +12,5 @@ export const SEARCH_PRODUCTS = "SEARCH_PRODUCTS";
 export const SEARCH_USERS = "SEARCH_USERS";
 export const SET_SEARCH_TYPE = "SET_SEARCH_TYPE";
 export const ORDERED = "ORDERED";
+export const GET_USER_BY_ID = 'GET_USER_BY_ID';
+export const USER_LOG_OUT = 'USER_LOG_OUT';

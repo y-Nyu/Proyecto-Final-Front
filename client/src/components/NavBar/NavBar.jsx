@@ -2,7 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { createUserRole } from "../../redux/Actions/Users/usersActions";
+import { createUserRole, userLogOut } from "../../redux/Actions/Users/usersActions";
 import imagelogo from "../../assets/logo/Logo.png";
 
 const NavBar = ({ userId, userImage }) => {
@@ -23,6 +23,7 @@ const NavBar = ({ userId, userImage }) => {
   const handleLogout = () => {
     sessionStorage.removeItem("jwt_session");
     dispatch(createUserRole(""));
+    dispatch(userLogOut())
     // navigate("/loginRegister");
     loginState(true);
   }

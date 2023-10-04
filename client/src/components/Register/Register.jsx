@@ -7,7 +7,6 @@ import { createUserRole } from "../../redux/Actions/Users/usersActions";
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import style from './Register.module.css';
 
-
 const Register = ({ toggleComponent }) => {
     const navigate = useNavigate();
 
@@ -49,7 +48,7 @@ const Register = ({ toggleComponent }) => {
                 dispatch(createUserRole(rol));
                 navigate("/")
             })
-            .catch(error => alert(error.message))
+            .catch(error => alert(error.response.data.error))
     };
     
     return(
