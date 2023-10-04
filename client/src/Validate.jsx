@@ -84,4 +84,3 @@ export const validateProduct = (data) => {
 
    return errors;
 };
-
