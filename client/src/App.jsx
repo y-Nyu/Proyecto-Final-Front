@@ -52,7 +52,6 @@ const App = () => {
   //       navigate("/");
   //     }
   //   }
-
   // }, [location, userRole]);
   // NO FUNCIONA
 
