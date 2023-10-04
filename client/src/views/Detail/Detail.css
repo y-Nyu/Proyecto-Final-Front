@@ -1,10 +1,11 @@
-.card {
+.cardDetail {
     font-family: 'Times New Roman', Times, serif;
     border: none;
     background-color: #f7f7f7;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 2px double #6489D8 !important;
+    box-shadow: 0 4px 8px rgba(0.4, 0.4, 0.4, 0.4);
     margin-top: 50px;
     margin-bottom: 50px;
     text-align: center;
@@ -47,7 +48,7 @@
  width: 50px;
  border-radius: 0.8px;
  text-align: center;
- border: 2px solid navy;
+ border: 2px groove #6489D8 ;
  border-radius: 5px;
  padding: 3.5px; 
  width: 50px;

@@ -36,7 +36,7 @@ const Detail = () => {
       />
     </div>
     <div className="col-md-8">
-      <div className="card">
+      <div className="cardDetail">
             <h1 className="product-name">{productId.name}</h1>
             <h3 className="product-brand">{productId.brand}</h3>
             <h3 className="product-category">{productId.category}</h3>
