@@ -1,5 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -7,9 +6,9 @@ import { createUserRole } from "../../redux/Actions/Users/usersActions";
 
 const NavBar = ({ userId, userImage }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const location = useLocation();
   const [login, loginState] = useState(true);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     const token = sessionStorage.getItem("jwt_session");
@@ -19,15 +18,22 @@ const NavBar = ({ userId, userImage }) => {
       loginState(false)
     }
   }, [location])
-
+  
   const handleLogout = () => {
     sessionStorage.removeItem("jwt_session");
     dispatch(createUserRole(""));
-    navigate("/loginRegister");
+    // navigate("/loginRegister");
     loginState(true);
   }
   
-  
+  const handleCart = () => {
+    const token = sessionStorage.getItem("jwt_session")
+    if(!token) {
+      navigate("/loginRegister")
+    }
+    navigate("/sales") // Carrito?
+  }
+
   return (
     <div>
       <nav className="navbar navbar-expand-md">
@@ -65,7 +71,6 @@ const NavBar = ({ userId, userImage }) => {
                 <button
                   className="btn"
                   onClick={() => {
-                    // handleLogin();  NO FUNCIONA
                     navigate("/loginRegister");
                   }}
                 >
@@ -74,22 +79,21 @@ const NavBar = ({ userId, userImage }) => {
                 <button
                   className="btn"
                   onClick={() => {
-                    // handleLogin(); NO FUNCIONA
                     navigate("/loginRegister");
                   }}
                 >
                   Registrarse
                 </button>
               </>
-            ) : (
+            ) 
+            : (
               <>
                 <button className="btn cart always-visible" type="submit">
-                  
                   {
                     login 
                     ? 
                     <Link to={`/accountDetail/${userId}`} >
-                      (<img src="src\images\Logo1.png" />)
+                      (<img src={userImage} />)
                     </Link>
                     : 
                     <Link to={`/accountDetail/${userId}`}>
@@ -106,10 +110,12 @@ const NavBar = ({ userId, userImage }) => {
                   Cerrar Sesión
                 </button>
               </>
-            )}
-            <button className="btn cart" type="submit">
+              )}
+
+            <button onClick={handleCart}className="btn cart" >
               <i className="bi bi-cart"></i>
             </button>
+
           </div>
         </div>
       </nav>
