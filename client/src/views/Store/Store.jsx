@@ -6,7 +6,6 @@ import Filters from "../../components/Filters/Filters";
 import Pagination from "../../components/Pagination/Pagination";
 
 const ITEMS_PER_PAGE = 6;
-import OrderByName from "../../components/OrderBYName/OrderByName";
 import Searchbar from "../../components/SearchBar/SearchBar";
 
 const Store = () => {
@@ -52,7 +51,6 @@ const Store = () => {
     <div>
       <Searchbar />
       <Filters />
-      <OrderByName />
       <div>
         <Pagination
           currentPage={currentPage}

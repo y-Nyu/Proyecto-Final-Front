@@ -1,48 +1,6 @@
-// import Card from "../Card/Card";
-// import { useEffect, useState } from "react";
-// import style from "./Cards.module.css";
-// import PuffLoader from "react-spinners/PuffLoader";
-
-// const Cards = ({ products, addToCart }) => {
-//     const [dataLoaded, setDataLoaded] = useState(false);
-
-//     useEffect(() => {
-//         if (products.length !== 0) {          
-//             setDataLoaded(true); 
-//         } else {
-//             setDataLoaded(false);
-//         }
-//       }, [products]);
-//     console.log('productos Card' + products);
-
-//     return(
-//         <div className={style["container"]}>
-//             <div className="row row-cols-4 g-4">             
-//                 { dataLoaded 
-//                 ? (
-//                     Array.isArray(products) &&  products.map((product) => {
-//                         return (
-//                             <Card
-//                                 key={product.id}
-//                                 product={product}
-//                                 addToCart={addToCart}
-//                             />
-//                         )
-//                     })
-//                     )
-//                 : 
-//                 <PuffLoader size={150} data-testid="loader" />
-//                 }
-//             </div>
-//         </div>
-//     )
-// };
-
-// export default Cards;
-
 import Card from "../Card/Card";
 import { useEffect, useState } from "react";
-import style from "./Cards.module.css";
+import style from "./cards.module.css";
 import PuffLoader from "react-spinners/PuffLoader";
 
 const Cards = ({ products }) => {
