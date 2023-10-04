@@ -32,7 +32,7 @@ const NavBar = ({ userId, userImage }) => {
     if(!token) {
       navigate("/loginRegister")
     }
-    navigate("/sales") // Carrito?
+    navigate("/cart")
   }
 
   return (
@@ -122,7 +122,7 @@ const NavBar = ({ userId, userImage }) => {
                   </button>
                 </>
               )}
-              <button className="btn cart" type="submit">
+              <button onClick={handleCart}className="btn cart" type="submit">
                 <i className="bi bi-cart"></i>
               </button>
             </div>
