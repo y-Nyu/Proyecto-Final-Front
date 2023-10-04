@@ -33,13 +33,13 @@ export const validateRegister = (data) => {
 export const validateLogin = (data) => {
   let errors = {};
 
-  if (!/(?=.*[a-z])/.test(data.password)) {
-    errors.password = "Requiere una letra minúscula";
-  } else if (!/(?=.*[A-Z])/.test(data.password)) {
-    errors.password = "Requiere una letra mayúscula";
-  } else if (data.password.length < 6 || data.password.length > 10) {
-    errors.password = "Requiere entre 6 y 10 caracteres";
-  } 
+  // if (!/(?=.*[a-z])/.test(data.password)) {
+  //   errors.password = "Requiere una letra minúscula";
+  // } else if (!/(?=.*[A-Z])/.test(data.password)) {
+  //   errors.password = "Requiere una letra mayúscula";
+  // } else if (data.password.length < 6 || data.password.length > 10) {
+  //   errors.password = "Requiere entre 6 y 10 caracteres";
+  // } 
 
   if( data.password !== data.passwordConfirmation) {
     errors.passwordConfirmation = 'Las contraseñas no coinciden'
