@@ -12,8 +12,10 @@ import Faq from "./views/Faq/faq";
 import Privacy from "./views/PrivacyP/Privacy";
 import Users from './views/Users/Users'
 import Sales from './views/Sales/Sales'
+import Cart from './views/Shopping Cart/Cart';
 import { Routes, Route } from 'react-router-dom'
 import './App.css'
+import { ShoppingCartProvider } from './contexts/ShoppingCartContext';
 
 // CONSULTAR RUTAS DEFINIDAS POR EL BACK - PDTE AJUSTAR!!
 
@@ -21,25 +23,29 @@ const App = () => {
 
   return (
     <div>
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/formProduct" element={<FormProduct/>}></Route>
-        <Route path='/formUser' element={<FormUser/>}></Route>
-        <Route path="/about" element={<About />} />
-        <Route path="/loginRegister" element={<LoginRegister />} />
-        <Route path="/accountDetail/:id" element={<AccountDetail />} />
-        <Route path="/store" element={<Store />} />
-        <Route path="/detail/:id" element={<Detail />} />
-        <Route path="/preguntas-frecuentes" element={<Faq />} />
-        <Route path="/politica-de-privacidad" element={<Privacy />} />
+      <ShoppingCartProvider>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/formProduct" element={<FormProduct/>}></Route>
+          <Route path='/formUser' element={<FormUser/>}></Route>
+          <Route path="/about" element={<About />} />
+          <Route path="/loginRegister" element={<LoginRegister />} />
+          <Route path="/accountDetail/:id" element={<AccountDetail />} />
+          <Route path="/store" element={<Store />} />
+          <Route path="/detail/:id" element={<Detail />} />
+          <Route path="/preguntas-frecuentes" element={<Faq />} />
+          <Route path="/politica-de-privacidad" element={<Privacy />} />
+          <Route path="/cart" element={<Cart />} />
 
-        <Route path="/adminLogin" element={<LoginRegister />} />
-        <Route path="/adminStore" element={<Store />} />
-        <Route path="/adminUsers" element={<Users />} />
-        <Route path="/adminSales" element={<Sales />} />
-      </Routes>
-      <Footer/>
+
+          <Route path="/adminLogin" element={<LoginRegister />} />
+          <Route path="/adminStore" element={<Store />} />
+          <Route path="/adminUsers" element={<Users />} />
+          <Route path="/adminSales" element={<Sales />} />
+        </Routes>
+        <Footer/>
+      </ShoppingCartProvider>
     </div>
   );
 };

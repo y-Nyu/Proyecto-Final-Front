@@ -93,7 +93,7 @@ const NavBar = ({ userId, userImage }) => {
                 </button>
               </>
             )}
-            <button className="btn cart" type="submit">
+            <button className="btn cart" type="submit" onClick={() => navigate("/cart")}>
               <i className="bi bi-cart"></i>
             </button>
           </div>
