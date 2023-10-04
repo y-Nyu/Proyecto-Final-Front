@@ -14,7 +14,7 @@ const NavBar = ({ userId, userImage }) => {
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-md navbar-light ">
         <div className="container">
           <Link to="/" className="navbar-brand">
             <img
@@ -113,3 +113,4 @@ const NavBar = ({ userId, userImage }) => {
 };
 
 export default NavBar;
+
