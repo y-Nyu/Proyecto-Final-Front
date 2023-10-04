@@ -41,7 +41,7 @@ const NavBar = ({ userId, userImage }) => {
         <div className="container">
           <Link to="/" className="navbar-brand">
             <img
-              src="src/images/Logo.png"
+              src={imagelogo}
               className="nav_logo"
               width="60"
               alt="Logo de la página"
