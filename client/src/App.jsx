@@ -16,13 +16,28 @@ import Cart from './views/Shopping Cart/Cart';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import './App.css'
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { ShoppingCartProvider } from './contexts/ShoppingCartContext';
+import { getUserById } from './redux/Actions/Users/usersActions'
+import jwtDecode from 'jwt-decode'
+
 
 // CONSULTAR RUTAS DEFINIDAS POR EL BACK - PDTE AJUSTAR!!
 
 const App = () => {
 
+  const dispatch = useDispatch()
+  const token = sessionStorage.getItem("jwt_session")
+
+  if (token) {
+    const decodedToken = jwtDecode(token);
+    const userId = decodedToken.id;
+  
+    useEffect(() => {
+      dispatch(getUserById(userId));
+    }, []);
+  }
+    
   // NO FUNCIONA
   // const userRole = useSelector(state => state.userRole);
   // const navigate = useNavigate();
