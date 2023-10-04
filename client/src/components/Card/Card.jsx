@@ -1,7 +1,32 @@
 import { Link } from "react-router-dom";
-import style from "./card.module.css";
+import style from "./Card.module.css";
+import { useContext, useEffect } from "react";
+import { CartContext } from "../../contexts/ShoppingCartContext";
 
-const Card = ({ id, image, name, price }) => {
+
+const Card = ({ id, image, name, price}) => {
+
+  const [cart, setCart] = useContext(CartContext);
+
+  
+  
+  const addToCart = (product) => {
+    const existingProduct = cart.find((element) => element.id === product.id);
+    
+    if (existingProduct) {
+      setCart(cart.map((element) => 
+      element.id === product.id
+      ? { ...element, quantity: element.quantity + 1}
+      : element
+      ));
+    } else {
+      setCart([...cart, { ...product, quantity: 1 }]);
+    };
+
+    
+    console.log(cart, 'el cart');
+  };
+
   return (
     <div className={`card ${style.customCard} mx-auto`} style={{ width: "18rem" }}>
       <i className={`bi bi-balloon-heart ${style.heart}`}></i>
@@ -18,6 +43,7 @@ const Card = ({ id, image, name, price }) => {
             </button>
           </Link>
         </div>
+        <button className={style["btn"]} onClick={() => addToCart({id, name, price})}>Agregar al Carrito</button>
       </div>
     </div>
   );
