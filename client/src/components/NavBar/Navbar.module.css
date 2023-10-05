@@ -11,6 +11,10 @@
     align-items: center;
     justify-content: space-between;
   }
+  .nav_link {
+    color: black;
+    text-decoration: none;
+  }
   .nav_link:first-child {
     flex: 0 0 auto; /* Evita que el primer div crezca o se contraiga */
     width: auto; /* Permite que el ancho del primer div se ajuste automáticamente */
@@ -27,7 +31,7 @@
     transition: transform 0.8s; /* Agrega una transición suave */
   }
 
-  .center-logo {
+  .center_logo {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -38,14 +42,14 @@
   }
 
 /* Buttons */
-  .btn {
+  .navbar_collapse .btn {
     background-color: #6489D8;
     color: white;
     border: none;
     margin-left: 10px;
   }
   
-  .btn:hover {
+  .navbar_collapse .btn:hover {
     transition: background-color 0.3s ease;
     background-color: white !important;
     color: black !important;

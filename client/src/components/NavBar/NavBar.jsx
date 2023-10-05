@@ -129,7 +129,7 @@ const NavBar = ({ userId, userImage }) => {
                   </button>
                 </>
               )}
-              <button onClick={handleCart}className="btn cart" type="submit">
+              <button onClick={handleCart}className={`btn cart ${style.btn}`} type="submit">
                 <i className="bi bi-cart"></i>
                 <span>{quantity}</span>
               </button>
