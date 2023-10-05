@@ -51,6 +51,9 @@ export const getUserById = (id) => {
     }
 }
 
+// RECIBE EL OBJETO user, QUE ES UN USUARIO DE LA DB CON TODOS LOS DATOS
+// EXCEPTO EL PASSWORD
+// ESTE OBJETO user ES GUARDADO EN userLogged EN EL ESTADO GLOBAL
 export const setUser = (user) => {
     return {type: SET_USER, payload: user};
 }
