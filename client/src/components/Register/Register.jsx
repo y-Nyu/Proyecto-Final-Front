@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { validateRegister } from "../../Validate";
-import { createUserRole } from "../../redux/Actions/Users/usersActions";
+import { createUserRole, setUser } from "../../redux/Actions/Users/usersActions";
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import style from './Register.module.css';
 
@@ -38,14 +38,21 @@ const Register = ({ toggleComponent }) => {
 
 
     const dispatch = useDispatch()
+
+
+    //
+    // USO, LO MISMO QUE EN EL LOGIN, UN DISPATCH CON LA ACTION setUser
+    // PARA EVITAR DECODIFICAR EL TOKEN Y TENER QUE HACER OTRA REQUEST AL BACK
+    //
     const register = (ev) => {
         ev.preventDefault();
 
         axios.post("https://pf-back-deploy.onrender.com/users", data)
             .then(res => {
-                const {rol, token} = res.data
+                const {id, email, name, rol, celular, token} = res.data
                 sessionStorage.setItem("jwt_session", token)
                 dispatch(createUserRole(rol));
+                dispatch(setUser({id, email, name, rol, celular}));
                 navigate("/")
             })
             .catch(error => alert(error.response.data.error))

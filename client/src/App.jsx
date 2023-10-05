@@ -56,31 +56,41 @@ const App = () => {
 
   }, [])
 
+
+  // ESTE CODIGO DE ACÁ ES PARA EL LOGIN DE GOOGLE
+  // 
+  // DEBIDO A QUE EL POPUP DE GOOGLE NOS REDIRIGE ACÁ
+  // CON PARAMETROS EN LA URL, LO QUE HAGO ES
+  // CHEQUEAR SI EN ESTOS MISMOS PARAMETROS EXISTE EL CODIGO QUE
+  // GOOGLE NOS PROVEE.
+  //
+  // EN CASO DE QUE EL CODIGO ESTÉ, LO PARSEO Y LO ENVÍO AL BACK.
+  // EL BACK LO UNICO QUE HACE ES USAR EL CODIGO PARA OBTENER EL EMAIL
+  // DEL USUARIO QUE SE LOGEA.
+  // SI EL MAIL ESTÁ EN LA BASE DE DATOS (ES DECIR, SI EL USUARIO ESTA REGISTRADO)
+  // LO DEJA HACER LOGIN Y RETORNA EL TOKEN JWT EN LA RESPONSE.
+  //
+  // EN CASO CONTRARIO ARROJA UN ERROR
   useEffect(() => {
     
-    // Chequeamos si fuimos redirigidos del login de google
-    // Si es así, tomamos el codigo que se muestra en la url
-    // y lo enviamos al server para terminar el proceso de login 
-    // y obtener el jwt
+
     if(location.pathname == "/")
     {
       const queries = location.search;
       const params = new URLSearchParams(queries);
 
-      // We search for the google oauth code
       let codeParam = params.entries().next();
       while(!codeParam.done)
       {
         if(codeParam.value[0] == "code")
         {
-          codeParam = codeParam[1];
+          codeParam = codeParam.value[1];
           codeParam = decodeURI(codeParam);
-          alert("TODO BIEN! El codigo de google es: " + codeParam);
           
           axios.post("http://localhost:3001/login-google", { google_code: codeParam})
             .then(resp => resp.data)
             .then(({id, token}) => {
-              console.log("EL ID ES: " + id);
+             
               sessionStorage.setItem("jwt_session", token);
               dispatch(getUserById(id));
             })

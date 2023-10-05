@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { validateLogin } from "../../Validate";
-import { createUserRole, getUserById } from "../../redux/Actions/Users/usersActions";
+import { createUserRole, getUserById, setUser } from "../../redux/Actions/Users/usersActions";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import jwtDecode from 'jwt-decode'
@@ -49,20 +49,27 @@ const Login = ({ toggleComponent }) => {
   };
 
 
+  //
+  // EN HANDLE SUBMIT EN VEZ DE HACER UN DISPATCH CON EL ID DE USUARIO
+  // USO LA ACCION setUser QUE CREE PARA USAR TODOS LOS DATOS QUE ME DEVUELVE EL BACK
+  // ASÍ QUE LA DECODIFICACIÓN DEL TOKEN JWT YA NO HACE FALTA TENERLA EN EL LOGIN
+  // NI EN EL REGISTRO
+
   const handleSubmit = (ev) => {
     ev.preventDefault();
 
     axios.post("https://pf-back-deploy.onrender.com/login", data)
       .then(usrRes => {
 
-        const {rol, token} = usrRes.data;
+        const {id, email, name, rol, celular, token} = usrRes.data;
+
         // Setteamos el token
         sessionStorage.setItem("jwt_session", token);
         dispatch(createUserRole(rol));
+        dispatch(setUser({id, email, name, rol, celular}));
+
         navigate("/");
-        const decodedToken = jwtDecode(token);
-        const userId = decodedToken.id
-        dispatch(getUserById(userId))
+    
       })
       .catch(error => {
         console.log(error);
@@ -70,14 +77,22 @@ const Login = ({ toggleComponent }) => {
       })
   };
 
-  // user que recibe debe quedar almacenado en localStorage
+
   const login = async () => {
     try
     {
       // 
-      // Pedimos a google la URL que nos abre un popup de login
+      // PEDIMOS AL BACK UNA URL DE GOOGLE
       //
+      // ESTA URL ES EL FAMOSO POPUP QUE APARECE SIEMPRE QUE HACEMOS LOGIN CON GOOGLE
+      //
+
       const {auth_url} = (await axios.post("http://localhost:3001/login-google-init")).data
+
+      //
+      // USANDO LA URL PROVISTA ABRIMOS UNA VENTANA QUE PIDE ESCOGER LA CUENTA DE MAIL
+      // CON LA QUE VAMOS A HACER LOGIN
+      //
       window.open(auth_url, "_self");
     }
     catch(error)

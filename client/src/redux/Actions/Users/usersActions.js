@@ -1,4 +1,4 @@
-import { SEARCH_USERS, SET_SEARCH_TYPE, GET_USER_BY_ID, USER_LOG_OUT } from '../action-types';
+import { SEARCH_USERS, SET_SEARCH_TYPE, GET_USER_BY_ID, USER_LOG_OUT, SET_USER } from '../action-types';
 import axios from 'axios';
 
 //Pdte config de error, cambiar alert por componente
@@ -49,6 +49,10 @@ export const getUserById = (id) => {
             alert(error.response.data)
         }
     }
+}
+
+export const setUser = (user) => {
+    return {type: SET_USER, payload: user};
 }
 
 export const searchUsers = (searched) => {
