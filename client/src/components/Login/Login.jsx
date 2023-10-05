@@ -79,8 +79,10 @@ const Login = ({ toggleComponent }) => {
   const login = async () => {
     try
     {
-      // Abrimos un popup para hacer el login
-      const {auth_url} = (await axios.post("http://localhost:3001/login-google")).data
+      // 
+      // Pedimos a google la URL que nos abre un popup de login
+      //
+      const {auth_url} = (await axios.post("http://localhost:3001/login-google-init")).data
       window.open(auth_url, "_self");
     }
     catch(error)

@@ -12,12 +12,12 @@ import Faq from "./views/Faq/faq";
 import Privacy from "./views/PrivacyP/Privacy";
 import Users from './views/Users/Users'
 import Sales from './views/Sales/Sales'
-// import Cart from './views/Shopping Cart/Cart';
 import Cart from './views/Cart/Cart';
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
+import axios from 'axios';
+import { Routes, Route, useLocation } from 'react-router-dom'
 import './App.css'
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { ShoppingCartProvider } from './contexts/ShoppingCartContext';
 import { getUserById } from './redux/Actions/Users/usersActions'
 import jwtDecode from 'jwt-decode'
@@ -32,6 +32,9 @@ const App = () => {
   const token = sessionStorage.getItem("jwt_session")
 
   /*
+  ME PARECE QUE EL CODIGO ACA ESTA AL REVES
+  useEffect DEBERIA CONTENER AL CONDICIONAL
+
   if (token) {
     const decodedToken = jwtDecode(token);
     const userId = decodedToken.id;
@@ -55,6 +58,10 @@ const App = () => {
 
   useEffect(() => {
     
+    // Chequeamos si fuimos redirigidos del login de google
+    // Si es así, tomamos el codigo que se muestra en la url
+    // y lo enviamos al server para terminar el proceso de login 
+    // y obtener el jwt
     if(location.pathname == "/")
     {
       const queries = location.search;
@@ -68,7 +75,16 @@ const App = () => {
         {
           codeParam = codeParam[1];
           codeParam = decodeURI(codeParam);
-          alert("TODO BIEN! El codigo de google es: " + codeParam);      
+          alert("TODO BIEN! El codigo de google es: " + codeParam);
+          
+          axios.post("http://localhost:3001/login-google", { google_code: codeParam})
+            .then(resp => resp.data)
+            .then(({id, token}) => {
+              sessionStorage.setItem("jwt_session", token);
+              dispatch(getUserById(id));
+            })
+            .catch(error => alert(error.message));
+
           break;
         }
       }
