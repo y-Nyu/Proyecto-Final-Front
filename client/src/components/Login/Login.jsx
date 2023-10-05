@@ -1,17 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import { GoogleLogin } from '@react-oauth/google';
-// import jwt_decode from "jwt-decode";
 import { validateLogin } from "../../Validate";
 import { useGoogleLogin } from "@react-oauth/google";
-import { createUserRole, userLogin } from "../../redux/Actions/Users/usersActions";
+import { createUserRole } from "../../redux/Actions/Users/usersActions";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import style from './Login.module.css';
 
 // EXTRA: Recuperación de contraseña
-// pendiente, crear action-type y action para enviar info al back
 
 const Login = ({ toggleComponent }) => {
   const navigate = useNavigate();
@@ -50,9 +47,6 @@ const Login = ({ toggleComponent }) => {
     return disabledAux;
   };
 
-  // const handleSubmit = () => {
-  //   dispatch(userLogin(data));
-  // };
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
@@ -67,7 +61,6 @@ const Login = ({ toggleComponent }) => {
         // Rol debería ser guardado en estado global
         // para chequear luego si el usuario tiene acceso a las paginas de admin o no
         const {rol, token} = usrRes.data;
-        
         // Setteamos el token
         sessionStorage.setItem("jwt_session", token);
         dispatch(createUserRole(rol));
@@ -79,33 +72,12 @@ const Login = ({ toggleComponent }) => {
       })
   };
 
-  // user que recibe debe quedar almacenado en localStorage
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
       axios.post("https://pf-back-deploy.onrender.com/login-google",{google_token: codeResponse.access_token})
     },
   });
 
-  // const login = useGoogleLogin({
-  //     onSuccess: async (response) => {
-  //         try {
-  //             const res = await axios.get(
-  //                 'https://www.googleapis.com/auth/userinfo',
-  //                 {
-  //                     headers: {
-  //                         Authorization: `Bearer ${response.access_token}`
-  //                     }
-  //                 }
-  //             )
-  //             console.log(res);
-  //         }
-  //         catch(err) {
-  //             console.log(err);
-  //         }
-  //     }
-  //   });
-
-  // Pdte deshabilitar botón submit cuando surja un error
   return (
     <div className="container">
       <div className="col">

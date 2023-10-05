@@ -14,7 +14,8 @@ import marca9 from "../../assets/marcas/marca-13.png";
 import marca10 from "../../assets/marcas/marca-16.png";
 import { Carousel } from 'react-bootstrap';
 
-const Home = () => {
+const Home = () => { 
+
   return (
     <section className="hero align-items-stretch">
 
