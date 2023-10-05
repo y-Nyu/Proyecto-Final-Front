@@ -76,13 +76,10 @@ const Detail = () => {
 
             <div className="product-cart">
               <button
-                onClick={() => addToCart()}
+                onClick={addToCart}
                 className={`btn ${style.btn}`} 
               >
                 Agregar al carrito
-              </button>
-              <button onClick={() => removeItem(productId.id)}>
-                Remover del Carrito
               </button>
               <input
                 type="number"

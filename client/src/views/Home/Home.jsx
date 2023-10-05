@@ -56,6 +56,10 @@ const Home = () => {
   </h5>
 </div>
 
+<div className="experiencia">
+
+</div>
+
       <div className="my-4 marcas-text">
   <i className="bi bi-stars"></i> Trabajamos con las mejores marcas del mercado
   <i className="bi bi-stars"></i>
