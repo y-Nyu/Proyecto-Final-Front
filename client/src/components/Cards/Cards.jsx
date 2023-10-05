@@ -28,6 +28,10 @@ const Cards = ({ products }) => {
                                 name={product.name}
                                 image={product.image}
                                 price={product.price}
+                                brand={product.brand}
+                                description={product.description}
+                                active={product.active}
+                                stock={product.stock}
                             />
                         )
                     })

@@ -1,15 +1,21 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Navbar.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useDispatch } from "react-redux";
 import { createUserRole, userLogOut } from "../../redux/Actions/Users/usersActions";
 import imagelogo from "../../assets/logo/Logo.png";
+import { CartContext } from "../../contexts/ShoppingCartContext";
 
 const NavBar = ({ userId, userImage }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
   const [login, loginState] = useState(true);
+  const [cart, setCart] = useContext(CartContext);
+
+  const quantity = cart.reduce((acc, curr) => {
+    return acc + curr.quantity;
+  }, 0);
 
   useEffect(() => {
     const token = sessionStorage.getItem("jwt_session");
@@ -105,7 +111,7 @@ const NavBar = ({ userId, userImage }) => {
                   <button className="btn cart always-visible" type="submit">
                     {login ? (
                       <Link to={`/accountDetail/${userId}`}>
-                        (<img src={imagelogo} />)
+                        (<img src={userImage} />)
                       </Link>
                     ) : (
                       <Link to={`/accountDetail/${userId}`}>
@@ -125,6 +131,7 @@ const NavBar = ({ userId, userImage }) => {
               )}
               <button onClick={handleCart}className="btn cart" type="submit">
                 <i className="bi bi-cart"></i>
+                <span>{quantity}</span>
               </button>
             </div>
           </div>

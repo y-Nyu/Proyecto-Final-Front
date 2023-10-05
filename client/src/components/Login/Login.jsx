@@ -3,9 +3,10 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { validateLogin } from "../../Validate";
 import { useGoogleLogin } from "@react-oauth/google";
-import { createUserRole } from "../../redux/Actions/Users/usersActions";
+import { createUserRole, getUserById } from "../../redux/Actions/Users/usersActions";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
+import jwtDecode from 'jwt-decode'
 import style from './Login.module.css';
 
 // EXTRA: Recuperación de contraseña
@@ -65,6 +66,9 @@ const Login = ({ toggleComponent }) => {
         sessionStorage.setItem("jwt_session", token);
         dispatch(createUserRole(rol));
         navigate("/");
+        const decodedToken = jwtDecode(token);
+        const userId = decodedToken.id
+        dispatch(getUserById(userId))
       })
       .catch(error => {
         console.log(error);
