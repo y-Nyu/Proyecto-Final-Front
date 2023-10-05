@@ -23,6 +23,30 @@ import { ShoppingCartProvider } from './contexts/ShoppingCartContext';
 
 const App = () => {
 
+  const location = useLocation();
+
+  useEffect(() => {
+    
+    if(location.pathname == "/")
+    {
+      const queries = location.search;
+      const params = new URLSearchParams(queries);
+
+      // We search for the google oauth code
+      let codeParam = params.entries().next();
+      while(!codeParam.done)
+      {
+        if(codeParam.value[0] == "code")
+        {
+          codeParam = codeParam[1];
+          alert("TODO BIEN! El codigo de google es: " + codeParam);      
+          break;
+        }
+      }
+
+    }
+    
+  }, [location]);
 
   return (
     <div>

@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import { GoogleLogin } from '@react-oauth/google';
-// import jwt_decode from "jwt-decode";
 import { validateLogin } from "../../Validate";
-import { useGoogleLogin } from "@react-oauth/google";
+
+
 import { createUserRole, userLogin } from "../../redux/Actions/Users/usersActions";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import style from './Login.module.css';
+
+const {CLIENT_ID, CLIENT_SECRET, OAUTH_REDIRECT} = import.meta.env;
 
 // EXTRA: Recuperación de contraseña
 // pendiente, crear action-type y action para enviar info al back
@@ -57,18 +58,11 @@ const Login = ({ toggleComponent }) => {
   const handleSubmit = (ev) => {
     ev.preventDefault();
 
-    // Envio la request de Login
-    // Si sale bien, guardo el token en sessionStorage y navego a home.
-    // En caso contrario se muestra una alerta con el mensaje de error
-    // deploy https://pf-back-deploy.onrender.com local http://localhost:3001
     axios.post("https://pf-back-deploy.onrender.com/login", data)
       .then(usrRes => {
 
-        // Rol debería ser guardado en estado global
-        // para chequear luego si el usuario tiene acceso a las paginas de admin o no
         const {rol, token} = usrRes.data;
         
-        // Setteamos el token
         sessionStorage.setItem("jwt_session", token);
         dispatch(createUserRole(rol));
         navigate("/");
@@ -80,11 +74,22 @@ const Login = ({ toggleComponent }) => {
   };
 
   // user que recibe debe quedar almacenado en localStorage
-  const login = useGoogleLogin({
-    onSuccess: (codeResponse) => {
-      axios.post("https://pf-back-deploy.onrender.com/login-google",{google_token: codeResponse.access_token})
-    },
-  });
+  const login = async () => {
+    // NECESITO SETTEAR LAS VARIABLES DE ENTORNO
+    try
+    {
+      // Abrimos un popup para hacer el login
+      const {auth_url} = (await axios.post("http://localhost:3001/login-google")).data
+      window.open(auth_url, "Google Login", "height=500,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes");
+    }
+    catch(error)
+    {
+      alert("Fallo al iniciar la autenticación con Google");
+    }
+  
+  }
+
+  
 
   // const login = useGoogleLogin({
   //     onSuccess: async (response) => {
