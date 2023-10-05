@@ -12,14 +12,13 @@ const NavBar = ({ userId, userImage }) => {
   const location = useLocation();
   const [login, loginState] = useState(true);
   const [cart, setCart] = useContext(CartContext);
+  const token = sessionStorage.getItem("jwt_session");
 
   const quantity = cart.reduce((acc, curr) => {
     return acc + curr.quantity;
   }, 0);
 
   useEffect(() => {
-    const token = sessionStorage.getItem("jwt_session");
-    
     if(token)
     {
       loginState(false)
@@ -35,11 +34,14 @@ const NavBar = ({ userId, userImage }) => {
   }
   
   const handleCart = () => {
-    const token = sessionStorage.getItem("jwt_session")
-    if(!token) {
-      navigate("/loginRegister")
+    // const token = sessionStorage.getItem("jwt_session")
+    console.log(token);
+    // token ? navigate("/cart") : navigate("/loginRegister")
+    if(token) {
+      navigate("/cart")
     }
-    navigate("/cart")
+    alert('Debe ingresar o registrarse')
+    navigate("/loginRegister")
   }
 
   return (
@@ -129,9 +131,9 @@ const NavBar = ({ userId, userImage }) => {
                   </button>
                 </>
               )}
-              <button onClick={handleCart}className={`btn cart ${style.btn}`} type="submit">
+              <button onClick={handleCart} className={`btn cart ${style.btn}`} type="submit">
                 <i className="bi bi-cart"></i>
-                <span>{quantity}</span>
+                {token && <span>{quantity}</span>}
               </button>
             </div>
           </div>
