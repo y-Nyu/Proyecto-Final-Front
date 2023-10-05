@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import style from "./card.module.css";
+import style from "./Card.module.css";
 import { useContext, useEffect } from "react";
 import { CartContext } from "../../contexts/ShoppingCartContext";
 
@@ -54,7 +54,6 @@ const Card = ({ id, image, name, price, brand, category, description, active, st
           <Link to={`/detail/${id}`}>
             <button className={`btn ${style.cardButton}`}>
               <ins>Más info</ins>
-              
             </button>
           </Link>
         </div>

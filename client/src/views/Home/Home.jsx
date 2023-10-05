@@ -1,4 +1,4 @@
-import "./Home.css";
+import style from "./Home.module.css"
 import imagebanner1 from "../../assets/banner/Banner1.png";
 import imagebanner2 from "../../assets/banner/Banner2.png";
 import imagebanner3 from "../../assets/banner/Banner3.png";
@@ -17,7 +17,7 @@ import { Carousel } from 'react-bootstrap';
 const Home = () => { 
 
   return (
-    <section className="hero align-items-stretch">
+    <section className={`${style.hero} align-items-stretch`}>
 
         <div id="carouselExampleIndicators" className="carousel slide">
   <div className="carousel-indicators">
@@ -46,7 +46,7 @@ const Home = () => {
   </button>
 </div>
 <div className="my-4">
-  <h5 className="custom-h5">
+  <h5 className={style.custom_h5}>
     "PATITAS FELICES es una tienda que nació como un proyecto grupal por
     amor y dedicación hacia nuestras mascotas y que poco a poco se irá
     convirtiendo en una gran empresa. Nuestro criterio profesional se basa
@@ -60,7 +60,7 @@ const Home = () => {
 
 </div>
 
-      <div className="my-4 marcas-text">
+      <div className={`my-4 ${style.marcas_text}`}>
   <i className="bi bi-stars"></i> Trabajamos con las mejores marcas del mercado
   <i className="bi bi-stars"></i>
 </div>
