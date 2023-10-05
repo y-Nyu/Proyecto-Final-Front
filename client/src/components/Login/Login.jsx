@@ -2,17 +2,12 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { validateLogin } from "../../Validate";
-
-
-import { createUserRole, userLogin } from "../../redux/Actions/Users/usersActions";
-import { useGoogleLogin } from "@react-oauth/google";
 import { createUserRole, getUserById } from "../../redux/Actions/Users/usersActions";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import jwtDecode from 'jwt-decode'
 import style from './Login.module.css';
 
-const {CLIENT_ID, CLIENT_SECRET, OAUTH_REDIRECT} = import.meta.env;
 
 // EXTRA: Recuperación de contraseña
 

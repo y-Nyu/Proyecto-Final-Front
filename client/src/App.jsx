@@ -8,7 +8,7 @@ import LoginRegister from './views/LoginRegister/LoginRegister'
 import AccountDetail from './views/AccountDetail/AccountDetail'
 import Store from './views/Store/Store'
 import Detail from './views/Detail/Detail'
-import Faq from "./views/Faq/faq";
+import Faq from "./views/Faq/Faq";
 import Privacy from "./views/PrivacyP/Privacy";
 import Users from './views/Users/Users'
 import Sales from './views/Sales/Sales'
@@ -80,6 +80,7 @@ const App = () => {
           axios.post("http://localhost:3001/login-google", { google_code: codeParam})
             .then(resp => resp.data)
             .then(({id, token}) => {
+              console.log("EL ID ES: " + id);
               sessionStorage.setItem("jwt_session", token);
               dispatch(getUserById(id));
             })
