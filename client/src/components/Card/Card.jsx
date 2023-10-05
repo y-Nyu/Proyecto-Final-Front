@@ -16,6 +16,7 @@ const Card = ({ id, image, name, price }) => {
           <Link to={`/detail/${id}`}>
             <button className={`btn ${style.cardButton}`}>
               <ins>Más info</ins>
+              
             </button>
           </Link>
         </div>
