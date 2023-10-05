@@ -8,7 +8,7 @@ import LoginRegister from './views/LoginRegister/LoginRegister'
 import AccountDetail from './views/AccountDetail/AccountDetail'
 import Store from './views/Store/Store'
 import Detail from './views/Detail/Detail'
-import Faq from "./views/Faq/faq";
+import Faq from "./views/Faq/Faq";
 import Privacy from "./views/PrivacyP/Privacy";
 import Users from './views/Users/Users'
 import Sales from './views/Sales/Sales'

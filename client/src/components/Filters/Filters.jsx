@@ -2,11 +2,20 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react';
 import { getCategories, 
     filterProducts, 
-    clearFilters 
+    clearFilters,
+    ordered
 } from '../../redux/Actions/Products/productsActions'
+
+const alphaSortTypes = {
+    alfa_asc: "alfa_asc",
+    alfa_desc: "alfa_desc"
+};
+
 
 const Filters = () => {
     const dispatch = useDispatch();
+  
+
     const allCategories = useSelector(state=>state.categories);
     
     const prices = [100, 500, 5000, 7500, 10000, 25000];
@@ -64,6 +73,16 @@ const Filters = () => {
 
     const changeSort = (event) => {
         const sort = event.target.value;
+        
+        if(alphaSortTypes[sort])
+        {
+            console.log("EL SORT ES: " + sort);
+            const order = (sort === alphaSortTypes.alfa_asc);
+            console.log("ORDER ES: " + order);
+            dispatch(ordered(order))
+            return;
+        }
+
         setFilters(prev => {return {...prev, sort}});
         
         const filterString = createFilterString({...filters, sort});
@@ -90,9 +109,11 @@ const Filters = () => {
                 {prices?.map((price, index) => <option value={price} key={index}>${price} ARS</option>)}
             </select>
             <select onChange={changeSort} >
-                <option value={''}>-- Ordenar por Precio --</option>
-                <option value={"asc"}>Ascendente</option>
-                <option value={"desc"}>Descendente</option>
+                <option value={''}>-- Ordenar por... --</option>
+                <option value={"asc"}>Precio Asc.</option>
+                <option value={"desc"}>Precio Desc.</option>
+                <option value={alphaSortTypes.alfa_asc}>Alfabetico Asc. </option>
+                <option value={alphaSortTypes.alfa_desc}>Alfabetico Desc.</option>
             </select>
         </div>
     )
