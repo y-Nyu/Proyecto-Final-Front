@@ -4,27 +4,41 @@ import { useContext, useEffect } from "react";
 import { CartContext } from "../../contexts/ShoppingCartContext";
 
 
-const Card = ({ id, image, name, price}) => {
+const Card = ({ id, image, name, price, brand, category, description, active, stock }) => {
 
   const [cart, setCart] = useContext(CartContext);
-
-  
   
   const addToCart = (product) => {
-    const existingProduct = cart.find((element) => element.id === product.id);
-    
-    if (existingProduct) {
-      setCart(cart.map((element) => 
-      element.id === product.id
-      ? { ...element, quantity: element.quantity + 1}
-      : element
-      ));
-    } else {
-      setCart([...cart, { ...product, quantity: 1 }]);
-    };
+    setCart((currItems) => {
+      const isItemsFound = currItems.find((item) => item.id === id);
+      if (isItemsFound) {
+        return currItems.map((item) => {
+          if (item.id === id) {
+            return { ...item, quantity: item.quantity + 1 };
+          } else {
+            return item;
+          }
+        });
+      } else {
+        return [...currItems, { id, quantity: 1, price, name, image, brand, category, description, active, stock }];
+      }
+    });
+  };
 
-    
-    console.log(cart, 'el cart');
+  const removeItem = (id) => {
+    setCart((currItems) => {
+      if (currItems.find((item) => item.id === id)?.quantity === 1) {
+        return currItems.filter((item) => item.id !== id);
+      } else {
+        return currItems.map((item) => {
+          if (item.id === id) {
+            return { ...item, quantity: item.quantity - 1, name, price, image, brand, category, description, active, stock };
+          } else {
+            return item;
+          }
+        });
+      }
+    });
   };
 
   return (
@@ -43,7 +57,12 @@ const Card = ({ id, image, name, price}) => {
             </button>
           </Link>
         </div>
-        <button className={style["btn"]} onClick={() => addToCart({id, name, price})}>Agregar al Carrito</button>
+        <button className={style["btn"]} onClick={addToCart}>
+          Agregar al Carrito
+        </button>
+        <button onClick={() => removeItem(id)} className={style["btn"]}>
+        Remover del Carrito
+      </button>
       </div>
     </div>
   );

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const AccountDetail = () => {
-
+  const navigate = useNavigate();
   const userData = useSelector(state=>state.userLogged)
   console.log(userData);
 
@@ -70,6 +71,9 @@ const AccountDetail = () => {
           ? ( <button onClick={saveChanges}>Guardar Cambios</button> ) 
           : ( <button onClick={() => setIsEditing(true)}>Editar</button> )
           }
+          <button onClick={() => {navigate('/sales')}}>
+            Mis compras
+          </button>
         </div>
       );
 }

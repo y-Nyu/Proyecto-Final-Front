@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import style from "./Detail.module.css";
+import { CartContext } from "../../contexts/ShoppingCartContext";
 
 const Detail = () => {
   const { id } = useParams();
   const [productId, SetproductId] = useState({});
   const [quantity, setQuantity] = useState(1); // Estado para la cantidad
+  const [cart, setCart] = useContext(CartContext); // Obtener el contexto del carrito
 
   useEffect(() => {
     axios
@@ -21,8 +23,35 @@ const Detail = () => {
 
   // Función para aumentar la cantidad
   const addToCart = () => {
-    // Aquí puedes realizar las acciones necesarias para agregar el producto al carrito
-    alert(`Se agregaron ${quantity} ${productId.name} al carrito`);
+    setCart((currItems) => {
+      const isItemsFound = currItems.find((item) => item.id === productId.id);
+      if (isItemsFound) {
+        return currItems.map((item) => {
+          if (item.id === productId.id) {
+            return { ...item, quantity: item.quantity + 1 };
+          } else {
+            return item;
+          }
+        });
+      } else {
+        return [...currItems, { id: productId.id, quantity: 1, price: productId.price, name: productId.name, image: productId.image, brand: productId.brand, category: productId.category, active: productId.active, description: productId.description, stock: productId.stock }];
+      }
+    });
+  };
+
+  const removeItem = (value) => {
+    setCart((currItems) => {
+      return currItems
+        .map((item) => {
+          if (item.id === value) {
+            if (item.quantity > 0) {
+              return { ...item, quantity: item.quantity - 1, name: productId.name, image: productId.image, brand: productId.brand, category: productId.category, active: productId.active, description: productId.description, stock: productId.stock };
+            }
+          }
+          return item;
+        })
+        .filter((item) => item.quantity > 0);
+    });
   };
 
   return (
@@ -47,10 +76,13 @@ const Detail = () => {
 
             <div className="product-cart">
               <button
-                onClick={addToCart}
+                onClick={() => addToCart()}
                 className={`btn ${style.btn}`} 
               >
                 Agregar al carrito
+              </button>
+              <button onClick={() => removeItem(productId.id)}>
+                Remover del Carrito
               </button>
               <input
                 type="number"
