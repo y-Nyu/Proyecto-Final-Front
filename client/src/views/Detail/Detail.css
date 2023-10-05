@@ -1,0 +1,57 @@
+.card {
+  background-color: #eeeded;
+  /* Establece el color de fondo */
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 400px;
+  /* Ajusta el ancho según tus preferencias */
+  margin: 0 auto;
+  /* Centra la carta horizontalmente */
+  font-family: 'Patrick Hand', cursive;
+  /* Aplica la fuente "Patrick Hand" o la que prefieras */
+}
+
+
+.card img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+}
+
+.formulario{
+  display: flex;
+  flex-direction: column;
+}
+
+.formulario label {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+.formulario select {
+  text-align: center;
+  padding: .5rem;
+  border: 1px solid blue;
+  border-radius: 1rem;
+}
+
+.formulario input[type="submit"]{
+  margin-top: 3rem;
+  background-color: aqua;
+  color: #0400ff;
+  text-transform: uppercase;
+  padding: 1.4rem;
+  font-weight: 700;
+  border: none;
+  transition-property: background-color;
+  transition-duration: 300ms;
+}
+
+.formulario input[type="submit"]:hover{
+  cursor: pointer;
+  background-color: rgb(0, 4, 255);
+  color: aqua;
+}
