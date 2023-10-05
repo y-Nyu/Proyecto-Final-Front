@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { validateLogin } from "../../Validate";
 
 
 import { createUserRole, userLogin } from "../../redux/Actions/Users/usersActions";
+import { useGoogleLogin } from "@react-oauth/google";
+import { createUserRole } from "../../redux/Actions/Users/usersActions";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import style from './Login.module.css';
@@ -12,7 +14,6 @@ import style from './Login.module.css';
 const {CLIENT_ID, CLIENT_SECRET, OAUTH_REDIRECT} = import.meta.env;
 
 // EXTRA: Recuperación de contraseña
-// pendiente, crear action-type y action para enviar info al back
 
 const Login = ({ toggleComponent }) => {
   const navigate = useNavigate();
@@ -51,9 +52,6 @@ const Login = ({ toggleComponent }) => {
     return disabledAux;
   };
 
-  // const handleSubmit = () => {
-  //   dispatch(userLogin(data));
-  // };
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
@@ -62,7 +60,7 @@ const Login = ({ toggleComponent }) => {
       .then(usrRes => {
 
         const {rol, token} = usrRes.data;
-        
+        // Setteamos el token
         sessionStorage.setItem("jwt_session", token);
         dispatch(createUserRole(rol));
         navigate("/");
@@ -91,26 +89,6 @@ const Login = ({ toggleComponent }) => {
 
   
 
-  // const login = useGoogleLogin({
-  //     onSuccess: async (response) => {
-  //         try {
-  //             const res = await axios.get(
-  //                 'https://www.googleapis.com/auth/userinfo',
-  //                 {
-  //                     headers: {
-  //                         Authorization: `Bearer ${response.access_token}`
-  //                     }
-  //                 }
-  //             )
-  //             console.log(res);
-  //         }
-  //         catch(err) {
-  //             console.log(err);
-  //         }
-  //     }
-  //   });
-
-  // Pdte deshabilitar botón submit cuando surja un error
   return (
     <div className="container">
       <div className="col">

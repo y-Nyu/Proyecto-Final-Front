@@ -1,4 +1,4 @@
-import { SEARCH_USERS, SET_SEARCH_TYPE } from '../action-types';
+import { SEARCH_USERS, SET_SEARCH_TYPE, GET_USER_BY_ID, USER_LOG_OUT } from '../action-types';
 import axios from 'axios';
 
 //Pdte config de error, cambiar alert por componente
@@ -7,7 +7,7 @@ export const usersCreate = (user) => {
         try {
             await axios.post('https://pf-back-deploy.onrender.com/users', user)
         } catch (error) {
-            alert(error.response.data)
+            console.log(error)
         }
     }
 };
@@ -28,6 +28,28 @@ export const userLogin = (loginData) => {
         }
     }
 };
+
+export const userLogOut = () => {
+    return async (dispatch) => {
+        try {
+            dispatch ({ type: USER_LOG_OUT })
+        } catch (error) {
+            alert(error.response.data)
+        }
+    }
+};
+
+export const getUserById = (id) => {
+    return async (dispatch) => {
+        try{
+            const { data } = await axios.get(`https://pf-back-deploy.onrender.com/users/${id}`)
+            dispatch ({ type: GET_USER_BY_ID, payload: data })
+            console.log(data);
+        }catch (error) {
+            alert(error.response.data)
+        }
+    }
+}
 
 export const searchUsers = (searched) => {
     return { type: SEARCH_USERS, payload: searched }

@@ -11,7 +11,9 @@ import { GET_PRODUCTS,
   SET_SEARCH_TYPE,
   SEARCH_USERS,
   SEARCH_PRODUCTS,
-  ORDERED
+  ORDERED,
+  GET_USER_BY_ID, 
+  USER_LOG_OUT
 } from "../Actions/action-types";
 
 const initialState = {
@@ -19,12 +21,12 @@ const initialState = {
     productsCopy: [],
     categories: [],
     updatedProduct: [],
+    userLogged: [],
     users: [],
     userRole: "",
     allUsers: [],
     searchType: "users",
 };
-
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -109,12 +111,29 @@ const reducer = (state = initialState, action) => {
               products: sortedProducts,
             };
           }
+
+          case GET_USER_BY_ID: {
+            return {
+              ...state,
+              userLogged: [action.payload]
+            }
+          }
+
+          case USER_LOG_OUT: {
+            return {
+              ...state,
+              userLogged: []
+            }
+          }
+
         default:
             return {...state}
     }
 };
 
 export default reducer;
+
+
 
 // Reemplazar lógica case ORDERED para traerlo desde el back
 // Error búsqueda por nombre cuando se omiten la mayúscula inicial en cada palabra
