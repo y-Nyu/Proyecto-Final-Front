@@ -8,9 +8,9 @@ const Carrito = () => {
   const [cart, setCart] = useContext(CartContext);
 
   const checkOut = async () => {
-    await axios.post("http://localhost:3001/create-order", cart)
-    .then(res => alert ("Tu pago fue realizado"))
-    .catch(error => error.message);
+    const response = await axios.post("https://pf-back-deploy.onrender.com/create-order", cart)
+    const initPoint = await response.data.body.init_point;
+    window.location.href = initPoint;
   }
 
 
@@ -31,6 +31,8 @@ const Carrito = () => {
   </div>
 
         <button className="btn-pagar" onClick={checkOut}>Pagar Total</button>
+
+
 
 
 </main>
