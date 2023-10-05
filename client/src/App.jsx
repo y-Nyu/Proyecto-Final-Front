@@ -28,6 +28,30 @@ import jwtDecode from 'jwt-decode'
 const App = () => {
 
   const location = useLocation();
+  const dispatch = useDispatch()
+  const token = sessionStorage.getItem("jwt_session")
+
+  /*
+  if (token) {
+    const decodedToken = jwtDecode(token);
+    const userId = decodedToken.id;
+  
+    useEffect(() => {
+      dispatch(getUserById(userId));
+    }, []);
+  }
+  */
+
+  useEffect(() => {
+    
+    if(token)
+    {
+      const decodedToken = jwtDecode(token);
+      const userId = decodedToken.id;
+      dispatch(getUserById(userId));
+    }
+
+  }, [])
 
   useEffect(() => {
     
@@ -43,6 +67,7 @@ const App = () => {
         if(codeParam.value[0] == "code")
         {
           codeParam = codeParam[1];
+          codeParam = decodeURI(codeParam);
           alert("TODO BIEN! El codigo de google es: " + codeParam);      
           break;
         }
@@ -51,17 +76,7 @@ const App = () => {
     }
     
   }, [location]);
-  const dispatch = useDispatch()
-  const token = sessionStorage.getItem("jwt_session")
-
-  if (token) {
-    const decodedToken = jwtDecode(token);
-    const userId = decodedToken.id;
   
-    useEffect(() => {
-      dispatch(getUserById(userId));
-    }, []);
-  }
     
   // NO FUNCIONA
   // const userRole = useSelector(state => state.userRole);

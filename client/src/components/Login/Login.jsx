@@ -77,12 +77,11 @@ const Login = ({ toggleComponent }) => {
 
   // user que recibe debe quedar almacenado en localStorage
   const login = async () => {
-    // NECESITO SETTEAR LAS VARIABLES DE ENTORNO
     try
     {
       // Abrimos un popup para hacer el login
       const {auth_url} = (await axios.post("http://localhost:3001/login-google")).data
-      window.open(auth_url, "Google Login", "height=500,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes");
+      window.open(auth_url, "_self");
     }
     catch(error)
     {
