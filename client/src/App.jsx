@@ -56,7 +56,6 @@ const App = () => {
 
   }, [])
 
-
   // ESTE CODIGO DE ACÁ ES PARA EL LOGIN DE GOOGLE
   // 
   // DEBIDO A QUE EL POPUP DE GOOGLE NOS REDIRIGE ACÁ
