@@ -25,7 +25,6 @@ const Filters = () => {
         category: undefined,
         price: undefined,
         sort: undefined,
-        name: undefined,
     })
 
     useEffect(()=>{
@@ -91,15 +90,15 @@ const Filters = () => {
         dispatch(filterProducts(filterString))
     }
 
-    const searchByName = () => {
-        const filterString = createFilterString(filters);
-        console.log("EL ESTADO ES: " + JSON.stringify(filters));
+    const searchByName = (name) => {
+        const filterString = createFilterString({...filters, name});
+        console.log("EL ESTADO ES: " + filterString);
         dispatch(filterProducts(filterString));
     }
 
     return(
         <>
-            <Searchbar setFilters={setFilters} onClick={searchByName} />
+            <Searchbar  onClick={searchByName} />
 
             <div>
 
