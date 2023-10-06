@@ -171,6 +171,7 @@ export const deleteProduct = (id) => {
 export const filterProducts = (filter) => {
   return async (dispatch) => {
     try {
+      console.log("FILTRO ES: " + filter);
       const { data } = await axios.get(
         `https://pf-back-deploy.onrender.com/product${filter}`,
         {
@@ -179,6 +180,8 @@ export const filterProducts = (filter) => {
           }
         },
       )
+
+      console.log("LA DATA: " + data);
 
       if(typeof data === 'string') {
         dispatch({

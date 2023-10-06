@@ -5,6 +5,7 @@ import { getCategories,
     clearFilters,
     ordered
 } from '../../redux/Actions/Products/productsActions'
+import Searchbar from '../SearchBar/SearchBar';
 
 const alphaSortTypes = {
     alfa_asc: "alfa_asc",
@@ -24,6 +25,7 @@ const Filters = () => {
         category: undefined,
         price: undefined,
         sort: undefined,
+        name: undefined,
     })
 
     useEffect(()=>{
@@ -78,9 +80,7 @@ const Filters = () => {
         
         if(alphaSortTypes[sort])
         {
-            console.log("EL SORT ES: " + sort);
             const order = (sort === alphaSortTypes.alfa_asc);
-            console.log("ORDER ES: " + order);
             dispatch(ordered(order))
             return;
         }
@@ -91,40 +91,52 @@ const Filters = () => {
         dispatch(filterProducts(filterString))
     }
 
+    const searchByName = () => {
+        const filterString = createFilterString(filters);
+        console.log("EL ESTADO ES: " + JSON.stringify(filters));
+        dispatch(filterProducts(filterString));
+    }
+
     return(
-        <div>
-            <p>Filtrar por categoria: </p>
+        <>
+            <Searchbar setFilters={setFilters} onClick={searchByName} />
 
-            <select onChange={handleFilter} name='filter'>
-                <option value={''}>-- Categoria --</option>
-                {
-                    allCategories.map(category=>
-                        <option 
-                            value={category.name} key={category.id}>{category.name}
-                        </option>
-                )}
-            </select>
-            <select className="form-control mt-2" onChange={changeMaxPrice}>
-              <option value={""}> Precio Max. </option>
-              {prices?.map((price, index) => (
-                <option value={price} key={index}>
-                  ${price} ARS
-                </option>
-              ))}
-            </select>
-            <select className="form-control mt-2" onChange={changeSort}>
-                <option value={''}>-- Ordenar por... --</option>
-                <option value={"asc"}>Precio Asc.</option>
-                <option value={"desc"}>Precio Desc.</option>
-                <option value={alphaSortTypes.alfa_asc}>Alfabetico Asc. </option>
-                <option value={alphaSortTypes.alfa_desc}>Alfabetico Desc.</option>
-            </select>
-            <button className="btn btn-secondary mt-2" name="clean" onClick={handleFilter}>
-              Restablecer filtros
-            </button>
+            <div>
 
-        <div className="col-md-9"></div>
-    </div>
+
+                <p>Filtrar por categoria: </p>
+
+                <select onChange={handleFilter} name='filter'>
+                    <option value={''}>-- Categoria --</option>
+                    {
+                        allCategories.map(category=>
+                            <option 
+                                value={category.name} key={category.id}>{category.name}
+                            </option>
+                    )}
+                </select>
+                <select className="form-control mt-2" onChange={changeMaxPrice}>
+                <option value={""}> Precio Max. </option>
+                {prices?.map((price, index) => (
+                    <option value={price} key={index}>
+                    ${price} ARS
+                    </option>
+                ))}
+                </select>
+                <select className="form-control mt-2" onChange={changeSort}>
+                    <option value={''}>-- Ordenar por... --</option>
+                    <option value={"asc"}>Precio Asc.</option>
+                    <option value={"desc"}>Precio Desc.</option>
+                    <option value={alphaSortTypes.alfa_asc}>Alfabetico Asc. </option>
+                    <option value={alphaSortTypes.alfa_desc}>Alfabetico Desc.</option>
+                </select>
+                <button className="btn btn-secondary mt-2" name="clean" onClick={handleFilter}>
+                Restablecer filtros
+                </button>
+
+            <div className="col-md-9"></div>
+        </div>
+    </>
   );
 };
 
