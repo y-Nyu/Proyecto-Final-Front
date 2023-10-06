@@ -13,7 +13,8 @@ import { GET_PRODUCTS,
   SEARCH_PRODUCTS,
   ORDERED,
   GET_USER_BY_ID, 
-  USER_LOG_OUT
+  USER_LOG_OUT,
+  SET_USER
 } from "../Actions/action-types";
 
 const initialState = {
@@ -110,6 +111,13 @@ const reducer = (state = initialState, action) => {
               ...state,
               products: sortedProducts,
             };
+          }
+
+          case SET_USER: {
+            return {
+              ...state,
+              userLogged: [action.payload]
+            }
           }
 
           case GET_USER_BY_ID: {
