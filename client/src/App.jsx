@@ -14,7 +14,7 @@ import Users from './views/Users/Users'
 import Sales from './views/Sales/Sales'
 import Cart from './views/Cart/Cart';
 import axios from 'axios';
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import './App.css'
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -142,20 +142,20 @@ const App = () => {
   return (
     <div>
       <ShoppingCartProvider>
-        <NavBar />
+        <NavBar/>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/formProduct" element={<FormProduct/>}></Route>
+          <Route path="/" element={<Home/>}/>
+          <Route path="/store" element={<Store/>}/>
+          <Route path="/detail/:id" element={<Detail/>}/>
+          <Route path="/about" element={<About/>}/>
+          <Route path="/loginRegister" element={token ? <Navigate to="/"/> :<LoginRegister />}/>
+          <Route path="/accountDetail/:id" element={<AccountDetail/>}/>
+          <Route path="/cart" element={<Cart/>}/>
+          <Route path="/sales" element={<Sales/>}/>
+          <Route path="/preguntas-frecuentes" element={<Faq/>}/>
+          <Route path="/politica-de-privacidad" element={<Privacy/>}/>
           <Route path='/formUser' element={<FormUser/>}></Route>
-          <Route path="/about" element={<About />} />
-          <Route path="/loginRegister" element={<LoginRegister />} />
-          <Route path="/accountDetail/:id" element={<AccountDetail />} />
-          <Route path="/store" element={<Store />} />
-          <Route path="/detail/:id" element={<Detail />} />
-          <Route path="/preguntas-frecuentes" element={<Faq />} />
-          <Route path="/politica-de-privacidad" element={<Privacy />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/sales" element={<Sales />} />
+          <Route path="/formProduct" element={<FormProduct/>}/>
 
           <Route path="/adminLogin" element={<LoginRegister />} />
           <Route path="/adminStore" element={<Store />} />

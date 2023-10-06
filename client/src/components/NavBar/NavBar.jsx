@@ -19,6 +19,7 @@ const NavBar = ({ userId, userImage }) => {
   }, 0);
 
   useEffect(() => {
+  const token = sessionStorage.getItem("jwt_session");
     if(token)
     {
       loginState(false)
@@ -34,7 +35,7 @@ const NavBar = ({ userId, userImage }) => {
   }
   
   const handleCart = () => {
-    // const token = sessionStorage.getItem("jwt_session")
+    const token = sessionStorage.getItem("jwt_session")
     console.log(token);
     // token ? navigate("/cart") : navigate("/loginRegister")
     if(token) {
