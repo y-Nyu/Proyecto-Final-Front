@@ -1,6 +1,6 @@
 import Card from "../Card/Card";
 import { useEffect, useState } from "react";
-import style from "./cards.module.css";
+import style from "./Cards.module.css";
 import PuffLoader from "react-spinners/PuffLoader";
 
 const Cards = ({ products }) => {

@@ -46,9 +46,9 @@ const Filters = () => {
     };
 
 
-    // Filter string es la query que se pasa por la action
-    const createFilterString = (filters_obj) => {
-        const filtersArr = [];
+  // Filter string es la query que se pasa por la action
+  const createFilterString = (filters_obj) => {
+    const filtersArr = [];
 
         for(const key of Object.keys(filters_obj))
         {
@@ -63,13 +63,15 @@ const Filters = () => {
         return filtersArr.length ? filterString : "";
     }
 
-    const changeMaxPrice = (event) => {
-        const price = event.target.value;
-        setFilters(prev => {return {...prev, price}});
+  const changeMaxPrice = (event) => {
+    const price = event.target.value;
+    setFilters((prev) => {
+      return { ...prev, price };
+    });
 
-        const filterString = createFilterString({...filters, price});
-        dispatch(filterProducts(filterString))
-    }
+    const filterString = createFilterString({ ...filters, price });
+    dispatch(filterProducts(filterString));
+  };
 
     const changeSort = (event) => {
         const sort = event.target.value;
@@ -102,21 +104,28 @@ const Filters = () => {
                         </option>
                 )}
             </select>
-            <button name='clean' onClick={handleFilter}> Restablecer filtros </button>
-
-            <select onChange={changeMaxPrice}>
-                <option value={''}>-- Precio Max. --</option>
-                {prices?.map((price, index) => <option value={price} key={index}>${price} ARS</option>)}
+            <select className="form-control mt-2" onChange={changeMaxPrice}>
+              <option value={""}> Precio Max. </option>
+              {prices?.map((price, index) => (
+                <option value={price} key={index}>
+                  ${price} ARS
+                </option>
+              ))}
             </select>
-            <select onChange={changeSort} >
+            <select className="form-control mt-2" onChange={changeSort}>
                 <option value={''}>-- Ordenar por... --</option>
                 <option value={"asc"}>Precio Asc.</option>
                 <option value={"desc"}>Precio Desc.</option>
                 <option value={alphaSortTypes.alfa_asc}>Alfabetico Asc. </option>
                 <option value={alphaSortTypes.alfa_desc}>Alfabetico Desc.</option>
             </select>
-        </div>
-    )
+            <button className="btn btn-secondary mt-2" name="clean" onClick={handleFilter}>
+              Restablecer filtros
+            </button>
+
+        <div className="col-md-9"></div>
+    </div>
+  );
 };
 
 export default Filters;
