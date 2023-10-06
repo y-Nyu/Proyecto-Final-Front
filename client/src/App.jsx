@@ -72,7 +72,6 @@ const App = () => {
   //
   // EN CASO CONTRARIO ARROJA UN ERROR
   useEffect(() => {
-    
 
     if(location.pathname == "/")
     {
