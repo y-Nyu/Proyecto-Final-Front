@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import { validateAccountDetail } from "../../Validate";
+import { validateAccountDetail } from "../../Validate";
 import { setUser } from '../../redux/Actions/Users/usersActions'
 import axios from "axios";
 import { useDispatch } from "react-redux";

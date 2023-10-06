@@ -30,7 +30,7 @@ const App = () => {
   const location = useLocation();
   const dispatch = useDispatch()
   const token = sessionStorage.getItem("jwt_session")
-
+  console.log(token);
   /*
   ME PARECE QUE EL CODIGO ACA ESTA AL REVES
   useEffect DEBERIA CONTENER AL CONDICIONAL
@@ -148,9 +148,10 @@ const App = () => {
           <Route path="/store" element={<Store/>}/>
           <Route path="/detail/:id" element={<Detail/>}/>
           <Route path="/about" element={<About/>}/>
-          <Route path="/loginRegister" element={token ? <Navigate to="/"/> :<LoginRegister />}/>
+          <Route path="/loginRegister" element={token ? <Navigate to="/"/> : <LoginRegister/>}/>
           <Route path="/accountDetail/:id" element={<AccountDetail/>}/>
-          <Route path="/cart" element={<Cart/>}/>
+          <Route path="/cart" element={token ? <Cart/> : <Navigate to="/"/>}/>
+          {/* <Route path="/sales" element={token ? <Sales/> : <Navigate to="/"/>}/> */}
           <Route path="/sales" element={<Sales/>}/>
           <Route path="/preguntas-frecuentes" element={<Faq/>}/>
           <Route path="/politica-de-privacidad" element={<Privacy/>}/>

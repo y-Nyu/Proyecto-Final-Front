@@ -25,7 +25,7 @@ const Sales = () => {
             <div className="card mb-3" >
                 <div className="row g-0">
                     <div className="col-md-4">
-                    <img src="" alt="" className="img-fluid rounded-start"/>
+                    <img src={ah} alt="" className="img-fluid rounded-start"/>
                     </div>
                     <div className="col-md-8">
                     <div className="card-body">
@@ -34,6 +34,7 @@ const Sales = () => {
                         <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                         <p className="card-text"><small className="text-body-secondary">{compras[0].date}</small></p>
                     </div>
+                    <button>Detalle</button>
                     </div>
                 </div>
             </div>

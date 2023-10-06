@@ -192,7 +192,7 @@ const Login = ({ toggleComponent }) => {
               </a>
             </div>
             <div className="row">
-              <p>¿Aún no tienes una cuenta?               <a
+              <p>¿Aún no tienes una cuenta?<a
                 onClick={toggleComponent}
                 className="btn-outline-primary custom-button-height w-100 my-1 btn-lg"
                 style={{ cursor: "pointer" }}

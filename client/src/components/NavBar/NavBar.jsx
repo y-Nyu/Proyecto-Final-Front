@@ -6,7 +6,7 @@ import { createUserRole, userLogOut } from "../../redux/Actions/Users/usersActio
 import imagelogo from "../../assets/logo/Logo.png";
 import { CartContext } from "../../contexts/ShoppingCartContext";
 
-const NavBar = ({ userId, userImage }) => {
+const NavBar = ({ toggleComponent, userId, userImage }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
@@ -94,17 +94,13 @@ const NavBar = ({ userId, userImage }) => {
                 <>
                   <button
                     className={`btn btn-sm ${style.btn}`}
-                    onClick={() => {
-                      navigate("/loginRegister");
-                    }}
+                    onClick={() => navigate('/loginRegister')}
                   >
                     Ingresar
                   </button>
                   <button
                     className={`btn btn-sm ${style.btn}`}
-                    onClick={() => {
-                      navigate("/loginRegister");
-                    }}
+                    onClick={() => navigate('/loginRegister')}
                   >
                     Registrarse
                   </button>
