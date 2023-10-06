@@ -15,12 +15,12 @@ import Sales from './views/Sales/Sales'
 import Cart from './views/Cart/Cart';
 import axios from 'axios';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
-import './App.css'
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { ShoppingCartProvider } from './contexts/ShoppingCartContext';
 import { getUserById } from './redux/Actions/Users/usersActions'
 import jwtDecode from 'jwt-decode'
+import './App.css'
 
 
 // CONSULTAR RUTAS DEFINIDAS POR EL BACK - PDTE AJUSTAR!! 
