@@ -57,7 +57,7 @@ const Register = ({ toggleComponent }) => {
             <form onSubmit={register} className="col">
 
                 <div className="mb-4 pt-1">
-                    <label className="form-label">Nombre</label>
+                    <label className="form-label"><strong>Nombre</strong></label>
                     <input onChange={handleChange} type='text' name='name' value={data.name} placeholder="Ingresa tu nombre" className="form-control"/>
                     {errors.name ? <p className={style["error-text"]}>{errors.name}</p> : <p className={style["error-text"]}></p>}
                 </div>
@@ -140,7 +140,7 @@ const Register = ({ toggleComponent }) => {
         <div className="container w-100 py-2">
     <div className='row'>
         <div className="col">
-            <button type="submit" className='btn btn-outline-primary w-100 my-1'>Registrarme</button>
+            <button type="submit" className='btn btn-primary w-100 my-1'>Registrarme</button>
         </div>
     </div>
     <div className="row my-3">

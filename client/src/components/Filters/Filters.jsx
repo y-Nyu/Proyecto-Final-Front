@@ -5,6 +5,7 @@ import { getCategories,
     clearFilters,
     ordered
 } from '../../redux/Actions/Products/productsActions'
+import style from "./Filters.module.css"
 
 const alphaSortTypes = {
     alfa_asc: "alfa_asc",
@@ -92,11 +93,10 @@ const Filters = () => {
     }
 
     return(
-        <div>
-            <p>Filtrar por categoria: </p>
+        <div className={`sidebar `}>
 
             <select onChange={handleFilter} name='filter'>
-                <option value={''}>-- Categoria --</option>
+                <option value={''}> Categoria </option>
                 {
                     allCategories.map(category=>
                         <option 
@@ -113,7 +113,7 @@ const Filters = () => {
               ))}
             </select>
             <select className="form-control mt-2" onChange={changeSort}>
-                <option value={''}>-- Ordenar por... --</option>
+                <option value={''}> Ordenar por... </option>
                 <option value={"asc"}>Precio Asc.</option>
                 <option value={"desc"}>Precio Desc.</option>
                 <option value={alphaSortTypes.alfa_asc}>Alfabetico Asc. </option>

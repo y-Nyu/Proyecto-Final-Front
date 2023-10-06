@@ -1,6 +1,14 @@
-.sidebar {
-    background-color: rgb(38, 0, 255) !important;
-}
+.sideB {
+    width: 20%;
+    height: 70%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #6489D8; /* Color de fondo de la sidecar */
+    padding: 20px; /* Espacio de relleno para el contenido dentro de la sidecar */
+    border-left: 1px solid #ccc; /* Borde izquierdo para separarla del contenido principal */
+  }
 
 #sidebar-container {
     min-height: 100vh;

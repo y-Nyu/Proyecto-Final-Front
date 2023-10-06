@@ -138,7 +138,7 @@ const Login = ({ toggleComponent }) => {
             <button
               type="submit"
               disabled={disableByEmptyProps()}
-              className="btn btn-primary"
+              className='btn btn-primary w-100 my-1'
             >
               {" "}
               Iniciar sesión{" "}
