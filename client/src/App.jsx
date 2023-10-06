@@ -23,8 +23,6 @@ import { getUserById } from './redux/Actions/Users/usersActions'
 import jwtDecode from 'jwt-decode'
 
 
-// CONSULTAR RUTAS DEFINIDAS POR EL BACK - PDTE AJUSTAR!! 
-
 const App = () => {
 
   const location = useLocation();
