@@ -17,7 +17,7 @@ const Card = ({
   const [cart, setCart] = useContext(CartContext);
 
   return (
-    <div className={`col-lg-4 col-md-6 col-12 ${style.customCardContainer}`}>
+    <div className={`col-lg-4 col-md-6 col-12 justify-content-center ${style.customCardContainer}`}>
       <div className={`card ${style.customCard}`}>
         <i className={`bi bi-balloon-heart ${style.heart}`}></i>
         <img
