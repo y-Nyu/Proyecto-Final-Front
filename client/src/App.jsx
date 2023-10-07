@@ -100,7 +100,6 @@ const App = () => {
     
   }, [location]);
   
-    
   // NO FUNCIONA
   // const userRole = useSelector(state => state.userRole);
   // const navigate = useNavigate();
