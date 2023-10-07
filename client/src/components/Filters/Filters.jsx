@@ -25,6 +25,7 @@ const Filters = () => {
         category: undefined,
         price: undefined,
         sort: undefined,
+        name: undefined,
     })
 
     useEffect(()=>{
@@ -91,8 +92,9 @@ const Filters = () => {
     }
 
     const searchByName = (name) => {
+        setFilters(prev => {return {...prev, name}});
         const filterString = createFilterString({...filters, name});
-        console.log("EL ESTADO ES: " + filterString);
+        
         dispatch(filterProducts(filterString));
     }
 

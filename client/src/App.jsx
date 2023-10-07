@@ -87,7 +87,7 @@ const App = () => {
           codeParam = codeParam.value[1];
           codeParam = decodeURI(codeParam);
           
-          axios.post("http://localhost:3001/login-google", { google_code: codeParam})
+          axios.post("https://pf-deploy-walterhorst.vercel.app/login-google", { google_code: codeParam})
             .then(resp => resp.data)
             .then(({id, token}) => {
              
