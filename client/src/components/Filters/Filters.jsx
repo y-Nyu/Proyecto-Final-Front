@@ -8,13 +8,13 @@ import { getCategories,
 import Searchbar from '../SearchBar/SearchBar';
 
 const alphaSortTypes = {
-    alfa_asc: "alfa_asc",
-    alfa_desc: "alfa_desc"
+  alfa_asc: "alfa_asc",
+  alfa_desc: "alfa_desc",
 };
 
-
 const Filters = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const allCategories = useSelector((state) => state.categories);
   
 
     const allCategories = useSelector(state=>state.categories);
@@ -65,7 +65,12 @@ const Filters = () => {
         return filtersArr.length ? filterString : "";
     }
 
-  const changeMaxPrice = (event) => {
+  const toggleFiltersVisibility = () => {
+    setFiltersVisible(!filtersVisible);
+  };
+
+   // Definir las funciones changeMaxPrice y changeSort
+   const changeMaxPrice = (event) => {
     const price = event.target.value;
     setFilters((prev) => {
       return { ...prev, price };
