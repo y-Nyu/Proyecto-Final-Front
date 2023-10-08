@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import {
-  getCategories,
-  filterProducts,
-  clearFilters,
-} from "../../redux/Actions/Products/productsActions";
-import style from "./Filters.module.css";
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react';
+import { getCategories, 
+    filterProducts, 
+    clearFilters,
+    ordered
+} from '../../redux/Actions/Products/productsActions'
+import Searchbar from '../SearchBar/SearchBar';
 
 const alphaSortTypes = {
   alfa_asc: "alfa_asc",
@@ -17,34 +17,53 @@ const Filters = () => {
   const allCategories = useSelector((state) => state.categories);
   
 
-  const prices = [100, 500, 5000, 7500, 10000, 25000];
+    const allCategories = useSelector(state=>state.categories);
+    
+    const prices = [100, 500, 5000, 7500, 10000, 25000];
+    
+    const [filters, setFilters] = useState({
+        category: undefined,
+        price: undefined,
+        sort: undefined,
+        name: undefined,
+    })
 
-  const [filters, setFilters] = useState({
-    category: undefined,
-    price: undefined,
-    sort: undefined,
-  });
+    useEffect(()=>{
+        dispatch(getCategories())
+    },[]);
 
-  // Agregar estado para controlar la visibilidad de los filtros y el botón "Restablecer filtros"
-  const [filtersVisible, setFiltersVisible] = useState(false);
+    const handleFilter = (event) => {
+        const {name, value} = event.target
+        if(name === 'filter') {
+            setFilters(prev => {
+                return {
+                    ...prev,
+                    category: value
+                }
+            })
+            const filterString = createFilterString({...filters, category: value});
+            dispatch(filterProducts(filterString))
+        }
+        else dispatch(clearFilters())
+    };
 
-  useEffect(() => {
-    dispatch(getCategories());
-  }, []);
 
-  const handleFilter = (event) => {
-    const { name, value } = event.target;
-    if (name === "filter") {
-      setFilters((prev) => {
-        return {
-          ...prev,
-          category: value,
-        };
-      });
-      const filterString = createFilterString({ ...filters, category: value });
-      dispatch(filterProducts(filterString));
-    } else dispatch(clearFilters());
-  };
+  // Filter string es la query que se pasa por la action
+  const createFilterString = (filters_obj) => {
+    const filtersArr = [];
+
+        for(const key of Object.keys(filters_obj))
+        {
+            console.log("Key: " + key);
+            if(filters_obj[key] && filters_obj[key].length > 0)
+            {
+                filtersArr.push("" + key + "=" + filters_obj[key]);
+            }
+        }
+        let filterString = "?";
+        filterString += filtersArr.join("&");
+        return filtersArr.length ? filterString : "";
+    }
 
   const toggleFiltersVisibility = () => {
     setFiltersVisible(!filtersVisible);
@@ -61,115 +80,69 @@ const Filters = () => {
     dispatch(filterProducts(filterString));
   };
 
-  const changeSort = (event) => {
-    const sort = event.target.value;
+    const changeSort = (event) => {
+        const sort = event.target.value;
+        
+        if(alphaSortTypes[sort])
+        {
+            const order = (sort === alphaSortTypes.alfa_asc);
+            dispatch(ordered(order))
+            return;
+        }
 
-    if (alphaSortTypes[sort]) {
-      console.log("EL SORT ES: " + sort);
-      const order = sort === alphaSortTypes.alfa_asc;
-      console.log("ORDEN ES: " + order);
-      dispatch(ordered(order));
-      return;
+        setFilters(prev => {return {...prev, sort}});
+        
+        const filterString = createFilterString({...filters, sort});
+        dispatch(filterProducts(filterString))
     }
 
-    setFilters((prev) => {
-      return { ...prev, sort };
-    });
+    const searchByName = (name) => {
+        setFilters(prev => {return {...prev, name}});
+        const filterString = createFilterString({...filters, name});
+        
+        dispatch(filterProducts(filterString));
+    }
 
-    const filterString = createFilterString({ ...filters, sort });
-    dispatch(filterProducts(filterString));
-  };
+    return(
+        <>
+            <Searchbar  onClick={searchByName} />
 
-  return (
-    <div className="container">
-      <div className="row">
-        <div className={`col-md-3 d-md-block ${style.sideB}`}>
-          <div id="sidebar" className={`sidebar ${filtersVisible ? style.visible : ''}`}>
-            <div className="d-flex justify-content-center mt-2">
-              <button
-                className="btn btn-outline-primary"
-                name="toggleFilters"
-                onClick={toggleFiltersVisibility}
-              >
-                Filtros y Ordenamientos
-              </button>
-            </div>
-            {filtersVisible && (
-              <div>
-                <ul className="navbar-nav d-flex flex-column mt-5 w-100">
-              {/* Filtro */}
-              <li className="nav-item dropdown w-100">
-                {allCategories.length > 0 ? (
-                  <select
-                    className="form-control mt-2"
-                    onChange={handleFilter}
-                    name="filter"
-                    style={{ color: "black" }}
-                  >
-                    <option value="" disabled selected hidden>
-                      Categorías
-                    </option>
-                    {allCategories.map((category) => (
-                      <option value={category.name} key={category.id}>
-                        {category.name}
-                      </option>
-                    ))}
-                  </select>
-                ) : (
-                  <p>Cargando categorías...</p>
-                )}
-              </li>
-              {/* Filtro */}
-              <li className="nav-item w-100">
+            <div>
+
+
+                <p>Filtrar por categoria: </p>
+
+                <select onChange={handleFilter} name='filter'>
+                    <option value={''}>-- Categoria --</option>
+                    {
+                        allCategories.map(category=>
+                            <option 
+                                value={category.name} key={category.id}>{category.name}
+                            </option>
+                    )}
+                </select>
                 <select className="form-control mt-2" onChange={changeMaxPrice}>
-                  <option
-                    value={""}
-                    className={`nav-link text-light pl-4 ${style.navLink}`}
-                  >
-                    Precio Máximo
-                  </option>
-                  {prices?.map((price, index) => (
+                <option value={""}> Precio Max. </option>
+                {prices?.map((price, index) => (
                     <option value={price} key={index}>
-                      ${price} ARS
+                    ${price} ARS
                     </option>
-                  ))}
+                ))}
                 </select>
-              </li>
-              {/* Ordenamiento */}
-              <li>
                 <select className="form-control mt-2" onChange={changeSort}>
-                  <option
-                    value={""}
-                    className={`nav-link text-light pl-4 ${style.navLink}`}
-                  >
-                    Ordenar por
-                  </option>
-                  <option value={"asc"}>Precio Ascendente</option>
-                  <option value={"desc"}>Precio Descendente</option>
-                  <option value={alphaSortTypes.alfa_asc}>
-                    Alfabético Ascendente
-                  </option>
-                  <option value={alphaSortTypes.alfa_desc}>
-                    Alfabético Descendente
-                  </option>
+                    <option value={''}>-- Ordenar por... --</option>
+                    <option value={"asc"}>Precio Asc.</option>
+                    <option value={"desc"}>Precio Desc.</option>
+                    <option value={alphaSortTypes.alfa_asc}>Alfabetico Asc. </option>
+                    <option value={alphaSortTypes.alfa_desc}>Alfabetico Desc.</option>
                 </select>
-              </li>
-              </ul>
-                <div className="d-flex justify-content-center mt-2">
-                  <button
-                    className="btn btn-secondary"
-                    name="clean"
-                    onClick={handleFilter}
-                  >
-                    Restablecer filtros
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
+                <button className="btn btn-secondary mt-2" name="clean" onClick={handleFilter}>
+                Restablecer filtros
+                </button>
+
+            <div className="col-md-9"></div>
         </div>
-      </div>
-    </div>
+    </>
   );
 };
 
