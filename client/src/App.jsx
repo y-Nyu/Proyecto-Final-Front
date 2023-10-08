@@ -21,6 +21,7 @@ import { useDispatch } from 'react-redux';
 import { ShoppingCartProvider } from './contexts/ShoppingCartContext';
 import { getUserById } from './redux/Actions/Users/usersActions'
 import jwtDecode from 'jwt-decode'
+import Stars from './components/Stars/Stars';
 
 
 const App = () => {
@@ -28,7 +29,7 @@ const App = () => {
   const location = useLocation();
   const dispatch = useDispatch()
   const token = sessionStorage.getItem("jwt_session")
-  console.log(token);
+  // console.log(token);
   /*
   ME PARECE QUE EL CODIGO ACA ESTA AL REVES
   useEffect DEBERIA CONTENER AL CONDICIONAL
@@ -147,6 +148,7 @@ const App = () => {
           <Route path="/accountDetail/:id" element={<AccountDetail/>}/>
           <Route path="/cart" element={token ? <Cart/> : <Navigate to="/"/>}/>
           {/* <Route path="/sales" element={token ? <Sales/> : <Navigate to="/"/>}/> */}
+          <Route path="/star" element={<Stars/>}/>
           <Route path="/sales" element={<Sales/>}/>
           <Route path="/preguntas-frecuentes" element={<Faq/>}/>
           <Route path="/politica-de-privacidad" element={<Privacy/>}/>
