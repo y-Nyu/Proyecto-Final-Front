@@ -85,7 +85,11 @@ const Login = ({ toggleComponent }) => {
       // ESTA URL ES EL FAMOSO POPUP QUE APARECE SIEMPRE QUE HACEMOS LOGIN CON GOOGLE
       //
 
-      const {auth_url} = (await axios.post("http://localhost:3001/login-google-init")).data
+      const { auth_url } = (
+        await axios.post(
+          "https://pf-back-deploy.onrender.com/login-google-init"
+        )
+      ).data;
 
       //
       // USANDO LA URL PROVISTA ABRIMOS UNA VENTANA QUE PIDE ESCOGER LA CUENTA DE MAIL
