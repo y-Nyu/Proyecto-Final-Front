@@ -1,12 +1,12 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import style from "./Navbar.module.css";
 import { useEffect, useState, useContext } from "react";
 import { useDispatch } from "react-redux";
 import { createUserRole, userLogOut } from "../../redux/Actions/Users/usersActions";
-import imagelogo from "../../assets/logo/Logo.png";
 import { CartContext } from "../../contexts/ShoppingCartContext";
+import imagelogo from "../../assets/logo/Logo.png";
+import style from "./Navbar.module.css";
 
-const NavBar = ({ toggleComponent, userId, userImage }) => {
+const NavBar = ({ userId, userImage }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
@@ -30,13 +30,11 @@ const NavBar = ({ toggleComponent, userId, userImage }) => {
     sessionStorage.removeItem("jwt_session");
     dispatch(createUserRole(""));
     dispatch(userLogOut())
-    // navigate("/loginRegister");
     loginState(true);
   }
   
   const handleCart = () => {
     const token = sessionStorage.getItem("jwt_session")
-    // token ? navigate("/cart") : navigate("/loginRegister")
     if(token) {
       navigate("/cart")
     }
@@ -146,4 +144,3 @@ const NavBar = ({ toggleComponent, userId, userImage }) => {
 
 
 export default NavBar;
-
