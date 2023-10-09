@@ -20,8 +20,10 @@ const Cart = () => {
   const incrementAmount = (productId) => {
     const updatedCart = [...cart];
     updatedCart.forEach((product) => {
-      if (product.id === productId) {
+      if (product.id === productId && product.quantity < product.stock) {
         product.quantity += 1;
+      } else if (product.id === productId && product.quantity === product.stock) {
+        window.alert('No hay suficiente stock');
       }
     });
     setCart(updatedCart);
