@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import style from "./Card.module.css";
 import { useContext } from "react";
 import { CartContext } from "../../contexts/ShoppingCartContext";
+import style from "./card.module.css";
 
 const Card = ({
   id,
