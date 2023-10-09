@@ -14,7 +14,8 @@ import { GET_PRODUCTS,
   ORDERED,
   GET_USER_BY_ID, 
   USER_LOG_OUT,
-  SET_USER
+  SET_USER,
+  GET_USERS
 } from "../Actions/action-types";
 
 const initialState = {
@@ -84,6 +85,11 @@ const reducer = (state = initialState, action) => {
 
           case SET_SEARCH_TYPE:
             return { ...state, searchType: action.payload.component 
+            };
+          case GET_USERS:
+            return {
+              ...state,
+              users: action.payload,
             };
           case SEARCH_USERS:
             return {

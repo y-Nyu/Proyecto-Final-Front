@@ -20,7 +20,9 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { ShoppingCartProvider } from './contexts/ShoppingCartContext';
 import { getUserById } from './redux/Actions/Users/usersActions'
+import DashBoard from "./views/DashBoard/DashBoard";
 import jwtDecode from 'jwt-decode'
+import Stars from './components/Stars/Stars';
 
 
 const App = () => {
@@ -28,7 +30,7 @@ const App = () => {
   const location = useLocation();
   const dispatch = useDispatch()
   const token = sessionStorage.getItem("jwt_session")
-  console.log(token);
+  // console.log(token);
   /*
   ME PARECE QUE EL CODIGO ACA ESTA AL REVES
   useEffect DEBERIA CONTENER AL CONDICIONAL
@@ -83,7 +85,7 @@ const App = () => {
           codeParam = codeParam.value[1];
           codeParam = decodeURI(codeParam);
           
-          axios.post("http://localhost:3001/login-google", { google_code: codeParam})
+          axios.post("https://pf-deploy-walterhorst.vercel.app/login-google", { google_code: codeParam})
             .then(resp => resp.data)
             .then(({id, token}) => {
              
@@ -147,12 +149,13 @@ const App = () => {
           <Route path="/accountDetail/:id" element={<AccountDetail/>}/>
           <Route path="/cart" element={token ? <Cart/> : <Navigate to="/"/>}/>
           {/* <Route path="/sales" element={token ? <Sales/> : <Navigate to="/"/>}/> */}
+          <Route path="/star" element={<Stars/>}/>
           <Route path="/sales" element={<Sales/>}/>
           <Route path="/preguntas-frecuentes" element={<Faq/>}/>
           <Route path="/politica-de-privacidad" element={<Privacy/>}/>
           <Route path='/formUser' element={<FormUser/>}></Route>
           <Route path="/formProduct" element={<FormProduct/>}/>
-
+          <Route path="/admin" element={<DashBoard/>}/>
           <Route path="/adminLogin" element={<LoginRegister />} />
           <Route path="/adminStore" element={<Store />} />
           <Route path="/adminUsers" element={<Users />} />

@@ -1,11 +1,17 @@
-.sideB{
-    background-color: #90adec;
-}
+/* .sideB{
+  background-color: #90adec;  
+} */
 
 .centerButton {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .visible {
+    transform: translateX(-20%);
+    transition: transform 0.3s ease;
+    background-color: #90adec90;
   }
 
 .nav {

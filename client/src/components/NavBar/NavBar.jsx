@@ -36,13 +36,14 @@ const NavBar = ({ toggleComponent, userId, userImage }) => {
   
   const handleCart = () => {
     const token = sessionStorage.getItem("jwt_session")
-    console.log(token);
     // token ? navigate("/cart") : navigate("/loginRegister")
     if(token) {
       navigate("/cart")
     }
-    alert('Debe ingresar o registrarse')
-    navigate("/loginRegister")
+    else {
+      alert('Debe ingresar o registrarse')
+      navigate("/loginRegister")
+    }
   }
 
   return (
@@ -110,7 +111,7 @@ const NavBar = ({ toggleComponent, userId, userImage }) => {
                   <button className={`btn cart always-visible ${style.btn}`} type="submit">
                     {login ? (
                       <Link to={`/accountDetail/${userId}`}>
-                        (<img src={userImage} />)
+                        (<img src={userImage}/>)
                       </Link>
                     ) : (
                       <Link to={`/accountDetail/${userId}`}>
@@ -118,6 +119,9 @@ const NavBar = ({ toggleComponent, userId, userImage }) => {
                       </Link>
                     )}
                   </button>
+                  <Link to={"/admin"}>
+                    <button className={`btn btn-sm ${style.btn}`}>ADMIN</button>
+                  </Link>
                   <button
                     className={`btn btn-sm ${style.btn}`}
                     onClick={() => {

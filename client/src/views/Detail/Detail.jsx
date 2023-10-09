@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import style from "./Detail.module.css";
 import { CartContext } from "../../contexts/ShoppingCartContext";
-//import { addToCart, removeItem } from "./Card"; // Importar las funciones desde Card
+
 
 const Detail = () => {
   const { id } = useParams();
@@ -21,6 +21,69 @@ const Detail = () => {
         alert("Error al obtener los detalles del producto:", error);
       });
   }, [id]);
+
+  const addToCart = () => {
+    setCart((currItems) => {
+      const isItemFound = currItems.find((item) => item.id === productId.id);
+
+      // Validar el stock antes de agregar
+      if (isItemFound && isItemFound.quantity + 1 > productId.stock) {
+        alert("No hay suficiente stock disponible");
+        return currItems;
+      }
+
+      if (isItemFound) {
+        return currItems.map((item) => {
+          if (item.id === productId.id) {
+            return { ...item, quantity: item.quantity + 1 };
+          } else {
+            return item;
+          }
+        });
+      } else {
+        return [
+          ...currItems,
+          {
+            id: productId.id,
+            quantity: 1,
+            price: productId.price,
+            name: productId.name,
+            image: productId.image,
+            brand: productId.brand,
+            category: productId.category,
+            active: productId.active,
+            description: productId.description,
+            stock: productId.stock,
+          },
+        ];
+      }
+    });
+  };
+
+  const removeItem = (value) => {
+    setCart((currItems) => {
+      return currItems
+        .map((item) => {
+          if (item.id === value) {
+            if (item.quantity > 0) {
+              return {
+                ...item,
+                quantity: item.quantity - 1,
+                name: productId.name,
+                image: productId.image,
+                brand: productId.brand,
+                category: productId.category,
+                active: productId.active,
+                description: productId.description,
+                stock: productId.stock,
+              };
+            }
+          }
+          return item;
+        })
+        .filter((item) => item.quantity > 0);
+    });
+  };
 
   return (
     <div className="container">
@@ -44,25 +107,19 @@ const Detail = () => {
 
             <div className="product-cart">
               <button
-                onClick={() => addToCart(productId.id, productId.name, productId.price, productId.image, productId.brand, productId.category, productId.description, productId.active, productId.stock)}
-                className={`btn ${style.btn}`} 
+                onClick={() => addToCart()}
+                className={`btn ${style.btn}`}
               >
                 Agregar al carrito
               </button>
-              <input
-                type="number"
-                value={quantity}
-                onChange={(e) => setQuantity(e.target.value)}
-                min="1"
-                className={`ml-2 ${style.input}`}
-              />
+              <button
+                className={`btn ${style.btn}`}
+                onClick={() => removeItem(productId.id)}
+              >
+                Remover del Carrito
+              </button>
             </div>
-            <button
-              onClick={() => removeItem(productId.id)}
-              className={`btn ${style.btnDelete}`} 
-            >
-             Eliminar
-            </button>
+            
           </div>
         </div>
       </div>

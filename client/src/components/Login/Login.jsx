@@ -67,9 +67,7 @@ const Login = ({ toggleComponent }) => {
         sessionStorage.setItem("jwt_session", token);
         dispatch(createUserRole(rol));
         dispatch(setUser({id, email, name, rol, celular}));
-
         navigate("/");
-    
       })
       .catch(error => {
         console.log(error);
