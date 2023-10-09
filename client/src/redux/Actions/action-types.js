@@ -15,3 +15,4 @@ export const ORDERED = "ORDERED";
 export const GET_USER_BY_ID = 'GET_USER_BY_ID';
 export const USER_LOG_OUT = 'USER_LOG_OUT';
 export const SET_USER = "SET_USER"
+export const GET_USERS = "GET_USERS";

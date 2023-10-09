@@ -119,6 +119,9 @@ const NavBar = ({ toggleComponent, userId, userImage }) => {
                       </Link>
                     )}
                   </button>
+                  <Link to={"/admin"}>
+                    <button className={`btn btn-sm ${style.btn}`}>ADMIN</button>
+                  </Link>
                   <button
                     className={`btn btn-sm ${style.btn}`}
                     onClick={() => {

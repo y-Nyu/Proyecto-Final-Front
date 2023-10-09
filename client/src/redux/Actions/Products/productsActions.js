@@ -15,17 +15,14 @@ import axios from "axios";
 export const getAllProducts = () => {
   return async (dispatch) => {
     try {
-      console.log(sessionStorage.getItem("jwt_session"))
-      const { data } = await axios.get(
+      const { data } = await axios(
         "https://pf-back-deploy.onrender.com/product",
         {
           headers: {
             Authorization: "Bearer " + sessionStorage.getItem("jwt_session"),
-          },
-          
+          }
         }
       )
-
       dispatch({
         type: GET_PRODUCTS,
         payload: data,
@@ -171,7 +168,6 @@ export const deleteProduct = (id) => {
 export const filterProducts = (filter) => {
   return async (dispatch) => {
     try {
-      console.log("FILTRO ES: " + filter);
       const { data } = await axios.get(
         `https://pf-back-deploy.onrender.com/product${filter}`,
         {
@@ -180,8 +176,6 @@ export const filterProducts = (filter) => {
           }
         },
       )
-
-      console.log("LA DATA: " + data);
 
       if(typeof data === 'string') {
         dispatch({

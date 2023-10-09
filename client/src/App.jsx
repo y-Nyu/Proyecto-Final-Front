@@ -20,6 +20,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { ShoppingCartProvider } from './contexts/ShoppingCartContext';
 import { getUserById } from './redux/Actions/Users/usersActions'
+import DashBoard from "./views/DashBoard/DashBoard";
 import jwtDecode from 'jwt-decode'
 import Stars from './components/Stars/Stars';
 
@@ -154,7 +155,7 @@ const App = () => {
           <Route path="/politica-de-privacidad" element={<Privacy/>}/>
           <Route path='/formUser' element={<FormUser/>}></Route>
           <Route path="/formProduct" element={<FormProduct/>}/>
-
+          <Route path="/admin" element={<DashBoard/>}/>
           <Route path="/adminLogin" element={<LoginRegister />} />
           <Route path="/adminStore" element={<Store />} />
           <Route path="/adminUsers" element={<Users />} />
