@@ -1,4 +1,11 @@
-import { SEARCH_USERS, SET_SEARCH_TYPE, GET_USER_BY_ID, USER_LOG_OUT, SET_USER, GET_USERS } from '../action-types';
+import { SEARCH_USERS, 
+    SET_SEARCH_TYPE, 
+    GET_USER_BY_ID, 
+    USER_LOG_OUT, 
+    SET_USER, 
+    GET_USERS, 
+    GET_SALES
+} from '../action-types';
 import axios from 'axios';
 
 export const getAllUsers = () => {
@@ -82,3 +89,14 @@ export const searchUsers = (searched) => {
 export const setSearchType = (searchType) => {
     return { type: SET_SEARCH_TYPE, payload: searchType }
 };
+
+export const getSales = () => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get('https://pf-back-deploy.onrender.com/product/sales')
+            dispatch( {type: GET_SALES, payload: data} )
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}

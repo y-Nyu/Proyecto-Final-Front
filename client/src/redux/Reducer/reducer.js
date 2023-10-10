@@ -18,6 +18,7 @@ import {
   SET_USER,
   GET_USERS,
   SET_PAGE,
+  GET_SALES,
 } from "../Actions/action-types";
 
 const initialState = {
@@ -31,6 +32,7 @@ const initialState = {
   allUsers: [],
   currentPage: 1,
   searchType: "users",
+  sales: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -145,7 +147,12 @@ const reducer = (state = initialState, action) => {
         userLogged: [],
       };
     }
-
+    case GET_SALES: {
+      return {
+        ...state,
+        sales: []
+      }
+    }
     default:
       return { ...state };
   }
