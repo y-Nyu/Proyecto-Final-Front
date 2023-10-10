@@ -23,7 +23,7 @@ const initialState = {
     productsCopy: [],
     categories: [],
     updatedProduct: [],
-    userLogged: [],
+    userLogged: {},
     users: [],
     userRole: "",
     allUsers: [],
@@ -122,7 +122,7 @@ const reducer = (state = initialState, action) => {
           case SET_USER: {
             return {
               ...state,
-              userLogged: [action.payload]
+              userLogged: action.payload
             }
           }
 
