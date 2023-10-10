@@ -1,5 +1,22 @@
-import { SEARCH_USERS, SET_SEARCH_TYPE, GET_USER_BY_ID, USER_LOG_OUT, SET_USER } from '../action-types';
+import { SEARCH_USERS, SET_SEARCH_TYPE, GET_USER_BY_ID, USER_LOG_OUT, SET_USER, GET_USERS } from '../action-types';
 import axios from 'axios';
+
+export const getAllUsers = () => {
+    return async (dispatch) => {
+      try {
+        const { data } = await axios.get(
+          "https://pf-back-deploy.onrender.com/users"
+        );
+  
+        dispatch({
+          type: GET_USERS,
+          payload: data,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+};
 
 //Pdte config de error, cambiar alert por componente
 export const usersCreate = (user) => {

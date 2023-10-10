@@ -1,37 +1,36 @@
-import NavBar from './components/NavBar/NavBar'
-import Footer from './components/Footer/Footer'
+import NavBar from './components/NavBar/NavBar';
+import Footer from './components/Footer/Footer';
 import FormProduct from "./components/FomProducto/FormProduct";
 import FormUser from './components/FormUser/FormUser';
-import Home from './views/Home/Home'
-import About from './views/About/About'
-import LoginRegister from './views/LoginRegister/LoginRegister'
-import AccountDetail from './views/AccountDetail/AccountDetail'
-import Store from './views/Store/Store'
-import Detail from './views/Detail/Detail'
+import Home from './views/Home/Home';
+import About from './views/About/About';
+import LoginRegister from './views/LoginRegister/LoginRegister';
+import AccountDetail from './views/AccountDetail/AccountDetail';
+import Store from './views/Store/Store';
+import Detail from './views/Detail/Detail';
 import Faq from "./views/Faq/Faq";
 import Privacy from "./views/PrivacyP/Privacy";
-import Users from './views/Users/Users'
-import Sales from './views/Sales/Sales'
+import Users from './views/Users/Users';
+import Sales from './views/Sales/Sales';
 import Cart from './views/Cart/Cart';
 import axios from 'axios';
-import { Routes, Route, useLocation, Navigate, useNavigate } from 'react-router-dom'
-import './App.css'
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import './App.css';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { ShoppingCartProvider } from './contexts/ShoppingCartContext';
 import { getUserById, createUserRole, setUser, userLogin } from './redux/Actions/Users/usersActions'
+import DashBoard from "./views/DashBoard/DashBoard";
 import jwtDecode from 'jwt-decode'
-import { eventEmitter } from './event_emitter/EventEmitter';import Stars from './components/Stars/Stars';
-
+import Stars from './components/Stars/Stars';
 
 const App = () => {
-
   const location = useLocation();
-  const dispatch = useDispatch()
-  const token = sessionStorage.getItem("jwt_session")
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const token = sessionStorage.getItem("jwt_session");
+  const userRole = useSelector(state => state.userRole);
 
-  /*
+    /*
   ME PARECE QUE EL CODIGO ACA ESTA AL REVES
   useEffect DEBERIA CONTENER AL CONDICIONAL
 
@@ -45,6 +44,7 @@ const App = () => {
   }
   */
 
+
   useEffect(() => {
 
     if(token)
@@ -53,10 +53,9 @@ const App = () => {
       const userId = decodedToken.id;
       dispatch(getUserById(userId));
     }
+  }, [token, dispatch]);
 
-  }, [])
-
-  // ESTE CODIGO DE ACÁ ES PARA EL LOGIN DE GOOGLE
+    // ESTE CODIGO DE ACÁ ES PARA EL LOGIN DE GOOGLE
   // 
   // DEBIDO A QUE EL POPUP DE GOOGLE NOS REDIRIGE ACÁ
   // CON PARAMETROS EN LA URL, LO QUE HAGO ES
@@ -70,23 +69,17 @@ const App = () => {
   // LO DEJA HACER LOGIN Y RETORNA EL TOKEN JWT EN LA RESPONSE.
   //
   // EN CASO CONTRARIO ARROJA UN ERROR
-  useEffect(() => {
 
-    if(location.pathname == "/")
-    {
+  useEffect(() => {
+    if (location.pathname === "/") {
       const queries = location.search;
       const params = new URLSearchParams(queries);
-
       let codeParam = params.entries().next();
-      while(!codeParam.done)
-      {
-        if(codeParam.value[0] == "code")
-        {
+      while (!codeParam.done) {
+        if (codeParam.value[0] === "code") {
           codeParam = codeParam.value[1];
           codeParam = decodeURI(codeParam);
-          
-          console.log("POST A LOGIN GOOGLE: ")
-          axios.post("http://localhost:3001/login-google", { google_code: codeParam})
+          axios.post("https://pf-back-deploy.onrender.com/login-google", { google_code: codeParam })
             .then(resp => resp.data)
             .then(({id,name, email, rol, celular, token}) => {
               
@@ -101,11 +94,9 @@ const App = () => {
           break;
         }
       }
-
     }
-    
-  }, [location]);
-  
+  }, [location, dispatch]);
+
   // NO FUNCIONA
   // const userRole = useSelector(state => state.userRole);
   // const navigate = useNavigate();
@@ -137,35 +128,45 @@ const App = () => {
   //       navigate("/");
   //     }
   //   }
-  // }, [location, userRole]);
+  // }, [location, userRole]); 
   // NO FUNCIONA
 
   return (
     <div>
       <ShoppingCartProvider>
-        <NavBar/>
+        <NavBar />
         <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/store" element={<Store/>}/>
-          <Route path="/detail/:id" element={<Detail/>}/>
-          <Route path="/about" element={<About/>}/>
-          <Route path="/loginRegister" element={token ? <Navigate to="/"/> : <LoginRegister/>}/>
-          <Route path="/accountDetail/:id" element={<AccountDetail/>}/>
-          <Route path="/cart" element={token ? <Cart/> : <Navigate to="/"/>}/>
-          {/* <Route path="/sales" element={token ? <Sales/> : <Navigate to="/"/>}/> */}
-          <Route path="/star" element={<Stars/>}/>
-          <Route path="/sales" element={<Sales/>}/>
-          <Route path="/preguntas-frecuentes" element={<Faq/>}/>
-          <Route path="/politica-de-privacidad" element={<Privacy/>}/>
-          <Route path='/formUser' element={<FormUser/>}></Route>
-          <Route path="/formProduct" element={<FormProduct/>}/>
+          <Route path="/" element={<Home />} />
+          <Route path="/store" element={<Store />} />
+          <Route path="/detail/:id" element={<Detail />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/loginRegister" element={token ? <Navigate to="/" /> : <LoginRegister />} />
+          <Route path="/accountDetail/:id" element={<AccountDetail />} />
+          <Route path="/cart" element={token ? <Cart /> : <Navigate to="/" />} />
+          <Route path="/star" element={<Stars />} />
+          <Route path="/sales" element={<Sales />} />
+          <Route path="/preguntas-frecuentes" element={<Faq />} />
+          <Route path="/politica-de-privacidad" element={<Privacy />} />
+          <Route path='/formUser' element={<FormUser />} />
+          <Route path="/formProduct" element={<FormProduct />} />
 
-          <Route path="/adminLogin" element={<LoginRegister />} />
-          <Route path="/adminStore" element={<Store />} />
-          <Route path="/adminUsers" element={<Users />} />
-          <Route path="/adminSales" element={<Sales />} />
+          {/* Acá esta la logica para determinar que solo el admin pueda acceder a las siguientes rutas :) */}
+          
+          {userRole === "ADMIN" 
+          ? (
+            <>
+              <Route path="/admin" element={<DashBoard />} />
+              <Route path="/adminLogin" element={<LoginRegister />} />
+              <Route path="/adminStore" element={<Store />} />
+              <Route path="/adminUsers" element={<Users />} />
+              <Route path="/adminSales" element={<Sales />} />
+            </>
+          ) 
+          : (
+            <Route path="*" element={<Navigate to="/" />} />
+          )}
         </Routes>
-        <Footer/>
+        <Footer />
       </ShoppingCartProvider>
     </div>
   );
