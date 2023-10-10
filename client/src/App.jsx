@@ -30,7 +30,7 @@ const App = () => {
   const location = useLocation();
   const dispatch = useDispatch()
   const token = sessionStorage.getItem("jwt_session")
-  // console.log(token);
+
   /*
   ME PARECE QUE EL CODIGO ACA ESTA AL REVES
   useEffect DEBERIA CONTENER AL CONDICIONAL
