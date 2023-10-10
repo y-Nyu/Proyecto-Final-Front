@@ -77,7 +77,7 @@ const App = () => {
         if (codeParam.value[0] === "code") {
           codeParam = codeParam.value[1];
           codeParam = decodeURI(codeParam);
-          axios.post("https://pf-deploy-walterhorst.vercel.app/login-google", { google_code: codeParam })
+          axios.post("https://pf-back-deploy.onrender.com/login-google", { google_code: codeParam })
             .then(resp => resp.data)
             .then(({ id, token }) => {
               sessionStorage.setItem("jwt_session", token);
