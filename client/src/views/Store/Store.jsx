@@ -1,63 +1,89 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Cards from "../../components/Cards/Cards";
-import { getAllProducts } from "../../redux/Actions/Products/productsActions";
+import {
+  getAllProducts,
+  setPage,
+} from "../../redux/Actions/Products/productsActions";
 import Filters from "../../components/Filters/Filters";
-import Pagination from "../../components/Pagination/Pagination";
-
-const ITEMS_PER_PAGE = 6;
-import Searchbar from "../../components/SearchBar/SearchBar";
 
 const Store = () => {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.products);
-
-  const [items, setItems] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0);
+  const currentPage = useSelector((satate) => satate.currentPage);
+  const productsPerPage = 6;
+  const totalPages = Math.ceil(allProducts.length / productsPerPage);
 
   useEffect(() => {
-    // Esto preserva los filtros, aunque
-    // no evita que los elementos <select> en filters
-    // se reseteen
     if (allProducts.length == 0) {
       dispatch(getAllProducts());
     }
   }, [dispatch]);
 
+  // Verificar si solo hay una página y establecer la página actual en 1
   useEffect(() => {
-    if (allProducts.length > 0) {
-      const startIndex = currentPage * ITEMS_PER_PAGE;
-      const endIndex = startIndex + ITEMS_PER_PAGE;
-      setItems(allProducts.slice(startIndex, endIndex));
+    if (totalPages <= 3 && currentPage !== 1) {
+      dispatch(setPage(1));
     }
-  }, [allProducts, currentPage]);
+  }, [currentPage, totalPages, dispatch]);
 
-  const nextHandler = () => {
-    const startIndex = (currentPage + 1) * ITEMS_PER_PAGE;
-    const endIndex = startIndex + ITEMS_PER_PAGE;
+  // Función para obtener los products de la página actual
+  const getCurrentProducts = () => {
+    const startIndex = (currentPage - 1) * productsPerPage;
+    const endIndex = startIndex + productsPerPage;
+    return allProducts.slice(startIndex, endIndex);
+  };
 
-    if (startIndex < allProducts.length) {
-      setCurrentPage(currentPage + 1);
+  // Función para cambiar a la página anterior
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      dispatch(setPage(currentPage - 1));
     }
   };
 
-  const prevHandler = () => {
-    if (currentPage > 0) {
-      setCurrentPage(currentPage - 1);
+  // Función para cambiar a la página siguiente
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      dispatch(setPage(currentPage + 1));
     }
   };
 
   return (
     <div>
       <Filters />
+      <nav aria-label="Page navigation example">
+        <ul className="pagination justify-content-center">
+          <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+            <button
+              className="page-link"
+              onClick={handlePrevPage}
+              aria-label="Previous"
+            >
+              <span aria-hidden="true">&laquo;</span>
+            </button>
+          </li>
+          <li className="page-item">
+            <span className="page-link">
+              {currentPage}/{totalPages}
+            </span>
+          </li>
+          <li
+            className={`page-item ${
+              currentPage === totalPages ? "disabled" : ""
+            }`}
+          >
+            <button
+              className="page-link"
+              onClick={handleNextPage}
+              aria-label="Next"
+            >
+              <span aria-hidden="true">&raquo;</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
       <div>
-        <Pagination
-          currentPage={currentPage}
-          items={items}
-          nextHandler={nextHandler}
-          prevHandler={prevHandler}
-        />
-        <Cards products={items} />
+        <Cards products={getCurrentProducts()} />
       </div>
     </div>
   );
