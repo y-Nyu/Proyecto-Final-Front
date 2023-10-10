@@ -154,7 +154,7 @@ const App = () => {
               <Route path="/adminUsers" element={<Users />} />
               <Route path="/adminSales" element={<Sales />} />
             </>
-          ) // Por ahora, hasta q no hayan mas rutas
+          ) // Por ahora, hasta q no hayan mas rutas 
           : (
             <Route path="*" element={<Navigate to="/" />} />
           )}
