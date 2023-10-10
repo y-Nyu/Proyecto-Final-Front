@@ -18,12 +18,13 @@ import axios from "axios";
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import "./App.css";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ShoppingCartProvider } from "./contexts/ShoppingCartContext";
 import { getUserById } from "./redux/Actions/Users/usersActions";
 import DashBoard from "./views/DashBoard/DashBoard";
 import jwtDecode from "jwt-decode";
 import Stars from "./components/Stars/Stars";
+import SaleDtail from "./views/SaleDetail/SaleDtail";
 
 
 const App = () => {
@@ -151,22 +152,11 @@ const App = () => {
           <Route path="/politica-de-privacidad" element={<Privacy />} />
           <Route path='/formUser' element={<FormUser />} />
           <Route path="/formProduct" element={<FormProduct />} />
-
-          {/* Acá esta la logica para determinar que solo el admin pueda acceder a las siguientes rutas :) */}
-          
-          {userRole === "ADMIN" 
-          ? (
-            <>
-              <Route path="/admin" element={<DashBoard />} />
-              <Route path="/adminLogin" element={<LoginRegister />} />
-              <Route path="/adminStore" element={<Store />} />
-              <Route path="/adminUsers" element={<Users />} />
-              <Route path="/adminSales" element={<Sales />} />
-            </>
-          ) 
-          : (
-            <Route path="*" element={<Navigate to="/" />} />
-          )}
+          <Route path="/admin" element={<DashBoard />} />
+          <Route path="/adminLogin" element={<LoginRegister />} />
+          <Route path="/adminStore" element={<Store />} />
+          <Route path="/adminUsers" element={<Users />} />
+          <Route path="/adminSales" element={<Sales />} />
         </Routes>
         <Footer />
       </ShoppingCartProvider>
