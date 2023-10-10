@@ -2,20 +2,21 @@ import { useEffect } from "react";
 import CardsShop from "../../components/CardsShop/CardsShop";
 import style from './Sales.module.css'
 import { useDispatch, useSelector } from "react-redux";
-import { getUserById } from "../../redux/Actions/Users/usersActions";
+import { getSales, getUserById } from "../../redux/Actions/Users/usersActions";
 import jwtDecode from 'jwt-decode'
 
 const Sales = () => {
 
     const token = sessionStorage.getItem("jwt_session")
     const { id } = jwtDecode(token)
-    const [user] = useSelector(state => state.userLogged)
+    const user = useSelector(state => state.userLogged)
     const dispatch = useDispatch()
-
+    const sales = useSelector(state => state.sales)
     useEffect(() => {
+        dispatch(getSales())
         dispatch(getUserById(id))
     }, [])
-
+    
     const compras = [
         {
             date: '05/10/2023',

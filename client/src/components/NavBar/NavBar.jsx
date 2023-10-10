@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createUserRole, userLogOut } from "../../redux/Actions/Users/usersActions";
 import { CartContext } from "../../contexts/ShoppingCartContext";
 import imagelogo from "../../assets/logo/Logo.png";
@@ -13,36 +13,35 @@ const NavBar = ({ userId, userImage }) => {
   const [login, loginState] = useState(true);
   const [cart, setCart] = useContext(CartContext);
   const token = sessionStorage.getItem("jwt_session");
+  const userRole = useSelector(state => state.userRole); // Obtener el rol del usuario desde Redux
 
   const quantity = cart.reduce((acc, curr) => {
     return acc + curr.quantity;
   }, 0);
 
   useEffect(() => {
-  const token = sessionStorage.getItem("jwt_session");
-    if(token)
-    {
-      loginState(false)
+    const token = sessionStorage.getItem("jwt_session");
+    if (token) {
+      loginState(false);
     }
-  }, [location])
-  
+  }, [location]);
+
   const handleLogout = () => {
     sessionStorage.removeItem("jwt_session");
     dispatch(createUserRole(""));
-    dispatch(userLogOut())
+    dispatch(userLogOut());
     loginState(true);
-  }
-  
+  };
+
   const handleCart = () => {
-    const token = sessionStorage.getItem("jwt_session")
-    if(token) {
-      navigate("/cart")
+    const token = sessionStorage.getItem("jwt_session");
+    if (token) {
+      navigate("/cart");
+    } else {
+      alert("Debe ingresar o registrarse");
+      navigate("/loginRegister");
     }
-    else {
-      alert('Debe ingresar o registrarse')
-      navigate("/loginRegister")
-    }
-  }
+  };
 
   return (
     <div>
@@ -88,8 +87,7 @@ const NavBar = ({ userId, userImage }) => {
               </li>
             </ul>
             <div className={`d-flex ${login ? "" : "always-visible"}`}>
-              {login
-              ? (
+              {login ? (
                 <>
                   <button
                     className={`btn btn-sm ${style.btn}`}
@@ -109,17 +107,20 @@ const NavBar = ({ userId, userImage }) => {
                   <button className={`btn cart always-visible ${style.btn}`} type="submit">
                     {login ? (
                       <Link to={`/accountDetail/${userId}`}>
-                        (<img src={userImage}/>)
+                        (<img src={userImage} />)
                       </Link>
                     ) : (
                       <Link to={`/accountDetail/${userId}`}>
                         <i className={`bi bi-person-circle ${style.custom_icon}`}></i>
                       </Link>
                     )}
+                    {/* En la siguiente linea aplicamos la misma logica que en el archivo app para que, únicamente se muestre el boton en caso de que el usuario sea ADMIN */}
                   </button>
-                  <Link to={"/admin"}>
-                    <button className={`btn btn-sm ${style.btn}`}>ADMIN</button>
-                  </Link>
+                  {userRole === "ADMIN" && ( 
+                    <Link to={"/admin"}>
+                      <button className={`btn btn-sm ${style.btn}`}>ADMIN</button>
+                    </Link>
+                  )}
                   <button
                     className={`btn btn-sm ${style.btn}`}
                     onClick={() => {
@@ -141,6 +142,5 @@ const NavBar = ({ userId, userImage }) => {
     </div>
   );
 };
-
 
 export default NavBar;

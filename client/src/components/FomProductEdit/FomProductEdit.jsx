@@ -246,7 +246,7 @@ const FormProductEdit = ({ productEdit }) => {
               className="form-control"
             />
             {data.image && (
-              <img src={data.image} alt={data.name} className="imagePreview" />
+              <img src={data.image} alt={data.name} className={style.imagePreview} />
             )}
           </div>
 
