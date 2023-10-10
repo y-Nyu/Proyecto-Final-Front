@@ -2,7 +2,7 @@
   background-color: #90adec;  
 } */
 
-.centerButton {
+/*.centerButton {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,7 +19,7 @@
     height: 100vh;
     position: fixed;
     /* margin-left: -300px; */
-    background-color: #6489D8;
+    /* background-color: #6489D8;
     transition: 0.4s;
 }
 
@@ -61,4 +61,4 @@
 }
 #menu-btn:focus{
 box-shadow: 0 0 0 0.25rem #6489D8;
-}
+}*/
