@@ -14,14 +14,14 @@ import Users from './views/Users/Users'
 import Sales from './views/Sales/Sales'
 import Cart from './views/Cart/Cart';
 import axios from 'axios';
-import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
+import { Routes, Route, useLocation, Navigate, useNavigate } from 'react-router-dom'
 import './App.css'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { ShoppingCartProvider } from './contexts/ShoppingCartContext';
-import { getUserById } from './redux/Actions/Users/usersActions'
+import { getUserById, createUserRole, setUser, userLogin } from './redux/Actions/Users/usersActions'
 import jwtDecode from 'jwt-decode'
-
+import { eventEmitter } from './event_emitter/EventEmitter';
 
 // CONSULTAR RUTAS DEFINIDAS POR EL BACK - PDTE AJUSTAR!! 
 
@@ -30,6 +30,7 @@ const App = () => {
   const location = useLocation();
   const dispatch = useDispatch()
   const token = sessionStorage.getItem("jwt_session")
+  const navigate = useNavigate();
 
   /*
   ME PARECE QUE EL CODIGO ACA ESTA AL REVES
@@ -46,7 +47,7 @@ const App = () => {
   */
 
   useEffect(() => {
-    
+
     if(token)
     {
       const decodedToken = jwtDecode(token);
@@ -87,14 +88,18 @@ const App = () => {
           codeParam = codeParam.value[1];
           codeParam = decodeURI(codeParam);
           
-          axios.post("https://pf-deploy-walterhorst.vercel.app/login-google", { google_code: codeParam})
+          console.log("POST A LOGIN GOOGLE: ")
+          axios.post("http://localhost:3001/login-google", { google_code: codeParam})
             .then(resp => resp.data)
-            .then(({id, token}) => {
-             
+            .then(({id,name, email, rol, celular, token}) => {
+              
               sessionStorage.setItem("jwt_session", token);
-              dispatch(getUserById(id));
+              dispatch(createUserRole(rol));
+              
+              dispatch(setUser({id, email, name, rol, celular}));
+              eventEmitter.emit("login", null);
             })
-            .catch(error => alert(error.message));
+            .catch(error => alert(error.response.data.message));
 
           break;
         }

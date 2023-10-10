@@ -47,7 +47,7 @@ const Register = ({ toggleComponent }) => {
     const register = (ev) => {
         ev.preventDefault();
 
-        axios.post("https://pf-back-deploy.onrender.com/users", data)
+        axios.post("http://localhost:3001/users", data)
             .then(res => {
                 const {id, email, name, rol, celular, token} = res.data
                 sessionStorage.setItem("jwt_session", token)

@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { createUserRole, userLogOut } from "../../redux/Actions/Users/usersActions";
 import imagelogo from "../../assets/logo/Logo.png";
 import { CartContext } from "../../contexts/ShoppingCartContext";
+import { eventEmitter } from "../../event_emitter/EventEmitter";
 
 const NavBar = ({ userId, userImage }) => {
   const navigate = useNavigate();
@@ -19,7 +20,14 @@ const NavBar = ({ userId, userImage }) => {
   }, 0);
 
   useEffect(() => {
-  const token = sessionStorage.getItem("jwt_session");
+    eventEmitter.on("login", () => {
+      loginState(false);
+    })
+  }, [])
+
+  useEffect(() => {
+  
+    const token = sessionStorage.getItem("jwt_session");
     if(token)
     {
       loginState(false)
@@ -34,12 +42,14 @@ const NavBar = ({ userId, userImage }) => {
     loginState(true);
   }
   
+
   const handleCart = () => {
     const token = sessionStorage.getItem("jwt_session")
     console.log(token);
     // token ? navigate("/cart") : navigate("/loginRegister")
     if(token) {
       navigate("/cart")
+      return;
     }
     alert('Debe ingresar o registrarse')
     navigate("/loginRegister")
