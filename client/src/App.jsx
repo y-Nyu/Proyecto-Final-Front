@@ -87,7 +87,7 @@ const App = () => {
               dispatch(createUserRole(rol));
               
               dispatch(setUser({id, email, name, rol, celular}));
-              eventEmitter.emit("login", null);
+             
             })
             .catch(error => alert(error.response.data.message));
 
