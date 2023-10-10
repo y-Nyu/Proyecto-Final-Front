@@ -25,12 +25,14 @@ import DashBoard from "./views/DashBoard/DashBoard";
 import jwtDecode from "jwt-decode";
 import Stars from "./components/Stars/Stars";
 
+
 const App = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const token = sessionStorage.getItem("jwt_session");
+  const userRole = useSelector(state => state.userRole);
 
-  /*
+    /*
   ME PARECE QUE EL CODIGO ACA ESTA AL REVES
   useEffect DEBERIA CONTENER AL CONDICIONAL
 
@@ -43,6 +45,7 @@ const App = () => {
     }, []);
   }
   */
+
 
   useEffect(() => {
     if (token) {
@@ -66,11 +69,11 @@ const App = () => {
   // LO DEJA HACER LOGIN Y RETORNA EL TOKEN JWT EN LA RESPONSE.
   //
   // EN CASO CONTRARIO ARROJA UN ERROR
+
   useEffect(() => {
     if (location.pathname == "/") {
       const queries = location.search;
       const params = new URLSearchParams(queries);
-
       let codeParam = params.entries().next();
       while (!codeParam.done) {
         if (codeParam.value[0] == "code") {
@@ -125,7 +128,7 @@ const App = () => {
   //       navigate("/");
   //     }
   //   }
-  // }, [location, userRole]);
+  // }, [location, userRole]); 
   // NO FUNCIONA
 
   return (
@@ -138,27 +141,32 @@ const App = () => {
           <Route path="/store" element={<Store />} />
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/about" element={<About />} />
-          <Route
-            path="/loginRegister"
-            element={token ? <Navigate to="/" /> : <LoginRegister />}
-          />
+          <Route path="/loginRegister" element={token ? <Navigate to="/" /> : <LoginRegister />} />
           <Route path="/accountDetail/:id" element={<AccountDetail />} />
-          <Route
-            path="/cart"
-            element={token ? <Cart /> : <Navigate to="/" />}
-          />
-          {/* <Route path="/sales" element={token ? <Sales/> : <Navigate to="/"/>}/> */}
+          <Route path="/cart" element={token ? <Cart /> : <Navigate to="/" />} />
           <Route path="/star" element={<Stars />} />
           <Route path="/sales" element={<Sales />} />
+          <Route path='/sales:id' element={<SaleDtail/>}/>
           <Route path="/preguntas-frecuentes" element={<Faq />} />
           <Route path="/politica-de-privacidad" element={<Privacy />} />
-          <Route path="/formUser" element={<FormUser />}></Route>
+          <Route path='/formUser' element={<FormUser />} />
           <Route path="/formProduct" element={<FormProduct />} />
-          <Route path="/admin" element={<DashBoard />} />
-          <Route path="/adminLogin" element={<LoginRegister />} />
-          <Route path="/adminStore" element={<Store />} />
-          <Route path="/adminUsers" element={<Users />} />
-          <Route path="/adminSales" element={<Sales />} />
+
+          {/* Acá esta la logica para determinar que solo el admin pueda acceder a las siguientes rutas :) */}
+          
+          {userRole === "ADMIN" 
+          ? (
+            <>
+              <Route path="/admin" element={<DashBoard />} />
+              <Route path="/adminLogin" element={<LoginRegister />} />
+              <Route path="/adminStore" element={<Store />} />
+              <Route path="/adminUsers" element={<Users />} />
+              <Route path="/adminSales" element={<Sales />} />
+            </>
+          ) 
+          : (
+            <Route path="*" element={<Navigate to="/" />} />
+          )}
         </Routes>
         <Footer />
       </ShoppingCartProvider>
