@@ -30,19 +30,6 @@ const App = () => {
   const token = sessionStorage.getItem("jwt_session");
   const userRole = useSelector(state => state.userRole);
 
-    /*
-  ME PARECE QUE EL CODIGO ACA ESTA AL REVES
-  useEffect DEBERIA CONTENER AL CONDICIONAL
-
-  if (token) {
-    const decodedToken = jwtDecode(token);
-    const userId = decodedToken.id;
-  
-    useEffect(() => {
-      dispatch(getUserById(userId));
-    }, []);
-  }
-  */
 
 
   useEffect(() => {
@@ -79,7 +66,7 @@ const App = () => {
         if (codeParam.value[0] === "code") {
           codeParam = codeParam.value[1];
           codeParam = decodeURI(codeParam);
-          axios.post("http://localhost:3001/login-google", { google_code: codeParam })
+          axios.post("https://pf-back-deploy.onrender.com/login-google", { google_code: codeParam })
             .then(resp => resp.data)
             .then(({id,name, email, rol, celular, token}) => {
               

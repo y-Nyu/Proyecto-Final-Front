@@ -3,7 +3,6 @@ import { useEffect, useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createUserRole, userLogOut } from "../../redux/Actions/Users/usersActions";
 import { CartContext } from "../../contexts/ShoppingCartContext";
-import { eventEmitter } from "../../event_emitter/EventEmitter";
 import imagelogo from "../../assets/logo/Logo.png";
 import style from "./Navbar.module.css";
 
@@ -21,12 +20,6 @@ const NavBar = ({ userId, userImage }) => {
     return acc + curr.quantity;
   }, 0);
 
-  useEffect(() => {
-
-    eventEmitter.on("login", () => {
-      loginState(false);
-    })
-  }, [])
 
   useEffect(() => {
   

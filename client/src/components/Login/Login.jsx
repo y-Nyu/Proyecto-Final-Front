@@ -5,7 +5,6 @@ import { validateLogin } from "../../Validate";
 import { createUserRole, getUserById, setUser } from "../../redux/Actions/Users/usersActions";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-import jwtDecode from 'jwt-decode'
 import style from './Login.module.css';
 import imgGoogle from "../../assets/iconos/google.png";
 
@@ -59,7 +58,7 @@ const Login = ({ toggleComponent }) => {
   const handleSubmit = (ev) => {
     ev.preventDefault();
 
-    axios.post("http://localhost:3001/login", data)
+    axios.post("https://pf-back-deploy.onrender.com/login", data)
       .then(usrRes => {
 
         const {id, email, name, rol, celular, token} = usrRes.data;
@@ -87,7 +86,7 @@ const Login = ({ toggleComponent }) => {
       alert("ACA ESTAMOS");
       const { auth_url } = (
         await axios.get(
-          "http://localhost:3001/login-google-init"
+          "https://pf-back-deploy.onrender.com/login-google-init"
         )
       ).data;
 

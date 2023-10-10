@@ -1,11 +1,8 @@
 import style from "./Searchbar.module.css"; 
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { getProductByName } from "../../redux/Actions/Products/productsActions";
-// import { searchUsers, setSearchType } from '../../redux/Actions/Users/usersActions';
+
 
 function Searchbar({onClick}) {
-  const dispatch = useDispatch();
   const [name, setName] = useState("");
 
   const handleChange = (event) => {
