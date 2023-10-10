@@ -144,11 +144,11 @@ const App = () => {
           <Route path="/formProduct" element={<FormProduct />} />
 
           {/* Acá esta la logica para determinar que solo el admin pueda acceder a las siguientes rutas :) */}
-
+          <Route path="/admin" element={<DashBoard />} />
           {userRole === "ADMIN" 
           ? (
             <>
-              <Route path="/admin" element={<DashBoard />} />
+              
               <Route path="/adminLogin" element={<LoginRegister />} />
               <Route path="/adminStore" element={<Store />} />
               <Route path="/adminUsers" element={<Users />} />
