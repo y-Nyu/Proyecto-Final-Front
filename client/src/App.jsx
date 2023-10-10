@@ -1,29 +1,30 @@
-import NavBar from './components/NavBar/NavBar';
-import Footer from './components/Footer/Footer';
+import NavBar from "./components/NavBar/NavBar";
+import Footer from "./components/Footer/Footer";
 import FormProduct from "./components/FomProducto/FormProduct";
-import FormUser from './components/FormUser/FormUser';
-import Home from './views/Home/Home';
-import About from './views/About/About';
-import LoginRegister from './views/LoginRegister/LoginRegister';
-import AccountDetail from './views/AccountDetail/AccountDetail';
-import Store from './views/Store/Store';
-import Detail from './views/Detail/Detail';
+import FormUser from "./components/FormUser/FormUser";
+import Home from "./views/Home/Home";
+import About from "./views/About/About";
+import LoginRegister from "./views/LoginRegister/LoginRegister";
+import AccountDetail from "./views/AccountDetail/AccountDetail";
+import Store from "./views/Store/Store";
+import Detail from "./views/Detail/Detail";
 import Faq from "./views/Faq/Faq";
 import Privacy from "./views/PrivacyP/Privacy";
-import Users from './views/Users/Users';
-import Sales from './views/Sales/Sales';
-import Cart from './views/Cart/Cart';
-import axios from 'axios';
-import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
-import './App.css';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { ShoppingCartProvider } from './contexts/ShoppingCartContext';
-import { getUserById } from './redux/Actions/Users/usersActions'
+import Users from "./views/Users/Users";
+import Sales from "./views/Sales/Sales";
+import Cart from "./views/Cart/Cart";
+import Success from "./components/Success/Success";
+import axios from "axios";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import "./App.css";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { ShoppingCartProvider } from "./contexts/ShoppingCartContext";
+import { getUserById } from "./redux/Actions/Users/usersActions";
 import DashBoard from "./views/DashBoard/DashBoard";
-import jwtDecode from 'jwt-decode'
-import Stars from './components/Stars/Stars';
-import SaleDtail from './views/SaleDetail/SaleDtail';
+import jwtDecode from "jwt-decode";
+import Stars from "./components/Stars/Stars";
+
 
 const App = () => {
   const location = useLocation();
@@ -52,10 +53,10 @@ const App = () => {
       const userId = decodedToken.id;
       dispatch(getUserById(userId));
     }
-  }, [token, dispatch]);
+  }, []);
 
-    // ESTE CODIGO DE ACÁ ES PARA EL LOGIN DE GOOGLE
-  // 
+  // ESTE CODIGO DE ACÁ ES PARA EL LOGIN DE GOOGLE
+  //
   // DEBIDO A QUE EL POPUP DE GOOGLE NOS REDIRIGE ACÁ
   // CON PARAMETROS EN LA URL, LO QUE HAGO ES
   // CHEQUEAR SI EN ESTOS MISMOS PARAMETROS EXISTE EL CODIGO QUE
@@ -70,26 +71,31 @@ const App = () => {
   // EN CASO CONTRARIO ARROJA UN ERROR
 
   useEffect(() => {
-    if (location.pathname === "/") {
+    if (location.pathname == "/") {
       const queries = location.search;
       const params = new URLSearchParams(queries);
       let codeParam = params.entries().next();
       while (!codeParam.done) {
-        if (codeParam.value[0] === "code") {
+        if (codeParam.value[0] == "code") {
           codeParam = codeParam.value[1];
           codeParam = decodeURI(codeParam);
-          axios.post("https://pf-back-deploy.onrender.com/login-google", { google_code: codeParam })
-            .then(resp => resp.data)
+
+          axios
+            .post("https://pf-deploy-walterhorst.vercel.app/login-google", {
+              google_code: codeParam,
+            })
+            .then((resp) => resp.data)
             .then(({ id, token }) => {
               sessionStorage.setItem("jwt_session", token);
               dispatch(getUserById(id));
             })
-            .catch(error => alert(error.message));
+            .catch((error) => alert(error.message));
+
           break;
         }
       }
     }
-  }, [location, dispatch]);
+  }, [location]);
 
   // NO FUNCIONA
   // const userRole = useSelector(state => state.userRole);
@@ -108,10 +114,10 @@ const App = () => {
 
   // // Esto es autenticación y autorización
   // useEffect(() => {
-   
+
   //   const token = sessionStorage.getItem("jwt_session");
   //   const isLogged = handleAuth(token);
-    
+
   //   // Chequea si el usuario está loggeado
   //   if(isLogged)
   //   {
@@ -130,6 +136,7 @@ const App = () => {
       <ShoppingCartProvider>
         <NavBar />
         <Routes>
+          <Route path="/success" element={<Success></Success>} />
           <Route path="/" element={<Home />} />
           <Route path="/store" element={<Store />} />
           <Route path="/detail/:id" element={<Detail />} />
