@@ -43,7 +43,7 @@ const Cart = () => {
   };
   
   const checkOut = async () => {
-    const response = await axios.post(
+    const { data } = await axios.post(
       "https://pf-back-deploy.onrender.com/create-order",
       cart
     );
