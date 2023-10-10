@@ -61,7 +61,6 @@ const Cart = () => {
     localStorage.clear();
   };
 
-
   return cart.length !== 0 ? (
     <main className={style.contenedor}>
   <div className="carrito">
