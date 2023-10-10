@@ -23,6 +23,7 @@ import { getUserById } from './redux/Actions/Users/usersActions'
 import DashBoard from "./views/DashBoard/DashBoard";
 import jwtDecode from 'jwt-decode'
 import Stars from './components/Stars/Stars';
+import SaleDtail from './views/SaleDetail/SaleDtail';
 
 const App = () => {
   const location = useLocation();
@@ -138,6 +139,7 @@ const App = () => {
           <Route path="/cart" element={token ? <Cart /> : <Navigate to="/" />} />
           <Route path="/star" element={<Stars />} />
           <Route path="/sales" element={<Sales />} />
+          <Route path='/sales:id' element={<SaleDtail/>}/>
           <Route path="/preguntas-frecuentes" element={<Faq />} />
           <Route path="/politica-de-privacidad" element={<Privacy />} />
           <Route path='/formUser' element={<FormUser />} />

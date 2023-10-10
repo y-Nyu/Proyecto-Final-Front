@@ -1,6 +1,6 @@
 import { useState } from "react";
 import style from "./Stars.module.css"
-
+import { FaStar } from 'react-icons/fa'
 
 const Stars = () => {
     const [rating, setRating] = useState(null);
@@ -17,12 +17,11 @@ const Stars = () => {
                     value={currentRating}
                     onClick={() => setRating(currentRating)}
                     />
-                    <i
-                    className={`bi bi-star-fill ${style.star}`}
+                    <FaStar
                     color={currentRating <= (hover ||  rating) ? "#ffc107" : "#e4e5e9"}
                     onMouseEnter={() => setHover(currentRating)}
                     onMouseLeave={() => setHover(null)}
-                    ></i>
+                    ></FaStar>
                 </label>
             )
         })}
