@@ -7,7 +7,7 @@ import imagelogo from "../../assets/logo/Logo.png";
 import { CartContext } from "../../contexts/ShoppingCartContext";
 import { eventEmitter } from "../../event_emitter/EventEmitter";
 
-const NavBar = ({ userId, userImage }) => {
+const NavBar = ({ toggleComponent, userId, userImage }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
@@ -45,14 +45,15 @@ const NavBar = ({ userId, userImage }) => {
 
   const handleCart = () => {
     const token = sessionStorage.getItem("jwt_session")
-    console.log(token);
     // token ? navigate("/cart") : navigate("/loginRegister")
     if(token) {
       navigate("/cart")
       return;
     }
-    alert('Debe ingresar o registrarse')
-    navigate("/loginRegister")
+    else {
+      alert('Debe ingresar o registrarse')
+      navigate("/loginRegister")
+    }
   }
 
   return (
@@ -104,17 +105,13 @@ const NavBar = ({ userId, userImage }) => {
                 <>
                   <button
                     className={`btn btn-sm ${style.btn}`}
-                    onClick={() => {
-                      navigate("/loginRegister");
-                    }}
+                    onClick={() => navigate('/loginRegister')}
                   >
                     Ingresar
                   </button>
                   <button
                     className={`btn btn-sm ${style.btn}`}
-                    onClick={() => {
-                      navigate("/loginRegister");
-                    }}
+                    onClick={() => navigate('/loginRegister')}
                   >
                     Registrarse
                   </button>
@@ -124,7 +121,7 @@ const NavBar = ({ userId, userImage }) => {
                   <button className={`btn cart always-visible ${style.btn}`} type="submit">
                     {login ? (
                       <Link to={`/accountDetail/${userId}`}>
-                        (<img src={userImage} />)
+                        (<img src={userImage}/>)
                       </Link>
                     ) : (
                       <Link to={`/accountDetail/${userId}`}>

@@ -67,9 +67,7 @@ const Login = ({ toggleComponent }) => {
         sessionStorage.setItem("jwt_session", token);
         dispatch(createUserRole(rol));
         dispatch(setUser({id, email, name, rol, celular}));
-
         navigate("/");
-    
       })
       .catch(error => {
         console.log(error);
@@ -159,7 +157,7 @@ const Login = ({ toggleComponent }) => {
             <button
               type="submit"
               disabled={disableByEmptyProps()}
-              className="btn btn-primary"
+              className='btn btn-primary w-100 my-1'
             >
               {" "}
               Iniciar sesión{" "}
@@ -192,7 +190,7 @@ const Login = ({ toggleComponent }) => {
               </a>
             </div>
             <div className="row">
-              <p>¿Aún no tienes una cuenta?               <a
+              <p>¿Aún no tienes una cuenta?<a
                 onClick={toggleComponent}
                 className="btn-outline-primary custom-button-height w-100 my-1 btn-lg"
                 style={{ cursor: "pointer" }}
