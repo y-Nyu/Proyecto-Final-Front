@@ -96,7 +96,7 @@ const Cart = () => {
       </button>
     </main>
   ) : (
-    <div className="carrito-vacio">
+    <div className={style.carritoVacio}>
       <p>Oops, tu carrito está vacío</p>
     </div>
   );

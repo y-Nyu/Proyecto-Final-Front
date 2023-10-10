@@ -1,5 +1,4 @@
 import NavBar from "./components/NavBar/NavBar";
-import Footer from "./components/Footer/Footer";
 import FormProduct from "./components/FomProducto/FormProduct";
 import FormUser from "./components/FormUser/FormUser";
 import Home from "./views/Home/Home";
@@ -25,6 +24,7 @@ import DashBoard from "./views/DashBoard/DashBoard";
 import jwtDecode from "jwt-decode";
 import Stars from "./components/Stars/Stars";
 import SaleDtail from "./views/SaleDetail/SaleDtail";
+import Footer from "./components/Footer/Footer";
 
 
 const App = () => {
@@ -158,7 +158,7 @@ const App = () => {
           <Route path="/adminUsers" element={<Users />} />
           <Route path="/adminSales" element={<Sales />} />
         </Routes>
-        <Footer />
+      <Footer />
       </ShoppingCartProvider>
     </div>
   );

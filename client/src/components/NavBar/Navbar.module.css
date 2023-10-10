@@ -86,10 +86,10 @@
   }
 
   .navbar_nav {
-    margin-top: 1rem; /* Espacio superior entre el logo y el menú */
-    display: flex !important; /* Para centrar los botones horizontalmente */
-    flex-direction: column !important; /* Alinea los botones en una columna */
-    align-items: center !important; /* Alinea los botones al centro horizontalmente */
+    margin-top: 1rem; 
+    display: flex !important; 
+    flex-direction: column !important;
+    align-items: center !important; 
   }
 
   .nav_item {
@@ -105,4 +105,13 @@
     margin: 0.2rem 0; /* Espaciado vertical entre los botones */
     align-items: center !important; 
   }
+ }
+
+ /* Estilo pegajoso: */
+ .stickyNavbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.062); /* Cambia esto al color de fondo deseado */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.486); /* Agrega una sombra si lo deseas */
  }

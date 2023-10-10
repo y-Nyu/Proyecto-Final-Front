@@ -44,7 +44,7 @@ const NavBar = ({ userId, userImage }) => {
   };
 
   return (
-    <div>
+    <div className={style.stickyNavbar}>
       <nav className={`navbar navbar-expand-md navbar-light ${style.navbar}`}>
         <div className="container">
           <Link to="/" className={style.navbar_brand}>
