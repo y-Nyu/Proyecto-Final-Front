@@ -3,12 +3,10 @@ import { useEffect, useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createUserRole, userLogOut } from "../../redux/Actions/Users/usersActions";
 import { CartContext } from "../../contexts/ShoppingCartContext";
-<<<<<<< HEAD
 import { eventEmitter } from "../../event_emitter/EventEmitter";
-=======
 import imagelogo from "../../assets/logo/Logo.png";
 import style from "./Navbar.module.css";
->>>>>>> 6714de05074f60605bd746145f73dfbf293464e2
+
 
 const NavBar = ({ userId, userImage }) => {
   const navigate = useNavigate();
@@ -24,7 +22,7 @@ const NavBar = ({ userId, userImage }) => {
   }, 0);
 
   useEffect(() => {
-<<<<<<< HEAD
+
     eventEmitter.on("login", () => {
       loginState(false);
     })
@@ -36,12 +34,8 @@ const NavBar = ({ userId, userImage }) => {
     if(token)
     {
       loginState(false)
-=======
-    const token = sessionStorage.getItem("jwt_session");
-    if (token) {
-      loginState(false);
->>>>>>> 6714de05074f60605bd746145f73dfbf293464e2
     }
+
   }, [location]);
 
   const handleLogout = () => {
@@ -49,18 +43,9 @@ const NavBar = ({ userId, userImage }) => {
     dispatch(createUserRole(""));
     dispatch(userLogOut());
     loginState(true);
-<<<<<<< HEAD
+
   }
   
-
-  const handleCart = () => {
-    const token = sessionStorage.getItem("jwt_session")
-    // token ? navigate("/cart") : navigate("/loginRegister")
-    if(token) {
-      navigate("/cart")
-      return;
-=======
-  };
 
   const handleCart = () => {
     const token = sessionStorage.getItem("jwt_session");
@@ -69,7 +54,7 @@ const NavBar = ({ userId, userImage }) => {
     } else {
       alert("Debe ingresar o registrarse");
       navigate("/loginRegister");
->>>>>>> 6714de05074f60605bd746145f73dfbf293464e2
+
     }
   };
 

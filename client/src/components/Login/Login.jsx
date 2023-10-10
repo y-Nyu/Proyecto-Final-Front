@@ -84,10 +84,10 @@ const Login = ({ toggleComponent }) => {
       //
       // ESTA URL ES EL FAMOSO POPUP QUE APARECE SIEMPRE QUE HACEMOS LOGIN CON GOOGLE
       //
-
+      alert("ACA ESTAMOS");
       const { auth_url } = (
-        await axios.post(
-          "https://pf-back-deploy.onrender.com/login-google-init"
+        await axios.get(
+          "http://localhost:3001/login-google-init"
         )
       ).data;
 
