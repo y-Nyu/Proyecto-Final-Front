@@ -1,7 +1,14 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../../contexts/ShoppingCartContext";
+import React from "react";  
 import style from "./card.module.css";
+
+
+const successBackgroundClass = "bg-success";
+const successTextClass = "text-white";
+const errorBackgroundClass = "bg-danger";
+const errorTextClass = "text-white";
 
 const Card = ({
   id,
@@ -16,6 +23,18 @@ const Card = ({
 }) => {
   
   const [cart, setCart] = useContext(CartContext);
+  const [showToast, setShowToast] = useState(false);
+  const [toastPosition, setToastPosition] = useState('');
+  const [toastMessage, setToastMessage] = useState("Producto añadido correctamente");
+  const [toastClass, setToastClass] = useState("");
+
+
+  const toggleToast = () => {
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+  };
+  
+  
 
   const addToCart = (product) => {
     setCart((currItems) => {
@@ -23,7 +42,8 @@ const Card = ({
 
       // Validar el stock antes de agregar
       if (isItemFound && isItemFound.quantity + 1 > stock) {
-        alert("No hay suficiente stock disponible");
+        setToastMessage("Producto sin stock");
+        setToastClass(`${errorBackgroundClass} ${errorTextClass}`); // Aplicar clase para mensaje en rojo y texto en negro
         return currItems;
       }
 
@@ -36,6 +56,9 @@ const Card = ({
           }
         });
       } else {
+        setToastMessage("Producto añadido correctamente");
+        setToastClass(`${successBackgroundClass} ${successTextClass}`); // Aplicar clase para mensaje en verde y texto en negro
+
         return [
           ...currItems,
           {
@@ -103,15 +126,34 @@ const Card = ({
                 <ins>Más info</ins>
               </button>
             </Link>
-          </div>
-          <button className={"btn btn-outline-primary"} onClick={addToCart}>
-          <i className="bi bi-cart3"></i> COMPRAR
-        </button>
-        {/* <button onClick={() => removeItem(id)} className={style["btn"]}>
-          Remover del Carrito
-        </button> */}
-        </div>
+          </div >
+          
+          <button
+  className="btn btn-outline-primary"
+  onClick={() => {
+    addToCart();
+    toggleToast();
+  }}
+>
+  <i className="bi bi-cart3"></i> COMPRAR
+</button>
+
+{showToast && (
+  <div
+    className={`toast show ${toastPosition} ${toastClass} border border-primary-subtle rounded-3`}
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
+    <div className="toast-body">
+      {toastMessage}
+    </div>
+  </div>
+)}
+
+
       </div>
+    </div>
     </div>
   );
 };
