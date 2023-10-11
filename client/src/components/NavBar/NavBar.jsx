@@ -1,7 +1,10 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createUserRole, userLogOut } from "../../redux/Actions/Users/usersActions";
+import {
+  createUserRole,
+  userLogOut,
+} from "../../redux/Actions/Users/usersActions";
 import { CartContext } from "../../contexts/ShoppingCartContext";
 import imagelogo from "../../assets/logo/Logo.png";
 import style from "./Navbar.module.css";
@@ -13,7 +16,7 @@ const NavBar = ({ userId, userImage }) => {
   const [login, loginState] = useState(true);
   const [cart, setCart] = useContext(CartContext);
   const token = sessionStorage.getItem("jwt_session");
-  const userRole = useSelector(state => state.userRole); // Obtener el rol del usuario desde Redux
+  const userRole = useSelector((state) => state.userRole); // Obtener el rol del usuario desde Redux
 
   const quantity = cart.reduce((acc, curr) => {
     return acc + curr.quantity;
@@ -62,7 +65,10 @@ const NavBar = ({ userId, userImage }) => {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          <div className={`${style.navbar_collapse} collapse navbar-collapse justify-content-between`} id="navbarNav">
+          <div
+            className={`${style.navbar_collapse} collapse navbar-collapse justify-content-between`}
+            id="navbarNav"
+          >
             <ul className={`navbar-nav ${style.navbar_nav}`}>
               <li className={style.nav_item}>
                 <a className={style.nav_link} onClick={() => navigate("/")}>
@@ -70,12 +76,18 @@ const NavBar = ({ userId, userImage }) => {
                 </a>
               </li>
               <li className={style.nav_item}>
-                <a className={style.nav_link} onClick={() => navigate("/store")}>
+                <a
+                  className={style.nav_link}
+                  onClick={() => navigate("/store")}
+                >
                   Tienda
                 </a>
               </li>
               <li className={style.nav_item}>
-                <a className={style.nav_link} onClick={() => navigate("/about")}>
+                <a
+                  className={style.nav_link}
+                  onClick={() => navigate("/about")}
+                >
                   Sobre nosotros
                 </a>
               </li>
@@ -85,34 +97,41 @@ const NavBar = ({ userId, userImage }) => {
                 <>
                   <button
                     className={`btn btn-sm ${style.btn}`}
-                    onClick={() => navigate('/loginRegister')}
+                    onClick={() => navigate("/loginRegister")}
                   >
                     Ingresar
                   </button>
                   <button
                     className={`btn btn-sm ${style.btn}`}
-                    onClick={() => navigate('/loginRegister')}
+                    onClick={() => navigate("/loginRegister")}
                   >
                     Registrarse
                   </button>
                 </>
               ) : (
                 <>
-                  <button className={`btn cart always-visible ${style.btn}`} type="submit">
+                  <button
+                    className={`btn cart always-visible ${style.btn}`}
+                    type="submit"
+                  >
                     {login ? (
                       <Link to={`/accountDetail/${userId}`}>
                         (<img src={userImage} />)
                       </Link>
                     ) : (
                       <Link to={`/accountDetail/${userId}`}>
-                        <i className={`bi bi-person-circle ${style.custom_icon}`}></i>
+                        <i
+                          className={`bi bi-person-circle ${style.custom_icon}`}
+                        ></i>
                       </Link>
                     )}
                     {/* En la siguiente linea aplicamos la misma logica que en el archivo app para que, únicamente se muestre el boton en caso de que el usuario sea ADMIN */}
                   </button>
-                  {userRole === "ADMIN" && ( 
+                  {userRole === "ADMIN" && (
                     <Link to={"/admin"}>
-                      <button className={`btn btn-sm ${style.btn}`}>ADMIN</button>
+                      <button className={`btn btn-sm ${style.btn}`}>
+                        ADMIN
+                      </button>
                     </Link>
                   )}
                   <button
@@ -125,9 +144,19 @@ const NavBar = ({ userId, userImage }) => {
                   </button>
                 </>
               )}
-              <button onClick={handleCart} className={`btn cart ${style.btn}`} type="submit">
+              <button
+                onClick={handleCart}
+                className={`btn cart ${style.btn} btn-primary position-relative`}
+                type="submit"
+              >
                 <i className="bi bi-cart"></i>
-                <span>{quantity}</span>
+                  <span
+                    className={`position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2 ${
+                      quantity > 0 ? "visible" : "invisible"
+                    }`}>
+                    <span className="visually-hidden">mensajes no leídos</span>
+                    {quantity > 0 && <span>{quantity}</span>}
+                  </span>
               </button>
             </div>
           </div>
