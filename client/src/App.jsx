@@ -30,9 +30,10 @@ const App = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const token = sessionStorage.getItem("jwt_session");
-  const userRole = useSelector((state) => state.userRole);
+  const userRole = useSelector(state => state.userRole);
 
-  /*
+
+    /*
   ME PARECE QUE EL CODIGO ACA ESTA AL REVES
   useEffect DEBERIA CONTENER AL CONDICIONAL
 
@@ -45,6 +46,7 @@ const App = () => {
     }, []);
   }
   */
+
 
   useEffect(() => {
     if (token) {
@@ -127,7 +129,7 @@ const App = () => {
   //       navigate("/");
   //     }
   //   }
-  // }, [location, userRole]);
+  // }, [location, userRole]); 
   // NO FUNCIONA
 
   return (
@@ -140,10 +142,7 @@ const App = () => {
           <Route path="/store" element={<Store />} />
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/about" element={<About />} />
-          <Route
-            path="/loginRegister"
-            element={token ? <Navigate to="/" /> : <LoginRegister />}
-          />
+          <Route path="/loginRegister" element={token ? <Navigate to="/" /> : <LoginRegister />} />
           <Route path="/accountDetail/:id" element={<AccountDetail />} />
           <Route
             path="/cart"
