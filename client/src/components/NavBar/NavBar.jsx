@@ -8,6 +8,7 @@ import {
 import { CartContext } from "../../contexts/ShoppingCartContext";
 import imagelogo from "../../assets/logo/Logo.png";
 import style from "./Navbar.module.css";
+import { Modal } from 'antd';
 
 const NavBar = ({ userId, userImage }) => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const NavBar = ({ userId, userImage }) => {
   const [login, loginState] = useState(true);
   const [cart, setCart] = useContext(CartContext);
   const token = sessionStorage.getItem("jwt_session");
-  const userRole = useSelector((state) => state.userRole); // Obtener el rol del usuario desde Redux
+  const userRole = useSelector((state) => state.userRole);
 
   const quantity = cart.reduce((acc, curr) => {
     return acc + curr.quantity;
@@ -29,7 +30,23 @@ const NavBar = ({ userId, userImage }) => {
     }
   }, [location]);
 
+  const [modalVisible, setModalVisible] = useState(false);
+  const [productToDelete, setProductToDelete] = useState(null);
+
+  const showConfirmModal = () => {
+    setModalVisible(true);
+  };
+
+  const handleCancel = () => {
+    setModalVisible(false);
+  };
+
   const handleLogout = () => {
+    showConfirmModal();
+  };
+
+  const confirmLogout = () => {
+    setModalVisible(false);
     sessionStorage.removeItem("jwt_session");
     dispatch(createUserRole(""));
     dispatch(userLogOut());
@@ -125,7 +142,6 @@ const NavBar = ({ userId, userImage }) => {
                         ></i>
                       </Link>
                     )}
-                    {/* En la siguiente linea aplicamos la misma logica que en el archivo app para que, únicamente se muestre el boton en caso de que el usuario sea ADMIN */}
                   </button>
                   {userRole === "ADMIN" && (
                     <Link to={"/admin"}>
@@ -150,19 +166,28 @@ const NavBar = ({ userId, userImage }) => {
                 type="submit"
               >
                 <i className="bi bi-cart"></i>
-                  <span
-                    className={`position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2 ${
-                      quantity > 0 ? "visible" : "invisible"
-                    }`}>
-                    <span className="visually-hidden">mensajes no leídos</span>
-                    {quantity > 0 && <span>{quantity}</span>}
-                  </span>
+                <span
+                  className={`position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2 ${
+                    quantity > 0 ? "visible" : "invisible"
+                  }`}>
+                  <span className="visually-hidden">mensajes no leídos</span>
+                  {quantity > 0 && <span>{quantity}</span>}
+                </span>
               </button>
             </div>
           </div>
-          
         </div>
       </nav>
+      <Modal
+        title="¿Estás seguro?"
+        visible={modalVisible}
+        onOk={confirmLogout}
+        onCancel={handleCancel}
+      >
+        <p>
+          Se cerrará la sesión. ¿Estás seguro?
+        </p>
+      </Modal>
     </div>
   );
 };

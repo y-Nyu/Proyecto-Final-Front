@@ -1,7 +1,10 @@
 .footer {
-  flex-shrink: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   background-color: #E5F2FB;
 }
+
 .titulo {
 font-size: 18px;
 font-weight: bold;
