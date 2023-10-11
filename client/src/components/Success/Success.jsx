@@ -18,9 +18,8 @@ const Success = () => {
     });
 
     setTimeout(() => {
-      setCart([]);
-    }, (5000));
-    
+      setCart([])
+    }, (5000))
   }, [user]);
 
   return (
