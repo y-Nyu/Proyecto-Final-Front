@@ -58,6 +58,7 @@
   text-align: center;
 }
 
+
 /* Media query para filas de 2 tarjetas en pantallas de 850px o menos */
 @media (max-width: 768px) {
   .customCardContainer {
