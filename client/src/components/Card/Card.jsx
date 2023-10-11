@@ -129,31 +129,29 @@ const Card = ({
           </div >
           
           <button
-  className="btn btn-outline-primary"
-  onClick={() => {
-    addToCart();
-    toggleToast();
-  }}
->
-  <i className="bi bi-cart3"></i> COMPRAR
-</button>
+            className="btn btn-outline-primary"
+            onClick={() => {
+              addToCart();
+              toggleToast();
+            }}
+          >
+            <i className="bi bi-cart3"></i> COMPRAR
+          </button>
 
-{showToast && (
-  <div
-    className={`toast show ${toastPosition} ${toastClass} border border-primary-subtle rounded-3`}
-    role="alert"
-    aria-live="assertive"
-    aria-atomic="true"
-  >
-    <div className="toast-body">
-      {toastMessage}
-    </div>
-  </div>
-)}
-
-
+          {showToast && (
+            <div
+              className={`toast show ${toastPosition} ${toastClass} border border-primary-subtle rounded-3`}
+              role="alert"
+              aria-live="assertive"
+              aria-atomic="true"
+            >
+              <div className="toast-body">
+                {toastMessage}
+              </div>
+            </div>
+          )} 
+        </div>
       </div>
-    </div>
     </div>
   );
 };
