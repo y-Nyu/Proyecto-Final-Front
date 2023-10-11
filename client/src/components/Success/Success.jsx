@@ -17,8 +17,12 @@ const Success = () => {
       await axios.post("https://pf-back-deploy.onrender.com/sale", itemSale);
     });
 
-    localStorage.clear();
-  });
+    setTimeout(() => {
+      setCart([]);
+    }, (5000));
+    
+  }, [user]);
+
   return (
     <div className="success-message">
       <h1>Tu compra para tu mascota ha sido generada con éxito</h1>
