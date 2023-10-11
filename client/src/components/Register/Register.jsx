@@ -49,10 +49,10 @@ const Register = ({ toggleComponent }) => {
 
         axios.post("https://pf-back-deploy.onrender.com/users", data)
             .then(res => {
-                const {id, email, name, rol, celular, token} = res.data
+                const {id, email, name, rol, celular, address, token} = res.data
                 sessionStorage.setItem("jwt_session", token)
                 dispatch(createUserRole(rol));
-                dispatch(setUser({id, email, name, rol, celular}));
+                dispatch(setUser({id, email, name, rol, celular, address}));
                 navigate("/")
             })
             .catch(error => alert(error.response.data.error))
@@ -91,6 +91,25 @@ const Register = ({ toggleComponent }) => {
         <div className="mb-4 pt-1">
           <label className="form-label">
             <strong>Celular</strong>
+          </label>
+          <input
+            onChange={handleChange}
+            type="text"
+            name="celular"
+            value={data.celular}
+            placeholder="Ingresa un número de 11 dígitos"
+            className="form-control"
+          />
+          {errors.celular ? (
+            <p className={style["error-text"]}>{errors.celular}</p>
+          ) : (
+            <p className={style["error-text"]}></p>
+          )}
+        </div>
+
+        <div className="mb-4 pt-1">
+          <label className="form-label">
+            <strong>Dirección</strong>
           </label>
           <input
             onChange={handleChange}
