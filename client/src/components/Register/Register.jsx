@@ -14,6 +14,7 @@ const Register = ({ toggleComponent }) => {
     name: "",
     email: "",
     celular: "",
+    address: '',
     password: "",
     passwordConfirmation: "",
   });
@@ -22,6 +23,7 @@ const Register = ({ toggleComponent }) => {
     name: "",
     email: "",
     celular: "",
+    address: '',
     password: "",
     passwordConfirmation: "",
   });
@@ -114,13 +116,13 @@ const Register = ({ toggleComponent }) => {
           <input
             onChange={handleChange}
             type="text"
-            name="celular"
-            value={data.celular}
-            placeholder="Ingresa un número de 11 dígitos"
+            name="address"
+            value={data.address}
+            placeholder="Ingresa una dirección de máximo 30 caracteres"
             className="form-control"
           />
-          {errors.celular ? (
-            <p className={style["error-text"]}>{errors.celular}</p>
+          {errors.address ? (
+            <p className={style["error-text"]}>{errors.address}</p>
           ) : (
             <p className={style["error-text"]}></p>
           )}

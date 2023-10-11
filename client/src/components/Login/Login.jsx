@@ -62,11 +62,11 @@ const Login = ({ toggleComponent }) => {
     axios.post("https://pf-back-deploy.onrender.com/login", data)
       .then(usrRes => {
 
-        const {id, email, name, rol, celular, address, token} = usrRes.data;
+        const {id, email, name, rol, celular, address, token, sales} = usrRes.data;
         // Setteamos el token
         sessionStorage.setItem("jwt_session", token);
         dispatch(createUserRole(rol));
-        dispatch(setUser({id, email, name, rol, celular, address}));
+        dispatch(setUser({id, email, name, rol, celular, address, sales}));
         navigate("/");
       })
       .catch(error => {

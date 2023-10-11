@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import style from './CardShop.module.css'
+import Rate from "../Rate/Rate";
 
-const CardShop = ({ id, name, date, total, units, image }) => {
+const CardShop = ({ id, name, total, quantity, image, date }) => {
 
   
   return (
@@ -12,15 +13,16 @@ const CardShop = ({ id, name, date, total, units, image }) => {
 
             <div className="row g-0">
                 <div className="col-md-4">
-                <img src="" alt="" className="img-fluid rounded-start"/>
+                <img src={image} alt="" className="img-fluid rounded-start"/>
                 </div>
                 <div className="col-md-8">
                 <div className="card-body">
+                    <Rate />
                     <h5 className="card-title">{name}</h5>
-                    <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p className="card-text"><small className="text-body-secondary">{date}</small></p>
+                    <p className="card-text">Cantidad: {quantity}</p>
+                    <p className="card-text">Total: {total}</p>
+                    <p className="card-text">Fecha compra: {date}</p>
                 </div>
-                <button>Detalle</button>
                 </div>
             </div>
             </div>

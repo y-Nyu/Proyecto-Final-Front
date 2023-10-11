@@ -11,11 +11,11 @@ const CardsShop = ({compras}) => {
                 <CardShop
                     key={compra.id}
                     id={compra.id}
-                    name={compra.name}
-                    date={compra.date}
-                    units={compra.units}
-                    image={compra.image}
-                    total={compra.total}
+                    name={compra.details[0].name}
+                    date={compra.createdAt.slice(0,10)}
+                    quantity={compra.details[0].quantity}
+                    image={compra.details[0].image}
+                    total={compra.details[0].total}
                 />
             )
         }))
