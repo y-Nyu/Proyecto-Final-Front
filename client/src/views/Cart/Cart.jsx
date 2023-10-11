@@ -3,7 +3,6 @@ import { CartContext } from "../../contexts/ShoppingCartContext";
 import style from "./Cart.module.css";
 import axios from "axios";
 
-
 const Cart = () => {
   const [cart, setCart] = useContext(CartContext);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -16,7 +15,7 @@ const Cart = () => {
     );
     setTotalPrice(newTotalPrice); // Actualizar el estado
   }, [cart]);
-  
+
   const incrementAmount = (productId) => {
     const updatedCart = [...cart];
     updatedCart.forEach((product) => {
@@ -41,7 +40,7 @@ const Cart = () => {
     const updatedCart = cart.filter((product) => product.id !== productId);
     setCart(updatedCart);
   };
-  
+
   const checkOut = async () => {
     const { data } = await axios.post(
       "https://pf-back-deploy.onrender.com/create-order",
@@ -60,7 +59,6 @@ const Cart = () => {
     window.location.href = initPoint;
     localStorage.clear();
   };
-
 
   return cart.length !== 0 ? (
     <main className={style.contenedor}>
@@ -85,7 +83,6 @@ const Cart = () => {
   <button className="btn-pagar" onClick={checkOut}>
         Pagar Total (${totalPrice})
       </button>
-
 
 </main>
 
