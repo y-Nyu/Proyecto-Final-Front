@@ -93,7 +93,7 @@ export const setSearchType = (searchType) => {
 export const getSales = () => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.get('https://pf-back-deploy.onrender.com/product/sales')
+            const { data } = await axios.get('https://pf-back-deploy.onrender.com/sale')
             dispatch( {type: GET_SALES, payload: data} )
         } catch (error) {
             console.log(error);

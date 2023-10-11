@@ -17,6 +17,10 @@ export const validateRegister = (data) => {
     errors.passwordConfirmation = 'Las contraseñas no coinciden'
   }
 
+  if (data.address === "" || data.address.length > 30 || data.address.length < 3) {
+    errors.address = "La dirección debe tener mínimo 3 y máximo 30 caracteres";
+  }
+
   if (!/^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/.test(data.email)) {
     errors.email = "Ingresa un email valido - ejemplo@correo.com";
   }
