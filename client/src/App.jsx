@@ -26,12 +26,12 @@ import jwtDecode from "jwt-decode";
 import Stars from "./components/Stars/Stars";
 import SaleDtail from "./views/SaleDetail/SaleDtail";
 
-
 const App = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const token = sessionStorage.getItem("jwt_session");
   const userRole = useSelector(state => state.userRole);
+
 
     /*
   ME PARECE QUE EL CODIGO ACA ESTA AL REVES
@@ -144,13 +144,16 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/loginRegister" element={token ? <Navigate to="/" /> : <LoginRegister />} />
           <Route path="/accountDetail/:id" element={<AccountDetail />} />
-          <Route path="/cart" element={token ? <Cart /> : <Navigate to="/" />} />
+          <Route
+            path="/cart"
+            element={token ? <Cart /> : <Navigate to="/" />}
+          />
           <Route path="/star" element={<Stars />} />
           <Route path="/sales" element={<Sales />} />
-          <Route path='/sales:id' element={<SaleDtail/>}/>
+          <Route path="/sales:id" element={<SaleDtail />} />
           <Route path="/preguntas-frecuentes" element={<Faq />} />
           <Route path="/politica-de-privacidad" element={<Privacy />} />
-          <Route path='/formUser' element={<FormUser />} />
+          <Route path="/formUser" element={<FormUser />} />
           <Route path="/formProduct" element={<FormProduct />} />
           <Route path="/admin" element={<DashBoard />} />
           <Route path="/adminLogin" element={<LoginRegister />} />
