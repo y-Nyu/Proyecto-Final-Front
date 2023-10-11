@@ -20,7 +20,9 @@ const CardShop = ({ id, name, date, total, units, image }) => {
                     <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                     <p className="card-text"><small className="text-body-secondary">{date}</small></p>
                 </div>
-                <button>Detalle</button>
+                <Link to={`/sales/${id}`}>
+                  <button>Detalle</button>
+                </Link>
                 </div>
             </div>
             </div>

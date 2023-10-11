@@ -23,8 +23,8 @@ import { getUserById } from "./redux/Actions/Users/usersActions";
 import DashBoard from "./views/DashBoard/DashBoard";
 import jwtDecode from "jwt-decode";
 import Stars from "./components/Stars/Stars";
-import SaleDtail from "./views/SaleDetail/SaleDtail";
 import Footer from "./components/Footer/Footer";
+import SaleDetail from "./views/SaleDetail/SaleDetail";
 
 const App = () => {
   const location = useLocation();
@@ -97,16 +97,25 @@ const App = () => {
           <Route path="/cart" element={<Cart/>}/>
           <Route path="/star" element={<Stars />} />
           <Route path="/sales" element={<Sales />} />
-          <Route path="/sales:id" element={<SaleDtail />} />
+          <Route path="/sales/:id" element={<SaleDetail/>} />
           <Route path="/preguntas-frecuentes" element={<Faq />} />
           <Route path="/politica-de-privacidad" element={<Privacy />} />
           <Route path="/formUser" element={<FormUser />} />
           <Route path="/formProduct" element={<FormProduct />} />
-          <Route path="/admin" element={<DashBoard />} />
-          <Route path="/adminLogin" element={<LoginRegister />} />
-          <Route path="/adminStore" element={<Store />} />
-          <Route path="/adminUsers" element={<Users />} />
-          <Route path="/adminSales" element={<Sales />} />
+
+          {userRole === "ADMIN" 
+          ? (
+            <>
+              <Route path="/admin" element={<DashBoard />} />
+              <Route path="/adminLogin" element={<LoginRegister />} />
+              <Route path="/adminStore" element={<Store />} />
+              <Route path="/adminUsers" element={<Users />} />
+              <Route path="/adminSales" element={<Sales />} />
+            </>
+          ) 
+          : (
+            <Route path="*" element={<Navigate to="/" />} />
+          )}
         </Routes>
       <Footer />
       </ShoppingCartProvider>
