@@ -144,10 +144,7 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/loginRegister" element={token ? <Navigate to="/" /> : <LoginRegister />} />
           <Route path="/accountDetail/:id" element={<AccountDetail />} />
-          <Route
-            path="/cart"
-            element={token ? <Cart /> : <Navigate to="/" />}
-          />
+          <Route path="/cart" element={token ? <Cart /> : <Navigate to="/" />}/>
           <Route path="/star" element={<Stars />} />
           <Route path="/sales" element={<Sales />} />
           <Route path="/sales:id" element={<SaleDtail />} />
