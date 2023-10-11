@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 import style from './CardShop.module.css'
 
 const CardShop = ({ id, name, date, total, units, image }) => {
 
-
+  
   return (
     <div className={style.list}>
         <ul className={`list-group ${style.card}`}>
@@ -22,7 +23,6 @@ const CardShop = ({ id, name, date, total, units, image }) => {
                 <button>Detalle</button>
                 </div>
             </div>
-            
             </div>
 
         </ul>
