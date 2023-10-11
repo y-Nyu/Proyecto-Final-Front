@@ -1,6 +1,6 @@
+import style from './SaleDetail.module.css'
 
-
-const SaleDtail = () => {
+const SaleDetail = () => {
   return (
     <div className={style.list}>
       <div className="card mb-3">
@@ -21,4 +21,4 @@ const SaleDtail = () => {
   )
 };
 
-export default SaleDtail
+export default SaleDetail;
