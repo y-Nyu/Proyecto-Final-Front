@@ -16,7 +16,7 @@ const Sales = () => {
         dispatch(getSales())
         dispatch(getUserById(id))
     }, [])
-    console.log(user);
+    
     const compras = [
         {
             date: '05/10/2023',
