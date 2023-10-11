@@ -166,17 +166,17 @@ const Register = ({ toggleComponent }) => {
         </div>
 
         <div className="container w-100 py-2">
-    <div className='row'>
-        <div className="col">
-            <button type="submit" className='btn btn-primary w-100 my-1'>Registrarme</button>
+            <div className='row'>
+                <div className="col">
+                    <button type="submit" className='btn btn-primary w-100 my-1'>Registrarme</button>
+                </div>
+            </div>
+            <div className="row my-3">
+                <div className="col d-flex justify-content-center">
+                    <p>¿Tienes una cuenta? <a onClick={toggleComponent} className='btn-outline-primary custom-button-height mx-2' style={{ cursor: "pointer" }}>Inicia sesión</a></p>
+                </div>
+            </div>
         </div>
-    </div>
-    <div className="row my-3">
-        <div className="col d-flex justify-content-center">
-            <p>¿Tienes una cuenta? <a onClick={toggleComponent} className='btn-outline-primary custom-button-height mx-2' style={{ cursor: "pointer" }}>Inicia sesión</a></p>
-        </div>
-    </div>
-</div>
 
       </form>
     </div>
