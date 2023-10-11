@@ -34,13 +34,7 @@ const NavBar = ({ userId, userImage }) => {
   };
 
   const handleCart = () => {
-    const token = sessionStorage.getItem("jwt_session");
-    if (token) {
-      navigate("/cart");
-    } else {
-      alert("Debe ingresar o registrarse");
-      navigate("/loginRegister");
-    }
+    navigate("/cart");
   };
 
   return (
@@ -133,10 +127,11 @@ const NavBar = ({ userId, userImage }) => {
               )}
               <button onClick={handleCart} className={`btn cart ${style.btn}`} type="submit">
                 <i className="bi bi-cart"></i>
-                {token && <span>{quantity}</span>}
+                <span>{quantity}</span>
               </button>
             </div>
           </div>
+          
         </div>
       </nav>
     </div>

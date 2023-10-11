@@ -47,22 +47,28 @@ const Cart = () => {
   };
 
   const checkOut = async () => {
-    const { data } = await axios.post(
-      "https://pf-back-deploy.onrender.com/create-order",
-      cart
-    );
-    const initPoint = await data.body.init_point;
-    // await cart.map(async (item) => {
-    //   let itemSale = {
-    //     iduser: 4,
-    //     idproduct: item.id,
-    //     quantity: item.quantity,
-    //   };
-    //   await axios.post("https://pf-back-deploy.onrender.com/sale", itemSale);
-    // });
-
-    window.location.href = initPoint;
-    // localStorage.clear();
+    const token = sessionStorage.getItem("jwt_session");
+    if (token) {
+      const { data } = await axios.post(
+        "https://pf-back-deploy.onrender.com/create-order",
+        cart
+      );
+      const initPoint = await data.body.init_point;
+      // await cart.map(async (item) => {
+      //   let itemSale = {
+      //     iduser: 4,
+      //     idproduct: item.id,
+      //     quantity: item.quantity,
+      //   };
+      //   await axios.post("https://pf-back-deploy.onrender.com/sale", itemSale);
+      // });
+  
+      window.location.href = initPoint;
+      // localStorage.clear();
+    } else {
+      alert("Debe ingresar o registrarse");
+      navigate("/loginRegister");
+    }
   };
 
   return cart.length !== 0 ? (
@@ -98,6 +104,7 @@ const Cart = () => {
   ) : (
     <div className={style.carritoVacio}>
       <p>Oops, tu carrito está vacío</p>
+      <img className={style.cart_empty} src="\src\views\Cart\cart-vacio.jpg" alt="carrito vacio" />
     </div>
   );
 };

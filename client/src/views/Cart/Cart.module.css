@@ -53,4 +53,7 @@
   .btn-pagar {
     margin-top: 20px; /* Agrega margen superior al botón de pagar */
   }
-  
+
+.cart_empty {
+    width: 80%;
+}

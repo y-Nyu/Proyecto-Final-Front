@@ -32,22 +32,6 @@ const App = () => {
   const token = sessionStorage.getItem("jwt_session");
   const userRole = useSelector(state => state.userRole);
 
-
-    /*
-  ME PARECE QUE EL CODIGO ACA ESTA AL REVES
-  useEffect DEBERIA CONTENER AL CONDICIONAL
-
-  if (token) {
-    const decodedToken = jwtDecode(token);
-    const userId = decodedToken.id;
-  
-    useEffect(() => {
-      dispatch(getUserById(userId));
-    }, []);
-  }
-  */
-
-
   useEffect(() => {
     if (token) {
       const decodedToken = jwtDecode(token);
@@ -98,40 +82,6 @@ const App = () => {
     }
   }, [location]);
 
-  // NO FUNCIONA
-  // const userRole = useSelector(state => state.userRole);
-  // const navigate = useNavigate();
-  // const location = useLocation();
-
-  // const handleAuth = (token) => {
-  //   if(!token && location.pathname != "/loginRegister")
-  //   {
-  //     navigate("/loginRegister");
-  //     return false;
-  //   }
-
-  //   return true;
-  // }
-
-  // // Esto es autenticación y autorización
-  // useEffect(() => {
-
-  //   const token = sessionStorage.getItem("jwt_session");
-  //   const isLogged = handleAuth(token);
-
-  //   // Chequea si el usuario está loggeado
-  //   if(isLogged)
-  //   {
-  //     // Si está loggeado e intenta acceder a una página del admin:
-  //     if(location.pathname.includes("admin") && userRole != "ADMIN")
-  //     {
-  //       // Si no es admin es rechazado
-  //       navigate("/");
-  //     }
-  //   }
-  // }, [location, userRole]); 
-  // NO FUNCIONA
-
   return (
     <div>
       <ShoppingCartProvider>
@@ -144,7 +94,7 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/loginRegister" element={token ? <Navigate to="/" /> : <LoginRegister />} />
           <Route path="/accountDetail/:id" element={<AccountDetail />} />
-          <Route path="/cart" element={token ? <Cart /> : <Navigate to="/" />}/>
+          <Route path="/cart" element={<Cart/>}/>
           <Route path="/star" element={<Stars />} />
           <Route path="/sales" element={<Sales />} />
           <Route path="/sales:id" element={<SaleDtail />} />
