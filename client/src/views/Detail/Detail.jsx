@@ -24,6 +24,8 @@ const Detail = () => {
   // Estados para mostrar los modal
   const [productToDelete, setProductToDelete] = useState(null);
   // const [confirmDelete, setConfirmDelete] = useState(false);
+  // Estados para mostrar el rating
+  const [rating, setRating] = useState('');
 
   const showSuccessMessage = () => {
     setToastMessage(
@@ -132,8 +134,29 @@ const Detail = () => {
       });
     }
   }
-  
 
+  const averageRating = async () => {       
+    if (productId.Rating.length > 1) {
+      let totalPoints = 0;
+      const index = productId.Rating.length;
+
+      productId.Rating.forEach((element) => {
+        totalPoints += element.rating;
+      })
+
+      const average = totalPoints / index;
+
+      setRating(average);
+    } else {
+      setRating("Sin puntuar");
+    };
+  };
+
+  useEffect(() => {
+    averageRating();
+  });
+
+  
   return (
     <div className="container">
       <div className="row align-items-center">
@@ -163,6 +186,8 @@ const Detail = () => {
             </h3>
 
             <div className="product-cart">
+
+              <p>Puntuacion: {rating}</p>
               <button
                 onClick={() => {
                   addToCart();
