@@ -54,41 +54,29 @@ const App = () => {
   // LO DEJA HACER LOGIN Y RETORNA EL TOKEN JWT EN LA RESPONSE.
   //
   // EN CASO CONTRARIO ARROJA UN ERROR
-  console.log("location " + location);
+  console.log("https://pf-back-deploy.onrender.com/login-google " + location);
   useEffect(() => {
-    if (location.pathname === "/") {
-      
-      const index = window.location.href.indexOf("?");
-      if(index >= 0)
-      {
-        const queries = window.location.href.slice(index);
+    if (location.pathname == "/") {
+      const queries = location.search;
+      const params = new URLSearchParams(queries);
+      let codeParam = params.entries().next();
+      while (!codeParam.done) {
+        if (codeParam.value[0] == "code") {
+          codeParam = codeParam.value[1];
+          codeParam = decodeURI(codeParam);
 
-        const params = new URLSearchParams(queries);
-        let codeParam = params.entries().next();
-        
-        console.log("Queries: " + queries);
-        while (!codeParam.done) {
-          
-          if (codeParam.value[0] === "code") {
-            
-            codeParam = codeParam.value[1];
-            codeParam = decodeURI(codeParam);
-            axios.post("https://pf-back-deploy.onrender.com/login-google", { google_code: codeParam })
-              .then(resp => resp.data)
-              .then(({id,name, email, rol, celular, token}) => {
-            
-                sessionStorage.setItem("jwt_session", token);
-                dispatch(createUserRole(rol));
-                
-                dispatch(setUser({id, email, name, rol, celular}));
-                window.location = "/"
-              })
-              .catch(error => {
-                alert("ESTO ES UNA ALERTA DE ERROR: " + error);
-              });
+          axios
+            .post("https://pf-back-deploy.onrender.com/login-google", {
+              google_code: codeParam,
+            })
+            .then((resp) => resp.data)
+            .then(({ id, token }) => {
+              sessionStorage.setItem("jwt_session", token);
+              dispatch(getUserById(id));
+            })
+            .catch((error) => alert(error.message));
 
-            break;
-          }
+          break;
         }
       }
     }
