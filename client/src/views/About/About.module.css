@@ -1,5 +1,9 @@
-.container.about {
-    background-image: url(../../assets/logo/Logo.png);/* No me deja ver la imagen de fondo */
+.containerAbout {
+  background-image: url(../../assets/logo/Logo.png);
+  background-repeat: no-repeat;
+  background-position: center center; 
+  background-size:contain; 
+  position: relative;
 }
 
 .imageCheck{
@@ -27,16 +31,22 @@
   .proyecto-contenedor {
     padding-top: 60px;
     margin-bottom: 40px;
+    text-align: center;
   }
   
   .overlay {
-    transition: all 0.2s ease;
+    /* transition: all 1s ease; */
     opacity: 0;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
+    top: 44% !important;
+    left: 44%  !important;
+    transform: translate(-50%, -40%);
+    text-align: center !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center !important; /* Centrar horizontalmente */
+    justify-content: center !important; ; /* Centrar verticalmente */
+    text-align: center !important; /* Centrar el texto */
   }
 
   .overlay .iconos-contenedor {
@@ -60,30 +70,29 @@
     margin: 0;
   }
   
-  .iconos.contenedor {
+  .iconosContenedor {
     display: flex;
-    flex-direction: column; 
-    align-items: center;
+    justify-content: center; 
+    align-items: center; 
   }
   
-  .iconos-contenedor a {
-    margin: 5px; 
+  .iconosContenedor a {
+    margin: 35px;
+    font-size: 24px; /* Tamaño de fuente ajustable */
   }
-  
+   
   .proyecto {
     position: relative;
   }
   
   .proyecto:hover img {
-    opacity: 0.2;
+    opacity: 0.3;
   }
   
   .proyecto:hover .overlay {
     opacity: 1;
     cursor: pointer;
   }
-  
-  /* Adaptable responsivo */
   
   @media screen and (max-width: 400px) {
     .overlay p {
@@ -94,4 +103,73 @@
       font-size: 40px;
     }
   }
-  
+
+  @media screen and (max-width: 768px) {
+    .smallImage {
+      max-width: 50%; /* Ajusta el ancho de las imágenes según tu preferencia */
+      height: auto; /* Mantén la proporción de la imagen */
+      margin: 0 auto; /* Centra horizontalmente la imagen */
+    }
+
+    .overlay {
+      /* transition: all 1s ease; */
+      opacity: 0;
+      position: absolute;
+      top: 45% !important;
+      left: 50%  !important;
+      transform: translate(-50%, -40%);
+      text-align: center !important;
+      display: flex;
+      flex-direction: column;
+      align-items: center !important; 
+      justify-content: center !important; ; 
+      text-align: center !important; 
+    }
+    .containerAbout {
+      background-image: url();
+      background-repeat: no-repeat;
+      background-position: center center; 
+      background-size:contain; 
+    }
+    .centeredParagraph {
+      text-align: center;
+      margin: 0;
+    }
+    
+    .iconosContenedor {
+      display: flex;
+      justify-content: center; /* Centrar horizontalmente */
+      align-items: center; /* Centrar verticalmente */
+    }
+    
+  }
+
+  @media screen and (max-width: 992px) {
+    .image {
+      max-width: 400px; 
+      height: 400px;
+      padding: 10px;
+      border-radius: 20px;
+      display: block;
+      justify-content: center; /* Centrar horizontalmente */
+      align-items: center; /* Centrar verticalmente */
+      transition: all 0.2s ease;
+    }
+    .containerAbout {
+      background-image: url();
+      background-repeat: no-repeat;
+      background-position: center center; 
+      background-size:contain; 
+    }
+    .centeredParagraph {
+      text-align: center;
+      margin: 0;
+    }
+    
+    .iconosContenedor {
+      display: flex;
+      justify-content: center; /* Centrar horizontalmente */
+      align-items: center; /* Centrar verticalmente */
+    }
+    
+  }  

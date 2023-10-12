@@ -1,0 +1,79 @@
+.centered-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .contenedor {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilos para cada artículo en el carrito */
+  .item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .producto_imagen {
+    max-width: 100px;
+    margin-right: 20px;
+  }
+  
+  .producto_detalle {
+    flex-grow: 1;
+  }
+  
+  .producto_nombre {
+    font-size: 18px;
+    margin: 0;
+  }
+  
+  .producto_precio {
+    font-size: 16px;
+    margin: 5px 0;
+    color: #0070ba;
+    font-weight: bold;
+  }
+  
+ /* Estilos para el mensaje de carrito vacío */
+.carritoVacio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70vh; /* Establece la altura al 70% del viewport */
+    flex-direction: column; /* Alinear verticalmente el mensaje */
+    background-color: #f0f0f0; /* Cambia el fondo para que se destaque */
+  }
+  
+  
+  /* Estilos para el botón de "Pagar" */
+  .btn-pagar {
+    margin-top: 20px; /* Agrega margen superior al botón de pagar */
+  }
+  
+  .cart_empty {
+    width: 80%;
+  }
+
+.perritosContainer {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .perritos {
+    width: 80%; 
+    max-height: 100%; 
+  }
+  
+  
