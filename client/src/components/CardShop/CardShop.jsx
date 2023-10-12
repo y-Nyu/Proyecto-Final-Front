@@ -30,6 +30,6 @@ const CardShop = ({ id, name, total, quantity, image, date }) => {
         </ul>
     </div>
   )
-}
+};
 
 export default CardShop;

@@ -4,10 +4,10 @@ import axios from "axios";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import style from "./FomProductDel.module.css";
 
-const FormProductDel = ({ productEdit }) => {
+const FormProductDel = ({ productEdit, closeModal }) => {
   const dispatch = useDispatch();
   const [isValid, setIsValid] = useState(true);
-  const activo = ["true", "false"];
+  const activo = ["Seleccione...", "Activar", "Desactivar"];
 
   // Inicializa el estado de data con el producto a editar
   const [data, setData] = useState(
@@ -25,45 +25,38 @@ const FormProductDel = ({ productEdit }) => {
   );
 
   useEffect(() => {
-    console.log(productEdit);
     if (productEdit) {
-      setData(productEdit);
+      setData((prevData) => ({
+        ...prevData,
+        ...productEdit,
+        active: "",
+      }));
     }
   }, [productEdit]);
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log("data:  ", data);
-    axios
-      .put(`https://pf-back-deploy.onrender.com/product/${data.id}`, data)
-      .then((res) => alert("Producto eliminado exitosamente!"))
-      .catch((error) => alert(error));
-
-    // Limpia el formulario después de la actualización
-    setData({
-      name: "",
-      image: "",
-      brand: "",
-      category: "",
-      description: "",
-      price: "",
-      stock: "",
-      id: "",
-      active: true,
-    });
+    if (data.active !== "") {
+      axios
+        .put(`https://pf-back-deploy.onrender.com/product/${data.id}`, data)
+        .then((res) => {
+          alert("Producto actualizado exitosamente!");
+          closeModal();
+        })
+        .catch((error) => alert(error));
+    } else {
+      alert("Seleccione una opción");
+    }
   };
 
   const handleChange = (event) => {
     if (event.target.name === "active") {
-      if (event.target.value === "true") {
+      if (event.target.value === "Activar") {
         setData({ ...data, active: true });
       } else {
         setData({ ...data, active: false });
       }
     }
-
-    console.log(event.target);
-    console.log(data);
   };
 
   return (
@@ -75,13 +68,14 @@ const FormProductDel = ({ productEdit }) => {
             <label htmlFor="name" className="form-label">
               Nombre producto
             </label>
-            <input
+            <label
               type="text"
               name="name"
               onChange={handleChange}
               className="form-control"
-              value={data.name}
-            />
+            >
+              {data.name}
+            </label>
           </div>
 
           <div className="mb-4 pt-4">

@@ -3,7 +3,7 @@ import axios from "axios";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import style from "./FomProductEdit.module.css";
 
-const FormUserEdit = ({ userEdit }) => {
+const FormUserEdit = ({ userEdit, closeModal }) => {
   const [isValid, setIsValid] = useState(true);
 
   const [data, setData] = useState({
@@ -27,17 +27,12 @@ const FormUserEdit = ({ userEdit }) => {
     console.log(data);
     axios
       .put(`https://pf-back-deploy.onrender.com/users/${data.id}`, data)
-      .then((res) => alert("Usuario actualizado exitosamente!"))
-      .catch((error) => alert(error));
+      .then((res) => {
+        alert("Usuario actualizado exitosamente!");
+        closeModal();
+      })
 
-    // Limpia el formulario después de la actualización
-    setData({
-      name: "",
-      email: "",
-      celular: "",
-      password: "",
-      passwordConfirmation: "",
-    });
+      .catch((error) => alert(error));
   };
 
   const handleChange = (event) => {
