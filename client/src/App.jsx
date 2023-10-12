@@ -101,7 +101,7 @@ const App = () => {
         <NavBar />
         <Routes>
           <Route path="/success" element={<Success></Success>} />
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={token && <Home />} />
           <Route path="/store" element={<Store />} />
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/about" element={<About />} />
