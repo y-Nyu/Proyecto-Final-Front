@@ -4,7 +4,8 @@ import { SEARCH_USERS,
     USER_LOG_OUT, 
     SET_USER, 
     GET_USERS, 
-    GET_SALES
+    GET_SALES,
+    ROLE
 } from '../action-types';
 import axios from 'axios';
 
@@ -37,7 +38,7 @@ export const usersCreate = (user) => {
 };
 
 export const createUserRole = (rol) => {
-    return {type: "ROLE",payload: rol};
+    return {type: ROLE,payload: rol};
 };
 
 export const userLogin = (loginData) => {
