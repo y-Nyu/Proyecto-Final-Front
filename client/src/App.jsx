@@ -19,7 +19,7 @@ import "./App.css";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ShoppingCartProvider } from "./contexts/ShoppingCartContext";
-import { createUserRole, getUserById } from "./redux/Actions/Users/usersActions";
+import { createUserRole, getUserById, setUser } from "./redux/Actions/Users/usersActions";
 import DashBoard from "./views/DashBoard/DashBoard";
 import jwtDecode from "jwt-decode";
 import Stars from "./components/Stars/Stars";
