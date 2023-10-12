@@ -13,9 +13,9 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <GoogleOAuthProvider clientId="74929370675-3o1v81d9asdbfn0sdok5oq41p7orjdvj.apps.googleusercontent.com">
     <Provider store={store}>
-      <BrowserRouter>
+      <HashRouter>
         <App />
-      </BrowserRouter>
+      </HashRouter>
     </Provider>
     ,
   </GoogleOAuthProvider>
