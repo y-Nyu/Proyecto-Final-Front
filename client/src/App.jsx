@@ -56,28 +56,25 @@ const App = () => {
   // EN CASO CONTRARIO ARROJA UN ERROR
 
   useEffect(() => {
-    if (location.pathname == "/") {
+    if (location.pathname === "/") {
       const queries = location.search;
       const params = new URLSearchParams(queries);
-      let codeParam = params.entries().next();
-      while (!codeParam.done) {
-        if (codeParam.value[0] == "code") {
-          codeParam = codeParam.value[1];
-          codeParam = decodeURI(codeParam);
-
-          axios
-            .post("https://pf-back-deploy.onrender.com/login-google", {
-              google_code: codeParam,
-            })
-            .then((resp) => resp.data)
-            .then(({ id, token }) => {
-              sessionStorage.setItem("jwt_session", token);
-              dispatch(getUserById(id));
-            })
-            .catch((error) => alert(error.message));
-
-          break;
-        }
+      let codeParam = params.get("code");
+      if (codeParam) {
+        codeParam = decodeURI(codeParam);
+  
+        axios
+          .post("https://pf-back-deploy.onrender.com/login-google", {
+            google_code: codeParam,
+          })
+          .then((resp) => {
+            const { id, token } = resp.data;
+            sessionStorage.setItem("jwt_session", token);
+            dispatch(getUserById(id));
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
       }
     }
   }, [location]);
