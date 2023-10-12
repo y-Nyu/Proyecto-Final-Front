@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { validateAccountDetail } from "../../Validate";
 import { setUser } from "../../redux/Actions/Users/usersActions";
 import axios from "axios";
-import style from "./AccountDetail.module.css";
 
 const AccountDetail = () => {
   const dispatch = useDispatch();
