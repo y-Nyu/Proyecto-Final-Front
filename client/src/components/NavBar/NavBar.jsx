@@ -18,7 +18,7 @@ const NavBar = ({ userId }) => {
   const [cart, setCart] = useContext(CartContext);
   const token = sessionStorage.getItem("jwt_session");
   const userRole = useSelector((state) => state.userRole);
-  console.log("TOKEN NAV " + token);
+
   const quantity = cart.reduce((acc, curr) => {
     return acc + curr.quantity;
   }, 0);
@@ -28,7 +28,7 @@ const NavBar = ({ userId }) => {
     if (token) {
       loginState(false);
     }
-  }, [location, token]);
+  }, [location]);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [productToDelete, setProductToDelete] = useState(null);
