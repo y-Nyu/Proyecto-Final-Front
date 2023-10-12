@@ -23,10 +23,11 @@ const Detail = () => {
   const [toastClass, setToastClass] = useState("");
   // Estados para mostrar los modal
   const [productToDelete, setProductToDelete] = useState(null);
+  const [showComments, setShowComments] = useState(false);
   // const [confirmDelete, setConfirmDelete] = useState(false);
   // Estados para mostrar el rating y comentarios
   const [rating, setRating] = useState('');
-  const [comments, setComments] = useState('');
+  const [comments, setComments] = useState([]);
 
   const showSuccessMessage = () => {
     setToastMessage(
@@ -163,7 +164,7 @@ const Detail = () => {
 
       setComments(allComments);
     } else {
-      setComments('No hay comentarios');
+      setComments(['No hay comentarios']);
     };
   };
 
@@ -172,6 +173,10 @@ const Detail = () => {
     averageRating();
     productComments();
   }, [productId]);
+
+  const handleShowComments = () => {
+    setShowComments(true);
+  };
 
   
   return (
@@ -205,7 +210,19 @@ const Detail = () => {
             <div className="product-cart">
 
               <p>Puntuacion: {rating}</p>
-              <p>Comentarios: {comments}</p>
+              <button onClick={handleShowComments}>Ver comentarios</button>
+              <Modal
+              title="Comentarios"
+              open={showComments}
+              onCancel={() => {setShowComments(false)}}
+              footer={null}
+              >
+                {comments.map((element, index) =>(
+                  <div key={index}>
+                    <p>{element}</p>
+                  </div>
+                ))}
+              </Modal>
               <button
                 onClick={() => {
                   addToCart();
