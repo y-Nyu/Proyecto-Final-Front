@@ -24,8 +24,9 @@ const Detail = () => {
   // Estados para mostrar los modal
   const [productToDelete, setProductToDelete] = useState(null);
   // const [confirmDelete, setConfirmDelete] = useState(false);
-  // Estados para mostrar el rating
+  // Estados para mostrar el rating y comentarios
   const [rating, setRating] = useState('');
+  const [comments, setComments] = useState('');
 
   const showSuccessMessage = () => {
     setToastMessage(
@@ -152,8 +153,24 @@ const Detail = () => {
     };
   };
 
+  const productComments = async () => {
+    if (productId.comments.length !== 0) {
+      let allComments = [];
+
+      productId.comments.forEach((element) => {
+        allComments.push(element.text);
+      });
+
+      setComments(allComments);
+    } else {
+      setComments('No hay comentarios');
+    };
+  };
+
+
   useEffect(() => {
     averageRating();
+    productComments();
   }, [productId]);
 
   
@@ -188,6 +205,7 @@ const Detail = () => {
             <div className="product-cart">
 
               <p>Puntuacion: {rating}</p>
+              <p>Comentarios: {comments}</p>
               <button
                 onClick={() => {
                   addToCart();
