@@ -116,19 +116,19 @@ const App = () => {
           <Route path="/formUser" element={<FormUser />} />
           <Route path="/formProduct" element={<FormProduct />} />
 
-          <Route path="/admin" element={<DashBoard />} />
-          <Route path="/adminLogin" element={<LoginRegister />} />
-          <Route path="/adminStore" element={<Store />} />
-          <Route path="/adminUsers" element={<Users />} />
-          <Route path="/adminSales" element={<Sales />} />
-          {/* {userRole === "ADMIN" 
+          {userRole === "ADMIN" 
           ? (
             <>
+            <Route path="/admin" element={<DashBoard />} />
+            <Route path="/adminLogin" element={<LoginRegister />} />
+            <Route path="/adminStore" element={<Store />} />
+            <Route path="/adminUsers" element={<Users />} />
+            <Route path="/adminSales" element={<Sales />} />
             </>
           ) 
           : (
             <Route path="*" element={<Navigate to="/" />} />
-          )} */}
+          )}
         </Routes>
       <Footer />
       </ShoppingCartProvider>
