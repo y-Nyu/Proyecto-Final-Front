@@ -137,7 +137,7 @@ const reducer = (state = initialState, action) => {
     case GET_USER_BY_ID: {
       return {
         ...state,
-        userLogged: [action.payload],
+        userLogged: action.payload,
       };
     }
 

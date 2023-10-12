@@ -10,7 +10,8 @@ const AccountDetail = () => {
   const navigate = useNavigate();
   const userData = useSelector(state => state.userLogged)
   const { id, name, email, celular, address } = userData
-  console.log('userdata ' + userData);
+  console.log(userData);
+  
   const [userDetail, setUserDetail] = useState({
     name: name,
     email: email,
@@ -26,7 +27,7 @@ const AccountDetail = () => {
     newPassword: ''
   });
 
-  console.log(userDetailCopy);
+  // console.log(userDetailCopy);
 
   const [errors, setErrors] = useState({
     name: '',
