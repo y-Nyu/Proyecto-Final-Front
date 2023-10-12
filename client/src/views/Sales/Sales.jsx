@@ -29,7 +29,7 @@ const Sales = () => {
             <h1 className={style.title}>Mis compras</h1>
 
             <CardsShop compras = {sales}/>
-            <Rate/>
+            {/* <Rate/> */}
             {/* <CardsShop compras={user.sales}/> */}
         </div>
     )

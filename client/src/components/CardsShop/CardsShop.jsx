@@ -5,7 +5,7 @@ const CardsShop = ({compras}) => {
   
   return (
     <div>
-      {console.log(compras.length)}
+      {/* {console.log(compras.length)} */}
         {compras
         ? (compras.map(compra => {
             return (

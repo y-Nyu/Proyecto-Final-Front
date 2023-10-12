@@ -199,7 +199,7 @@ const Detail = () => {
                </div>
                   <Modal
       title="¿Estás seguro?"
-      visible={visible}
+      open={visible}
       onOk={handleOk}
       onCancel={handleCancel}
     >
