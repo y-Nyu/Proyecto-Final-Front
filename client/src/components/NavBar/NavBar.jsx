@@ -18,17 +18,17 @@ const NavBar = ({ userId, userImage }) => {
   const [cart, setCart] = useContext(CartContext);
   const token = sessionStorage.getItem("jwt_session");
   const userRole = useSelector((state) => state.userRole);
-
+  console.log("token " + token);
   const quantity = cart.reduce((acc, curr) => {
     return acc + curr.quantity;
   }, 0);
 
+  // const token = sessionStorage.getItem("jwt_session");
   useEffect(() => {
-    const token = sessionStorage.getItem("jwt_session");
     if (token) {
       loginState(false);
     }
-  }, [location]);
+  }, [location, token]);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [productToDelete, setProductToDelete] = useState(null);
