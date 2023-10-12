@@ -136,7 +136,7 @@ const Detail = () => {
   }
 
   const averageRating = async () => {       
-    if (productId.Rating.length > 1) {
+    if (productId.Rating.length !== 0) {
       let totalPoints = 0;
       const index = productId.Rating.length;
 
@@ -154,7 +154,7 @@ const Detail = () => {
 
   useEffect(() => {
     averageRating();
-  });
+  }, [productId]);
 
   
   return (
