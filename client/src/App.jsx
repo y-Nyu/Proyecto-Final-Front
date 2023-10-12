@@ -73,7 +73,7 @@ const App = () => {
             
             codeParam = codeParam.value[1];
             codeParam = decodeURI(codeParam);
-            axios.post("", { google_code: codeParam })
+            axios.post("https://pf-back-deploy.onrender.com/login-google", { google_code: codeParam })
               .then(resp => resp.data)
               .then(({id,name, email, rol, celular, token}) => {
             
