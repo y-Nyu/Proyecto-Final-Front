@@ -55,7 +55,7 @@ const App = () => {
   //
   // EN CASO CONTRARIO ARROJA UN ERROR
 
-  useEffect(async() => {
+  useEffect(() => {
     if (location.pathname === "/") {
       
       const index = window.location.href.indexOf("?");
@@ -74,19 +74,19 @@ const App = () => {
             codeParam = codeParam.value[1];
             codeParam = decodeURI(codeParam);
             
-            try {
-              const resp = await axios.post("https://pf-back-deploy.onrender.com/login-google", { google_code: codeParam });
-              const { id, name, email, rol, celular, token } = resp.data;
+            axios.post("https://pf-back-deploy.onrender.com/login-google", { google_code: codeParam })
+              .then(resp => resp.data)
+              .then(({id,name, email, rol, celular, token}) => {
             
-              sessionStorage.setItem("jwt_session", token);
-              dispatch(createUserRole(rol));
-              dispatch(setUser({ id, email, name, rol, celular }));
-            
-              // Redirige al usuario después de que se complete la autenticación
-              window.location("/");
-            } catch (error) {
-              alert("ESTO ES UNA ALERTA DE ERROR: " + error);
-            }
+                sessionStorage.setItem("jwt_session", token);
+                dispatch(createUserRole(rol));
+                
+                dispatch(setUser({id, email, name, rol, celular}));
+                window.location = "/"
+              })
+              .catch(error => {
+                alert("ESTO ES UNA ALERTA DE ERROR: " + error);
+              });
 
             break;
           }
