@@ -19,7 +19,7 @@ import "./App.css";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ShoppingCartProvider } from "./contexts/ShoppingCartContext";
-import { createUserRole, getUserById } from "./redux/Actions/Users/usersActions";
+import { createUserRole, getUserById, setUser } from "./redux/Actions/Users/usersActions";
 import DashBoard from "./views/DashBoard/DashBoard";
 import jwtDecode from "jwt-decode";
 import Stars from "./components/Stars/Stars";
@@ -31,7 +31,7 @@ const App = () => {
   const dispatch = useDispatch();
   const token = sessionStorage.getItem("jwt_session");
   const userRole = useSelector(state => state.userRole);
-  console.log('TOKEN APP ' + token);
+  console.log("TOKEN APP " + token);
   useEffect(() => {
     if (token) {
       const decodedToken = jwtDecode(token);
@@ -57,36 +57,33 @@ const App = () => {
 
   useEffect(() => {
     if (location.pathname === "/") {
-      
       const index = window.location.href.indexOf("?");
-      if(index >= 0)
-      {
+      if (index >= 0) {
         const queries = window.location.href.slice(index);
-
         const params = new URLSearchParams(queries);
         let codeParam = params.entries().next();
-        
+  
         console.log("Queries: " + queries);
+  
         while (!codeParam.done) {
-          
           if (codeParam.value[0] === "code") {
-            
             codeParam = codeParam.value[1];
             codeParam = decodeURI(codeParam);
-            axios.post("https://pf-back-deploy.onrender.com/login-google", { google_code: codeParam })
-              .then(resp => resp.data)
-              .then(({id,name, email, rol, celular, token}) => {
-            
+  
+            (async () => {
+              try {
+                const resp = await axios.post("https://pf-back-deploy.onrender.com/login-google", { google_code: codeParam });
+                const { id, name, email, rol, celular, token } = resp.data;
+  
                 sessionStorage.setItem("jwt_session", token);
                 dispatch(createUserRole(rol));
-                
-                dispatch(setUser({id, email, name, rol, celular}));
-              
-              })
-              .catch(error => {
+                dispatch(setUser({ id, email, name, rol, celular }));
+                window.location("/")
+              } catch (error) {
                 alert("ESTO ES UNA ALERTA DE ERROR: " + error);
-              });
-
+              }
+            })();
+  
             break;
           }
         }
@@ -104,7 +101,7 @@ const App = () => {
           <Route path="/store" element={<Store />} />
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/about" element={<About />} />
-          <Route path="/loginRegister" element={token ? <Navigate to="/" /> : <LoginRegister />} />
+          <Route path="/loginRegister" element={<LoginRegister />} />
           <Route path="/accountDetail/:id" element={!token ? <Navigate to="/" /> : <AccountDetail />} />
           <Route path="/cart" element={<Cart/>}/>
           {/* <Route path="/star" element={<Stars />} /> */}
@@ -118,11 +115,11 @@ const App = () => {
           {userRole === "ADMIN" 
           ? (
             <>
-              <Route path="/admin" element={<DashBoard />} />
-              <Route path="/adminLogin" element={<LoginRegister />} />
-              <Route path="/adminStore" element={<Store />} />
-              <Route path="/adminUsers" element={<Users />} />
-              <Route path="/adminSales" element={<Sales />} />
+            <Route path="/admin" element={<DashBoard />} />
+            <Route path="/adminLogin" element={<LoginRegister />} />
+            <Route path="/adminStore" element={<Store />} />
+            <Route path="/adminUsers" element={<Users />} />
+            <Route path="/adminSales" element={<Sales />} />
             </>
           ) 
           : (

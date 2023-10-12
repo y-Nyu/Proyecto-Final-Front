@@ -10,7 +10,7 @@ import imagelogo from "../../assets/logo/Logo.png";
 import style from "./Navbar.module.css";
 import { Modal } from 'antd';
 
-const NavBar = ({ userId, userImage }) => {
+const NavBar = ({ userId }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
