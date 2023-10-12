@@ -31,7 +31,7 @@ const App = () => {
   const dispatch = useDispatch();
   const token = sessionStorage.getItem("jwt_session");
   const userRole = useSelector(state => state.userRole);
-
+  console.log("TOKEN APP " + token);
   useEffect(() => {
     if (token) {
       const decodedToken = jwtDecode(token);
@@ -56,29 +56,39 @@ const App = () => {
   // EN CASO CONTRARIO ARROJA UN ERROR
   console.log("location " + location);
   useEffect(() => {
-    if (location.pathname == "/") {
-      const queries = location.search;
-      const params = new URLSearchParams(queries);
-      let codeParam = params.entries().next();
-      console.log("code params " + codeParam);
-      while (!codeParam.done) {
-        console.log("ENTRO");
-        if (codeParam.value[0] == "code") {
-          codeParam = codeParam.value[1];
-          codeParam = decodeURI(codeParam);
+    if (location.pathname === "/") {
+      
+      const index = window.location.href.indexOf("?");
+      if(index >= 0)
+      {
+        const queries = window.location.href.slice(index);
 
-          axios
-            .post("https://pf-back-deploy.onrender.com/login-google", {
-              google_code: codeParam,
-            })
-            .then((resp) => resp.data)
-            .then(({ id, token }) => {
-              sessionStorage.setItem("jwt_session", token);
-              dispatch(getUserById(id));
-            })
-            .catch((error) => alert(error.message));
+        const params = new URLSearchParams(queries);
+        let codeParam = params.entries().next();
+        
+        console.log("Queries: " + queries);
+        while (!codeParam.done) {
+          
+          if (codeParam.value[0] === "code") {
+            
+            codeParam = codeParam.value[1];
+            codeParam = decodeURI(codeParam);
+            axios.post("http://localhost:3001/login-google", { google_code: codeParam })
+              .then(resp => resp.data)
+              .then(({id,name, email, rol, celular, token}) => {
+            
+                sessionStorage.setItem("jwt_session", token);
+                dispatch(createUserRole(rol));
+                
+                dispatch(setUser({id, email, name, rol, celular}));
+              
+              })
+              .catch(error => {
+                alert("ESTO ES UNA ALERTA DE ERROR: " + error);
+              });
 
-          break;
+            break;
+          }
         }
       }
     }
