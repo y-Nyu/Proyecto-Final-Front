@@ -3,9 +3,9 @@ import axios from "axios";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import style from "./FomProductDel.module.css";
 
-const FormUserDel = ({ userEdit }) => {
+const FormUserDel = ({ userEdit, closeModal }) => {
   const [isValid, setIsValid] = useState(true);
-  const activo = ["true", "false"];
+  const activo = ["Seleccione...", "Activar", "Desactivar"];
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -16,7 +16,12 @@ const FormUserDel = ({ userEdit }) => {
 
   useEffect(() => {
     if (userEdit) {
-      setData(userEdit);
+      setData((prevData) => ({
+        ...prevData,
+        ...userEdit,
+        active: "",
+      }));
+      console.log("sec ", data);
     }
   }, [userEdit]);
 
@@ -24,33 +29,27 @@ const FormUserDel = ({ userEdit }) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log(data);
-    axios
-      .put(`https://pf-back-deploy.onrender.com/users/${data.id}`, data)
-      .then((res) => alert("Usuario actualizado exitosamente!"))
-      .catch((error) => alert(error));
-
-    // Limpia el formulario después de la actualización
-    setData({
-      name: "",
-      email: "",
-      celular: "",
-      password: "",
-      passwordConfirmation: "",
-    });
+    if (data.active !== "") {
+      axios
+        .put(`https://pf-back-deploy.onrender.com/users/${data.id}`, data)
+        .then((res) => {
+          alert("Usuario actualizado exitosamente!");
+          closeModal();
+        })
+        .catch((error) => alert(error));
+    } else {
+      alert("Seleccione una opción");
+    }
   };
 
   const handleChange = (event) => {
     if (event.target.name === "active") {
-      if (event.target.value === "true") {
+      if (event.target.value === "Activar") {
         setData({ ...data, active: true });
       } else {
         setData({ ...data, active: false });
       }
     }
-
-    console.log(event.target);
-    console.log(data);
   };
 
   return (

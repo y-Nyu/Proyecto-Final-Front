@@ -6,7 +6,7 @@ import axios from "axios";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import style from "./FomProductEdit.module.css";
 
-const FormProductEdit = ({ productEdit }) => {
+const FormProductEdit = ({ productEdit, closeModal }) => {
   const dispatch = useDispatch();
   const [isValid, setIsValid] = useState(true);
 
@@ -15,6 +15,13 @@ const FormProductEdit = ({ productEdit }) => {
   }, []);
 
   const categories = useSelector((state) => state.categories);
+
+  useEffect(() => {
+    if (productEdit) {
+      setData(productEdit);
+    }
+  }, [productEdit]);
+
   const [data, setData] = useState({
     name: "",
     image: "",
@@ -24,21 +31,6 @@ const FormProductEdit = ({ productEdit }) => {
     price: "",
     stock: "",
     id: "",
-  });
-
-  useEffect(() => {
-    if (productEdit) {
-      setData(productEdit);
-    }
-  }, [productEdit]);
-
-  const [errors, setErrors] = useState({
-    name: "Ingrese nombre menor a 20 caracteres",
-    brand: "Ingrese marca menor a 20 caracteres",
-    category: "Seleccione una categoria",
-    description: "Ingrese detalle de producto mayor a 10 caracteres",
-    price: "Ingrese precio",
-    stock: "Stock debe ser un número",
   });
 
   const handleImageUpload = async (e) => {
@@ -71,35 +63,28 @@ const FormProductEdit = ({ productEdit }) => {
     console.log(data);
     axios
       .put(`https://pf-back-deploy.onrender.com/product/${data.id}`, data)
-      .then((res) => alert("Producto actualizado exitosamente!"))
-      .catch((error) => alert(error));
+      .then((res) => {
+        alert("Producto actualizado exitosamente!");
+        closeModal();
+      })
 
-    // Limpia el formulario después de la actualización
-    setData({
-      name: "",
-      image: "",
-      brand: "",
-      category: "",
-      description: "",
-      price: "",
-      stock: "",
-      id: "",
-    });
+      .catch((error) => alert(error));
   };
 
   const handleChange = (event) => {
     let { name, value } = event.target;
-    console.log(data);
-    setData({
-      ...data,
-      [name]: value,
-    });
-    // const newErrors = ValidateProduct({
-    //   ...data,
-    //   [name]: value,
-    // });
-    // setErrors(newErrors);
-    // isFormValid();
+    if (
+      name === "name" ||
+      name === "image" ||
+      name === "brand" ||
+      name === "category" ||
+      name === "description"
+    ) {
+      setData({
+        ...data,
+        [name]: value,
+      });
+    }
   };
 
   // La función isFormValid verifica si no hay mensajes de error en el estado `errors`.

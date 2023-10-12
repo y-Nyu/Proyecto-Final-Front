@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../../redux/Actions/Users/usersActions";
-import FormUser from "../../components/FormUser/FormUser";
 import FormUserDel from "../../components/FomUserDel/FomUserDel";
 import FormUserEdit from "../../components/FomUserEdit/FomUserEdit";
 import { Table, Button, Modal } from "antd";
 import { EditFilled, DeleteFilled } from "@ant-design/icons";
+import RegisterInDash from "../../components/Register/RegisterInDash";
 import "./DashBoard.modules.css";
 
 const DashBoardUsers = () => {
@@ -89,10 +89,10 @@ const DashBoardUsers = () => {
   const handleModalDel = () => {
     setModalDel(!modalDel);
   };
-  
+
   return (
     <div className="dashBoard">
-      <Button type="primary" className="buttonInsert">
+      <Button type="primary" className="buttonInsert" onClick={handleModalIns}>
         Nuevo
       </Button>
       <Table columns={columns} dataSource={users}></Table>
@@ -102,6 +102,8 @@ const DashBoardUsers = () => {
         destroyOnClose={true}
         onCancel={handleModalIns}
         centered
+        okButtonProps={{ style: { display: "none" } }}
+        cancelButtonProps={{ style: { display: "none" } }}
         // footer={[
         //   <Button key={0} onClick={handleModalIns}>
         //     cancelar
@@ -111,23 +113,33 @@ const DashBoardUsers = () => {
         //   </Button>,
         // ]}
       >
-        <FormUser />
+        <RegisterInDash closeModal={() => setModalIns(false)} />
       </Modal>
       <Modal
         open={modalEdit}
         destroyOnClose={true}
         onCancel={handleModalEdit}
         centered
+        okButtonProps={{ style: { display: "none" } }}
+        cancelButtonProps={{ style: { display: "none" } }}
       >
-        <FormUserEdit userEdit={selected} />
+        <FormUserEdit
+          userEdit={selected}
+          closeModal={() => setModalEdit(false)}
+        />
       </Modal>
       <Modal
         open={modalDel}
         destroyOnClose={true}
         onCancel={handleModalDel}
         centered
+        okButtonProps={{ style: { display: "none" } }}
+        cancelButtonProps={{ style: { display: "none" } }}
       >
-        <FormUserDel userEdit={selected} />
+        <FormUserDel
+          userEdit={selected}
+          closeModal={() => setModalDel(false)}
+        />
       </Modal>
     </div>
   );
