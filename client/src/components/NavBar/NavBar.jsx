@@ -180,7 +180,7 @@ const NavBar = ({ userId, userImage }) => {
       </nav>
       <Modal
         title="¿Estás seguro?"
-        visible={modalVisible}
+        open={modalVisible}
         onOk={confirmLogout}
         onCancel={handleCancel}
       >

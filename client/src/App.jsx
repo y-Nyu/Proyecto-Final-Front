@@ -66,7 +66,7 @@ const App = () => {
           codeParam = decodeURI(codeParam);
 
           axios
-            .post("https://pf-deploy-walterhorst.vercel.app/login-google", {
+            .post("https://pf-back-deploy.onrender.com/login-google", {
               google_code: codeParam,
             })
             .then((resp) => resp.data)
@@ -95,8 +95,8 @@ const App = () => {
           <Route path="/loginRegister" element={token ? <Navigate to="/" /> : <LoginRegister />} />
           <Route path="/accountDetail/:id" element={!token ? <Navigate to="/" /> : <AccountDetail />} />
           <Route path="/cart" element={<Cart/>}/>
-          <Route path="/star" element={<Stars />} />
-          <Route path="/sales" element={<Sales />} />
+          {/* <Route path="/star" element={<Stars />} /> */}
+          <Route path="/sales" element={!token ? <Navigate to="/" /> : <Sales />} />
           <Route path="/sales/:id" element={<SaleDetail/>} />
           <Route path="/preguntas-frecuentes" element={<Faq />} />
           <Route path="/politica-de-privacidad" element={<Privacy />} />
