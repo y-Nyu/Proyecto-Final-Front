@@ -57,44 +57,40 @@ const App = () => {
 
   useEffect(() => {
     if (location.pathname === "/") {
-      
       const index = window.location.href.indexOf("?");
-      if(index >= 0)
-      {
+      if (index >= 0) {
         const queries = window.location.href.slice(index);
-
         const params = new URLSearchParams(queries);
         let codeParam = params.entries().next();
-        
+  
         console.log("Queries: " + queries);
+  
         while (!codeParam.done) {
-          
           if (codeParam.value[0] === "code") {
-            
             codeParam = codeParam.value[1];
             codeParam = decodeURI(codeParam);
-            
-            axios.post("https://pf-back-deploy.onrender.com/login-google", { google_code: codeParam })
-              .then(resp => resp.data)
-              .then(({id,name, email, rol, celular, token}) => {
-            
+  
+            (async () => {
+              try {
+                const resp = await axios.post("https://pf-back-deploy.onrender.com/login-google", { google_code: codeParam });
+                const { id, name, email, rol, celular, token } = resp.data;
+  
                 sessionStorage.setItem("jwt_session", token);
                 dispatch(createUserRole(rol));
-                
-                dispatch(setUser({id, email, name, rol, celular}));
-                window.location = "/"
-              })
-              .catch(error => {
+                dispatch(setUser({ id, email, name, rol, celular }));
+                window.location("/")
+              } catch (error) {
                 alert("ESTO ES UNA ALERTA DE ERROR: " + error);
-              });
-
+              }
+            })();
+  
             break;
           }
         }
       }
-      
     }
   }, [location]);
+  
 
   return (
     <div>
