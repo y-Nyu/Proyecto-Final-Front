@@ -81,7 +81,7 @@ const App = () => {
                 dispatch(createUserRole(rol));
                 
                 dispatch(setUser({id, email, name, rol, celular}));
-              
+                window.location = "/"
               })
               .catch(error => {
                 alert("ESTO ES UNA ALERTA DE ERROR: " + error);
