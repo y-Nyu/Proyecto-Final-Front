@@ -42,7 +42,7 @@ const App = () => {
     }
   }, [token, dispatch]);
 
-    // ESTE CODIGO DE ACÁ ES PARA EL LOGIN DE GOOGLE
+  // ESTE CODIGO DE ACÁ ES PARA EL LOGIN DE GOOGLE
   // 
   // DEBIDO A QUE EL POPUP DE GOOGLE NOS REDIRIGE ACÁ
   // CON PARAMETROS EN LA URL, LO QUE HAGO ES
@@ -52,35 +52,43 @@ const App = () => {
   // EN CASO DE QUE EL CODIGO ESTÉ, LO PARSEO Y LO ENVÍO AL BACK.
   // EL BACK LO UNICO QUE HACE ES USAR EL CODIGO PARA OBTENER EL EMAIL
   // DEL USUARIO QUE SE LOGEA.
-  // SI EL MAIL ESTÁ EN LA BASE DE DATOS (ES DECIR, SI EL USUARIO ESTA REGISTRADO)
-  // LO DEJA HACER LOGIN Y RETORNA EL TOKEN JWT EN LA RESPONSE.
-  //
-  // EN CASO CONTRARIO ARROJA UN ERROR
 
   useEffect(() => {
     if (location.pathname === "/") {
-      const queries = location.search;
+      
+      const index = window.location.href.indexOf("?");
+      if(index >= 0)
+      {
+        const queries = window.location.href.slice(index);
+
       const params = new URLSearchParams(queries);
       let codeParam = params.entries().next();
+      
       while (!codeParam.done) {
+        
         if (codeParam.value[0] === "code") {
+          
           codeParam = codeParam.value[1];
           codeParam = decodeURI(codeParam);
-          axios.post("https://pf-back-deploy.onrender.com/login-google", { google_code: codeParam })
+          axios.post("http://localhost:3001/login-google", { google_code: codeParam })
             .then(resp => resp.data)
             .then(({id,name, email, rol, celular, token}) => {
-              
+          
               sessionStorage.setItem("jwt_session", token);
               dispatch(createUserRole(rol));
               
               dispatch(setUser({id, email, name, rol, celular}));
              
             })
-            .catch(error => alert(error.response.data.message));
+            .catch(error => {
+              alert("ESTO ES UNA ALERTA DE ERROR: " + error);
+            });
 
           break;
         }
       }
+      }
+      
     }
   }, [location, dispatch]);
 

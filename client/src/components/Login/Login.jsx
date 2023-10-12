@@ -85,8 +85,8 @@ const Login = ({ toggleComponent }) => {
       //
       alert("ACA ESTAMOS");
       const { auth_url } = (
-        await axios.get(
-          "https://pf-back-deploy.onrender.com/login-google-init"
+        await axios.post(
+          "http://localhost:3001/login-google-init"
         )
       ).data;
 
@@ -94,6 +94,7 @@ const Login = ({ toggleComponent }) => {
       // USANDO LA URL PROVISTA ABRIMOS UNA VENTANA QUE PIDE ESCOGER LA CUENTA DE MAIL
       // CON LA QUE VAMOS A HACER LOGIN
       //
+      alert(auth_url);
       window.open(auth_url, "_self");
     }
     catch(error)
