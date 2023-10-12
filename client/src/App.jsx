@@ -54,13 +54,15 @@ const App = () => {
   // LO DEJA HACER LOGIN Y RETORNA EL TOKEN JWT EN LA RESPONSE.
   //
   // EN CASO CONTRARIO ARROJA UN ERROR
-
+  console.log("location " + location);
   useEffect(() => {
     if (location.pathname == "/") {
       const queries = location.search;
       const params = new URLSearchParams(queries);
       let codeParam = params.entries().next();
+      console.log("code params " + codeParam);
       while (!codeParam.done) {
+        console.log("ENTRO");
         if (codeParam.value[0] == "code") {
           codeParam = codeParam.value[1];
           codeParam = decodeURI(codeParam);
@@ -92,7 +94,7 @@ const App = () => {
           <Route path="/store" element={<Store />} />
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/about" element={<About />} />
-          <Route path="/loginRegister" element={token ? <Navigate to="/" /> : <LoginRegister />} />
+          <Route path="/loginRegister" element={<LoginRegister />} />
           <Route path="/accountDetail/:id" element={!token ? <Navigate to="/" /> : <AccountDetail />} />
           <Route path="/cart" element={<Cart/>}/>
           {/* <Route path="/star" element={<Stars />} /> */}
