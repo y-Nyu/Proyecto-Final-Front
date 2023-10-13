@@ -65,9 +65,7 @@ const AccountDetail = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (userDetailCopy.newPassword.length > 0) {
-      axios.put(`https://pf-back-deploy.onrender.com/change-password`, {
-        id, newPassword: userDetailCopy.newPassword,
-      })
+      axios.put(`https://pf-back-deploy.onrender.com/change-password`, {id, password: userDetailCopy.newPassword})
       .then((response) => {
         console.log(response.data);
         alert('Contraseña modificada exitosamente');
