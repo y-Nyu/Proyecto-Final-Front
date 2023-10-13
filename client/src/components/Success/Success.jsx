@@ -6,19 +6,26 @@ import axios from "axios";
 const Success = () => {
   const [cart, setCart] = useContext(CartContext);
   const user = useSelector((state) => state.userLogged);
-  console.log(cart);
-  console.log(user);
+  console.log("carritooo", cart);
+  console.log("userrrr", user.id);
   useEffect(() => {
     setTimeout(() => {
       axios
-        .post("https://pf-back-deploy.onrender.com/sale", {
-          iduser: user.id,
-          products: cart,
-        })
+        .post(
+          "https://pf-back-deploy.onrender.com/sale",
+          {
+            iduser: user.id,
+            products: [...cart],
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
         .then((res) => setCart([]));
     }, 5000);
   }, []);
-
   return (
     <div className="success-message">
       <h1>Tu compra para tu mascota ha sido generada con éxito</h1>
