@@ -9,14 +9,15 @@ const Cart = ({ isVisible, onClose }) => {
   const [cart, setCart] = useContext(CartContext);
   const [totalPrice, setTotalPrice] = useState(0);
   const [productToAdd, setProductToAdd] = useState(null);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [loginMessage, setLoginMessage] = useState("");
 
   useEffect(() => {
-    // Calcular el precio total de todos los productos en el carrito
     const newTotalPrice = cart.reduce(
       (total, item) => total + item.price * item.quantity,
       0
     );
-    setTotalPrice(newTotalPrice); // Actualizar el estado
+    setTotalPrice(newTotalPrice); 
   }, [cart]);
 
   useEffect(() => {
@@ -34,7 +35,6 @@ const Cart = ({ isVisible, onClose }) => {
     if (product.quantity < product.stock) {
       product.quantity += 1;
     } else {
-      // Si intentas agregar un producto sin stock, muestra el modal
       setProductToAdd(product);
     }
     setCart(updatedCart);
@@ -62,10 +62,11 @@ const Cart = ({ isVisible, onClose }) => {
         cart
       );
       const initPoint = await data.body.init_point;
-
+  
       window.location.href = initPoint;
     } else {
-      alert("Debe ingresar o registrarse");
+      setLoginMessage("Deberás ingresar o registrarte");
+      setShowLoginModal(true);
       navigate("/loginRegister");
     }
   };
@@ -192,19 +193,36 @@ const Cart = ({ isVisible, onClose }) => {
           onOk={() => setProductToAdd(null)}
           onCancel={() => setProductToAdd(null)}
           footer={[
-            <Button key="ok" type="primary" onClick={() => setProductToAdd(null)}>
+            <Button
+              key="ok"
+              type="primary"
+              onClick={() => setProductToAdd(null)}
+            >
               OK
-            </Button>
+            </Button>,
           ]}
         >
           <p>Lo siento, este producto ya no tiene más stock.</p>
         </Modal>
       )}
+      <Modal
+  title="Para continuar..."
+  visible={showLoginModal}
+  onOk={() => setShowLoginModal(false)}
+  onCancel={() => setShowLoginModal(false)}
+  footer={[
+    <Button key="ok" type="primary" onClick={() => setShowLoginModal(false)}>
+      OK
+    </Button>
+  ]}
+>
+  {loginMessage}
+</Modal>
+
+      
+
     </div>
   );
 };
 
 export default Cart;
-
-
-
