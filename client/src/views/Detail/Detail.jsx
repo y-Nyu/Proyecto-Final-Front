@@ -23,7 +23,11 @@ const Detail = () => {
   const [toastClass, setToastClass] = useState("");
   // Estados para mostrar los modal
   const [productToDelete, setProductToDelete] = useState(null);
+  const [showComments, setShowComments] = useState(false);
   // const [confirmDelete, setConfirmDelete] = useState(false);
+  // Estados para mostrar el rating y comentarios
+  const [rating, setRating] = useState('');
+  const [comments, setComments] = useState([]);
 
   const showSuccessMessage = () => {
     setToastMessage(
@@ -132,8 +136,49 @@ const Detail = () => {
       });
     }
   }
-  
 
+  const averageRating = async () => {       
+    if (productId.Rating.length !== 0) {
+      let totalPoints = 0;
+      const index = productId.Rating.length;
+
+      productId.Rating.forEach((element) => {
+        totalPoints += element.rating;
+      })
+
+      const average = totalPoints / index;
+
+      setRating(average);
+    } else {
+      setRating("Sin puntuar");
+    };
+  };
+
+  const productComments = async () => {
+    if (productId.comments.length !== 0) {
+      let allComments = [];
+
+      productId.comments.forEach((element) => {
+        allComments.push(element.text);
+      });
+
+      setComments(allComments);
+    } else {
+      setComments(['No hay comentarios']);
+    };
+  };
+
+
+  useEffect(() => {
+    averageRating();
+    productComments();
+  }, [productId]);
+
+  const handleShowComments = () => {
+    setShowComments(true);
+  };
+
+  
   return (
     <div className="container">
       <div className="row align-items-center">
@@ -163,6 +208,21 @@ const Detail = () => {
             </h3>
 
             <div className="product-cart">
+
+              <p>Puntuacion: {rating}</p>
+              <button onClick={handleShowComments}>Ver comentarios</button>
+              <Modal
+              title="Comentarios"
+              open={showComments}
+              onCancel={() => {setShowComments(false)}}
+              footer={null}
+              >
+                {comments.map((element, index) =>(
+                  <div key={index}>
+                    <p>{element}</p>
+                  </div>
+                ))}
+              </Modal>
               <button
                 onClick={() => {
                   addToCart();

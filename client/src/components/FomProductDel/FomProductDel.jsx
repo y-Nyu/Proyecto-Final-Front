@@ -3,11 +3,12 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import style from "./FomProductDel.module.css";
+import { getAllProducts } from "../../redux/Actions/Products/productsActions";
 
-const FormProductDel = ({ productEdit }) => {
+const FormProductDel = ({ productEdit, closeModal }) => {
   const dispatch = useDispatch();
   const [isValid, setIsValid] = useState(true);
-  const activo = ["true", "false"];
+  const activo = ["Seleccione...", "Activar", "Desactivar"];
 
   // Inicializa el estado de data con el producto a editar
   const [data, setData] = useState(
@@ -25,70 +26,65 @@ const FormProductDel = ({ productEdit }) => {
   );
 
   useEffect(() => {
-    console.log(productEdit);
     if (productEdit) {
-      setData(productEdit);
+      setData((prevData) => ({
+        ...prevData,
+        ...productEdit,
+        active: "",
+      }));
     }
   }, [productEdit]);
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log("data:  ", data);
-    axios
-      .put(`https://pf-back-deploy.onrender.com/product/${data.id}`, data)
-      .then((res) => alert("Producto eliminado exitosamente!"))
-      .catch((error) => alert(error));
-
-    // Limpia el formulario después de la actualización
-    setData({
-      name: "",
-      image: "",
-      brand: "",
-      category: "",
-      description: "",
-      price: "",
-      stock: "",
-      id: "",
-      active: true,
-    });
+    if (data.active !== "") {
+      axios
+        .put(`https://pf-back-deploy.onrender.com/product/${data.id}`, data)
+        .then((res) => {
+          alert("Producto actualizado exitosamente!");
+          dispatch(getAllProducts());
+          closeModal();
+        })
+        .catch((error) => alert(error));
+    } else {
+      alert("Seleccione una opción");
+    }
   };
 
   const handleChange = (event) => {
     if (event.target.name === "active") {
-      if (event.target.value === "true") {
+      if (event.target.value === "Activar") {
         setData({ ...data, active: true });
       } else {
         setData({ ...data, active: false });
       }
     }
-
-    console.log(event.target);
-    console.log(data);
   };
 
   return (
     <div className="container">
       <div className="col">
-        <h2 className="fw-bold text-center pt-4">Borrar producto</h2>
+        <h2 className="fw-bold text-center pt-4">Activar/Desactivar producto</h2>
         <form onSubmit={submitHandler}>
           <div className="mb-4 pt-4">
             <label htmlFor="name" className="form-label">
               Nombre producto
             </label>
-            <input
+            <label
               type="text"
               name="name"
               onChange={handleChange}
               className="form-control"
-              value={data.name}
-            />
+            >
+              {data.name}
+            </label>
           </div>
 
           <div className="mb-4 pt-4">
             <label htmlFor="active" className="form-label">
               Borrar
             </label>
-            <select name="active" onChange={handleChange}>
+            <select name="active" onChange={handleChange} className="form-control">
               {activo.map((sel, index) => (
                 <option key={index} value={sel}>
                   {sel}
@@ -103,7 +99,7 @@ const FormProductDel = ({ productEdit }) => {
               disabled={!isValid}
               className="btn btn-outline-primary w-100 my-1"
             >
-              Borrar producto
+              Desactivar Producto
             </button>
           </div>
         </form>

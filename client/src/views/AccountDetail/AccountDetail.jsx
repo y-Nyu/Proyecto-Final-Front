@@ -60,16 +60,19 @@ const AccountDetail = () => {
     }));
   };
 
-
   const hasErrors = Object.values(errors).some((error) => error !== "");
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (userDetailCopy.newPassword.length > 0) {
-      axios.post(`https://pf-back-deploy.onrender.com/change-password`, {
-        newPassword: userDetailCopy.newPassword,
-      });
+      axios.put(`https://pf-back-deploy.onrender.com/change-password`, { id, password: userDetailCopy.newPassword })
+      .then((response) => {
+        console.log(response.data);
+        alert('Contraseña modificada exitosamente');
+      })
+      .catch((error) => {
+        alert(error.response.data.error)
+      })
     } else {
       // Envía al backend solo las propiedades modificadas
       const modifiedData = Object.keys(userDetailCopy).reduce((element, key) => {
@@ -89,7 +92,7 @@ const AccountDetail = () => {
           setIsEditing(false);
         })
         .catch((error) => {
-          alert(error.response.data);
+          alert(error.response.data.error)
         });
     }
   };

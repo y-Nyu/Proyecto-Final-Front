@@ -18,7 +18,7 @@ import {
   SET_USER,
   GET_USERS,
   SET_PAGE,
-  GET_SALES,
+  GET_SALES
 } from "../Actions/action-types";
 
 const initialState = {
@@ -106,6 +106,7 @@ const reducer = (state = initialState, action) => {
           user.name.toUpperCase().includes(action.payload.toUpperCase())
         ),
       };
+
     case SEARCH_PRODUCTS:
       return {
         ...state,
@@ -113,6 +114,7 @@ const reducer = (state = initialState, action) => {
           product.name.toUpperCase().includes(action.payload.toUpperCase())
         ),
       };
+
     case ORDERED: {
       const sortedProducts = [...state.products].sort((a, b) => {
         if (action.payload) {
@@ -130,14 +132,16 @@ const reducer = (state = initialState, action) => {
     case SET_USER: {
       return {
         ...state,
-        userLogged: action.payload,
+        userLogged: action.payload
       };
     }
 
     case GET_USER_BY_ID: {
       return {
         ...state,
+        //Se relaciona de nuevo para settear la información de las sales
         userLogged: action.payload,
+
       };
     }
 

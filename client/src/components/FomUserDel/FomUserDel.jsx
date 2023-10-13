@@ -2,10 +2,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import style from "./FomProductDel.module.css";
+import { useDispatch } from "react-redux";
+import { getAllUsers } from "../../redux/Actions/Users/usersActions";
 
-const FormUserDel = ({ userEdit }) => {
+const FormUserDel = ({ userEdit, closeModal }) => {
   const [isValid, setIsValid] = useState(true);
-  const activo = ["true", "false"];
+  const activo = ["Seleccione...", "Activar", "Desactivar"];
+  const dispatch = useDispatch();
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -16,7 +19,12 @@ const FormUserDel = ({ userEdit }) => {
 
   useEffect(() => {
     if (userEdit) {
-      setData(userEdit);
+      setData((prevData) => ({
+        ...prevData,
+        ...userEdit,
+        active: "",
+      }));
+      console.log("sec ", data);
     }
   }, [userEdit]);
 
@@ -24,33 +32,28 @@ const FormUserDel = ({ userEdit }) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log(data);
-    axios
-      .put(`https://pf-back-deploy.onrender.com/users/${data.id}`, data)
-      .then((res) => alert("Usuario actualizado exitosamente!"))
-      .catch((error) => alert(error));
-
-    // Limpia el formulario después de la actualización
-    setData({
-      name: "",
-      email: "",
-      celular: "",
-      password: "",
-      passwordConfirmation: "",
-    });
+    if (data.active !== "") {
+      axios
+        .put(`https://pf-back-deploy.onrender.com/users/${data.id}`, data)
+        .then((res) => {
+          alert("Usuario actualizado exitosamente!");
+          dispatch(getAllUsers());
+          closeModal();
+        })
+        .catch((error) => alert(error));
+    } else {
+      alert("Seleccione una opción");
+    }
   };
 
   const handleChange = (event) => {
     if (event.target.name === "active") {
-      if (event.target.value === "true") {
+      if (event.target.value === "Activar") {
         setData({ ...data, active: true });
       } else {
         setData({ ...data, active: false });
       }
     }
-
-    console.log(event.target);
-    console.log(data);
   };
 
   return (
@@ -80,9 +83,9 @@ const FormUserDel = ({ userEdit }) => {
 
           <div className="mb-4 pt-4">
             <label htmlFor="active" className="form-label">
-              Borrar
+              Activar/Desactivar
             </label>
-            <select name="active" onChange={handleChange}>
+            <select name="active" onChange={handleChange} className="form-control">
               {activo.map((sel, index) => (
                 <option key={index} value={sel}>
                   {sel}
@@ -97,7 +100,7 @@ const FormUserDel = ({ userEdit }) => {
               disabled={!isValid}
               className="btn btn-outline-primary w-100 my-1"
             >
-              Editar Usuario
+              {!isValid ? 'Activar' : 'Desactivar'}
             </button>
             <h2></h2>
           </div>

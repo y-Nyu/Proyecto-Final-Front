@@ -1,26 +1,26 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import axios from "axios";
 
-
-const Rate = () => {
+const Rate = ({productId, userId}) => {
     const [ratingProps,setRatingProps] = useState({
         count: 5,
-        rating: 0,
+        Rating: 0,
         color: {
           filled: "#f5eb3b",
           unfilled: "#DCDCDC",
-        }
+        },
     })
 
   const [hoverRating, setHoverRating] = useState(0);
   
-  const { count, rating, color } = ratingProps
+  const { count, Rating, color } = ratingProps
 
   const getColor = (index) => {
     if (hoverRating >= index) {
       return color.filled;
-    } else if (!hoverRating && rating >= index) {
+    } else if (!hoverRating && Rating >= index) {
       return color.filled;
     }
     return color.unfilled;
@@ -33,7 +33,14 @@ const Rate = () => {
         key={i}
         className="bi bi-star cursor-pointer"
         onClick={() => {
-          setRatingProps({ ...ratingProps, rating: i });
+          setRatingProps({ ...ratingProps, Rating: i });
+          axios.post(`https://pf-back-deploy.onrender.com/rate/${productId}`, {userId,Rating})
+          .then(usrRes => {
+          console.log(usrRes);
+        })
+      .catch(error => {
+        console.log(error.response.data.error);
+      })
         }}
         style={{ color: getColor(i) }}
         onMouseEnter={() => setHoverRating(i)}
@@ -41,12 +48,9 @@ const Rate = () => {
       />
     );
   }
-
   return (
   <div>
-    <div> Rating: {rating}</div>
     <div>{starRating}</div>
-    
   </div>)
   ;
 };
