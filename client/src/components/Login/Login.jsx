@@ -65,6 +65,7 @@ const Login = ({ toggleComponent }) => {
 
         // Setteamos el token
         sessionStorage.setItem("jwt_session", token);
+        sessionStorage.setItem("userRole", rol);
         dispatch(createUserRole(rol));
         dispatch(setUser({id, email, name, rol, celular, address, sales}));
         navigate("/");
