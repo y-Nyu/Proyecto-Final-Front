@@ -4,7 +4,7 @@ import style from "./Cart.module.css";
 import axios from "axios";
 import { PoweroffOutlined } from "@ant-design/icons";
 import { Modal, Button } from "antd";
-import carritoVacio from "../../assets/img/CarritoVacio3.png";
+import carritoVacio from "../../assets/img/Carritovacio3.png";
 
 const Cart = ({ isVisible, onClose }) => {
   const [cart, setCart] = useContext(CartContext);
