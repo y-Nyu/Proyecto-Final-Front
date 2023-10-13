@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { CartContext } from "../../contexts/ShoppingCartContext";
 import axios from "axios";
 import style from "./Success.module.css";
+import corgi from "../../assets/img/corgi.png";
 
 const Success = () => {
   const [cart, setCart] = useContext(CartContext);
@@ -28,7 +29,7 @@ const Success = () => {
   <h2 className="text-info-emphasis" style={{ textAlign: "center", color: "blue" }}>Tu transacción ha tenido un resultado exitoso!!!</h2>
   <div className={style.centerImage}>
     <img
-      src="\src\components\Success\corgi.png"
+      src={corgi}
       alt="corgi feliz"
       style={{ width: "350px", height: "350px" }}
     />
