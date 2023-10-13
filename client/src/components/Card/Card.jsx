@@ -63,7 +63,7 @@ const Card = ({
             correctamente
           </span>
         );
-        setToastClass(`${successBackgroundClass} ${successTextClass}`); // Aplicar clase para mensaje en verde y texto en negro
+        setToastClass(`${successBackgroundClass} ${successTextClass}`); 
 
         return [
           ...currItems,

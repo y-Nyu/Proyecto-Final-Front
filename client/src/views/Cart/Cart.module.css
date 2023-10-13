@@ -1,65 +1,54 @@
-.centered-modal {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-  
-.contenedor {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Estilos para cada artículo en el carrito */
-.item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+ .contenedor {
+    background-color: rgb(254, 254, 254);
+    width: 300px; 
+    border-radius: 2px solid #ccc;
     padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
+    position: fixed; 
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+  } 
+  
 .producto_imagen {
-    max-width: 100px;
-    margin-right: 20px;
+  max-width: 100px;
+  height: auto;
 }
 
 .producto_detalle {
-    flex-grow: 1;
+    flex: 1; 
 }
 
 .producto_nombre {
-    font-size: 18px;
-    margin: 0;
-}
+    font-size: 30px;
+    color: #6489D8;
+} 
 
-.producto_precio {
-    font-size: 16px;
-    margin: 5px 0;
-    color: #0070ba;
-    font-weight: bold;
-}
+.overlay {
+    position: fixed ;
+    top: 0 ;
+    left: 0 ;
+    width: 100% ;
+    height: 100% ;
+    background: rgba(0, 0, 0, 0.7); 
+    z-index: 1000 ; 
+  }
 
-/* Estilos para el mensaje de carrito vacío */
-.carritoVacio {
+  .productoGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 2fr));
+    gap: 20px;
+  }
+
+  .carrito {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
-    height: 70vh; /* Establece la altura al 100% del viewport */
-    flex-direction: column; /* Alinear verticalmente el mensaje */
-    background-color: #f0f0f0; /* Cambia el fondo para que se destaque */
+    align-items: center;
+    text-align: center;
+    height: 100%;
   }
-  
-  /* Estilos para el botón de "Pagar" */
-  .btn-pagar {
-    margin-top: 20px; /* Agrega margen superior al botón de pagar */
-  }
-
-.cart_empty {
-    width: 80%;
+.btnPagar{
+  background:#00ff80 !important;
+  color: #00ff80 !important;
+  border: 5px !important;
 }
