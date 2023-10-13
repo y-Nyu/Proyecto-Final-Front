@@ -23,8 +23,8 @@
 }
 
 .buttonInsert:hover {
-  background-color: #14B76E;
-  border-color: #14B76E;
+  /* background-color: #8cb714;
+  border-color: #14B76E; */
 }
 
 .icon{
@@ -39,4 +39,13 @@
 .buttonTrash:hover{
   color: rgb(162, 7, 7) !important;
   border: rgb(162, 7, 7) !important;
+}
+
+.ant-table-thead th {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.centered-title {
+  text-align: center;
 }
