@@ -14,24 +14,13 @@ function DashBoard() {
     setViews(view);
   };
   return (
-    <div>
-      <div className="topButtons">
-        <Button
-          type="primary"
-          className="singleButton"
-          onClick={() => productSelect("DashBoardProducts")}
-        >
-          Productos
-        </Button>
-        <Button
-          type="primary"
-          className="singleButton"
-          onClick={() => userSelect("DashBoardUsers")}
-        >
-          Usuarios
-        </Button>
-      </div>
-
+    <div style={{ textAlign: "left" }}>
+      <Button type="primary" onClick={() => productSelect("DashBoardProducts")} style={{ margin: "10px" }}>
+        Productos
+      </Button>
+      <Button type="primary" onClick={() => userSelect("DashBoardUsers")} style={{ margin: "10px" }}>
+        Usuarios
+      </Button>
       {views === "DashBoardProducts" && <DashBoardProducts />}
       {views === "DashBoardUsers" && <DashBoardUsers />}
     </div>

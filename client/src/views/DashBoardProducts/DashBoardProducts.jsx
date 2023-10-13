@@ -42,53 +42,63 @@ const DashBoard = () => {
       title: "ID",
       dataIndex: "id",
       key: "id",
+      className: "centered-title",
     },
     {
       title: "Nombre",
       dataIndex: "name",
       key: "name",
+      className: "centered-title",
     },
     {
       title: "Imagen",
       dataIndex: "image",
       key: "image",
       render: (image) => <img src={image} alt={image} width={50} height={50} />,
+      className: "centered-title",
     },
     {
       title: "Marca",
       dataIndex: "brand",
       key: "brand",
+      className: "centered-title",
     },
     {
       title: "Imagen",
       dataIndex: "image",
       key: "image",
+      className: "centered-title",
     },
     {
       title: "Categoria",
       dataIndex: "category",
       key: "category",
+      className: "centered-title",
     },
     {
       title: "Detalle",
       dataIndex: "description",
       key: "description",
+      className: "centered-title",
     },
     {
       title: "Precio",
       dataIndex: "price",
       key: "price",
+      className: "centered-title",
     },
     {
       title: "Stock",
       dataIndex: "stock",
       key: "stock",
+      className: "centered-title",
     },
     {
       title: "Activo",
       dataIndex: "active",
       key: "active",
       render: (active) => (active ? "Activo" : "Inactivo"),
+      className: "centered-title",
     },
 
     {
@@ -128,16 +138,9 @@ const DashBoard = () => {
 
   return (
     <div className="dashBoard">
-      <div>
-        <Button
-          type="primary"
-          className="buttonInsert"
-          onClick={handleModalIns}
-        >
-          Nuevo
-        </Button>
-        <Searchbar onClick={searchByName} className="searchdash" />
-      </div>
+      <Button type="dashed" className="buttonInsert" onClick={handleModalIns} style={{ margin: "10px", color: "white", backgroundColor: "#14B76E" }}>
+        Nuevo
+      </Button>
       <Table columns={columns} dataSource={products}></Table>
 
       <Modal
