@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ValidateProduct } from "../../Validate/Validate";
-import { getCategories } from "../../redux/Actions/Products/productsActions";
+import {
+  getAllProducts,
+  getCategories,
+} from "../../redux/Actions/Products/productsActions";
 import axios from "axios";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import style from "./FomProductEdit.module.css";
@@ -31,6 +34,16 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
     price: "",
     stock: "",
     id: "",
+  });
+
+  const [errors, setErrors] = useState({
+    name: "",
+    image: "",
+    brand: "",
+    category: "",
+    description: "",
+    price: "",
+    stock: "",
   });
 
   const handleImageUpload = async (e) => {
@@ -65,6 +78,7 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
       .put(`https://pf-back-deploy.onrender.com/product/${data.id}`, data)
       .then((res) => {
         alert("Producto actualizado exitosamente!");
+        dispatch(getAllProducts());
         closeModal();
       })
 
@@ -142,7 +156,7 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
               Categoria
             </label>
             {/* PENDIENTE APLICAR ESTILOS DE BOOTSTRAP A LA LISTA DESPLEGABLE*/}
-            <select name="category" onChange={handleChange}>
+            <select name="category" onChange={handleChange} className="form-control">
               {categories.map((category) => (
                 <option key={category.id} value={category.name}>
                   {" "}
@@ -231,7 +245,11 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
               className="form-control"
             />
             {data.image && (
-              <img src={data.image} alt={data.name} className={style.imagePreview} />
+              <img
+                src={data.image}
+                alt={data.name}
+                className={style.imagePreview}
+              />
             )}
           </div>
 

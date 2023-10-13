@@ -61,14 +61,7 @@ const RegisterInDash = ({ closeModal }) => {
         const { id, email, name, rol, celular, token } = res.data;
         dispatch(setUser({ id, email, name, rol, celular }));
         alert("Usuario creado");
-        setData({
-          rol: "Select...",
-          name: "",
-          email: "",
-          celular: "",
-          password: "",
-          passwordConfirmation: "",
-        });
+        dispatch(getAllUsers());
         closeModal();
       })
       .catch((error) => alert(error.response.data.error));
@@ -155,7 +148,7 @@ const RegisterInDash = ({ closeModal }) => {
           </label>
           <input
             onChange={handleChange}
-            type="password"
+            type="text"
             name="password"
             value={data.password}
             placeholder="Contraseña"
@@ -174,7 +167,7 @@ const RegisterInDash = ({ closeModal }) => {
           </label>
           <input
             onChange={handleChange}
-            type="password"
+            type="text"
             name="passwordConfirmation"
             placeholder="Ingresa nuevamente tu contraseña"
             className="form-control"

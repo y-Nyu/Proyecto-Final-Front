@@ -2,10 +2,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import style from "./FomProductDel.module.css";
+import { useDispatch } from "react-redux";
+import { getAllUsers } from "../../redux/Actions/Users/usersActions";
 
 const FormUserDel = ({ userEdit, closeModal }) => {
   const [isValid, setIsValid] = useState(true);
   const activo = ["Seleccione...", "Activar", "Desactivar"];
+  const dispatch = useDispatch();
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -34,6 +37,7 @@ const FormUserDel = ({ userEdit, closeModal }) => {
         .put(`https://pf-back-deploy.onrender.com/users/${data.id}`, data)
         .then((res) => {
           alert("Usuario actualizado exitosamente!");
+          dispatch(getAllUsers());
           closeModal();
         })
         .catch((error) => alert(error));
@@ -79,9 +83,9 @@ const FormUserDel = ({ userEdit, closeModal }) => {
 
           <div className="mb-4 pt-4">
             <label htmlFor="active" className="form-label">
-              Borrar
+              Activar/Desactivar
             </label>
-            <select name="active" onChange={handleChange}>
+            <select name="active" onChange={handleChange} className="form-control">
               {activo.map((sel, index) => (
                 <option key={index} value={sel}>
                   {sel}
@@ -96,7 +100,7 @@ const FormUserDel = ({ userEdit, closeModal }) => {
               disabled={!isValid}
               className="btn btn-outline-primary w-100 my-1"
             >
-              Editar Usuario
+              {!isValid ? 'Activar' : 'Desactivar'}
             </button>
             <h2></h2>
           </div>

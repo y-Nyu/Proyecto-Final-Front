@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
 import { Table, Button, Modal } from "antd";
 import { EditFilled, DeleteFilled } from "@ant-design/icons";
-import "./DashBoard.modules.css";
+// import "./DashBoard.modules.css";
 import FormProduct from "../../components/FomProducto/FormProduct";
 import FormProductEdit from "../../components/FomProductEdit/FomProductEdit";
 import FormProductDel from "../../components/FomProductDel/FomProductDel";
-import { getAllProducts } from "../../redux/Actions/Products/productsActions";
+import {
+  getAllProducts,
+  searchProducts,
+} from "../../redux/Actions/Products/productsActions";
 import { useDispatch, useSelector } from "react-redux";
+import Searchbar from "../../components/SearchBar/SearchBar";
+import "./DashBoard.modules.css";
 
 const DashBoard = () => {
   const dispatch = useDispatch();
@@ -34,7 +39,7 @@ const DashBoard = () => {
 
   const columns = [
     {
-      title: "id",
+      title: "ID",
       dataIndex: "id",
       key: "id",
     },
@@ -116,15 +121,27 @@ const DashBoard = () => {
     setModalDel(!modalDel);
   };
 
+  const searchByName = (name) => {
+    console.log("Searching for:", name);
+    dispatch(searchProducts(name));
+  };
+
   return (
     <div className="dashBoard">
-      <Button type="primary" className="buttonInsert" onClick={handleModalIns}>
-        Nuevo
-      </Button>
+      <div>
+        <Button
+          type="primary"
+          className="buttonInsert"
+          onClick={handleModalIns}
+        >
+          Nuevo
+        </Button>
+        <Searchbar onClick={searchByName} className="searchdash" />
+      </div>
       <Table columns={columns} dataSource={products}></Table>
 
       <Modal
-        visible={modalIns}
+        open={modalIns}
         destroyOnClose={true}
         onCancel={handleModalIns}
         centered
@@ -137,10 +154,10 @@ const DashBoard = () => {
         //   </Button>,
         // ]}
       >
-        <FormProduct />
+        <FormProduct closeModal={() => setModalIns(false)} />
       </Modal>
       <Modal
-        visible={modalEdit}
+        open={modalEdit}
         destroyOnClose={true}
         onCancel={handleModalEdit}
         centered
@@ -153,7 +170,7 @@ const DashBoard = () => {
         />
       </Modal>
       <Modal
-        visible={modalDel}
+        open={modalDel}
         destroyOnClose={true}
         onCancel={handleModalDel}
         centered

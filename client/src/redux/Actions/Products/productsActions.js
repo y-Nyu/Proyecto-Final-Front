@@ -30,6 +30,7 @@ export const getAllProducts = () => {
           },
         }
       );
+      data.sort((a, b) => a.id - b.id);
       dispatch({
         type: GET_PRODUCTS,
         payload: data,

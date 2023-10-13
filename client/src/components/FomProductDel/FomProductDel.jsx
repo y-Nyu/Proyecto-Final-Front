@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import style from "./FomProductDel.module.css";
+import { getAllProducts } from "../../redux/Actions/Products/productsActions";
 
 const FormProductDel = ({ productEdit, closeModal }) => {
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ const FormProductDel = ({ productEdit, closeModal }) => {
         .put(`https://pf-back-deploy.onrender.com/product/${data.id}`, data)
         .then((res) => {
           alert("Producto actualizado exitosamente!");
+          dispatch(getAllProducts());
           closeModal();
         })
         .catch((error) => alert(error));
@@ -62,7 +64,7 @@ const FormProductDel = ({ productEdit, closeModal }) => {
   return (
     <div className="container">
       <div className="col">
-        <h2 className="fw-bold text-center pt-4">Borrar producto</h2>
+        <h2 className="fw-bold text-center pt-4">Activar/Desactivar producto</h2>
         <form onSubmit={submitHandler}>
           <div className="mb-4 pt-4">
             <label htmlFor="name" className="form-label">
@@ -82,7 +84,7 @@ const FormProductDel = ({ productEdit, closeModal }) => {
             <label htmlFor="active" className="form-label">
               Borrar
             </label>
-            <select name="active" onChange={handleChange}>
+            <select name="active" onChange={handleChange} className="form-control">
               {activo.map((sel, index) => (
                 <option key={index} value={sel}>
                   {sel}
@@ -97,7 +99,7 @@ const FormProductDel = ({ productEdit, closeModal }) => {
               disabled={!isValid}
               className="btn btn-outline-primary w-100 my-1"
             >
-              Borrar producto
+              Desactivar Producto
             </button>
           </div>
         </form>
