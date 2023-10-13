@@ -28,7 +28,7 @@ const initialState = {
   updatedProduct: [],
   userLogged: {},
   users: [],
-  userRole: "",
+  userRole: sessionStorage.getItem("userRole") || "",
   allUsers: [],
   currentPage: 1,
   searchType: "users",

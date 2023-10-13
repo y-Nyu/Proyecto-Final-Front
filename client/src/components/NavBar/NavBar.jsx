@@ -50,6 +50,7 @@ const NavBar = ({ userId }) => {
   const confirmLogout = () => {
     setModalVisible(false);
     sessionStorage.removeItem("jwt_session");
+    sessionStorage.removeItem("userRole");
     dispatch(createUserRole(""));
     dispatch(userLogOut());
     loginState(true);
@@ -116,12 +117,12 @@ const NavBar = ({ userId }) => {
                   >
                     Ingresar
                   </button>
-                  <button
+                  {/* <button
                     className={`btn btn-sm ${style.btn}`}
                     onClick={() => navigate("/loginRegister")}
                   >
                     Registrarse
-                  </button>
+                  </button> */}
                 </>
               ) : (
                 <>
