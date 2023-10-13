@@ -1,21 +1,24 @@
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../contexts/ShoppingCartContext";
 import style from "./Cart.module.css";
 import axios from "axios";
 import { PoweroffOutlined } from "@ant-design/icons";
-import { Button } from "antd";
+import { Modal, Button } from "antd";
+import carritoVacio from "../../assets/img/CarritoVacio3.png";
 
 const Cart = ({ isVisible, onClose }) => {
   const [cart, setCart] = useContext(CartContext);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [productToAdd, setProductToAdd] = useState(null);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [loginMessage, setLoginMessage] = useState("");
 
   useEffect(() => {
-    // Calcular el precio total de todos los productos en el carrito
     const newTotalPrice = cart.reduce(
       (total, item) => total + item.price * item.quantity,
       0
     );
-    setTotalPrice(newTotalPrice); // Actualizar el estado
+    setTotalPrice(newTotalPrice); 
   }, [cart]);
 
   useEffect(() => {
@@ -28,26 +31,22 @@ const Cart = ({ isVisible, onClose }) => {
 
   const incrementAmount = (productId) => {
     const updatedCart = [...cart];
-    updatedCart.forEach((product) => {
-      if (product.id === productId && product.quantity < product.stock) {
-        product.quantity += 1;
-      } else if (
-        product.id === productId &&
-        product.quantity === product.stock
-      ) {
-        window.alert("No hay suficiente stock");
-      }
-    });
+    const product = updatedCart.find((p) => p.id === productId);
+
+    if (product.quantity < product.stock) {
+      product.quantity += 1;
+    } else {
+      setProductToAdd(product);
+    }
     setCart(updatedCart);
   };
 
   const decrementAmount = (productId) => {
     const updatedCart = [...cart];
-    updatedCart.forEach((product) => {
-      if (product.id === productId && product.quantity > 1) {
-        product.quantity -= 1;
-      }
-    });
+    const product = updatedCart.find((p) => p.id === productId);
+    if (product.quantity > 1) {
+      product.quantity -= 1;
+    }
     setCart(updatedCart);
   };
 
@@ -64,10 +63,11 @@ const Cart = ({ isVisible, onClose }) => {
         cart
       );
       const initPoint = await data.body.init_point;
-
+  
       window.location.href = initPoint;
     } else {
-      alert("Debe ingresar o registrarse");
+      setLoginMessage("Deberás ingresar o registrarte");
+      setShowLoginModal(true);
       navigate("/loginRegister");
     }
   };
@@ -103,7 +103,7 @@ const Cart = ({ isVisible, onClose }) => {
               </h2>
               <img
                 className={style.cart_empty}
-                src="\src\views\Cart\Carritovacio3.png"
+                src={carritoVacio}
                 alt="carrito vacío"
                 style={{ width: "300px", height: "300px", margin: "20px" }}
               />
@@ -123,38 +123,106 @@ const Cart = ({ isVisible, onClose }) => {
                   <div className={style.producto_detalle}>
                     <h2 className={style.producto_nombre}>{item.name}</h2>
                     <p className={style.producto_precio}>
-                    <italic> $ </italic>{item.price} / unidad
+                      <italic> $ </italic>
+                      {item.price} / unidad
                     </p>
                     <p className="producto-cantidad">
-                    <italic>Cantidad:</italic> {item.quantity}
+                      <italic>Cantidad:</italic> {item.quantity}
                     </p>
-                    <Button onClick={() => decrementAmount(item.id)} style={{ margin: "10px" }}>-</Button>
+                    <Button
+                      onClick={() => decrementAmount(item.id)}
+                      style={{ margin: "10px" }}
+                    >
+                      -
+                    </Button>
                     <span>{item.quantity}</span>
-                    <Button onClick={() => incrementAmount(item.id)} style={{ margin: "10px" }}>+</Button>
-                    <Button onClick={() => removeItem(item.id)} danger style={{ margin: "20px" }}>
+                    <Button
+                      onClick={() => incrementAmount(item.id)}
+                      style={{ margin: "10px" }}
+                    >
+                      +
+                    </Button>
+                    <Button
+                      onClick={() => removeItem(item.id)}
+                      danger
+                      style={{ margin: "20px" }}
+                    >
                       Eliminar
                     </Button>
                     <p className="producto-total">
                       Subtotal: ${item.price * item.quantity}
                     </p>
-                    {index < cart.length - 1 && <hr style={{ width: "80%", margin: "10px auto", borderColor: "gray" }} />}
+                    {index < cart.length - 1 && (
+                      <hr
+                        style={{
+                          width: "80%",
+                          margin: "10px auto",
+                          borderColor: "gray",
+                        }}
+                      />
+                    )}
                   </div>
                 </div>
               ))}
             </div>
           )}
           {cart.length > 0 && (
-            <div style={{ display: "flex", alignItems: "center" }} >
-              <h4><strong>Total ${totalPrice}</strong></h4>
-              <Button style={{ margin: "20px", backgroundColor: "#33ffcc" }} type="dashed" size="large" className="btnPagar" onClick={checkOut} block>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <h4>
+                <strong>Total ${totalPrice}</strong>
+              </h4>
+              <Button
+                style={{ margin: "20px", backgroundColor: "#33ffcc" }}
+                type="dashed"
+                size="large"
+                className="btnPagar"
+                onClick={checkOut}
+                block
+              >
                 <strong>FINALIZAR COMPRA</strong>
               </Button>
             </div>
           )}
         </div>
       </div>
+
+      {/* Renderiza el modal de advertencia si se intenta agregar un producto sin stock */}
+      {productToAdd && (
+        <Modal
+          title="Sin Stock"
+          visible={true}
+          onOk={() => setProductToAdd(null)}
+          onCancel={() => setProductToAdd(null)}
+          footer={[
+            <Button
+              key="ok"
+              type="primary"
+              onClick={() => setProductToAdd(null)}
+            >
+              OK
+            </Button>,
+          ]}
+        >
+          <p>Lo siento, este producto ya no tiene más stock.</p>
+        </Modal>
+      )}
+      <Modal
+  title="Para continuar..."
+  visible={showLoginModal}
+  onOk={() => setShowLoginModal(false)}
+  onCancel={() => setShowLoginModal(false)}
+  footer={[
+    <Button key="ok" type="primary" onClick={() => setShowLoginModal(false)}>
+      OK
+    </Button>
+  ]}
+>
+  {loginMessage}
+</Modal>
+
+      
+
     </div>
-          
   );
 };
 
