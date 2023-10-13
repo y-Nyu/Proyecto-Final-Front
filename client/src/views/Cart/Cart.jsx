@@ -1,13 +1,14 @@
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../contexts/ShoppingCartContext";
 import style from "./Cart.module.css";
 import axios from "axios";
 import { PoweroffOutlined } from "@ant-design/icons";
-import { Button } from "antd";
+import { Modal, Button } from "antd";
 
 const Cart = ({ isVisible, onClose }) => {
   const [cart, setCart] = useContext(CartContext);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [productToAdd, setProductToAdd] = useState(null);
 
   useEffect(() => {
     // Calcular el precio total de todos los productos en el carrito
@@ -28,26 +29,23 @@ const Cart = ({ isVisible, onClose }) => {
 
   const incrementAmount = (productId) => {
     const updatedCart = [...cart];
-    updatedCart.forEach((product) => {
-      if (product.id === productId && product.quantity < product.stock) {
-        product.quantity += 1;
-      } else if (
-        product.id === productId &&
-        product.quantity === product.stock
-      ) {
-        window.alert("No hay suficiente stock");
-      }
-    });
+    const product = updatedCart.find((p) => p.id === productId);
+
+    if (product.quantity < product.stock) {
+      product.quantity += 1;
+    } else {
+      // Si intentas agregar un producto sin stock, muestra el modal
+      setProductToAdd(product);
+    }
     setCart(updatedCart);
   };
 
   const decrementAmount = (productId) => {
     const updatedCart = [...cart];
-    updatedCart.forEach((product) => {
-      if (product.id === productId && product.quantity > 1) {
-        product.quantity -= 1;
-      }
-    });
+    const product = updatedCart.find((p) => p.id === productId);
+    if (product.quantity > 1) {
+      product.quantity -= 1;
+    }
     setCart(updatedCart);
   };
 
@@ -123,39 +121,90 @@ const Cart = ({ isVisible, onClose }) => {
                   <div className={style.producto_detalle}>
                     <h2 className={style.producto_nombre}>{item.name}</h2>
                     <p className={style.producto_precio}>
-                    <italic> $ </italic>{item.price} / unidad
+                      <italic> $ </italic>
+                      {item.price} / unidad
                     </p>
                     <p className="producto-cantidad">
-                    <italic>Cantidad:</italic> {item.quantity}
+                      <italic>Cantidad:</italic> {item.quantity}
                     </p>
-                    <Button onClick={() => decrementAmount(item.id)} style={{ margin: "10px" }}>-</Button>
+                    <Button
+                      onClick={() => decrementAmount(item.id)}
+                      style={{ margin: "10px" }}
+                    >
+                      -
+                    </Button>
                     <span>{item.quantity}</span>
-                    <Button onClick={() => incrementAmount(item.id)} style={{ margin: "10px" }}>+</Button>
-                    <Button onClick={() => removeItem(item.id)} danger style={{ margin: "20px" }}>
+                    <Button
+                      onClick={() => incrementAmount(item.id)}
+                      style={{ margin: "10px" }}
+                    >
+                      +
+                    </Button>
+                    <Button
+                      onClick={() => removeItem(item.id)}
+                      danger
+                      style={{ margin: "20px" }}
+                    >
                       Eliminar
                     </Button>
                     <p className="producto-total">
                       Subtotal: ${item.price * item.quantity}
                     </p>
-                    {index < cart.length - 1 && <hr style={{ width: "80%", margin: "10px auto", borderColor: "gray" }} />}
+                    {index < cart.length - 1 && (
+                      <hr
+                        style={{
+                          width: "80%",
+                          margin: "10px auto",
+                          borderColor: "gray",
+                        }}
+                      />
+                    )}
                   </div>
                 </div>
               ))}
             </div>
           )}
           {cart.length > 0 && (
-            <div style={{ display: "flex", alignItems: "center" }} >
-              <h4><strong>Total ${totalPrice}</strong></h4>
-              <Button style={{ margin: "20px", backgroundColor: "#33ffcc" }} type="dashed" size="large" className="btnPagar" onClick={checkOut} block>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <h4>
+                <strong>Total ${totalPrice}</strong>
+              </h4>
+              <Button
+                style={{ margin: "20px", backgroundColor: "#33ffcc" }}
+                type="dashed"
+                size="large"
+                className="btnPagar"
+                onClick={checkOut}
+                block
+              >
                 <strong>FINALIZAR COMPRA</strong>
               </Button>
             </div>
           )}
         </div>
       </div>
+
+      {/* Renderiza el modal de advertencia si se intenta agregar un producto sin stock */}
+      {productToAdd && (
+        <Modal
+          title="Sin Stock"
+          visible={true}
+          onOk={() => setProductToAdd(null)}
+          onCancel={() => setProductToAdd(null)}
+          footer={[
+            <Button key="ok" type="primary" onClick={() => setProductToAdd(null)}>
+              OK
+            </Button>
+          ]}
+        >
+          <p>Lo siento, este producto ya no tiene más stock.</p>
+        </Modal>
+      )}
     </div>
-          
   );
 };
 
 export default Cart;
+
+
+
