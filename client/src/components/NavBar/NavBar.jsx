@@ -183,7 +183,7 @@ const NavBar = ({ userId }) => {
         />
       )}
       <Modal
-        title="¿Estás seguro?"
+        title="Cierre de sesión"
         open={modalVisible}
         onOk={confirmLogout}
         onCancel={handleCancel}
