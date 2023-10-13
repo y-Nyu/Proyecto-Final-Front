@@ -4,6 +4,7 @@ import style from "./Cart.module.css";
 import axios from "axios";
 import { PoweroffOutlined } from "@ant-design/icons";
 import { Button } from "antd";
+import carritoVacio from "../../assets/Carritovacio3.png";
 
 const Cart = ({ isVisible, onClose }) => {
   const [cart, setCart] = useContext(CartContext);
@@ -103,7 +104,7 @@ const Cart = ({ isVisible, onClose }) => {
               </h2>
               <img
                 className={style.cart_empty}
-                src="\src\views\Cart\Carritovacio3.png"
+                src={carritoVacio}
                 alt="carrito vacío"
                 style={{ width: "300px", height: "300px", margin: "20px" }}
               />
