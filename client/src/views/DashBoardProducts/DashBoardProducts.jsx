@@ -138,6 +138,7 @@ const DashBoard = () => {
 
   return (
     <div className="dashBoard">
+      <Searchbar/>
       <Button type="dashed" className="buttonInsert" onClick={handleModalIns} style={{ margin: "10px", color: "white", backgroundColor: "#14B76E" }}>
         Nuevo
       </Button>
