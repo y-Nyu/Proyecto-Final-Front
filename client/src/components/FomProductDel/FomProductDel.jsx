@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import style from "./FomProductDel.module.css";
+import { getAllProducts } from "../../redux/Actions/Products/productsActions";
 
 const FormProductDel = ({ productEdit, closeModal }) => {
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ const FormProductDel = ({ productEdit, closeModal }) => {
         .put(`https://pf-back-deploy.onrender.com/product/${data.id}`, data)
         .then((res) => {
           alert("Producto actualizado exitosamente!");
+          dispatch(getAllProducts());
           closeModal();
         })
         .catch((error) => alert(error));

@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import style from "./FomProductEdit.module.css";
+import { useDispatch } from "react-redux";
+import { getAllUsers } from "../../redux/Actions/Users/usersActions";
 
 const FormUserEdit = ({ userEdit, closeModal }) => {
   const [isValid, setIsValid] = useState(true);
@@ -21,7 +23,7 @@ const FormUserEdit = ({ userEdit, closeModal }) => {
   }, [userEdit]);
 
   const [errors, setErrors] = useState({});
-
+  const dispatch = useDispatch();
   const submitHandler = (event) => {
     event.preventDefault();
     console.log(data);
@@ -29,6 +31,7 @@ const FormUserEdit = ({ userEdit, closeModal }) => {
       .put(`https://pf-back-deploy.onrender.com/users/${data.id}`, data)
       .then((res) => {
         alert("Usuario actualizado exitosamente!");
+        dispatch(getAllUsers());
         closeModal();
       })
 

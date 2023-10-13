@@ -2,10 +2,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import style from "./FomProductDel.module.css";
+import { useDispatch } from "react-redux";
+import { getAllUsers } from "../../redux/Actions/Users/usersActions";
 
 const FormUserDel = ({ userEdit, closeModal }) => {
   const [isValid, setIsValid] = useState(true);
   const activo = ["Seleccione...", "Activar", "Desactivar"];
+  const dispatch = useDispatch();
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -34,6 +37,7 @@ const FormUserDel = ({ userEdit, closeModal }) => {
         .put(`https://pf-back-deploy.onrender.com/users/${data.id}`, data)
         .then((res) => {
           alert("Usuario actualizado exitosamente!");
+          dispatch(getAllUsers());
           closeModal();
         })
         .catch((error) => alert(error));

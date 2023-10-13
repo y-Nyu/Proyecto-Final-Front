@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ValidateProduct } from "../../Validate/Validate";
-import { getCategories } from "../../redux/Actions/Products/productsActions";
+import {
+  getAllProducts,
+  getCategories,
+} from "../../redux/Actions/Products/productsActions";
 import axios from "axios";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import style from "./FormProduct.module.css";
 
-const FormProduct = () => {
+const FormProduct = ({ closeModal }) => {
   const dispatch = useDispatch();
   const [isValid, setIsValid] = useState(false);
 
@@ -22,6 +25,8 @@ const FormProduct = () => {
     category: "",
     description: "",
     price: "",
+    stock: "",
+    active: true,
   });
 
   const [errors, setErrors] = useState({
@@ -63,7 +68,11 @@ const FormProduct = () => {
 
     axios
       .post("https://pf-back-deploy.onrender.com/product", data)
-      .then((res) => alert("Prudcto cargado exitosamente!"))
+      .then((res) => {
+        alert("Prudcto cargado exitosamente!");
+        dispatch(getAllProducts());
+        closeModal();
+      })
       .catch((error) => alert(error));
 
     setData({
@@ -77,13 +86,18 @@ const FormProduct = () => {
   };
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    let { name, value } = event.target;
+    if (name === "stock") {
+      value = Number(value);
+    }
     if (
       name === "name" ||
       name === "image" ||
       name === "brand" ||
       name === "category" ||
-      name === "description"
+      name === "description" ||
+      name === "price" ||
+      name === "stock"
     ) {
       setData({
         ...data,
@@ -226,8 +240,32 @@ const FormProduct = () => {
               className="form-control"
             />
             {data.image && (
-              <img src={data.image} alt={data.name} className="imagePreview" />
+              <img
+                style={{ height: "300px", width: "300px", margin: "15px" }}
+                src={data.image}
+                alt={data.name}
+                className={style.imagePreview}
+              />
             )}
+          </div>
+
+          <div className="mb-4 pt-4">
+            <label htmlFor="stock" className="form-label">
+              Stock
+            </label>
+            <input
+              type="text"
+              name="stock"
+              onChange={handleChange}
+              className="form-control"
+            />
+            <div className="error-container">
+              {errors.stock ? (
+                <p className={style["error-text"]}>{errors.stock}</p>
+              ) : (
+                <p className={style["error-text"]}></p>
+              )}
+            </div>
           </div>
 
           <div>
