@@ -63,12 +63,7 @@ const DashBoard = () => {
       key: "brand",
       className: "centered-title",
     },
-    {
-      title: "Imagen",
-      dataIndex: "image",
-      key: "image",
-      className: "centered-title",
-    },
+
     {
       title: "Categoria",
       dataIndex: "category",
@@ -138,8 +133,13 @@ const DashBoard = () => {
 
   return (
     <div className="dashBoard">
-      <Searchbar/>
-      <Button type="dashed" className="buttonInsert" onClick={handleModalIns} style={{ margin: "10px", color: "white", backgroundColor: "#14B76E" }}>
+      <Searchbar />
+      <Button
+        type="dashed"
+        className="buttonInsert"
+        onClick={handleModalIns}
+        style={{ margin: "10px", color: "white", backgroundColor: "#14B76E" }}
+      >
         Nuevo
       </Button>
       <Table columns={columns} dataSource={products}></Table>
