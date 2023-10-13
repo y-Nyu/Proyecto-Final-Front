@@ -9,7 +9,11 @@ import style from './Register.module.css';
 
 const Register = ({ toggleComponent }) => {
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -134,12 +138,15 @@ const Register = ({ toggleComponent }) => {
           </label>
           <input
             onChange={handleChange}
-            type="password"
+            type={showPassword ? 'text' : 'password'}
             name="password"
             value={data.password}
             placeholder="Contraseña"
             className="form-control"
           />
+          <a onClick={togglePasswordVisibility} className={style.eye}> 
+            {!showPassword ? <i class="bi bi-eye"></i> : <i class="bi bi-eye-fill"></i>} 
+          </a>
           {errors.password ? (
             <p className={style["error-text"]}>{errors.password}</p>
           ) : (
