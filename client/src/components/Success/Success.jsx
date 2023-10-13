@@ -5,22 +5,17 @@ import axios from "axios";
 
 const Success = () => {
   const [cart, setCart] = useContext(CartContext);
-  const user = useSelector((state) => state.userLogged[0]);
-
+  const user = useSelector((state) => state.userLogged);
+  console.log(cart);
+  console.log(user);
   useEffect(() => {
-    cart.map(async (item) => {
-      let itemSale = {
+    axios
+      .post("https://pf-back-deploy.onrender.com/sale", {
         iduser: user.id,
-        idproduct: item.id,
-        quantity: item.quantity,
-      };
-      await axios.post("https://pf-back-deploy.onrender.com/sale", itemSale);
-    });
-
-    setTimeout(() => {
-      setCart([])
-    }, (5000))
-  }, [user]);
+        products: cart,
+      })
+      .then((res) => setCart([]));
+  }, []);
 
   return (
     <div className="success-message">
