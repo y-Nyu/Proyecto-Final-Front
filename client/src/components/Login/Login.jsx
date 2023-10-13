@@ -14,6 +14,11 @@ import imgGoogle from "../../assets/iconos/google.png";
 const Login = ({ toggleComponent }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const [data, setData] = useState({
     email: "",
@@ -141,13 +146,16 @@ const Login = ({ toggleComponent }) => {
             </label>
             <input
               onChange={handleChange}
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               name="password"
               className="form-control"
               id="passwordInput"
               placeholder="Ingresa tu contraseña"
               value={data.password}
             />
+            <a onClick={togglePasswordVisibility} className={style.eye}> 
+              {!showPassword ? <i class="bi bi-eye"></i> : <i class="bi bi-eye-fill"></i>} 
+            </a>
             <div className="error-container">
               {errors.password ? (
                 <p className={style["error-text"]}>{errors.password}</p>
