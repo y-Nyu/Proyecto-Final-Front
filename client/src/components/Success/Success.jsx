@@ -9,12 +9,14 @@ const Success = () => {
   console.log(cart);
   console.log(user);
   useEffect(() => {
-    axios
-      .post("https://pf-back-deploy.onrender.com/sale", {
-        iduser: user.id,
-        products: cart,
-      })
-      .then((res) => setCart([]));
+    setTimeout(() => {
+      axios
+        .post("https://pf-back-deploy.onrender.com/sale", {
+          iduser: user.id,
+          products: cart,
+        })
+        .then((res) => setCart([]));
+    }, 5000);
   }, []);
 
   return (
