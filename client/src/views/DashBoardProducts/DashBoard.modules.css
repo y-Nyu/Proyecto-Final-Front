@@ -46,6 +46,10 @@
   margin-bottom: 5px;
 }
 
+.ant-table-cell {
+background-color: rgba(161, 181, 234, 0.217);
+}
+
 .centered-title {
   text-align: center;
 }
