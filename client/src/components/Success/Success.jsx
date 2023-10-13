@@ -8,17 +8,26 @@ import corgi from "../../assets/img/corgi.png";
 const Success = () => {
   const [cart, setCart] = useContext(CartContext);
   const user = useSelector((state) => state.userLogged);
-  console.log(cart);
-  console.log(user);
+  console.log("carritooo", cart);
+  console.log("userrrr", user.id);
   useEffect(() => {
-    axios
-      .post("https://pf-back-deploy.onrender.com/sale", {
-        iduser: user.id,
-        products: cart,
-      })
-      .then((res) => setCart([]));
+    setTimeout(() => {
+      axios
+        .post(
+          "https://pf-back-deploy.onrender.com/sale",
+          {
+            iduser: user.id,
+            products: [...cart],
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((res) => setCart([]));
+    }, 5000);
   }, []);
-
   return (
 <div className="success-message">
   <h2 className="text-info-emphasis" style={{ textAlign: "center", color: "blue" }}>Tu transacción ha tenido un resultado exitoso!!!</h2>
