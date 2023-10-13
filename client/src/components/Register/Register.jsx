@@ -14,6 +14,7 @@ const Register = ({ toggleComponent }) => {
     name: "",
     email: "",
     celular: "",
+    address: "",
     password: "",
     passwordConfirmation: "",
   });
@@ -22,6 +23,7 @@ const Register = ({ toggleComponent }) => {
     name: "",
     email: "",
     celular: "",
+    address: "",
     password: "",
     passwordConfirmation: "",
   });
@@ -49,10 +51,10 @@ const Register = ({ toggleComponent }) => {
 
         axios.post("https://pf-back-deploy.onrender.com/users", data)
             .then(res => {
-                const {id, email, name, rol, celular, token} = res.data
+                const {id, email, name, rol, celular, address, token} = res.data
                 sessionStorage.setItem("jwt_session", token)
                 dispatch(createUserRole(rol));
-                dispatch(setUser({id, email, name, rol, celular}));
+                dispatch(setUser({id, email, name, rol, celular, address}));
                 navigate("/")
             })
             .catch(error => alert(error.response.data.error))
@@ -109,6 +111,25 @@ const Register = ({ toggleComponent }) => {
 
         <div className="mb-4 pt-1">
           <label className="form-label">
+            <strong>Dirección</strong>
+          </label>
+          <input
+            onChange={handleChange}
+            type="text"
+            name="address"
+            value={data.address}
+            placeholder="Ingresa una dirección de máximo 30 caracteres"
+            className="form-control"
+          />
+          {errors.address ? (
+            <p className={style["error-text"]}>{errors.address}</p>
+          ) : (
+            <p className={style["error-text"]}></p>
+          )}
+        </div>
+
+        <div className="mb-4 pt-1">
+          <label className="form-label">
             <strong>Contraseña</strong>
           </label>
           <input
@@ -145,17 +166,17 @@ const Register = ({ toggleComponent }) => {
         </div>
 
         <div className="container w-100 py-2">
-    <div className='row'>
-        <div className="col">
-            <button type="submit" className='btn btn-primary w-100 my-1'>Registrarme</button>
+            <div className='row'>
+                <div className="col">
+                    <button type="submit" className='btn btn-primary w-100 my-1'>Registrarme</button>
+                </div>
+            </div>
+            <div className="row my-3">
+                <div className="col d-flex justify-content-center">
+                    <p>¿Tienes una cuenta? <a onClick={toggleComponent} className='btn-outline-primary custom-button-height mx-2' style={{ cursor: "pointer" }}>Inicia sesión</a></p>
+                </div>
+            </div>
         </div>
-    </div>
-    <div className="row my-3">
-        <div className="col d-flex justify-content-center">
-            <p>¿Tienes una cuenta? <a onClick={toggleComponent} className='btn-outline-primary custom-button-height mx-2' style={{ cursor: "pointer" }}>Inicia sesión</a></p>
-        </div>
-    </div>
-</div>
 
       </form>
     </div>

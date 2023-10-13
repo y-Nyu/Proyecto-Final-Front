@@ -1,0 +1,63 @@
+.dashBoard {
+  display: flexbox;
+  justify-content: center;
+}
+
+.containerPrimary {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: solid blue;
+  padding: 40px 40px 10px 40px; /* Arreglado los valores de padding */
+  background-color: white;
+  text-align: center; /* Para centrar el contenido dentro del contenedor */
+}
+
+.topButtons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.singleButton {
+  background-color: rgb(47, 85, 255);
+  border-color: rgb(47, 85, 255);
+}
+
+.singleButton:hover {
+  background-color: #14B76E;
+  border-color: #14B76E;
+}
+
+/* Otros estilos para los iconos y botones de eliminar si son necesarios */
+
+
+.containerSecondary {
+  text-align: center;
+}
+
+.buttonInsert {
+  background-color: rgb(47, 85, 255);
+  border-color: rgb(47, 85, 255);
+}
+
+.buttonInsert:hover {
+  background-color: #14B76E;
+  border-color: #14B76E;
+}
+
+.icon{
+  padding: 3px;
+  font-size: 15px;
+}
+
+.buttonTrash{
+  color: red;
+}
+
+.buttonTrash:hover{
+  color: rgb(162, 7, 7) !important;
+  border: rgb(162, 7, 7) !important;
+}

@@ -2,13 +2,12 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { validateLogin } from "../../Validate";
-import { createUserRole, getUserById, setUser } from "../../redux/Actions/Users/usersActions";
+import { createUserRole, setUser } from "../../redux/Actions/Users/usersActions";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import jwtDecode from 'jwt-decode'
 import style from './Login.module.css';
 import imgGoogle from "../../assets/iconos/google.png";
-
 
 // EXTRA: Recuperación de contraseña
 
@@ -62,11 +61,12 @@ const Login = ({ toggleComponent }) => {
     axios.post("https://pf-back-deploy.onrender.com/login", data)
       .then(usrRes => {
 
-        const {id, email, name, rol, celular, token} = usrRes.data;
+        const {id, email, name, rol, celular, address, token, sales} = usrRes.data;
+
         // Setteamos el token
         sessionStorage.setItem("jwt_session", token);
         dispatch(createUserRole(rol));
-        dispatch(setUser({id, email, name, rol, celular}));
+        dispatch(setUser({id, email, name, rol, celular, address, sales}));
         navigate("/");
       })
       .catch(error => {

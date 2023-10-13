@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../../contexts/ShoppingCartContext";
 import style from "./card.module.css";
+
+const successBackgroundClass = "bg-success bg-opacity-75";
+const successTextClass = "text-white";
+const errorBackgroundClass = "bg-danger bg-opacity-75";
+const errorTextClass = "text-white";
 
 const Card = ({
   id,
@@ -14,8 +19,18 @@ const Card = ({
   active,
   stock,
 }) => {
-  
   const [cart, setCart] = useContext(CartContext);
+  const [showToast, setShowToast] = useState(false);
+  const [toastPosition, setToastPosition] = useState("");
+  const [toastMessage, setToastMessage] = useState(
+    "Producto añadido correctamente"
+  );
+  const [toastClass, setToastClass] = useState("");
+
+  const toggleToast = () => {
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+  };
 
   const addToCart = (product) => {
     setCart((currItems) => {
@@ -23,7 +38,13 @@ const Card = ({
 
       // Validar el stock antes de agregar
       if (isItemFound && isItemFound.quantity + 1 > stock) {
-        alert("No hay suficiente stock disponible");
+        setToastMessage(
+          <span>
+            <i className="bi bi-exclamation-triangle-fill"></i> Producto sin
+            stock
+          </span>
+        );
+        setToastClass(`${errorBackgroundClass} ${errorTextClass}`);
         return currItems;
       }
 
@@ -36,6 +57,14 @@ const Card = ({
           }
         });
       } else {
+        setToastMessage(
+          <span>
+            <i className="bi bi-check-circle"></i> Producto añadido
+            correctamente
+          </span>
+        );
+        setToastClass(`${successBackgroundClass} ${successTextClass}`); 
+
         return [
           ...currItems,
           {
@@ -85,7 +114,6 @@ const Card = ({
   return (
     <div className={`col-lg-4 col-md-6 col-12 justify-content-center ${style.customCardContainer}`}>
       <div className={`card ${style.customCard}`}>
-        <i className={`bi bi-balloon-heart ${style.heart}`}></i>
         <img
           src={image}
           className={`card-img-top ${style.cardImage}`}
@@ -105,12 +133,27 @@ const Card = ({
               </button>
             </Link>
           </div>
-          <button className={style["btn"]} onClick={addToCart}>
-          Agregar al Carrito
-        </button>
-        <button onClick={() => removeItem(id)} className={style["btn"]}>
-          Remover del Carrito
-        </button>
+
+          <button
+            className="btn btn-outline-primary"
+            onClick={() => {
+              addToCart();
+              toggleToast();
+            }}
+          >
+            <i className="bi bi-cart3"></i> COMPRAR
+          </button>
+
+          {showToast && (
+            <div
+              className={`toast show ${toastPosition} ${toastClass} border border-primary-subtle rounded-3`}
+              role="alert"
+              aria-live="assertive"
+              aria-atomic="true"
+            >
+              <div className="toast-body">{toastMessage}</div>
+            </div>
+          )}
         </div>
       </div>
     </div>
