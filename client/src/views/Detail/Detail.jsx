@@ -270,7 +270,7 @@ const Detail = () => {
           </div>
           <Modal
         title="¿Estás seguro?"
-        visible={isModalVisible} // Usar el estado para controlar la visibilidad del modal
+        open={isModalVisible} // Usar el estado para controlar la visibilidad del modal
         onOk={handleOk}
         onCancel={() => setIsModalVisible(false)} // Ocultar el modal
       >
