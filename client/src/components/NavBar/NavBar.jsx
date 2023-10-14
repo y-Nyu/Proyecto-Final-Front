@@ -1,4 +1,4 @@
-import Cart from '../../views/Cart/Cart';
+import Cart from "../../views/Cart/Cart";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import React, { useEffect, useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +9,7 @@ import {
 import { CartContext } from "../../contexts/ShoppingCartContext";
 import imagelogo from "../../assets/logo/Logo.png";
 import style from "./Navbar.module.css";
-import { Modal } from 'antd';
+import { Modal } from "antd";
 
 const NavBar = ({ userId }) => {
   const navigate = useNavigate();
@@ -107,6 +107,13 @@ const NavBar = ({ userId }) => {
                 </a>
               </li>
             </ul>
+
+            {userRole === "ADMIN" && (
+              <Link to={"/admin"} className={`btn btn-sm ${style.btn}`}>
+                ADMIN
+              </Link>
+            )}
+
             <div className={`d-flex ${login ? "" : "always-visible"}`}>
               {login ? (
                 <>
@@ -141,13 +148,7 @@ const NavBar = ({ userId }) => {
                       </Link>
                     )}
                   </button>
-                  {userRole === "ADMIN" && (
-                    <Link to={"/admin"}>
-                      <button className={`btn btn-sm ${style.btn}`}>
-                        ADMIN
-                      </button>
-                    </Link>
-                  )}
+
                   <button
                     className={`btn btn-sm ${style.btn}`}
                     onClick={() => {
@@ -167,7 +168,8 @@ const NavBar = ({ userId }) => {
                 <span
                   className={`position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2 ${
                     quantity > 0 ? "visible" : "invisible"
-                  }`}>
+                  }`}
+                >
                   <span className="visually-hidden">mensajes no leídos</span>
                   {quantity > 0 && <span>{quantity}</span>}
                 </span>
@@ -188,24 +190,13 @@ const NavBar = ({ userId }) => {
         onOk={confirmLogout}
         onCancel={handleCancel}
       >
-        <p>
-          Se cerrará la sesión. ¿Estás seguro?
-        </p>
+        <p>Se cerrará la sesión. ¿Estás seguro?</p>
       </Modal>
     </div>
   );
 };
 
 export default NavBar;
-
-
-
-
-
-
-
-
-
 
 // import { Link, useLocation, useNavigate } from "react-router-dom";
 // import { useEffect, useState, useContext } from "react";
@@ -369,7 +360,7 @@ export default NavBar;
 //               </button>
 //             </div>
 //           </div>
-          
+
 //         </div>
 //       </nav>
 //     </div>

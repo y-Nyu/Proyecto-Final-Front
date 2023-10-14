@@ -64,11 +64,11 @@ const FormProductDel = ({ productEdit, closeModal }) => {
   return (
     <div className="container">
       <div className="col">
-        <h2 className="fw-bold text-center pt-4">Activar/Desactivar producto</h2>
+        <h2 className="fw-bold text-center pt-4">Activar / Desactivar producto</h2>
         <form onSubmit={submitHandler}>
           <div className="mb-4 pt-4">
             <label htmlFor="name" className="form-label">
-              Nombre producto
+              <strong>Nombre producto</strong>
             </label>
             <label
               type="text"
@@ -82,7 +82,7 @@ const FormProductDel = ({ productEdit, closeModal }) => {
 
           <div className="mb-4 pt-4">
             <label htmlFor="active" className="form-label">
-              Borrar
+            <strong>Seleccionar</strong>
             </label>
             <select name="active" onChange={handleChange} className="form-control">
               {activo.map((sel, index) => (
@@ -99,7 +99,7 @@ const FormProductDel = ({ productEdit, closeModal }) => {
               disabled={!isValid}
               className="btn btn-outline-primary w-100 my-1"
             >
-              Desactivar Producto
+              Guardar cambios
             </button>
           </div>
         </form>
