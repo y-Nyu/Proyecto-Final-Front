@@ -1,3 +1,11 @@
+.topBar {
+  display: flex;
+  justify-content: space-between; /* Distribuir elementos en el espacio disponible */
+  align-items: center; /* Alinear verticalmente al centro */
+}
+
+
+
 .dashBoard {
   display: flexbox;
   justify-content:space-between
@@ -22,11 +30,9 @@
   border-color: rgb(47, 85, 255);
 }
 
-
-
 .buttonInsert:hover {
-  /* background-color: #8cb714;
-  border-color: #14B76E; */
+  background-color: #14B76E;
+  border-color: #14B76E;
 }
 
 .icon{
@@ -41,13 +47,4 @@
 .buttonTrash:hover{
   color: rgb(162, 7, 7) !important;
   border: rgb(162, 7, 7) !important;
-}
-
-.ant-table-thead th {
-  text-align: center;
-  margin-bottom: 5px;
-}
-
-.centered-title {
-  text-align: center;
 }

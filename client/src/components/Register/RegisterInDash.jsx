@@ -148,7 +148,7 @@ const RegisterInDash = ({ closeModal }) => {
           </label>
           <input
             onChange={handleChange}
-            type="text"
+            type="password"
             name="password"
             value={data.password}
             placeholder="Contraseña"
@@ -167,7 +167,7 @@ const RegisterInDash = ({ closeModal }) => {
           </label>
           <input
             onChange={handleChange}
-            type="text"
+            type="password"
             name="passwordConfirmation"
             placeholder="Ingresa nuevamente tu contraseña"
             className="form-control"

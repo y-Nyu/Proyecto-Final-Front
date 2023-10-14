@@ -21,13 +21,12 @@ const FormUserEdit = ({ userEdit, closeModal }) => {
       setData(userEdit);
     }
   }, [userEdit]);
-  console.log("holi", data);
-  console.log(data);
+
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
   const submitHandler = (event) => {
     event.preventDefault();
-    
+    console.log(data);
     axios
       .put(`https://pf-back-deploy.onrender.com/users/${data.id}`, data)
       .then((res) => {
@@ -124,32 +123,13 @@ const FormUserEdit = ({ userEdit, closeModal }) => {
             </div>
           </div>
 
-          <div className="mb-4 pt-4">
-            <label htmlFor="password" className="form-label">
-              Password
-            </label>
-            <input
-              type="text"
-              name="password"
-              onChange={handleChange}
-              className="form-control"
-              value={data.password}
-            />
-            <div className="error-container">
-              {errors.password ? (
-                <p className={style["error-text"]}>{errors.password}</p>
-              ) : (
-                <p className={style["error-text"]}></p>
-              )}
-            </div>
-          </div>
           <div>
             <button
               type="submit"
               disabled={!isValid}
               className="btn btn-outline-primary w-100 my-1"
             >
-              Editar
+              Editar Usuario
             </button>
             <h2></h2>
           </div>

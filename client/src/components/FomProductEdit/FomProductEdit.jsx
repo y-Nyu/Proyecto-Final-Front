@@ -7,7 +7,7 @@ import {
 } from "../../redux/Actions/Products/productsActions";
 import axios from "axios";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import style from "./FomProductEdit.module.css";
+import style from "./FormProductEdit.module.css";
 
 const FormProductEdit = ({ productEdit, closeModal }) => {
   const dispatch = useDispatch();
@@ -98,6 +98,14 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
         ...data,
         [name]: value,
       });
+    } else if (name === "price" || name === "stock") {
+      if (!isNaN(value) && value != "") {
+        value = parseFloat(value);
+      }
+      setData({
+        ...data,
+        [name]: value,
+      });
     }
   };
 
@@ -156,7 +164,11 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
               Categoria
             </label>
             {/* PENDIENTE APLICAR ESTILOS DE BOOTSTRAP A LA LISTA DESPLEGABLE*/}
-            <select name="category" onChange={handleChange} className="form-control">
+            <select
+              name="category"
+              onChange={handleChange}
+              className="form-control"
+            >
               {categories.map((category) => (
                 <option key={category.id} value={category.name}>
                   {" "}
