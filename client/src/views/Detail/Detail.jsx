@@ -4,7 +4,7 @@ import axios from "axios";
 import style from "./Detail.module.css";
 import { CartContext } from "../../contexts/ShoppingCartContext";
 import { Modal } from 'antd';
-import { ExclamationCircleFilled } from '@ant-design/icons';
+
 
 
 
@@ -14,7 +14,8 @@ const Detail = () => {
   const [quantity, setQuantity] = useState(1);
   const [cart, setCart] = useContext(CartContext);
   const [visible, setVisible] = useState(false);
-
+  const [productIsLoaded, setProductIsLoaded] = useState(true);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   // Estados para mostrar los toasts
   const [showSuccessToast, setShowSuccessToast] = useState(false);
@@ -24,7 +25,6 @@ const Detail = () => {
   // Estados para mostrar los modal
   const [productToDelete, setProductToDelete] = useState(null);
   const [showComments, setShowComments] = useState(false);
-  // const [confirmDelete, setConfirmDelete] = useState(false);
   // Estados para mostrar el rating y comentarios
   const [rating, setRating] = useState('');
   const [comments, setComments] = useState([]);
@@ -37,7 +37,7 @@ const Detail = () => {
     );
     setToastClass("toast-success");
     setShowSuccessToast(true);
-    setTimeout(() => setShowSuccessToast(false), 3000);
+    setTimeout(() => setShowSuccessToast(false), 2000);
   };
 
   const showOutOfStockMessage = () => {
@@ -102,20 +102,24 @@ const Detail = () => {
   };
 
   const removeItem = (product) => {
-    setProductToDelete(product);
-    setVisible(true);
+    if (product) {
+      setProductToDelete(product);
+      setIsModalVisible(true); // Mostrar el modal
+    } else {
+      setProductIsLoaded(false);
+      setIsModalVisible(true); // Mostrar el modal
+    }
   };
-
+  
   const handleOk = () => {
-    setVisible(false); 
     confirmDeleteItem();
+    setIsModalVisible(false); // Ocultar el modal
+    setProductToDelete(null);
   };
-  
+ 
   const handleCancel = () => {
-    setVisible(false); 
+    setVisible(false);
   };
-  
-  
 
   const confirmDeleteItem = () => {
     if (productToDelete) {
@@ -151,7 +155,7 @@ const Detail = () => {
       setRating(average);
     } else {
       setRating("Sin puntuar");
-    };
+    }
   };
 
   const productComments = async () => {
@@ -165,7 +169,7 @@ const Detail = () => {
       setComments(allComments);
     } else {
       setComments(['No hay comentarios']);
-    };
+    }
   };
 
 
@@ -206,11 +210,12 @@ const Detail = () => {
             <h3 className={`product-price ${style.price}`}>
               <strong>Precio: $ {productId.price}</strong>
             </h3>
-
             <div className="product-cart">
-
               <p>Puntuacion: {rating}</p>
-              <button onClick={handleShowComments}>Ver comentarios</button>
+              <button
+                id="btn1" 
+                className={`btn ${style.btn}`} 
+                onClick={handleShowComments}>Ver comentarios</button>
               <Modal
               title="Comentarios"
               open={showComments}
@@ -232,42 +237,48 @@ const Detail = () => {
                 Agregar al carrito
               </button>
               <button
-                id="btn1" 
-                className={`btn ${style.btn}`}
-                onClick={() => removeItem(productId)}
+        id="btn1"
+        className={`btn ${style.btn}`}
+        onClick={() => {
+          if (productIsLoaded) {
+            removeItem(productId);
+          } else {
+            removeItem();
+          }
+        }}
+      >
+        {productIsLoaded ? "Remover del Carrito" : "Producto Eliminado"}
+      </button>
+          <div className="toast-container">
+            {showSuccessToast && (
+              <div
+                className={`toast show toast-success-detail bg-success bg-opacity-75 text-white `}
+                role="alert"
               >
-                Remover del Carrito
-              </button>
-              <div className="toast-container">
-              {showSuccessToast && (
-                <div
-                  className={`toast show toast-success-detail bg-success bg-opacity-75 text-white `}
-                  role="alert"
-                >
-                  <div className="toast-body">{toastMessage}</div>
-                </div>
-              )}
+                <div className="toast-body">{toastMessage}</div>
+              </div>
+            )}
 
-              {showOutOfStockToast && (
-                <div
-                  className={`toast show toast-error-detail bg-danger bg-opacity-75 text-white`}
-                  role="alert"
-                >
-                  <div className="toast-body">{toastMessage}</div>
-                </div>
-              )}
-               </div>
-                  <Modal
-      title="¿Estás seguro?"
-      open={visible}
-      onOk={handleOk}
-      onCancel={handleCancel}
-    >
-      <p>
-        Se eliminará el producto{" "}
-        <strong>{productToDelete ? productToDelete.name : 'Producto'}</strong> de tu carro de compras
-      </p>
-    </Modal>
+            {showOutOfStockToast && (
+              <div
+                className={`toast show toast-error-detail bg-danger bg-opacity-75 text-white`}
+                role="alert"
+              >
+                <div className="toast-body">{toastMessage}</div>
+              </div>
+            )}
+          </div>
+          <Modal
+        title="¿Estás seguro?"
+        open={isModalVisible} // Usar el estado para controlar la visibilidad del modal
+        onOk={handleOk}
+        onCancel={() => setIsModalVisible(false)} // Ocultar el modal
+      >
+        <p>
+          Se eliminará el producto{" "}
+          <strong>{productToDelete ? productToDelete.name : 'Producto'}</strong> de tu carro de compras
+        </p>
+      </Modal>
             </div>
           </div>
         </div>
@@ -277,3 +288,4 @@ const Detail = () => {
 };
 
 export default Detail;
+

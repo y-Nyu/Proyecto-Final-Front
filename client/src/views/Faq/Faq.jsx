@@ -35,7 +35,7 @@ const Faq = () => {
               <div className="accordion-body">
                 Es el sitio web donde vas a poder encontrar todo lo que
                 necesitás para tus mascotas. Registrándote en Patitas Felices
-                vas a poder adquirir todos los productos y servicios que
+                vas a poder adquirir todos los productos y servicios (próximamente) que
                 ofrecemos.
               </div>
             </div>
@@ -51,7 +51,7 @@ const Faq = () => {
                 aria-expanded="false"
                 aria-controls="collapseTwo"
               >
-                ¿Cómo recupero mi contraseña olvidada?
+                ¿Tengo algún registro de mis compras?
               </button>
             </h2>
             <div
@@ -60,10 +60,8 @@ const Faq = () => {
               data-bs-parent="#accordionExample"
             >
               <div className="accordion-body">
-                Si has olvidado tu contraseña, puedes recuperarla en el apartado
-                de LOGIN. Proporciona tu dirección de correo electrónico y tu
-                nombre de usuario. Te enviaremos la contraseña a tu e-mail para
-                que puedas seguir utilizando tu cuenta.
+                Si, para poder revisar tus compras realizadas en este sitio web, deberás acceder a nuestra sección <i className="bi bi-person-circle"></i> del menú principal y hacer clic
+                en el botón «MIS COMPRAS».
               </div>
             </div>
           </div>
@@ -88,8 +86,8 @@ const Faq = () => {
             >
               <div className="accordion-body">
                 Para editar tu cuenta de nuestra tienda online, sólo tenés que
-                visitar nuestra sección «LOGIN» del menú principal y hacer clic
-                en el botón «EDITAR CUENTA».
+                visitar nuestra sección <i className="bi bi-person-circle"></i> del menú principal y hacer clic
+                en el botón «MODIFICAR INFORMACION».
               </div>
             </div>
           </div>
