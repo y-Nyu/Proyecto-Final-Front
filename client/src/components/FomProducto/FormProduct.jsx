@@ -69,7 +69,7 @@ const FormProduct = ({ closeModal }) => {
     axios
       .post("https://pf-back-deploy.onrender.com/product", data)
       .then((res) => {
-        alert("Producto cargado exitosamente!");
+        alert("Prudcto cargado exitosamente!");
         dispatch(getAllProducts());
         closeModal();
       })
@@ -165,7 +165,7 @@ const FormProduct = ({ closeModal }) => {
               Categoria
             </label>
             {/* PENDIENTE APLICAR ESTILOS DE BOOTSTRAP A LA LISTA DESPLEGABLE*/}
-            <select name="category" onChange={handleChange} className="form-control">
+            <select name="category" onChange={handleChange}>
               {categories.map((category) => (
                 <option key={category.id} value={category.name}>
                   {" "}

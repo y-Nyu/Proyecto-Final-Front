@@ -190,7 +190,7 @@ const Cart = ({ isVisible, onClose }) => {
       {productToAdd && (
         <Modal
           title="Sin Stock"
-          visible={true}
+          open={true}
           onOk={() => setProductToAdd(null)}
           onCancel={() => setProductToAdd(null)}
           footer={[
@@ -208,7 +208,7 @@ const Cart = ({ isVisible, onClose }) => {
       )}
       <Modal
   title="Para continuar..."
-  visible={showLoginModal}
+  open={showLoginModal}
   onOk={() => setShowLoginModal(false)}
   onCancel={() => setShowLoginModal(false)}
   footer={[

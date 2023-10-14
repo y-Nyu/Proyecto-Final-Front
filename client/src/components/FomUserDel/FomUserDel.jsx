@@ -83,9 +83,9 @@ const FormUserDel = ({ userEdit, closeModal }) => {
 
           <div className="mb-4 pt-4">
             <label htmlFor="active" className="form-label">
-              Activar/Desactivar
+              Borrar
             </label>
-            <select name="active" onChange={handleChange} className="form-control">
+            <select name="active" onChange={handleChange}>
               {activo.map((sel, index) => (
                 <option key={index} value={sel}>
                   {sel}
@@ -100,7 +100,7 @@ const FormUserDel = ({ userEdit, closeModal }) => {
               disabled={!isValid}
               className="btn btn-outline-primary w-100 my-1"
             >
-              {!isValid ? 'Activar' : 'Desactivar'}
+              Editar Usuario
             </button>
             <h2></h2>
           </div>
