@@ -25,6 +25,8 @@ import jwtDecode from "jwt-decode";
 import Stars from "./components/Stars/Stars";
 import Footer from "./components/Footer/Footer";
 import SaleDetail from "./views/SaleDetail/SaleDetail";
+import { FloatButton } from "antd";
+import Icon, { WhatsAppOutlined } from '@ant-design/icons';
 
 const App = () => {
   const location = useLocation();
@@ -91,10 +93,15 @@ const App = () => {
     }
   }, [location]);
 
+  const redirigirAWhatsapp = () => {
+    window.location.href = "https://www.whatsapp.com/";
+  };
+
   return (
     <div>
       <ShoppingCartProvider>
         <NavBar />
+        <FloatButton icon={<WhatsAppOutlined />} style={{bottom: 100, right: 100}} tooltip="WhatsApp" className="miBotonPersonalizado" onClick={redirigirAWhatsapp} type="green"/>
         <Routes>
           <Route path="/success" element={<Success></Success>} />
           <Route path="/" element={<Home />} />
