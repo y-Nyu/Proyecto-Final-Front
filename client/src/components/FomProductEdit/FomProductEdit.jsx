@@ -121,7 +121,7 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
         <form onSubmit={submitHandler}>
           <div className="mb-4 pt-4">
             <label htmlFor="name" className="form-label">
-              Nombre producto
+             <strong>Nombre producto</strong>
             </label>
             <input
               type="text"
@@ -141,7 +141,7 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
 
           <div className="mb-4 pt-4">
             <label htmlFor="brand" className="form-label">
-              Marca
+             <strong>Marca</strong>
             </label>
             <input
               type="text"
@@ -161,7 +161,7 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
 
           <div className="mb-4 pt-4">
             <label htmlFor="category" className="form-label">
-              Categoria
+              <strong>Categoría</strong>
             </label>
             {/* PENDIENTE APLICAR ESTILOS DE BOOTSTRAP A LA LISTA DESPLEGABLE*/}
             <select
@@ -187,7 +187,7 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
 
           <div className="mb-4 pt-4">
             <label htmlFor="description" className="form-label">
-              Descripción
+              <strong>Descripción</strong>
             </label>
             <input
               type="text"
@@ -207,7 +207,7 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
 
           <div className="mb-4 pt-4">
             <label htmlFor="price" className="form-label">
-              Precio
+              <strong>Precio</strong>
             </label>
             <input
               type="text"
@@ -227,7 +227,7 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
 
           <div className="mb-4 pt-4">
             <label htmlFor="stock" className="form-label">
-              Stock / Inventario
+              <strong>Stock / Inventario</strong>
             </label>
             <input
               type="text"
@@ -248,7 +248,7 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
           <div className="mb-4 pt-4">
             {/* PENDIENTE APLICAR ESTILOS DE BOOTSTRAP*/}
             <label htmlFor="image" className="form-label">
-              Imagen
+              <strong>Imagen</strong>
             </label>
             <input
               type="file"
@@ -271,7 +271,7 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
               disabled={!isValid}
               className="btn btn-outline-primary w-100 my-1"
             >
-              Editar producto
+              Guardar cambios
             </button>
             <h2></h2>
           </div>

@@ -124,7 +124,7 @@ const FormProduct = ({ closeModal }) => {
         <form onSubmit={submitHandler}>
           <div className="mb-4 pt-4">
             <label htmlFor="name" className="form-label">
-              Nombre producto
+              <strong>Nombre producto</strong>
             </label>
             <input
               type="text"
@@ -143,7 +143,7 @@ const FormProduct = ({ closeModal }) => {
 
           <div className="mb-4 pt-4">
             <label htmlFor="brand" className="form-label">
-              Marca
+              <strong>Marca</strong>
             </label>
             <input
               type="text"
@@ -162,7 +162,7 @@ const FormProduct = ({ closeModal }) => {
 
           <div className="mb-4 pt-4">
             <label htmlFor="category" className="form-label">
-              Categoria
+            <strong>Categoría</strong> 
             </label>
             {/* PENDIENTE APLICAR ESTILOS DE BOOTSTRAP A LA LISTA DESPLEGABLE*/}
             <select name="category" onChange={handleChange}>
@@ -184,7 +184,7 @@ const FormProduct = ({ closeModal }) => {
 
           <div className="mb-4 pt-4">
             <label htmlFor="description" className="form-label">
-              Descripción
+            <strong>Descripción</strong> 
             </label>
             <input
               type="text"
@@ -203,7 +203,7 @@ const FormProduct = ({ closeModal }) => {
 
           <div className="mb-4 pt-4">
             <label htmlFor="price" className="form-label">
-              Precio
+              <strong>Precio</strong>
             </label>
             <input
               type="text"
@@ -231,7 +231,7 @@ const FormProduct = ({ closeModal }) => {
           <div className="mb-4 pt-4">
             {/* PENDIENTE APLICAR ESTILOS DE BOOTSTRAP*/}
             <label htmlFor="image" className="form-label">
-              Imagen
+              <strong>Imagen</strong>
             </label>
             <input
               type="file"
@@ -251,7 +251,7 @@ const FormProduct = ({ closeModal }) => {
 
           <div className="mb-4 pt-4">
             <label htmlFor="stock" className="form-label">
-              Stock
+            <strong>Stock</strong>
             </label>
             <input
               type="text"

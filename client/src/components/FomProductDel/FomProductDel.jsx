@@ -109,11 +109,11 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
   return (
     <div className="container">
       <div className="col">
-        <h2 className="fw-bold text-center pt-4">Editar producto</h2>
+        <h2 className="fw-bold text-center pt-4">Activar / Desactivar producto</h2>
         <form onSubmit={submitHandler}>
           <div className="mb-4 pt-4">
             <label htmlFor="name" className="form-label">
-              Nombre producto
+              <strong>Nombre producto</strong>
             </label>
             <input
               type="text"
@@ -152,8 +152,8 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
           </div>
 
           <div className="mb-4 pt-4">
-            <label htmlFor="category" className="form-label">
-              Categoria
+            <label htmlFor="active" className="form-label">
+            <strong>Seleccionar</strong>
             </label>
             {/* PENDIENTE APLICAR ESTILOS DE BOOTSTRAP A LA LISTA DESPLEGABLE*/}
             <select name="category" onChange={handleChange}>
@@ -259,7 +259,7 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
               disabled={!isValid}
               className="btn btn-outline-primary w-100 my-1"
             >
-              Editar producto
+              Guardar cambios
             </button>
             <h2></h2>
           </div>
@@ -268,4 +268,5 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
     </div>
   );
 };
+
 export default FormProductEdit;

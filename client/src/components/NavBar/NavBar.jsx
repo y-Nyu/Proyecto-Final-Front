@@ -1,4 +1,4 @@
-import Cart from '../../views/Cart/Cart';
+import Cart from "../../views/Cart/Cart";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import React, { useEffect, useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,15 +9,17 @@ import {
 import { CartContext } from "../../contexts/ShoppingCartContext";
 import imagelogo from "../../assets/logo/Logo.png";
 import style from "./Navbar.module.css";
-import { Modal } from 'antd';
+import { Modal } from "antd";
+import jwt_decode from "jwt-decode"
 
-const NavBar = ({ userId }) => {
+const NavBar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
   const [login, loginState] = useState(true);
   const [cart, setCart] = useContext(CartContext);
   const token = sessionStorage.getItem("jwt_session");
+  const { id } = jwt_decode(token);
   const userRole = useSelector((state) => state.userRole);
   const [isCartVisible, setIsCartVisible] = useState(false);
 
@@ -108,6 +110,13 @@ const NavBar = ({ userId }) => {
                 </a>
               </li>
             </ul>
+
+            {userRole === "ADMIN" && (
+              <Link to={"/admin"} className={`btn btn-sm ${style.btn}`}>
+                ADMIN
+              </Link>
+            )}
+
             <div className={`d-flex ${login ? "" : "always-visible"}`}>
               {login ? (
                 <>
@@ -131,24 +140,18 @@ const NavBar = ({ userId }) => {
                     type="submit"
                   >
                     {login ? (
-                      <Link to={`/accountDetail/${userId}`}>
+                      <Link to={`/accountDetail/${id}`}>
                         (<img src={userImage} />)
                       </Link>
                     ) : (
-                      <Link to={`/accountDetail/${userId}`}>
+                      <Link to={`/accountDetail/${id}`}>
                         <i
                           className={`bi bi-person-circle ${style.custom_icon}`}
                         ></i>
                       </Link>
                     )}
                   </button>
-                  {userRole === "ADMIN" && (
-                    <Link to={"/admin"}>
-                      <button className={`btn btn-sm ${style.btn}`}>
-                        ADMIN
-                      </button>
-                    </Link>
-                  )}
+
                   <button
                     className={`btn btn-sm ${style.btn}`}
                     onClick={() => {
@@ -168,7 +171,8 @@ const NavBar = ({ userId }) => {
                 <span
                   className={`position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2 ${
                     quantity > 0 ? "visible" : "invisible"
-                  }`}>
+                  }`}
+                >
                   <span className="visually-hidden">mensajes no leídos</span>
                   {quantity > 0 && <span>{quantity}</span>}
                 </span>
@@ -189,9 +193,7 @@ const NavBar = ({ userId }) => {
         onOk={confirmLogout}
         onCancel={handleCancel}
       >
-        <p>
-          Se cerrará la sesión. ¿Estás seguro?
-        </p>
+        <p>Se cerrará la sesión. ¿Estás seguro?</p>
       </Modal>
     </div>
   );
