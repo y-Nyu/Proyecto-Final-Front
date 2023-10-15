@@ -33,7 +33,6 @@ const App = () => {
   const dispatch = useDispatch();
   const token = sessionStorage.getItem("jwt_session");
   const userRole = useSelector(state => state.userRole);
-  console.log("TOKEN APP " + token);
   useEffect(() => {
     if (token) {
       const decodedToken = jwtDecode(token);
@@ -41,7 +40,7 @@ const App = () => {
       dispatch(getUserById(userId));
     }
   }, []);
-
+  
   // ESTE CODIGO DE ACÁ ES PARA EL LOGIN DE GOOGLE
   //
   // DEBIDO A QUE EL POPUP DE GOOGLE NOS REDIRIGE ACÁ

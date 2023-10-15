@@ -19,7 +19,7 @@ const NavBar = () => {
   const [login, loginState] = useState(true);
   const [cart, setCart] = useContext(CartContext);
   const token = sessionStorage.getItem("jwt_session");
-  const { id } = jwt_decode(token);
+  
   const userRole = useSelector((state) => state.userRole);
   const [isCartVisible, setIsCartVisible] = useState(false);
 
@@ -27,6 +27,12 @@ const NavBar = () => {
     return acc + curr.quantity;
   }, 0);
 
+  const idUser = () => {
+    if(token) {
+      const { id } = jwt_decode(token);
+      return id
+    }
+  };
   // const token = sessionStorage.getItem("jwt_session");
   useEffect(() => {
     if (token) {
@@ -140,11 +146,11 @@ const NavBar = () => {
                     type="submit"
                   >
                     {login ? (
-                      <Link to={`/accountDetail/${id}`}>
+                      <Link to={`/accountDetail/${idUser()}`}>
                         (<img src={userImage} />)
                       </Link>
                     ) : (
-                      <Link to={`/accountDetail/${id}`}>
+                      <Link to={`/accountDetail/${idUser()}`}>
                         <i
                           className={`bi bi-person-circle ${style.custom_icon}`}
                         ></i>
