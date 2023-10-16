@@ -68,7 +68,7 @@ const Cart = ({ isVisible, onClose }) => {
     } else {
       setLoginMessage("Deberás ingresar o registrarte");
       setShowLoginModal(true);
-      navigate("/loginRegister");
+      navigate("/inicioSesionRegistro");
     }
   };
 

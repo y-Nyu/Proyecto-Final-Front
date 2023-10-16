@@ -102,7 +102,7 @@ const NavBar = () => {
               <li className={style.nav_item}>
                 <a
                   className={style.nav_link}
-                  onClick={() => navigate("/store")}
+                  onClick={() => navigate("/tienda")}
                 >
                   Tienda
                 </a>
@@ -110,7 +110,7 @@ const NavBar = () => {
               <li className={style.nav_item}>
                 <a
                   className={style.nav_link}
-                  onClick={() => navigate("/about")}
+                  onClick={() => navigate("/sobreNosotros")}
                 >
                   Sobre nosotros
                 </a>
@@ -128,7 +128,7 @@ const NavBar = () => {
                 <>
                   <button
                     className={`btn btn-sm ${style.btn}`}
-                    onClick={() => navigate("/loginRegister")}
+                    onClick={() => navigate("/inicioSesionRegistro")}
                   >
                     Ingresar
                   </button>
@@ -146,11 +146,11 @@ const NavBar = () => {
                     type="submit"
                   >
                     {login ? (
-                      <Link to={`/accountDetail/${idUser()}`}>
+                      <Link to={`/detallesCuenta/${idUser()}`}>
                         (<img src={userImage} />)
                       </Link>
                     ) : (
-                      <Link to={`/accountDetail/${idUser()}`}>
+                      <Link to={`/detallesCuenta/${idUser()}`}>
                         <i
                           className={`bi bi-person-circle ${style.custom_icon}`}
                         ></i>
