@@ -21,7 +21,7 @@ const FormUserEdit = ({ userEdit, closeModal }) => {
       setData(userEdit);
     }
   }, [userEdit]);
-
+  console.log('user', userEdit);
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
   const submitHandler = (event) => {
@@ -117,6 +117,26 @@ const FormUserEdit = ({ userEdit, closeModal }) => {
             <div className="error-container">
               {errors.celular ? (
                 <p className={style["error-text"]}>{errors.celular}</p>
+              ) : (
+                <p className={style["error-text"]}></p>
+              )}
+            </div>
+          </div>
+
+          <div className="mb-4 pt-4">
+            <label htmlFor="password" className="form-label">
+              Contraseña
+            </label>
+            <input
+              type="text"
+              name="password"
+              onChange={handleChange}
+              className="form-control"
+              value={data.password}
+            />
+            <div className="error-container">
+              {errors.password ? (
+                <p className={style["error-text"]}>{errors.password}</p>
               ) : (
                 <p className={style["error-text"]}></p>
               )}

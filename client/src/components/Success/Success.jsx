@@ -11,23 +11,15 @@ const Success = () => {
   console.log("carritooo", cart);
   console.log("userrrr", user.id);
   useEffect(() => {
-    setTimeout(() => {
+    if (cart.length > 0 && user.id) {
       axios
-        .post(
-          "https://pf-back-deploy.onrender.com/sale",
-          {
-            iduser: user.id,
-            products: [...cart],
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
+        .post("https://pf-back-deploy.onrender.com/sale", {
+          iduser: user.id,
+          products: [...cart],
+        })
         .then((res) => setCart([]));
-    }, 5000);
-  }, []);
+    }
+  }, [cart]);
   return (
 <div className="success-message">
   <h2 className="text-info-emphasis" style={{ textAlign: "center", color: "blue" }}>Tu transacción ha tenido un resultado exitoso!!!</h2>

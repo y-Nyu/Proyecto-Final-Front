@@ -3,6 +3,8 @@ import CardsShop from "../../components/CardsShop/CardsShop";
 import style from './Sales.module.css'
 import { useSelector, useDispatch } from "react-redux";
 import { getUserById } from "../../redux/Actions/Users/usersActions";
+import { Input, Select, Button } from 'antd';
+
 
 const Sales = () => {
     const dispatch = useDispatch()
@@ -132,18 +134,27 @@ const Sales = () => {
 
     return(
         <div className={style.container}>
-            <h1 className={style.title}>Mis compras</h1>
-            <input type="text" placeholder="Buscar por nombre de producto" value={filters.productName} onChange={handleChange}/>
+            <h2 className={style.title}><strong><ins>Mis compras</ins></strong></h2>
+            <div className={style.inputContainer}>
+            <Input
+  type="text"
+  placeholder="Buscar por nombre de producto"
+  value={filters.productName}
+  onChange={handleChange}
+/>
 
-            <select value={sortOrder} onChange={handleSortChange}>
-                <option value="">Seleccionar orden</option>
-                <option value="asc">Ascendente</option>
-                <option value="desc">Descendente</option>
-            </select>
+<Select
+  value={sortOrder}
+  onChange={handleSortChange}
+  style={{ width: 200, marginRight: '16px' }}
+>
+  <Select.Option value="">Seleccionar orden</Select.Option>
+  <Select.Option value="asc">Ascendente</Select.Option>
+  <Select.Option value="desc">Descendente</Select.Option>
+</Select>
 
-            <button onClick={showAllProducts}>Mostrar todo</button>
-
-
+<Button className={style.btn} type="primary" onClick={showAllProducts}>Mostrar todo</Button>
+</div>
     <>
     <CardsShop compras = { sales.salesOriginal } />
     {sales.salesOriginal.length === 0 && (
@@ -155,6 +166,27 @@ const Sales = () => {
 }
 
 export default Sales;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // import { useEffect, useState } from "react";
 // import CardsShop from "../../components/CardsShop/CardsShop";

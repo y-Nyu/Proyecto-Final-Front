@@ -127,7 +127,7 @@ const Card = ({
             </p>
           </div>
           <div className={`text-center ${style.centeredButton}`}>
-            <Link to={`/detail/${id}`}>
+            <Link to={`/detalleProducto/${id}`}>
               <button className={`btn ${style.cardButton}`}>
                 <ins>Más info</ins>
               </button>

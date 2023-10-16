@@ -2,22 +2,33 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { validateAccountDetail } from "../../Validate";
-import { setUser } from "../../redux/Actions/Users/usersActions";
+import { setUser, getUserById } from "../../redux/Actions/Users/usersActions";
 import axios from "axios";
 import style from "./AccountDetail.module.css"
+import { useEffect } from "react";
 
 const AccountDetail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // const userData = useSelector(state => state.userLogged)
+  // const { id, name, email, celular, address } = userData
+  // console.log(userData);
+
+  const {id} = useSelector(state => state.userLogged)
+
+  useEffect(() => {
+    dispatch(getUserById(id))
+  }, []);
+
   const userData = useSelector(state => state.userLogged)
-  const { id, name, email, celular, address } = userData
-  console.log(userData);
-  
+  const { name, email, celular, address } = userData
+
   const [userDetail, setUserDetail] = useState({
     name: name,
     email: email,
     celular: celular,
     address: address || "",
+    newPassword: ""
   });
 
   const [userDetailCopy, setUserDetailCopy] = useState({
@@ -26,6 +37,7 @@ const AccountDetail = () => {
     celular: celular,
     address: address || "",
     newPassword: "",
+    passwordConfirmation: ""
   });
 
   // console.log(userDetailCopy);
@@ -64,11 +76,12 @@ const AccountDetail = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (userDetailCopy.newPassword.length > 0) {
+    if (userDetailCopy.newPassword !== userDetail.newPassword && userDetailCopy.newPassword === userDetailCopy.passwordConfirmation) {
       axios.put(`https://pf-back-deploy.onrender.com/change-password`, { id, password: userDetailCopy.newPassword })
       .then((response) => {
         console.log(response.data);
         alert('Contraseña modificada exitosamente');
+        handleClose()
       })
       .catch((error) => {
         alert(error.response.data.error)
@@ -86,10 +99,10 @@ const AccountDetail = () => {
       axios
         .put(`https://pf-back-deploy.onrender.com/users/${id}`, modifiedData)
         .then((response) => {
-          console.log(response.data);
           // Actualiza en el estado global la info modificada.
           dispatch(setUser({ ...userData, ...modifiedData }));
           setIsEditing(false);
+          console.log(response.data);
         })
         .catch((error) => {
           alert(error.response.data.error)
@@ -104,6 +117,8 @@ const AccountDetail = () => {
       email: email,
       celular: celular,
       address: address,
+      newPassword: '',
+      passwordConfirmation: ''
     });
     // Limpia los errores
     setErrors({
@@ -121,10 +136,8 @@ const AccountDetail = () => {
     <div className={`container d-flex justify-content-center align-items-center ${style.container}`}>
       <form className="w-75 mb-4" onSubmit={handleSubmit}>
         <fieldset disabled={!isEditing}>
-          <legend className="text-center mt-3">
-            <strong>
-              <ins>Detalles de mi cuenta</ins>
-            </strong>
+          <legend className={`text-center mt-3" ${style.titulo}`}>
+              <h3><strong><ins>Detalles de mi cuenta</ins></strong></h3>
           </legend>
 
           <div className="row">
@@ -198,6 +211,7 @@ const AccountDetail = () => {
                   className="form-control"
                   name="newPassword"
                   onChange={handleChange}
+                  value={userDetailCopy.newPassword}
                 />
                 {errors.newPassword ? <p>{errors.newPassword}</p> : <p></p>}
               </div>
@@ -211,6 +225,7 @@ const AccountDetail = () => {
                   className="form-control"
                   name="passwordConfirmation"
                   onChange={handleChange}
+                  value={userDetailCopy.passwordConfirmation}
                 />
                 {errors.passwordConfirmation ? <p>{errors.passwordConfirmation}</p> : <p></p>}
               </div>
@@ -253,7 +268,7 @@ const AccountDetail = () => {
           type="button"
           className="btn btn-outline-success ms-2"
           onClick={() => {
-            navigate("/sales");
+            navigate("/compras");
           }}
           >
           <i className="bi bi-cart-check-fill"></i> Mis compras
