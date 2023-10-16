@@ -37,7 +37,10 @@ const Cards = ({ products }) => {
                     })
                     )
                 : 
-                <PuffLoader size={150} data-testid="loader" />
+                <div className={style.loading}>
+                    <PuffLoader size={150} data-testid="loader" />
+                </div>
+                
                 }
             </div>
         </div>

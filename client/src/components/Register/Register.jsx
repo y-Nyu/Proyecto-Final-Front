@@ -9,10 +9,14 @@ import style from './Register.module.css';
 
 const Register = ({ toggleComponent }) => {
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
+  const [input1, setInput1] = useState(false);
+  const [input2, setInput2] = useState(false);
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+  const togglePasswordVisibility1 = () => {
+    setInput1(!input1)
+  };
+  const togglePasswordVisibility2 = () => {
+    setInput2(!input2)
   };
   const [data, setData] = useState({
     name: "",
@@ -138,14 +142,14 @@ const Register = ({ toggleComponent }) => {
           </label>
           <input
             onChange={handleChange}
-            type={showPassword ? 'text' : 'password'}
+            type={input1 ? 'text' : 'password'}
             name="password"
             value={data.password}
             placeholder="Contraseña"
             className="form-control"
           />
-          <a onClick={togglePasswordVisibility} className={style.eye}> 
-            {!showPassword ? <i class="bi bi-eye"></i> : <i class="bi bi-eye-fill"></i>} 
+          <a onClick={togglePasswordVisibility1} className={style.eye}> 
+            {!input1 ? <i class="bi bi-eye"></i> : <i class="bi bi-eye-fill"></i>} 
           </a>
           {errors.password ? (
             <p className={style["error-text"]}>{errors.password}</p>
@@ -160,11 +164,14 @@ const Register = ({ toggleComponent }) => {
           </label>
           <input
             onChange={handleChange}
-            type="password"
+            type={input2 ? 'text' : 'password'}
             name="passwordConfirmation"
             placeholder="Ingresa nuevamente tu contraseña"
             className="form-control"
           />
+            <a onClick={togglePasswordVisibility2} className={style.eye}> 
+            {!input2 ? <i class="bi bi-eye"></i> : <i class="bi bi-eye-fill"></i>} 
+          </a>
           {errors.passwordConfirmation ? (
             <p className={style["error-text"]}>{errors.passwordConfirmation}</p>
           ) : (
