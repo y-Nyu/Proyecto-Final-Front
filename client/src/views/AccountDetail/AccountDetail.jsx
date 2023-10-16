@@ -121,10 +121,8 @@ const AccountDetail = () => {
     <div className={`container d-flex justify-content-center align-items-center ${style.container}`}>
       <form className="w-75 mb-4" onSubmit={handleSubmit}>
         <fieldset disabled={!isEditing}>
-          <legend className="text-center mt-3">
-            <strong>
-              <ins>Detalles de mi cuenta</ins>
-            </strong>
+          <legend className={`text-center mt-3" ${style.titulo}`}>
+              <h3><strong><ins>Detalles de mi cuenta</ins></strong></h3>
           </legend>
 
           <div className="row">
