@@ -1,3 +1,24 @@
-.title {
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh; /* Esto centra el contenido verticalmente */
+  }
+  
+  .title {
+    margin: 16px 0;
+    font-family: 'Times New Roman', Times, serif;
     text-align: center;
-}
+  }
+  
+  .input-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .btn {
+    margin-top: 16px;
+  }
+  
