@@ -104,15 +104,15 @@ const App = () => {
         <Routes>
           <Route path="/success" element={<Success></Success>} />
           <Route path="/" element={<Home />} />
-          <Route path="/store" element={<Store />} />
-          <Route path="/detail/:id" element={<Detail />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/loginRegister" element={<LoginRegister />} />
-          <Route path="/accountDetail/:id" element={!token ? <Navigate to="/" /> : <AccountDetail />} />
-          <Route path="/cart" element={<Cart/>}/>
+          <Route path="/tienda" element={<Store />} />
+          <Route path="/detalleProducto/:id" element={<Detail />} />
+          <Route path="/sobreNosotros" element={<About />} />
+          <Route path="/inicioSesionRegistro" element={<LoginRegister />} />
+          <Route path="/detallesCuenta/:id" element={!token ? <Navigate to="/" /> : <AccountDetail />} />
+          <Route path="/carritoCompras" element={<Cart/>}/>
           {/* <Route path="/star" element={<Stars />} /> */}
-          <Route path="/sales" element={!token ? <Navigate to="/" /> : <Sales />} />
-          <Route path="/sales/:id" element={<SaleDetail/>} />
+          <Route path="/compras" element={!token ? <Navigate to="/" /> : <Sales />} />
+          <Route path="/compra/:id" element={<SaleDetail/>} />
           <Route path="/preguntas-frecuentes" element={<Faq />} />
           <Route path="/politica-de-privacidad" element={<Privacy />} />
           <Route path="/formUser" element={<FormUser />} />
