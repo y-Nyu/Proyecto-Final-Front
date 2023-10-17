@@ -29,7 +29,7 @@ const AccountDetail = () => {
     name: name,
     email: email,
     celular: celular,
-    address: address || "",
+    address: address,
     newPassword: ""
   });
 
@@ -37,7 +37,7 @@ const AccountDetail = () => {
     name: name,
     email: email,
     celular: celular,
-    address: address || "",
+    address: address,
     newPassword: "",
     passwordConfirmation: ""
   });
