@@ -33,6 +33,14 @@ const App = () => {
   const dispatch = useDispatch();
   const token = sessionStorage.getItem("jwt_session");
   const userRole = useSelector(state => state.userRole);
+
+  const whatsappURL = 'https://api.whatsapp.com/send?phone=TUNUMEROTELEFONO';
+  const iconStyle = {
+  fontSize: '28px',
+  color: 'white', 
+  display: 'flex',
+  };
+  
   useEffect(() => {
     if (token) {
       const decodedToken = jwtDecode(token);
@@ -93,14 +101,21 @@ const App = () => {
   }, [location]);
 
   const redirigirAWhatsapp = () => {
-    window.location.href = "https://www.whatsapp.com/";
+    window.open(whatsappURL, '_blank');
   };
 
   return (
     <div>
       <ShoppingCartProvider>
         <NavBar />
-        <FloatButton icon={<WhatsAppOutlined />} style={{bottom: 100, right: 100}} tooltip="WhatsApp" className="miBotonPersonalizado" onClick={redirigirAWhatsapp} type="green"/>
+        <FloatButton
+     icon={<WhatsAppOutlined style={iconStyle} />}
+      style={{ bottom: 100, right: 100 }}
+      tooltip="WhatsApp"
+      className="miBotonPersonalizado"
+      onClick={redirigirAWhatsapp}
+      type="green"
+    />
         <Routes>
           <Route path="/success" element={<Success></Success>} />
           <Route path="/" element={<Home />} />

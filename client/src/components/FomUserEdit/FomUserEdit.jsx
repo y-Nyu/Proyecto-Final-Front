@@ -65,7 +65,7 @@ const FormUserEdit = ({ userEdit, closeModal }) => {
         <form onSubmit={submitHandler}>
           <div className="mb-4 pt-4">
             <label htmlFor="name" className="form-label">
-              Nombre Usuario
+              <strong>Nombre Usuario</strong>
             </label>
             <input
               type="text"
@@ -85,7 +85,7 @@ const FormUserEdit = ({ userEdit, closeModal }) => {
 
           <div className="mb-4 pt-4">
             <label htmlFor="email" className="form-label">
-              Email
+             <strong>Email</strong> 
             </label>
             <input
               type="text"
@@ -105,7 +105,7 @@ const FormUserEdit = ({ userEdit, closeModal }) => {
 
           <div className="mb-4 pt-4">
             <label htmlFor="celular" className="form-label">
-              Celular
+              <strong>Celular</strong>
             </label>
             <input
               type="text"
@@ -149,7 +149,7 @@ const FormUserEdit = ({ userEdit, closeModal }) => {
               disabled={!isValid}
               className="btn btn-outline-primary w-100 my-1"
             >
-              Editar Usuario
+             Guardar cambios
             </button>
             <h2></h2>
           </div>
