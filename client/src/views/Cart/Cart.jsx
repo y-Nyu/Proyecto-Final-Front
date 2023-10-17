@@ -59,7 +59,7 @@ const Cart = ({ isVisible, onClose }) => {
     const token = sessionStorage.getItem("jwt_session");
     if (token) {
       const { data } = await axios.post(
-        "http://localhost:3001/create-order",
+        "https://pf-back-deploy.onrender.com/create-order",
         cart
       );
       const initPoint = await data.body.init_point;
