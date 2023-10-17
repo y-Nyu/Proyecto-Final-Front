@@ -63,7 +63,7 @@ const FormUserDel = ({ userEdit, closeModal }) => {
         <form onSubmit={submitHandler}>
           <div className="mb-4 pt-4">
             <label htmlFor="name" className="form-label">
-              Nombre Usuario
+             <strong>Nombre Usuario</strong>
             </label>
             <input
               type="text"
@@ -82,9 +82,9 @@ const FormUserDel = ({ userEdit, closeModal }) => {
           </div>
 
           <div className="mb-4 pt-4">
-            <label htmlFor="active" className="form-label">
-              Borrar
-            </label>
+           
+              <strong>Seleccionar </strong>
+            
             <select name="active" onChange={handleChange}>
               {activo.map((sel, index) => (
                 <option key={index} value={sel}>
@@ -100,7 +100,7 @@ const FormUserDel = ({ userEdit, closeModal }) => {
               disabled={!isValid}
               className="btn btn-outline-primary w-100 my-1"
             >
-              Editar Usuario
+              Guardar cambios
             </button>
             <h2></h2>
           </div>
