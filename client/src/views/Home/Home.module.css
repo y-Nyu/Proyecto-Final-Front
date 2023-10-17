@@ -54,3 +54,10 @@ h1 {
     background-color: white;
     margin: 10px 0;
   }
+
+  .imgCat {
+    position: absolute;
+    bottom: -200px; 
+    left: 50%;
+    transform: translateX(-50%); 
+  }
