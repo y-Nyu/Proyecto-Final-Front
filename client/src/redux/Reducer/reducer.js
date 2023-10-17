@@ -18,7 +18,8 @@ import {
   SET_USER,
   GET_USERS,
   SET_PAGE,
-  GET_SALES
+  GET_SALES, 
+  SET_SALES_BY_USER
 } from "../Actions/action-types";
 
 const initialState = {
@@ -32,7 +33,8 @@ const initialState = {
   allUsers: [],
   currentPage: 1,
   searchType: "users",
-  sales: []
+  sales: [],
+  salesByUser: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -141,7 +143,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         //Se relaciona de nuevo para settear la información de las sales
         userLogged: action.payload,
-
       };
     }
 
@@ -154,9 +155,17 @@ const reducer = (state = initialState, action) => {
     case GET_SALES: {
       return {
         ...state,
-        sales: []
+        sales: action.payload
       }
     }
+
+    case SET_SALES_BY_USER: {
+      return {
+        ...state,
+        salesByUser: [action.payload]
+      }
+    }
+
     default:
       return { ...state };
   }
