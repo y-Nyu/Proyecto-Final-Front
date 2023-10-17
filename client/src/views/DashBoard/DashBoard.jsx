@@ -1,6 +1,7 @@
 import { useState } from "react";
 import DashBoardProducts from "../DashBoardProducts/DashBoardProducts";
 import DashBoardUsers from "../DashBoardUsers/DashBoardUsers";
+import DashBoardSales from "../DashBoardSales/DashBoardSales";
 import { Button } from "antd";
 import "./DashBoard.modules.css";
 
@@ -30,10 +31,18 @@ function DashBoard() {
         >
           Usuarios
         </Button>
+        <Button
+          type="primary"
+          className="singleButton"
+          onClick={() => userSelect("DashBoardSales")}
+        >
+          Ventas
+        </Button>
       </div>
 
       {views === "DashBoardProducts" && <DashBoardProducts />}
       {views === "DashBoardUsers" && <DashBoardUsers />}
+      {views === "DashBoardSales" && <DashBoardSales />}
     </div>
   );
 }

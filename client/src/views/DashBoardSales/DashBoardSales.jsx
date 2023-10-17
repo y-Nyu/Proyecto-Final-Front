@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSales } from "../../redux/Actions/Users/usersActions";
 import { Table, Button, Modal } from "antd";
@@ -7,13 +7,26 @@ import { EyeOutlined } from "@ant-design/icons";
 function DashBoardSales() {
   const dispatch = useDispatch();
   const salesReport = useSelector((state) => state.sales);
-  const [modalView, setModalView] = useState(false);
+
   useEffect(() => {
-    console.log("ventas", salesReport);
-    if (salesReport.length === 0) {
+    console.log("ventas:", salesReport);
+    if (salesReport.length == 0) {
       dispatch(getSales());
     }
   }, [dispatch]);
+
+  const [modalView, setModalView] = useState(false);
+  const [selected, setSelected] = useState({});
+
+  const handleModalView = () => {
+    setModalView(!modalView);
+  };
+
+  const viewSale = (record) => {
+    setSelected(record);
+    console.log(record);
+    handleModalView();
+  };
 
   const columns = [
     {
@@ -28,7 +41,7 @@ function DashBoardSales() {
     },
     {
       title: "Fecha",
-      dataIndex: "createdAt", // Asegúrate de que coincide con la propiedad en tus datos
+      dataIndex: "createdAt",
       key: "createdAt",
     },
     {
@@ -38,7 +51,7 @@ function DashBoardSales() {
         if (record.details.length > 0) {
           return record.details[0].total;
         }
-        return "N/A"; // Otra valor predeterminado si details no contiene elementos
+        return "N/A";
       },
     },
     {
@@ -46,16 +59,14 @@ function DashBoardSales() {
       key: "actions",
       render: (record) => (
         <>
-          <Button>
+          <Button onClick={() => viewSale(record.details[0])}>
             <EyeOutlined className="icon" />
           </Button>
         </>
       ),
     },
   ];
-  const handleModalView = () => {
-    setModalView(!modalView);
-  };
+
   return (
     <div>
       <h1>Reporte de Ventas</h1>
@@ -68,10 +79,28 @@ function DashBoardSales() {
         okButtonProps={{ style: { display: "none" } }}
         cancelButtonProps={{ style: { display: "none" } }}
       >
-        <FormDetail
-          productEdit={selected}
-          closeModal={() => setModalEdit(false)}
-        />
+        <div> venta</div>
+        <h4>
+          <strong>ID:</strong> {selected.id}
+        </h4>
+        <h3>
+          <strong>Valor:</strong> {selected.total}
+        </h3>
+        <h3>
+          <strong>Productos:</strong>
+          <ul>
+            {selected.products.map((product, index) => (
+              <li key={index}>
+                <p>Nombre:</p> {product.name}
+                <br />
+                <p>Marca:</p> {product.brand}
+                <br />
+                <p>Precio:</p> {product.price}
+                <br />
+              </li>
+            ))}
+          </ul>
+        </h3>
       </Modal>
     </div>
   );
