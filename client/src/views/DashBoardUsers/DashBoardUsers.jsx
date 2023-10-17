@@ -34,7 +34,7 @@ const DashBoardUsers = () => {
 
   const columns = [
     {
-      title: "id",
+      title: "Id",
       dataIndex: "id",
       key: "id",
     },

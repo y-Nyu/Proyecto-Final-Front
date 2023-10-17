@@ -103,7 +103,7 @@ const FormUserEdit = ({ userEdit, closeModal }) => {
             </div>
           </div>
 
-          {/* <div className="mb-4 pt-4">
+          <div className="mb-4 pt-4">
             <label htmlFor="celular" className="form-label">
               Celular
             </label>
@@ -121,7 +121,7 @@ const FormUserEdit = ({ userEdit, closeModal }) => {
                 <p className={style["error-text"]}></p>
               )}
             </div>
-          </div> */}
+          </div>
 
           <div className="mb-4 pt-4">
             <label htmlFor="password" className="form-label">

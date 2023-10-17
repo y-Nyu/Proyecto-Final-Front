@@ -3,6 +3,9 @@
   margin: 0;
   padding: 0;
   /* text-align: center; */
+  position: relative;
+  padding-bottom: 110px;
+  min-height: 100vh;
 }
 .miBotonPersonalizado {
   background-color: rgb(128, 250, 125);
