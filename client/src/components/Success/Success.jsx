@@ -19,7 +19,7 @@ const Success = () => {
         })
         .then((res) => setCart([]));
     }
-  }, [cart]);
+  }, [cart, user]);
   return (
 <div className="success-message">
   <h2 className="text-info-emphasis" style={{ textAlign: "center", color: "blue" }}>Tu transacción ha tenido un resultado exitoso!!!</h2>
