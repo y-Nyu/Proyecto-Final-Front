@@ -89,7 +89,7 @@ function DashBoardSales() {
         <h3>
           <strong>Productos:</strong>
           <ul>
-            {selected.products.map((product, index) => (
+            {selected.products?.map((product, index) => (
               <li key={index}>
                 <p>Nombre:</p> {product.name}
                 <br />
