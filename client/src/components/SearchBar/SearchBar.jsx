@@ -15,8 +15,7 @@ function Searchbar({ onClick }) {
 
   const handleSearch = (event) => {
     event.preventDefault();
-
-    onClick(name);
+    onClick(name); 
   };
 
   return (
@@ -52,27 +51,82 @@ function Searchbar({ onClick }) {
 
 export default Searchbar;
 
-// function Searchbar(component) {
-//  const dispatch = useDispatch();
-//   const searchType = useSelector((state) => state.searchType);
-//   const [info, setInfo] = useState("");
-//   dispatch(setSearchType(component));
 
-//   const HandleChange = (event) => {
-//     setInfo(() => {
-//       const searched = event.target.value;
-//       console.log(searchType);
-//       if (searchType === "products") {
-//         dispatch(searchProducts(searched));
-//         return searched;
-//       } else if (searchType === "users") {
-//         dispatch(searchUsers(searched));
-//         return searched;
-//       }
-//     });
+
+
+
+
+// import style from "./Searchbar.module.css";
+// import { useState } from "react";
+// import { useDispatch } from "react-redux";
+// import { getProductByName } from "../../redux/Actions/Products/productsActions";
+// import { Modal, Button  } from 'antd'; 
+
+
+// function Searchbar({ onClick }) {
+//   const dispatch = useDispatch();
+//   const [name, setName] = useState("");
+//   const [isModalVisible, setIsModalVisible] = useState(false); 
+//   const [errorMessage, setErrorMessage] = useState("");
+//   const [productoEncontrado, setProductoEncontrado] = useState(false);
+
+//   const handleChange = (event) => {
+//     event.preventDefault();
+//     setName(event.target.value);
 //   };
+
+//   const handleSearch = (event) => {
+//     event.preventDefault();
+//     try {
+//       const product = await dispatch(getProductByName(name));
+
+//       if (product) {
+//         // Producto encontrado
+//         setProductoEncontrado(true);
+//         onClick(name);
+//       } else {
+//         // Producto no encontrado
+//         setErrorMessage("Producto no encontrado");
+//         setIsModalVisible(true);
+//       }
+//     } catch (error) {
+//       // Manejar errores de búsqueda
+//       console.error(error);
+//     }
+//   };
+
+//   const closeModal = () => {
+//     setIsModalVisible(false);
+//     setErrorMessage(""); // Limpiar el mensaje de error al cerrar el modal
+//   };
+
 //   return (
 //     <div>
-//       <input type="search" value={info} onChange={HandleChange} />
+//       <div>
+//         <input
+//           type="search"
+//           placeholder="Buscar producto"
+//           onChange={(event) => handleChange(event)}
+//           value={name}
+//         />
+//         <button onClick={(event) => handleSearch(event)}>Buscar</button>
+//       </div>
+
+//       <Modal
+//         title="Error"
+//         visible={isModalVisible}
+//         onOk={closeModal}
+//         onCancel={closeModal}
+//         footer={[
+//           <Button key="ok" onClick={closeModal}>
+//             OK
+//           </Button>
+//         ]}
+//       >
+//         <p>{errorMessage}</p>
+//       </Modal>
 //     </div>
 //   );
+// }
+
+// export default Searchbar;
