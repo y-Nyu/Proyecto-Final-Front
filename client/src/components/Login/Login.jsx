@@ -155,7 +155,7 @@ const Login = ({ toggleComponent }) => {
               value={data.password}
             />
             <a onClick={togglePasswordVisibility} className={style.eye}> 
-              {!showPassword ? <i class="bi bi-eye"></i> : <i class="bi bi-eye-fill"></i>} 
+              {!showPassword ? <i className="bi bi-eye"></i> : <i className="bi bi-eye-fill"></i>} 
             </a>
             <div className="error-container">
               {errors.password ? (

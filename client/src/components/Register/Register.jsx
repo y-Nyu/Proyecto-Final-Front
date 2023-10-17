@@ -149,7 +149,7 @@ const Register = ({ toggleComponent }) => {
             className="form-control"
           />
           <a onClick={togglePasswordVisibility1} className={style.eye}> 
-            {!input1 ? <i class="bi bi-eye"></i> : <i class="bi bi-eye-fill"></i>} 
+            {!input1 ? <i className="bi bi-eye"></i> : <i className="bi bi-eye-fill"></i>} 
           </a>
           {errors.password ? (
             <p className={style["error-text"]}>{errors.password}</p>
@@ -170,7 +170,7 @@ const Register = ({ toggleComponent }) => {
             className="form-control"
           />
             <a onClick={togglePasswordVisibility2} className={style.eye}> 
-            {!input2 ? <i class="bi bi-eye"></i> : <i class="bi bi-eye-fill"></i>} 
+            {!input2 ? <i className="bi bi-eye"></i> : <i className="bi bi-eye-fill"></i>} 
           </a>
           {errors.passwordConfirmation ? (
             <p className={style["error-text"]}>{errors.passwordConfirmation}</p>
