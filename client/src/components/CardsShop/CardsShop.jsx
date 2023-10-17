@@ -9,13 +9,11 @@ const CardsShop = ({compras}) => {
         ? (compras.map(compra => {
             return (
                 <CardShop
-                    key={compra.detail.idsale}
-                    id={compra.detail.idproduct}
-                    name={compra.detail.name}
-                    date={compra.createdAt.slice(0,10)}
-                    quantity={compra.detail.quantity}
-                    image={compra.detail.image}
-                    total={compra.detail.total}
+                    key={compra.id}
+                    id={compra.id}
+                    idUser={compra.idUser}
+                    date={compra.date.slice(0,10)}
+                    total={compra.total}
                 />
             )
         }))

@@ -3,8 +3,13 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from "axios";
 
-const Rate = ({productId, userId}) => {
-    const [ratingProps,setRatingProps] = useState({
+const Rate = ({productId, userId, ratingReset}) => {
+
+  if(ratingReset === true){
+    setRatingProps({...ratingProps,Rating:0})
+  }
+
+  const [ratingProps,setRatingProps] = useState({
         count: 5,
         Rating: 0,
         color: {
@@ -37,6 +42,7 @@ const Rate = ({productId, userId}) => {
           axios.post(`https://pf-back-deploy.onrender.com/rate/${productId}`, {userId,Rating})
           .then(usrRes => {
           console.log(usrRes);
+
         })
       .catch(error => {
         console.log(error.response.data.error);

@@ -18,7 +18,8 @@ import {
   SET_USER,
   GET_USERS,
   SET_PAGE,
-  GET_SALES,
+  GET_SALES, 
+  SET_SALES_BY_USER
 } from "../Actions/action-types";
 
 const initialState = {
@@ -33,6 +34,7 @@ const initialState = {
   currentPage: 1,
   searchType: "users",
   sales: [],
+  salesByUser: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -153,9 +155,17 @@ const reducer = (state = initialState, action) => {
     case GET_SALES: {
       return {
         ...state,
-        sales: action.payload.sales,
-      };
+        sales: action.payload
+      }
     }
+
+    case SET_SALES_BY_USER: {
+      return {
+        ...state,
+        salesByUser: [action.payload]
+      }
+    }
+
     default:
       return { ...state };
   }

@@ -65,7 +65,6 @@ const Login = ({ toggleComponent }) => {
 
     axios.post("https://pf-back-deploy.onrender.com/login", data)
       .then(usrRes => {
-
         const {id, email, name, rol, celular, address, token, sales} = usrRes.data;
 
         // Setteamos el token
