@@ -5,6 +5,7 @@ import { SEARCH_USERS,
     SET_USER, 
     GET_USERS, 
     GET_SALES,
+    SET_SALES_BY_USER,
     ROLE
 } from '../action-types';
 import axios from 'axios';
@@ -104,4 +105,8 @@ export const getSales = () => {
       console.log(error);
     }
   };
+};
+
+export const setSalesByUser = (data) => {
+  return { type: SET_SALES_BY_USER, payload: data };
 };

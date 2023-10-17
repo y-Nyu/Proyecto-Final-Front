@@ -65,7 +65,6 @@ const Login = ({ toggleComponent }) => {
 
     axios.post("https://pf-back-deploy.onrender.com/login", data)
       .then(usrRes => {
-
         const {id, email, name, rol, celular, address, token, sales} = usrRes.data;
 
         // Setteamos el token
@@ -155,7 +154,7 @@ const Login = ({ toggleComponent }) => {
               value={data.password}
             />
             <a onClick={togglePasswordVisibility} className={style.eye}> 
-              {!showPassword ? <i class="bi bi-eye"></i> : <i class="bi bi-eye-fill"></i>} 
+              {!showPassword ? <i className="bi bi-eye"></i> : <i className="bi bi-eye-fill"></i>} 
             </a>
             <div className="error-container">
               {errors.password ? (

@@ -6,22 +6,24 @@ import { setUser, getUserById } from "../../redux/Actions/Users/usersActions";
 import axios from "axios";
 import style from "./AccountDetail.module.css"
 import { useEffect } from "react";
+import jwtDecode from "jwt-decode";
 
 const AccountDetail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const userData = useSelector(state => state.userLogged)
-  // const { id, name, email, celular, address } = userData
-  // console.log(userData);
 
-  const {id} = useSelector(state => state.userLogged)
-
-  useEffect(() => {
-    dispatch(getUserById(id))
-  }, []);
-
+  const token = sessionStorage.getItem("jwt_session");
   const userData = useSelector(state => state.userLogged)
   const { name, email, celular, address } = userData
+  const decodedToken = jwtDecode(token);
+  console.log('TOKEN', decodedToken);
+  const userId = decodedToken.id;
+
+
+  useEffect(() => {
+    dispatch(getUserById(userId));
+  }, []);
+
 
   const [userDetail, setUserDetail] = useState({
     name: name,
@@ -97,7 +99,7 @@ const AccountDetail = () => {
       console.log(modifiedData);
 
       axios
-        .put(`https://pf-back-deploy.onrender.com/users/${id}`, modifiedData)
+        .put(`https://pf-back-deploy.onrender.com/users/${userId}`, modifiedData)
         .then((response) => {
           // Actualiza en el estado global la info modificada.
           dispatch(setUser({ ...userData, ...modifiedData }));
@@ -151,7 +153,7 @@ const AccountDetail = () => {
                   type="text"
                   className="form-control"
                   name="name"
-                  value={userDetailCopy.name}
+                  value={isEditing ? userDetailCopy.name : userData.name}
                   onChange={handleChange}
                 />
                 {errors.name ? <p>{errors.name}</p> : <p></p>}
@@ -165,7 +167,7 @@ const AccountDetail = () => {
                   type="email"
                   className="form-control"
                   name="email"
-                  value={userDetailCopy.email}
+                  value={isEditing ? userDetailCopy.email : userData.email}
                   onChange={handleChange}
                 />
                 {errors.email ? <p>{errors.email}</p> : <p></p>}
@@ -179,7 +181,7 @@ const AccountDetail = () => {
                   type="text"
                   className="form-control"
                   name="celular"
-                  value={userDetailCopy.celular}
+                  value={isEditing ? userDetailCopy.celular : userData.celular}
                   onChange={handleChange}
                 />
                 {errors.celular ? <p>{errors.celular}</p> : <p></p>}
@@ -193,7 +195,7 @@ const AccountDetail = () => {
                   type="text"
                   className="form-control"
                   name="address"
-                  value={userDetailCopy.address}
+                  value={isEditing ? userDetailCopy.address : userData.address}
                   onChange={handleChange}
                 />
                 {errors.address ? <p>{errors.address}</p> : <p></p>}
