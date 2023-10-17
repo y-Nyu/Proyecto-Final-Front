@@ -21,7 +21,7 @@ const FormUserEdit = ({ userEdit, closeModal }) => {
       setData(userEdit);
     }
   }, [userEdit]);
-  console.log('user', userEdit);
+  console.log("user", userEdit);
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
   const submitHandler = (event) => {
@@ -45,12 +45,6 @@ const FormUserEdit = ({ userEdit, closeModal }) => {
       ...data,
       [name]: value,
     });
-    // const newErrors = ValidateProduct({
-    //   ...data,
-    //   [name]: value,
-    // });
-    // setErrors(newErrors);
-    // isFormValid();
   };
 
   // La función isFormValid verifica si no hay mensajes de error en el estado `errors`.
@@ -85,7 +79,7 @@ const FormUserEdit = ({ userEdit, closeModal }) => {
 
           <div className="mb-4 pt-4">
             <label htmlFor="email" className="form-label">
-              Email
+              <strong>Email</strong>
             </label>
             <input
               type="text"
@@ -103,7 +97,7 @@ const FormUserEdit = ({ userEdit, closeModal }) => {
             </div>
           </div>
 
-          {/* <div className="mb-4 pt-4">
+          <div className="mb-4 pt-4">
             <label htmlFor="celular" className="form-label">
               Celular
             </label>
@@ -121,26 +115,6 @@ const FormUserEdit = ({ userEdit, closeModal }) => {
                 <p className={style["error-text"]}></p>
               )}
             </div>
-          </div> */}
-
-          <div className="mb-4 pt-4">
-            <label htmlFor="password" className="form-label">
-              Contraseña
-            </label>
-            <input
-              type="text"
-              name="password"
-              onChange={handleChange}
-              className="form-control"
-              value={data.password}
-            />
-            <div className="error-container">
-              {errors.password ? (
-                <p className={style["error-text"]}>{errors.password}</p>
-              ) : (
-                <p className={style["error-text"]}></p>
-              )}
-            </div>
           </div>
 
           <div>
@@ -149,7 +123,7 @@ const FormUserEdit = ({ userEdit, closeModal }) => {
               disabled={!isValid}
               className="btn btn-outline-primary w-100 my-1"
             >
-              Editar Usuario
+              Guardar cambios
             </button>
             <h2></h2>
           </div>

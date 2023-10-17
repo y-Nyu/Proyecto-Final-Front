@@ -79,28 +79,29 @@ function DashBoardSales() {
         okButtonProps={{ style: { display: "none" } }}
         cancelButtonProps={{ style: { display: "none" } }}
       >
-        <div> venta</div>
-        <h4>
-          <strong>ID:</strong> {selected.id}
-        </h4>
-        <h3>
-          <strong>Valor:</strong> {selected.total}
-        </h3>
-        <h3>
-          <strong>Productos:</strong>
+        <div>Detalle de venta</div>
+        <div>
+          {`Id venta:  ${selected.id}`}
+          <br />
+          {`Valor:  ${selected.total}`}
+        </div>
+        <div>
+          <label>
+            <strong>Productos:</strong>
+          </label>
           <ul>
             {selected?.products?.map((product, index) => (
               <li key={index}>
-                <p>Nombre:</p> {product.name}
+                {`Nombre: ${product.name}`}
                 <br />
-                <p>Marca:</p> {product.brand}
+                {`Cantidad: ${product.quantity}`}
                 <br />
-                <p>Precio:</p> {product.price}
+                {`Precio: ${product.price}`}
                 <br />
               </li>
             ))}
           </ul>
-        </h3>
+        </div>
       </Modal>
     </div>
   );
