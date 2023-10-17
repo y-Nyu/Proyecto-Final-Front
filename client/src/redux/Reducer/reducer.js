@@ -155,7 +155,7 @@ const reducer = (state = initialState, action) => {
     case GET_SALES: {
       return {
         ...state,
-        sales: action.payload
+        sales: action.payload.sales
       }
     }
 

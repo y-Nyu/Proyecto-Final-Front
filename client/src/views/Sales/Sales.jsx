@@ -15,7 +15,7 @@ const Sales = () => {
         id && dispatch(getUserById(id))
     }, [])
 
-    const allSales = useSelector(state => state.sales.sales)
+    const allSales = useSelector(state => state.sales)
     console.log('TODAS COMPRAS', allSales);
     
     // ALMACENAMIENTO COMPRAS

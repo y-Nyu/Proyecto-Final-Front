@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from "axios";
+import { useEffect } from "react";
 
 const Rate = ({productId, userId, ratingReset}) => {
 
-  if(ratingReset === true){
-    setRatingProps({...ratingProps,Rating:0})
-  }
+  useEffect(() => {
+    if(ratingReset === true){
+      setRatingProps({...ratingProps,Rating:0})
+    }  
+  }, [ratingReset])
+
 
   const [ratingProps,setRatingProps] = useState({
         count: 5,
