@@ -141,7 +141,7 @@ const SaleDetail = () => {
 
           <div>
             <button type="button" className="btn btn-primary" datatoggle="modal" data-target="#exampleModalScrollable" onClick={() => showModal(product.productId)}> Calificar producto </button>
-            <Modal title="Califica el producto" open={isModalVisible} onOk={handleSubmit} onCancel={handleCancel} okText="Enviar comentario" cancelText="Cancelar">
+            <Modal title="Califica el producto" open={isModalVisible} onOk={handleSubmit} onCancel={handleCancel} okText="Enviar comentario" cancelText="Cancelar" destroyOnClose={true}>
               <form onSubmit={handleSubmit} className="row">
                 <Rate productId={comment.productId} userId={comment.userId} reset={comment.ratingReset} />
                 <label htmlFor="text">Dejános tu opinión sobre el producto</label>
