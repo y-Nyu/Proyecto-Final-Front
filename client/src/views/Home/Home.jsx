@@ -153,7 +153,7 @@ const Home = () => {
               <img src={marca10} className="d-block img-fluid mx-auto" alt="..." />
             </Carousel.Item>
           </Carousel>
-          <img src={imageF} className="d-block mx-auto mt-4" alt="img" />
+          <img src={imageF} className={`mx-auto ${style.imgCat}`} alt="img" />
         </div>
       </div>
     </section>
