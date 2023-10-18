@@ -1,0 +1,59 @@
+.saleDetailContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.productImage img {
+    max-width: 100px ;
+    height: auto ;
+  }
+  .topContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .topContainer button {
+    margin: 20px;
+    color: #6489D8;
+  }
+  
+  .buttonContainer input {
+    width: 400px; 
+  }
+
+  .buttonContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 120px;
+    height: 50px;
+    margin-top: 10px; 
+  }
+  
+  .productInfoContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .productInfo {
+    text-align: center;
+    width: 25%;
+    margin: 10px;
+  }
+
+  .productInfoGrayBackground {
+    background-color: #f2f2f2; /* Define el color de fondo gris claro */
+    padding: 10px; /* Agrega relleno al bloque para espaciarlo del contenido */
+  }
+
+  .showAllButtonContainer {
+    margin-left: auto; /* Mueve el botón al lado derecho del contenedor */
+  }
