@@ -11,6 +11,7 @@ import {
   SEARCH_PRODUCTS,
   ORDERED,
   SET_PAGE,
+  GET_PRODUCTS_ADMIN,
 } from "../action-types";
 import axios from "axios";
 
@@ -19,6 +20,27 @@ export const setPage = (pageNumber) => ({
   payload: pageNumber,
 });
 
+export const getAllProductsAdmin = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios(
+        "https://pf-back-deploy.onrender.com/product",
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("jwt_session"),
+          },
+        }
+      );
+      data.sort((a, b) => a.id - b.id);
+      dispatch({
+        type: GET_PRODUCTS_ADMIN,
+        payload: data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
 export const getAllProducts = () => {
   return async (dispatch) => {
     try {

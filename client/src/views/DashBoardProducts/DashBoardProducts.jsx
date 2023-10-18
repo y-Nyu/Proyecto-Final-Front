@@ -7,6 +7,7 @@ import FormProductEdit from "../../components/FomProductEdit/FomProductEdit";
 import FormProductDel from "../../components/FomProductDel/FomProductDel";
 import {
   getAllProducts,
+  getAllProductsAdmin,
   searchProducts,
 } from "../../redux/Actions/Products/productsActions";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,10 +15,10 @@ import Searchbar from "../../components/SearchBar/SearchBar";
 import "./DashBoard.modules.css";
 const DashBoard = () => {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products);
+  const products = useSelector((state) => state.productsAdmin);
   useEffect(() => {
     if (products.length == 0) {
-      dispatch(getAllProducts());
+      dispatch(getAllProductsAdmin());
     }
   }, [dispatch]);
 

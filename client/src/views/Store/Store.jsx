@@ -15,9 +15,9 @@ const Store = () => {
   const totalPages = Math.ceil(allProducts.length / productsPerPage);
 
   useEffect(() => {
-    if (allProducts.length == 0) {
+    // if (allProducts.length == 0) {
       dispatch(getAllProducts());
-    }
+    // }
   }, [dispatch]);
 
   // Verificar si solo hay una página y establecer la página actual en 1

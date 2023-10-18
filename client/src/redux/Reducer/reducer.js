@@ -19,7 +19,8 @@ import {
   GET_USERS,
   SET_PAGE,
   GET_SALES, 
-  SET_SALES_BY_USER
+  SET_SALES_BY_USER,
+  GET_PRODUCTS_ADMIN
 } from "../Actions/action-types";
 
 const initialState = {
@@ -34,18 +35,27 @@ const initialState = {
   currentPage: 1,
   searchType: "users",
   sales: [],
-  salesByUser: []
+  salesByUser: [],
+  productsAdmin: []
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_PAGE:
       return { ...state, currentPage: action.payload };
-    case GET_PRODUCTS:
+    case GET_PRODUCTS_ADMIN:
       return {
         ...state,
-        products: action.payload,
-        productsCopy: action.payload,
+        productsAdmin: action.payload
+      }
+    case GET_PRODUCTS:
+      console.log('ACTION', action.payload[0].active);
+      let activados = [...action.payload].filter((product) => product.active === true)
+      console.log('ACTIVADOS', activados);
+      return {
+        ...state,
+        products: activados,
+        productsCopy: activados,
       };
     case GET_PRODUCTS_CATEGORIES:
       return {

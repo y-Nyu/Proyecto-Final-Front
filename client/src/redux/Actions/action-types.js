@@ -19,3 +19,4 @@ export const GET_USERS = "GET_USERS";
 export const SET_PAGE = "SET_PAGE";
 export const GET_SALES = "GET_SALES";
 export const SET_SALES_BY_USER = "SET_SALES_BY_USER";
+export const GET_PRODUCTS_ADMIN = "GET_PRODUCTS_ADMIN";
