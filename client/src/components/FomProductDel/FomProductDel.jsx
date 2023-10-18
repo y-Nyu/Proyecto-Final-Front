@@ -71,7 +71,7 @@ const FormProductDel = ({ productEdit, closeModal }) => {
 
           <div className="mb-4 pt-4">
             <label htmlFor="active" className="form-label">
-              Borrar
+              Seleccionar 
             </label>
             <select name="active" onChange={handleChange}>
               {activo.map((sel, index) => (

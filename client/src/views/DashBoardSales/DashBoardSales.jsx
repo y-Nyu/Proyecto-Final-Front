@@ -44,7 +44,7 @@ function DashBoardSales() {
       key: "createdAt",
     },
     {
-      title: "valor",
+      title: "Valor",
       key: "total",
       render: (text, record) => {
         if (record.details.length > 0) {
@@ -78,11 +78,13 @@ function DashBoardSales() {
         okButtonProps={{ style: { display: "none" } }}
         cancelButtonProps={{ style: { display: "none" } }}
       >
-        <div>Detalle de venta</div>
+        <h3 style={{ textAlign: "center", textDecoration: "underline" }}>
+          Detalle de venta
+        </h3>
         <div>
-          <strong>{`Id venta:  ${selected.id}`}</strong>
+          <strong>Id venta:</strong> {selected.id}
           <br />
-          <strong>{`Valor:  ${selected.total}`}</strong>
+          <strong>Valor: </strong> ${selected.total}
         </div>
         <div>
           <label>
@@ -91,11 +93,11 @@ function DashBoardSales() {
           <ul>
             {selected?.products?.map((product, index) => (
               <li key={index}>
-                {`Nombre: ${product.name}`}
+                <span>Nombre: {product.name}</span>
                 <br />
-                {`Cantidad: ${product.quantity}`}
+                <span>Cantidad: {product.quantity}</span>
                 <br />
-                {`Precio: ${product.price}`}
+                <span>Precio: ${product.price}</span>
                 <br />
               </li>
             ))}
