@@ -62,6 +62,11 @@ const NavBar = () => {
     dispatch(createUserRole(""));
     dispatch(userLogOut());
     loginState(true);
+
+    // Agrega un retraso breve antes de redirigir al usuario a la página de inicio
+    setTimeout(() => {
+      navigate('/');
+    }, 100); // Puedes ajustar el tiempo de espera según tus necesidades
   };
 
   return (
