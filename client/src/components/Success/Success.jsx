@@ -15,34 +15,36 @@ const Success = () => {
 
   const status = params.get("status");
 
-  console.log("carritooo", cart);
-  console.log("userrrr", user.id);
-  console.log(status, 'statusss');
   useEffect(() => {
-    if (status == 'approved') {
-      if (cart.length > 0 && user.id) {
-        axios
-          .post("https://pf-back-deploy.onrender.com/sale", {
-            iduser: user.id,
-            products: [...cart],
-          })
-          .then((res) => setCart([]));
-      };
-    };
+    if (status == "approved" && cart.length > 0 && user.id) {
+      axios
+        .post("https://pf-back-deploy.onrender.com/sale", {
+          iduser: user.id,
+          products: [...cart],
+        })
+        .then((res) => setCart([]));
+    }
   }, [cart, user]);
 
   return (
-<div className="success-message">
-  <h2 className="text-info-emphasis" style={{ textAlign: "center", color: "blue" }}>Tu transacción ha tenido un resultado exitoso!!!</h2>
-  <div className={style.centerImage}>
-    <img
-      src={corgi}
-      alt="corgi feliz"
-      style={{ width: "350px", height: "350px" }}
-    />
-  </div>
-  <h4  className="text-info-emphasis" style={{ textAlign: "center" }}>¡Gracias por tu compra! Tú mascota estará muy feliz.</h4>
-</div>
+    <div className="success-message">
+      <h2
+        className="text-info-emphasis"
+        style={{ textAlign: "center", color: "blue" }}
+      >
+        Tu transacción ha tenido un resultado exitoso!!!
+      </h2>
+      <div className={style.centerImage}>
+        <img
+          src={corgi}
+          alt="corgi feliz"
+          style={{ width: "350px", height: "350px" }}
+        />
+      </div>
+      <h4 className="text-info-emphasis" style={{ textAlign: "center" }}>
+        ¡Gracias por tu compra! Tú mascota estará muy feliz.
+      </h4>
+    </div>
   );
 };
 export default Success;
