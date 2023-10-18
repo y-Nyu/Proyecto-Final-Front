@@ -85,6 +85,7 @@ const App = () => {
                 const { id, name, email, rol, celular, token } = resp.data;
   
                 sessionStorage.setItem("jwt_session", token);
+                console.log('TOKEN GOOGLE', token);
                 dispatch(createUserRole(rol));
                 dispatch(setUser({ id, email, name, rol, celular }));
                 window.location = "/"
