@@ -49,6 +49,11 @@ const DashBoardUsers = () => {
       key: "email",
     },
     {
+      title: "Celular",
+      dataIndex: "celular",
+      key: "celular",
+    },
+    {
       title: "Rol",
       dataIndex: "rol",
       key: "email",

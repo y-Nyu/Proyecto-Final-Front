@@ -121,7 +121,7 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
         <form onSubmit={submitHandler}>
           <div className="mb-4 pt-4">
             <label htmlFor="name" className="form-label">
-             <strong>Nombre producto</strong>
+              <strong>Nombre producto</strong>
             </label>
             <input
               type="text"
@@ -141,7 +141,7 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
 
           <div className="mb-4 pt-4">
             <label htmlFor="brand" className="form-label">
-             <strong>Marca</strong>
+              <strong>Marca</strong>
             </label>
             <input
               type="text"
@@ -169,6 +169,7 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
               onChange={handleChange}
               className="form-control"
             >
+              <option value="">Seleccione</option>
               {categories.map((category) => (
                 <option key={category.id} value={category.name}>
                   {" "}

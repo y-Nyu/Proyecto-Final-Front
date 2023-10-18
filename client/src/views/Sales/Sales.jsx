@@ -4,15 +4,20 @@ import style from './Sales.module.css'
 import { useSelector, useDispatch } from "react-redux";
 import { getUserById, getSales, setSalesByUser } from "../../redux/Actions/Users/usersActions";
 import { Input, Select, Button } from 'antd';
+import jwtDecode from "jwt-decode";
 
 const Sales = () => {
     const dispatch = useDispatch()
-    const { id, sales } = useSelector(state => state.userLogged)
-
+    const { sales } = useSelector(state => state.userLogged)
+    const token = sessionStorage.getItem("jwt_session");
+    const decodedToken = jwtDecode(token);
+    const id = decodedToken.id;
     //Completa info del usuario, especificamente SALES al traer del id esa relación.
     useEffect(() => {
         dispatch(getSales())
-        id && dispatch(getUserById(id))
+        if (token) {
+            dispatch(getUserById(id));
+          }
     }, [])
 
     const allSales = useSelector(state => state.sales)
@@ -105,92 +110,3 @@ const Sales = () => {
 }
 
 export default Sales;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import { useEffect, useState } from "react";
-// import CardsShop from "../../components/CardsShop/CardsShop";
-// import style from './Sales.module.css'
-// import { useSelector, useDispatch } from "react-redux";
-// // import jwtDecode from 'jwt-decode'
-// import { getUserById, setUserSales } from "../../redux/Actions/Users/usersActions";
-// import { searchSalesProducts } from "../../redux/Actions/Products/productsActions";
-// import Searchbar from '../../components/SearchBar/SearchBar';
-
-
-// const Sales = () => {
-//     const dispatch = useDispatch()
-//     const userData = useSelector(state => state.userLogged)
-
-
-//     useEffect(() => {
-//                 dispatch(getUserById(userData.id))
-//                 dispatch(setUserSales(userData.sales))
-//             }, [])
-
-//    // SEARCHBAR
-//    const userSales = useSelector(state => state.salesByUser)
-
-//    console.log('INFO SALES');
-//    console.log(userData);
-//      console.log(userSales);
-//    const [filters, setFilters] = useState({
-//     name: ''
-//     });
-
-//     const createFilterString = (filters_obj) => {
-//         const filtersArr = [];
-    
-//         for (const key of Object.keys(filters_obj)) {
-//           if (filters_obj[key] !== undefined) {
-//             filtersArr.push("" + key + "=" + filters_obj[key]);
-//           }
-//         }
-//         let filterString = "?";
-//         filterString += filtersArr.join("&");
-//         return filtersArr.length ? filterString : "";
-//       };
-
-//    const searchByName = (name) => {
-//     setFilters((prev) => ({
-//       ...prev,
-//       name,
-//     }));
-//     const filterString = createFilterString({ ...filters, name });
-//     dispatch(searchSalesProducts(filterString));
-//   };
-
-//   useEffect(() => {
-//     const filterString = createFilterString({ ...filters });
-//     dispatch(searchSalesProducts(filterString));
-//   }, [filters]);
-
-//     return(
-//         <div className={style.container}>
-//             <h1 className={style.title}>Mis compras</h1>
-//             <Searchbar onClick={searchByName} />
-//             <CardsShop compras = {filters.name.length > 0 ? userSales : userData.sales}/>
-//         </div>
-//     )
-// }
-
-// export default Sales;

@@ -21,7 +21,7 @@ const FormUserEdit = ({ userEdit, closeModal }) => {
       setData(userEdit);
     }
   }, [userEdit]);
-  console.log('user', userEdit);
+  console.log("user", userEdit);
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
   const submitHandler = (event) => {
@@ -45,12 +45,6 @@ const FormUserEdit = ({ userEdit, closeModal }) => {
       ...data,
       [name]: value,
     });
-    // const newErrors = ValidateProduct({
-    //   ...data,
-    //   [name]: value,
-    // });
-    // setErrors(newErrors);
-    // isFormValid();
   };
 
   // La función isFormValid verifica si no hay mensajes de error en el estado `errors`.
