@@ -63,7 +63,7 @@ const App = () => {
   // LO DEJA HACER LOGIN Y RETORNA EL TOKEN JWT EN LA RESPONSE.
   //
   // EN CASO CONTRARIO ARROJA UN ERROR
-
+  console.log('TOKen NYU', token);
   useEffect(() => {
     if (location.pathname === "/") {
       const index = window.location.href.indexOf("?");
