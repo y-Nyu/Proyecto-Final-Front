@@ -16,9 +16,9 @@ const Sales = () => {
     const id = decodedToken.id;
     //Completa info del usuario, especificamente SALES al traer del id esa relación.
     useEffect(() => {
-        dispatch(getSales())
         if (token) {
             dispatch(getUserById(id));
+            dispatch(getSales())
           }
     }, [])
 
