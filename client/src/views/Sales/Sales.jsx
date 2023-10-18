@@ -1,110 +1,215 @@
 import { useEffect, useState } from "react";
 import CardsShop from "../../components/CardsShop/CardsShop";
-import style from './Sales.module.css'
+import style from './Sales.module.css';
 import { useSelector, useDispatch } from "react-redux";
 import { getUserById, getSales, setSalesByUser } from "../../redux/Actions/Users/usersActions";
-import { Input, Select, Button } from 'antd';
+import { Select } from 'antd';
+
+const { Option } = Select;
 
 const Sales = () => {
-    const dispatch = useDispatch()
-    const { id, sales } = useSelector(state => state.userLogged)
+    const dispatch = useDispatch();
+    const { id, sales } = useSelector(state => state.userLogged);
 
-    //Completa info del usuario, especificamente SALES al traer del id esa relación.
+    // Completa info del usuario, específicamente SALES al traer del id esa relación.
     useEffect(() => {
-        dispatch(getSales())
-        id && dispatch(getUserById(id))
-    }, [])
+        dispatch(getSales());
+        id && dispatch(getUserById(id));
+    }, []);
 
-    const allSales = useSelector(state => state.sales)
-    console.log('TODAS COMPRAS', allSales);
-    
+    const allSales = useSelector(state => state.sales);
+
     // ALMACENAMIENTO COMPRAS
-
     const [userSales, setUserSales] = useState({
-        salesOriginal : [],
+        salesOriginal: [],
         salesCopy: []
-    })
+    });
 
-    let salesData
     useEffect(() => {
-        if(allSales){
-            salesData = allSales.filter(element => element.iduser === id)
-            console.log('COMPRAS USUARIO', salesData);
+        if (allSales) {
+            const salesData = allSales.filter(element => element.iduser === id);
 
-            if(salesData){
+            if (salesData) {
                 const organizedData = salesData.map(data => ({
                     date: data.createdAt,
                     id: data.id,
                     idUser: data.iduser,
                     total: data.details[0].total,
-                    products : data.details[0].products.map(product => ({
+                    products: data.details[0].products.map(product => ({
                         productId: product.id,
                         name: product.name,
                         image: product.image,
                         unitPrice: product.price,
                         quantity: product.quantity
-                    }))                
-                }))
-                setUserSales({ salesOriginal: organizedData, salesCopy: organizedData });   
-                dispatch(setSalesByUser(organizedData))       
+                    }))
+                }));
+                setUserSales({ salesOriginal: organizedData, salesCopy: organizedData });
+                dispatch(setSalesByUser(organizedData));
             }
-            console.log('ORIGINAL STATE', userSales.salesOriginal);
-            console.log('COPY STATE', userSales.salesCopy);
-        } 
-    }, [sales])
-    
-
+        }
+    }, [sales]);
 
     // ORDENAMIENTO
-
     const [sortOrder, setSortOrder] = useState(""); // Estado para almacenar la selección del usuario
 
     const sortSalesByAsc = () => {
         const sortedSales = [...userSales.salesOriginal].sort((a, b) => {
             return new Date(a.date) - new Date(b.date);
         });
-
         setUserSales({ ...userSales, salesOriginal: sortedSales });
     };
-    
+
     const sortSalesByDesc = () => {
         const sortedSales = [...userSales.salesOriginal].sort((a, b) => {
             return new Date(b.date) - new Date(a.date);
         });
-    
         setUserSales({ ...userSales, salesOriginal: sortedSales });
     };
 
-    const handleSortChange = (event) => {
-        const { value } = event.target
-            setSortOrder(value);
-            if (value === "asc") {
-                sortSalesByAsc();
-            } else if (value === "desc") {
-                sortSalesByDesc();
-            }        
+    const handleSortChange = (value) => {
+        setSortOrder(value);
+        if (value === "asc") {
+            sortSalesByAsc();
+        } else if (value === "desc") {
+            sortSalesByDesc();
+        }
     };
 
     return (
         <div className={style.container}>
             <h2 className={style.title}><strong><ins>Mis compras</ins></strong></h2>
             <div className={style.inputContainer}>
-
-                <select onChange={handleSortChange} style={{ width: 200, marginRight: '16px' }}>
-                    <option value="">Orden por fecha</option>
-                    <option value="asc">Ascendente</option>
-                    <option value="desc">Descendente</option>
-                </select>
-
+                <Select
+                    style={{ width: 200, marginRight: '16px' }}
+                    placeholder="Ordenar por fecha"
+                    onChange={handleSortChange}
+                >
+                    <Option value="asc">Ascendente</Option>
+                    <Option value="desc">Descendente</Option>
+                </Select>
             </div>
-            <>
-                <CardsShop compras={userSales.salesOriginal && userSales.salesOriginal} />
-            </>
+            <div className={style.cardsContainer}>
+                {userSales.salesOriginal && userSales.salesOriginal.map((sale, index) => (
+                    <CardsShop key={index} compras={[sale]} />
+                ))}
+            </div>
         </div>
-    )
+    );
 }
 
 export default Sales;
+
+
+
+
+
+// import { useEffect, useState } from "react";
+// import CardsShop from "../../components/CardsShop/CardsShop";
+// import style from './Sales.module.css'
+// import { useSelector, useDispatch } from "react-redux";
+// import { getUserById, getSales, setSalesByUser } from "../../redux/Actions/Users/usersActions";
+// import { Input, Select, Button, Row, Col } from 'antd';
+
+// const Sales = () => {
+//     const dispatch = useDispatch()
+//     const { id, sales } = useSelector(state => state.userLogged)
+
+//     //Completa info del usuario, especificamente SALES al traer del id esa relación.
+//     useEffect(() => {
+//         dispatch(getSales())
+//         id && dispatch(getUserById(id))
+//     }, [])
+
+//     const allSales = useSelector(state => state.sales)
+//     console.log('TODAS COMPRAS', allSales);
+    
+//     // ALMACENAMIENTO COMPRAS
+
+//     const [userSales, setUserSales] = useState({
+//         salesOriginal : [],
+//         salesCopy: []
+//     })
+
+//     let salesData
+//     useEffect(() => {
+//         if(allSales){
+//             salesData = allSales.filter(element => element.iduser === id)
+//             console.log('COMPRAS USUARIO', salesData);
+
+//             if(salesData){
+//                 const organizedData = salesData.map(data => ({
+//                     date: data.createdAt,
+//                     id: data.id,
+//                     idUser: data.iduser,
+//                     total: data.details[0].total,
+//                     products : data.details[0].products.map(product => ({
+//                         productId: product.id,
+//                         name: product.name,
+//                         image: product.image,
+//                         unitPrice: product.price,
+//                         quantity: product.quantity
+//                     }))                
+//                 }))
+//                 setUserSales({ salesOriginal: organizedData, salesCopy: organizedData });   
+//                 dispatch(setSalesByUser(organizedData))       
+//             }
+//             console.log('ORIGINAL STATE', userSales.salesOriginal);
+//             console.log('COPY STATE', userSales.salesCopy);
+//         } 
+//     }, [sales])
+    
+
+
+//     // ORDENAMIENTO
+
+//     const [sortOrder, setSortOrder] = useState(""); // Estado para almacenar la selección del usuario
+
+//     const sortSalesByAsc = () => {
+//         const sortedSales = [...userSales.salesOriginal].sort((a, b) => {
+//             return new Date(a.date) - new Date(b.date);
+//         });
+
+//         setUserSales({ ...userSales, salesOriginal: sortedSales });
+//     };
+    
+//     const sortSalesByDesc = () => {
+//         const sortedSales = [...userSales.salesOriginal].sort((a, b) => {
+//             return new Date(b.date) - new Date(a.date);
+//         });
+    
+//         setUserSales({ ...userSales, salesOriginal: sortedSales });
+//     };
+
+//     const handleSortChange = (event) => {
+//         const { value } = event.target
+//             setSortOrder(value);
+//             if (value === "asc") {
+//                 sortSalesByAsc();
+//             } else if (value === "desc") {
+//                 sortSalesByDesc();
+//             }        
+//     };
+
+//     return (
+//         <div className={style.container}>
+//             <h2 className={style.title}><strong><ins>Mis compras</ins></strong></h2>
+//             <div className={style.inputContainer}>
+
+//                 <select onChange={handleSortChange} style={{ width: 200, marginRight: '16px' }}>
+//                     <option value="">Orden por fecha</option>
+//                     <option value="asc">Ascendente</option>
+//                     <option value="desc">Descendente</option>
+//                 </select>
+
+//             </div>
+//             <>
+//                 <CardsShop compras={userSales.salesOriginal && userSales.salesOriginal} />
+//             </>
+//         </div>
+//     )
+// }
+
+// export default Sales;
 
 
 

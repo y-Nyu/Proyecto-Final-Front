@@ -1,10 +1,21 @@
-.list {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.cardContainer {
+  border: 2px dotted #6489D8;
+  padding: 10px; 
+  margin-top: 10px;
 }
-.card {
-    width: 60%;
-    display: flex;
-    flex-wrap: wrap;
+
+.productInfoContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.productInfo {
+  text-align: center;
+  margin: 30px;
+}
+
+.button {
+    color: #6489D8;
   }

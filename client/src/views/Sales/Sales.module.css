@@ -3,13 +3,19 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    height: 100vh; /* Esto centra el contenido verticalmente */
+    height: 100vh;
   }
   
   .title {
     margin: 16px 0;
     font-family: 'Times New Roman', Times, serif;
     text-align: center;
+  }
+  
+  .info-container {
+    display: flex;
+    flex-wrap: wrap; /* Para que los elementos se envuelvan si no hay suficiente espacio en la fila */
+    justify-content: space-between; /* Para espaciar los elementos de manera uniforme */
   }
   
   .input-container {
