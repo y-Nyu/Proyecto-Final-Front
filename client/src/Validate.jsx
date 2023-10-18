@@ -67,13 +67,13 @@ export const validateRegister = (data) => {
       errors.image = "Escribe la URL de la imagen con formato valido";
     }
     if (data.brand || data.brand === "" || data.brand.length > 20) {
-      errors.brand = "Ingese marca menor a 20 caracteres";
+      errors.brand = "Ingrese marca menor a 20 caracteres";
     }
     if (data.category === "Seleccione") {
       errors.category = "Seleccione una categoria";
     }
     if (data.detail === "" || data.detail.length < 10) {
-      errors.detail = "Ingese detalle de producto mayor a 10 caracteres";
+      errors.detail = "Ingrese detalle de producto mayor a 10 caracteres";
     }
     if (data.price.trim() === "") {
       errors.price = "Ingrese precio";

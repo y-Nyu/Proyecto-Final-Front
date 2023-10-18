@@ -74,3 +74,36 @@ margin: 10px 0;
     margin-bottom: 30px;
     font-family: 'Quicksand', sans-serif;
   }
+
+
+  @media (max-width: 768px) {
+    .footer {
+      position: static;
+
+    }
+  
+    .iconosRedesSociales a {
+      width: 40px;
+      height: 40px;
+    }
+    .iconosRedesSociales i {
+      font-size: 1.2rem;
+
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .footer {
+      position: static;
+margin-bottom: auto;
+    }
+  
+    .iconosRedesSociales a {
+      width: 40px;
+      height: 40px;
+    }
+    .iconosRedesSociales i {
+      font-size: 1.2rem;
+
+    }
+  }

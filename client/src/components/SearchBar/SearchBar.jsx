@@ -19,12 +19,15 @@ function Searchbar({ onClick }) {
     event.preventDefault();
     const product = await getProductByName(name);
 
+    console.log("Respuesta de getProductByName:", product);
+
     if (product) {
       onClick(name);
-      setProductFound(true); 
+      setProductFound(true);
     } else {
-      setProductFound(false); // Product not found
+      setProductFound(false); // Producto no encontrado
     }
+    
   };
 
   return (
@@ -55,8 +58,11 @@ function Searchbar({ onClick }) {
         </div>
       </div>
       {productFound === false && (
-        <p className={style.errorMessage}>Producto no encontrado.</p>
-      )}
+  <div>
+    {console.log("Mensaje de error mostrado.")}
+    <p className={style.errorMessage}>Producto no encontrado.</p>
+  </div>
+)}
     </div>
   );
 }
