@@ -63,7 +63,7 @@ const App = () => {
   // LO DEJA HACER LOGIN Y RETORNA EL TOKEN JWT EN LA RESPONSE.
   //
   // EN CASO CONTRARIO ARROJA UN ERROR
-
+  console.log('TOKen NYU', token);
   useEffect(() => {
     if (location.pathname === "/") {
       const index = window.location.href.indexOf("?");
@@ -85,6 +85,7 @@ const App = () => {
                 const { id, name, email, rol, celular, token } = resp.data;
   
                 sessionStorage.setItem("jwt_session", token);
+                console.log('TOKEN GOOGLE', token);
                 dispatch(createUserRole(rol));
                 dispatch(setUser({ id, email, name, rol, celular }));
                 window.location = "/"

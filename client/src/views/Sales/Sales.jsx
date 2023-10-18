@@ -16,9 +16,10 @@ const Sales = () => {
     const id = decodedToken.id;
     //Completa info del usuario, especificamente SALES al traer del id esa relación.
     useEffect(() => {
-        dispatch(getSales())
         if (token) {
             dispatch(getUserById(id));
+            dispatch(getSales())
+            console.log('SALES', sales);
           }
     }, [])
 
@@ -31,7 +32,7 @@ const Sales = () => {
     });
 
     useEffect(() => {
-        if (allSales) {
+        if (allSales.length > 0) {
             const salesData = allSales.filter(element => element.iduser === id);
 
             if (salesData) {
@@ -93,8 +94,9 @@ const Sales = () => {
                     <Option value="desc">Descendente</Option>
                 </Select>
             </div>
+
             <div className={style.cardsContainer}>
-                {userSales.salesOriginal && userSales.salesOriginal.map((sale, index) => (
+                {userSales.salesOriginal.map((sale, index) => (
                     <CardsShop key={index} compras={[sale]} />
                 ))}
             </div>
