@@ -63,10 +63,10 @@ const NavBar = () => {
     dispatch(userLogOut());
     loginState(true);
 
-    // Agrega un retraso breve antes de redirigir al usuario a la página de inicio
+    // Tiempo para redirigir al usuario a la pagina de home
     setTimeout(() => {
       navigate('/');
-    }, 100); // Puedes ajustar el tiempo de espera según tus necesidades
+    }, 100);
   };
 
   return (
