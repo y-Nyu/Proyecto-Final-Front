@@ -24,7 +24,6 @@ function DashBoardSales() {
 
   const viewSale = (record) => {
     setSelected(record);
-    console.log(record);
     handleModalView();
   };
 
@@ -81,9 +80,9 @@ function DashBoardSales() {
       >
         <div>Detalle de venta</div>
         <div>
-          {`Id venta:  ${selected.id}`}
+          <strong>{`Id venta:  ${selected.id}`}</strong>
           <br />
-          {`Valor:  ${selected.total}`}
+          <strong>{`Valor:  ${selected.total}`}</strong>
         </div>
         <div>
           <label>

@@ -62,16 +62,7 @@ const FormUserDel = ({ userEdit, closeModal }) => {
         <h2 className="fw-bold text-center pt-4">Editar Usuario</h2>
         <form onSubmit={submitHandler}>
           <div className="mb-4 pt-4">
-            <label htmlFor="name" className="form-label">
-              Nombre Usuario
-            </label>
-            <input
-              type="text"
-              name="name"
-              onChange={handleChange}
-              className="form-control"
-              value={data.name}
-            />
+            <strong>{` ${data.name}`}</strong>
             <div className="error-container">
               {errors.name ? (
                 <p className={style["error-text"]}>{errors.name}</p>
@@ -85,7 +76,11 @@ const FormUserDel = ({ userEdit, closeModal }) => {
             <label htmlFor="active" className="form-label">
               Borrar
             </label>
-            <select name="active" onChange={handleChange} className="form-control">
+            <select
+              name="active"
+              onChange={handleChange}
+              className="form-control"
+            >
               {activo.map((sel, index) => (
                 <option key={index} value={sel}>
                   {sel}
@@ -100,7 +95,7 @@ const FormUserDel = ({ userEdit, closeModal }) => {
               disabled={!isValid}
               className="btn btn-outline-primary w-100 my-1"
             >
-              Editar Usuario
+              Guardar cambios
             </button>
             <h2></h2>
           </div>
