@@ -9,7 +9,6 @@ const FormProductDel = ({ productEdit, closeModal }) => {
   const [isValid, setIsValid] = useState(true);
   const activo = ["Seleccione...", "Activar", "Desactivar"];
 
-  // Inicializa el estado de data con el producto a editar
   const [data, setData] = useState(
     productEdit || {
       name: "",
@@ -67,17 +66,7 @@ const FormProductDel = ({ productEdit, closeModal }) => {
         </h2>
         <form onSubmit={submitHandler}>
           <div className="mb-4 pt-4">
-            <label htmlFor="name" className="form-label">
-              Nombre producto
-            </label>
-            <p
-              type="text"
-              name="name"
-              onChange={handleChange}
-              className="form-control"
-            >
-              {data.name}
-            </p>
+            <strong>{` ${data.name}`}</strong>
           </div>
 
           <div className="mb-4 pt-4">
@@ -99,7 +88,7 @@ const FormProductDel = ({ productEdit, closeModal }) => {
               disabled={!isValid}
               className="btn btn-outline-primary w-100 my-1"
             >
-              Borrar producto
+              Guardar cambios
             </button>
           </div>
         </form>
