@@ -14,7 +14,7 @@ const AccountDetail = () => {
 
   const token = sessionStorage.getItem("jwt_session");
   const userData = useSelector(state => state.userLogged)
-  const { name, email, celular, address } = userData
+  const { id, name, email, celular, address } = userData
   const decodedToken = jwtDecode(token);
   console.log('TOKEN', decodedToken);
   const userId = decodedToken.id;
@@ -32,17 +32,14 @@ const AccountDetail = () => {
     address: address,
     newPassword: ""
   });
-
+  
   const [userDetailCopy, setUserDetailCopy] = useState({
     name: name,
     email: email,
     celular: celular,
     address: address,
     newPassword: "",
-    passwordConfirmation: ""
   });
-
-  // console.log(userDetailCopy);
 
   const [errors, setErrors] = useState({
     name: "",
@@ -107,7 +104,7 @@ const AccountDetail = () => {
           console.log(response.data);
         })
         .catch((error) => {
-          alert(error.response.data.error)
+          console.log(error.response.data.error)
         });
     }
   };
