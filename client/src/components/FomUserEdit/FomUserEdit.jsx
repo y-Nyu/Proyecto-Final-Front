@@ -47,7 +47,6 @@ const FormUserEdit = ({ userEdit, closeModal }) => {
     });
   };
 
-  // La función isFormValid verifica si no hay mensajes de error en el estado `errors`.
   const isFormValid = () => {
     setIsValid(Object.values(errors).every((error) => error === ""));
   };

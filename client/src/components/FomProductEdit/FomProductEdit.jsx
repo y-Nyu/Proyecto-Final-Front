@@ -163,7 +163,7 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
             <label htmlFor="category" className="form-label">
               <strong>Categoría</strong>
             </label>
-            {/* PENDIENTE APLICAR ESTILOS DE BOOTSTRAP A LA LISTA DESPLEGABLE*/}
+
             <select
               name="category"
               onChange={handleChange}
