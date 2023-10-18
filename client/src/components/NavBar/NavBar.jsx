@@ -30,10 +30,10 @@ const NavBar = () => {
   const idUser = () => {
     if(token) {
       const { id } = jwt_decode(token);
-      return id
+      return id;
     }
   };
-  // const token = sessionStorage.getItem("jwt_session");
+
   useEffect(() => {
     if (token) {
       loginState(false);
@@ -62,6 +62,11 @@ const NavBar = () => {
     dispatch(createUserRole(""));
     dispatch(userLogOut());
     loginState(true);
+
+    // Agrega un retraso breve antes de redirigir al usuario a la página de inicio
+    setTimeout(() => {
+      navigate('/');
+    }, 100); // Puedes ajustar el tiempo de espera según tus necesidades
   };
 
   return (
@@ -121,7 +126,7 @@ const NavBar = () => {
               <Link to={"/admin"} className={`btn btn-sm ${style.btn}`}>
                 ADMIN
               </Link>
-            )}
+            )};
 
             <div className={`d-flex ${login ? "" : "always-visible"}`}>
               {login ? (
@@ -132,12 +137,6 @@ const NavBar = () => {
                   >
                     Ingresar
                   </button>
-                  {/* <button
-                    className={`btn btn-sm ${style.btn}`}
-                    onClick={() => navigate("/loginRegister")}
-                  >
-                    Registrarse
-                  </button> */}
                 </>
               ) : (
                 <>
