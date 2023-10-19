@@ -1,10 +1,18 @@
+.containerPrivacy  {
+  color: #000;
+  font-size: 16px; 
+  padding: 50px; 
+  position: relative;
+}
+
 .containerPrivacy::before {
     content: "";
     background-image: url(../../assets/logo/Logo.png);
     background-repeat: no-repeat;
     background-size: contain; 
     opacity: 0.5; 
-    position: absolute; 
+    /* position: absolute;  */
+    padding: 0;
     top: 20%; 
     left: 25%;
     width: 100%;
@@ -12,12 +20,7 @@
     z-index: -1; 
   }
   
-  .containerPrivacy  {
-    color: #000;
-    font-size: 16px; 
-    padding: 50px; 
 
-  }
 
   @media screen and (max-width: 1300px) {
     .containerPrivacy::before {
