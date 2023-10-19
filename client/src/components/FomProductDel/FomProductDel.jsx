@@ -40,6 +40,7 @@ const FormProductDel = ({ productEdit, closeModal }) => {
         .put(`https://pf-back-deploy.onrender.com/product/${data.id}`, data)
         .then((res) => {
           alert("Producto actualizado exitosamente!");
+          dispatch(getAllProducts());
           closeModal();
         })
         .catch((error) => alert(error));

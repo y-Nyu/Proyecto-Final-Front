@@ -18,11 +18,12 @@ import {
   SET_USER,
   GET_USERS,
   SET_PAGE,
-  GET_SALES, 
-  SET_SALES_BY_USER
+  GET_SALES,
+  SET_SALES_BY_USER,
 } from "../Actions/action-types";
 
 const initialState = {
+  adminproducts: [],
   products: [],
   productsCopy: [],
   categories: [],
@@ -34,7 +35,7 @@ const initialState = {
   currentPage: 1,
   searchType: "users",
   sales: [],
-  salesByUser: []
+  salesByUser: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -46,6 +47,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         products: action.payload,
         productsCopy: action.payload,
+        adminproducts: action.payload,
       };
     case GET_PRODUCTS_CATEGORIES:
       return {
@@ -155,15 +157,15 @@ const reducer = (state = initialState, action) => {
     case GET_SALES: {
       return {
         ...state,
-        sales: action.payload.sales
-      }
+        sales: action.payload.sales,
+      };
     }
 
     case SET_SALES_BY_USER: {
       return {
         ...state,
-        salesByUser: [action.payload]
-      }
+        salesByUser: [action.payload],
+      };
     }
 
     default:

@@ -14,7 +14,7 @@ import Searchbar from "../../components/SearchBar/SearchBar";
 import "./DashBoard.modules.css";
 const DashBoard = () => {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products);
+  const products = useSelector((state) => state.adminproducts);
   useEffect(() => {
     if (products.length == 0) {
       dispatch(getAllProducts());
@@ -139,14 +139,8 @@ const DashBoard = () => {
         destroyOnClose={true}
         onCancel={handleModalIns}
         centered
-        // footer={[
-        //   <Button key={0} onClick={handleModalIns}>
-        //     cancelar
-        //   </Button>,
-        //   <Button key={1} onClick={handleModalIns}>
-        //     Crear
-        //   </Button>,
-        // ]}
+        okButtonProps={{ style: { display: "none" } }}
+        cancelButtonProps={{ style: { display: "none" } }}
       >
         <FormProduct closeModal={() => setModalIns(false)} />
       </Modal>
