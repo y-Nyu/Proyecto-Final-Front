@@ -75,7 +75,7 @@ const FormProductDel = ({ productEdit, closeModal }) => {
             <label htmlFor="active" className="form-label">
               Borrar
             </label>
-            <select name="active" onChange={handleChange}>
+            <select name="active" onChange={handleChange} className="form-control">
               {activo.map((sel, index) => (
                 <option key={index} value={sel}>
                   {sel}
