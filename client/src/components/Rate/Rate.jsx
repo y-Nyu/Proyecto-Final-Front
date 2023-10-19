@@ -2,15 +2,8 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from "axios";
-import { useEffect } from "react";
 
-const Rate = ({productId, userId, ratingReset}) => {
-
-  useEffect(() => {
-    if(ratingReset === true){
-      setRatingProps({...ratingProps,Rating:0})
-    }  
-  }, [ratingReset])
+const Rate = ({productId, userId}) => {
 
 
   const [ratingProps,setRatingProps] = useState({
@@ -43,6 +36,7 @@ const Rate = ({productId, userId, ratingReset}) => {
         className="bi bi-star cursor-pointer"
         onClick={() => {
           setRatingProps({ ...ratingProps, Rating: i });
+          const { Rating } = ratingProps
           axios.post(`https://pf-back-deploy.onrender.com/rate/${productId}`, {userId,Rating})
           .then(usrRes => {
           console.log(usrRes);
