@@ -66,7 +66,7 @@ const Sales = () => {
     dispatch(getSales())
     update()
     }
-    }, []);
+    }, [sales]);
 
     // ORDENAMIENTO
     const [sortOrder, setSortOrder] = useState(""); // Estado para almacenar la selección del usuario
