@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ValidateProduct } from "../../Validate/Validate";
 import {
-  getAllProducts,
+  getAllProductsAdmin,
   getCategories,
 } from "../../redux/Actions/Products/productsActions";
 import axios from "axios";
@@ -78,7 +78,7 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
       .put(`https://pf-back-deploy.onrender.com/product/${data.id}`, data)
       .then((res) => {
         alert("Producto actualizado exitosamente!");
-        dispatch(getAllProducts());
+        dispatch(getAllProductsAdmin());
         closeModal();
       })
 

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import style from "./FomProductDel.module.css";
+import { getAllProductsAdmin } from "../../redux/Actions/Products/productsActions";
 
 const FormProductDel = ({ productEdit, closeModal }) => {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const FormProductDel = ({ productEdit, closeModal }) => {
         .put(`https://pf-back-deploy.onrender.com/product/${data.id}`, data)
         .then((res) => {
           alert("Producto actualizado exitosamente!");
+          dispatch(getAllProductsAdmin());
           closeModal();
         })
         .catch((error) => alert(error));
@@ -71,7 +73,7 @@ const FormProductDel = ({ productEdit, closeModal }) => {
 
           <div className="mb-4 pt-4">
             <label htmlFor="active" className="form-label">
-              Seleccionar 
+              Borrar
             </label>
             <select name="active" onChange={handleChange}>
               {activo.map((sel, index) => (
