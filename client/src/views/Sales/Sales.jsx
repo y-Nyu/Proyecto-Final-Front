@@ -64,10 +64,9 @@ const Sales = () => {
         if (token) {
     dispatch(getUserById(id));
     dispatch(getSales())
-    console.log('SALES', sales);
     update()
     }
-    }, [dispatch]);
+    }, []);
 
     // ORDENAMIENTO
     const [sortOrder, setSortOrder] = useState(""); // Estado para almacenar la selección del usuario
