@@ -18,9 +18,9 @@ import {
   SET_USER,
   GET_USERS,
   SET_PAGE,
-  GET_SALES, 
+  GET_SALES,
   SET_SALES_BY_USER,
-  GET_PRODUCTS_ADMIN
+  GET_PRODUCTS_ADMIN,
 } from "../Actions/action-types";
 
 const initialState = {
@@ -36,7 +36,8 @@ const initialState = {
   searchType: "users",
   sales: [],
   salesByUser: [],
-  productsAdmin: []
+  productsAdmin: [],
+  productsAdminCopy: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -46,12 +47,15 @@ const reducer = (state = initialState, action) => {
     case GET_PRODUCTS_ADMIN:
       return {
         ...state,
-        productsAdmin: action.payload
-      }
+        productsAdmin: action.payload,
+        productsAdminCopy: action.payload,
+      };
     case GET_PRODUCTS:
-      console.log('ACTION', action.payload[0].active);
-      let activados = [...action.payload].filter((product) => product.active === true)
-      console.log('ACTIVADOS', activados);
+      console.log("ACTION", action.payload[0].active);
+      let activados = [...action.payload].filter(
+        (product) => product.active === true
+      );
+      console.log("ACTIVADOS", activados);
       return {
         ...state,
         products: activados,
@@ -125,6 +129,9 @@ const reducer = (state = initialState, action) => {
         products: state.productsCopy.filter((product) =>
           product.name.toUpperCase().includes(action.payload.toUpperCase())
         ),
+        productsAdmin: state.productsAdminCopy.filter((productAdmin) =>
+          productAdmin.name.toUpperCase().includes(action.payload.toUpperCase())
+        ),
       };
 
     case ORDERED: {
@@ -165,15 +172,15 @@ const reducer = (state = initialState, action) => {
     case GET_SALES: {
       return {
         ...state,
-        sales: action.payload.sales
-      }
+        sales: action.payload.sales,
+      };
     }
 
     case SET_SALES_BY_USER: {
       return {
         ...state,
-        salesByUser: [action.payload]
-      }
+        salesByUser: [action.payload],
+      };
     }
 
     default:

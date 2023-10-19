@@ -6,7 +6,6 @@ import FormProduct from "../../components/FomProducto/FormProduct";
 import FormProductEdit from "../../components/FomProductEdit/FomProductEdit";
 import FormProductDel from "../../components/FomProductDel/FomProductDel";
 import {
-  getAllProducts,
   getAllProductsAdmin,
   searchProducts,
 } from "../../redux/Actions/Products/productsActions";
@@ -140,14 +139,8 @@ const DashBoard = () => {
         destroyOnClose={true}
         onCancel={handleModalIns}
         centered
-        // footer={[
-        //   <Button key={0} onClick={handleModalIns}>
-        //     cancelar
-        //   </Button>,
-        //   <Button key={1} onClick={handleModalIns}>
-        //     Crear
-        //   </Button>,
-        // ]}
+        okButtonProps={{ style: { display: "none" } }}
+        cancelButtonProps={{ style: { display: "none" } }}
       >
         <FormProduct closeModal={() => setModalIns(false)} />
       </Modal>

@@ -41,10 +41,12 @@ const FormUserEdit = ({ userEdit, closeModal }) => {
   const handleChange = (event) => {
     let { name, value } = event.target;
     console.log("Data:...", data);
-    setData({
-      ...data,
-      [name]: value,
-    });
+    if (name === "name" || name === "email" || name === "celular") {
+      setData({
+        ...data,
+        [name]: value,
+      });
+    }
   };
 
   const isFormValid = () => {
@@ -78,7 +80,7 @@ const FormUserEdit = ({ userEdit, closeModal }) => {
 
           <div className="mb-4 pt-4">
             <label htmlFor="email" className="form-label">
-             <strong>Email</strong> 
+              <strong>Email</strong>
             </label>
             <input
               type="text"
@@ -116,33 +118,13 @@ const FormUserEdit = ({ userEdit, closeModal }) => {
             </div>
           </div>
 
-          <div className="mb-4 pt-4">
-            <label htmlFor="password" className="form-label">
-              Contraseña
-            </label>
-            <input
-              type="text"
-              name="password"
-              onChange={handleChange}
-              className="form-control"
-              value={data.password}
-            />
-            <div className="error-container">
-              {errors.password ? (
-                <p className={style["error-text"]}>{errors.password}</p>
-              ) : (
-                <p className={style["error-text"]}></p>
-              )}
-            </div>
-          </div>
-
           <div>
             <button
               type="submit"
               disabled={!isValid}
               className="btn btn-outline-primary w-100 my-1"
             >
-             Guardar cambios
+              Guardar cambios
             </button>
             <h2></h2>
           </div>
