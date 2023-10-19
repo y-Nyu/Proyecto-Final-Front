@@ -15,13 +15,14 @@ const Sales = () => {
     const decodedToken = jwtDecode(token);
     const id = decodedToken.id;
     //Completa info del usuario, especificamente SALES al traer del id esa relación.
-    useEffect(() => {
-        if (token) {
-            dispatch(getUserById(id));
-            dispatch(getSales())
-            console.log('SALES', sales);
-          }
-    }, [])
+    // useEffect(() => {
+    //     if (token) {
+    //         dispatch(getUserById(id));
+    //         dispatch(getSales())
+    //         console.log('SALES', sales);
+    //         update()
+    //       }
+    // }, [])
 
     const allSales = useSelector(state => state.sales);
 
@@ -60,7 +61,12 @@ const Sales = () => {
     }
 }
     useEffect(() => {
-       update()
+        if (token) {
+    dispatch(getUserById(id));
+    dispatch(getSales())
+    console.log('SALES', sales);
+    update()
+    }
     }, [sales]);
 
     // ORDENAMIENTO
