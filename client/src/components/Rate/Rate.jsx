@@ -4,14 +4,8 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from "axios";
 import { useEffect } from "react";
 
-const Rate = ({productId, userId, ratingReset}) => {
 
-  useEffect(() => {
-    if(ratingReset === true){
-      setRatingProps({...ratingProps,Rating:0})
-    }  
-  }, [ratingReset])
-
+const Rate = ({productId, userId}) => {
 
   const [ratingProps,setRatingProps] = useState({
         count: 5,
@@ -36,21 +30,18 @@ const Rate = ({productId, userId, ratingReset}) => {
   };
 
   const starRating = [];
+
   for (let i = 1; i <= count; i++) {
+
     starRating.push(
       <i
         key={i}
         className="bi bi-star cursor-pointer"
-        onClick={() => {
+       
+        onClick={ async () => {
+          console.log(i);
           setRatingProps({ ...ratingProps, Rating: i });
-          axios.post(`https://pf-back-deploy.onrender.com/rate/${productId}`, {userId,Rating})
-          .then(usrRes => {
-          console.log(usrRes);
-
-        })
-      .catch(error => {
-        console.log(error.response.data.error);
-      })
+          
         }}
         style={{ color: getColor(i) }}
         onMouseEnter={() => setHoverRating(i)}
@@ -58,6 +49,12 @@ const Rate = ({productId, userId, ratingReset}) => {
       />
     );
   }
+
+  useEffect(() => {
+    axios.post(`https://pf-back-deploy.onrender.com/rate/${productId}`, {userId,Rating})
+  }, [Rating]);
+
+
   return (
   <div>
     <div>{starRating}</div>
