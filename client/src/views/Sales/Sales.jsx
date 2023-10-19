@@ -31,7 +31,8 @@ const Sales = () => {
         salesCopy: []
     });
 
-    useEffect(() => {
+    const update = () => {
+        try {
         if (allSales.length > 0) {
             const salesData = allSales.filter(element => element.iduser === id);
 
@@ -51,8 +52,15 @@ const Sales = () => {
                 }));
                 setUserSales({ salesOriginal: organizedData, salesCopy: organizedData });
                 dispatch(setSalesByUser(organizedData));
+
             }
         }
+    } catch (error) {
+        console.log(error);
+    }
+}
+    useEffect(() => {
+       update()
     }, [sales]);
 
     // ORDENAMIENTO
