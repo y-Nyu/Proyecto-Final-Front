@@ -67,7 +67,7 @@ const Sales = () => {
     console.log('SALES', sales);
     update()
     }
-    }, [sales]);
+    }, [dispatch]);
 
     // ORDENAMIENTO
     const [sortOrder, setSortOrder] = useState(""); // Estado para almacenar la selección del usuario
