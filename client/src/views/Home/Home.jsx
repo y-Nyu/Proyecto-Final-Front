@@ -1,4 +1,3 @@
-import style from "./Home.module.css"
 import imagebanner1 from "../../assets/banner/Banner1.png";
 import imagebanner2 from "../../assets/banner/Banner2.png";
 import imagebanner3 from "../../assets/banner/Banner3.png";
@@ -15,6 +14,7 @@ import marca10 from "../../assets/marcas/marca-16.png";
 import imageF from "../../assets/banner/cat.png"
 import imageFlyer from "../../assets/banner/Flyer.png"
 import { Carousel } from 'react-bootstrap';
+import style from "./Home.module.css"
 
 const Home = () => { 
 
@@ -114,48 +114,48 @@ const Home = () => {
           </div>
         </div>
 
-      <div className={`my-4 ${style.marcas_text}`}>
-        <i className="bi bi-stars"></i> Trabajamos con las mejores marcas del mercado
-        <i className="bi bi-stars"></i>
-      </div>
-
-      <div className="text-center">
-        <div id="circularCarousel" className="carousel slide" data-bs-ride="carousel">
-          <Carousel>
-            <Carousel.Item>
-              <img src={marca1} className="d-block img-fluid mx-auto" alt="..." />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img src={marca2} className="d-block img-fluid mx-auto" alt="..." />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img src={marca3} className="d-block img-fluid mx-auto" alt="..." />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img src={marca4} className="d-block img-fluid mx-auto" alt="..." />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img src={marca5} className="d-block img-fluid mx-auto" alt="..." />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img src={marca6} className="d-block img-fluid mx-auto" alt="..." />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img src={marca7} className="d-block img-fluid mx-auto" alt="..." />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img src={marca8} className="d-block img-fluid mx-auto" alt="..." />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img src={marca9} className="d-block img-fluid mx-auto" alt="..." />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img src={marca10} className="d-block img-fluid mx-auto" alt="..." />
-            </Carousel.Item>
-          </Carousel>
-          <img src={imageF} className={`mx-auto ${style.imgCat}`} alt="img" />
+        <div className={`my-4 ${style.marcas_text}`}>
+          <i className="bi bi-stars"></i> Trabajamos con las mejores marcas del mercado
+          <i className="bi bi-stars"></i>
         </div>
-      </div>
+
+        <div className="text-center">
+          <div id="circularCarousel" className="carousel slide" data-bs-ride="carousel">
+            <Carousel>
+              <Carousel.Item>
+                <img src={marca1} className="d-block img-fluid mx-auto" alt="..." />
+              </Carousel.Item>
+              <Carousel.Item>
+                <img src={marca2} className="d-block img-fluid mx-auto" alt="..." />
+              </Carousel.Item>
+              <Carousel.Item>
+                <img src={marca3} className="d-block img-fluid mx-auto" alt="..." />
+              </Carousel.Item>
+              <Carousel.Item>
+                <img src={marca4} className="d-block img-fluid mx-auto" alt="..." />
+              </Carousel.Item>
+              <Carousel.Item>
+                <img src={marca5} className="d-block img-fluid mx-auto" alt="..." />
+              </Carousel.Item>
+              <Carousel.Item>
+                <img src={marca6} className="d-block img-fluid mx-auto" alt="..." />
+              </Carousel.Item>
+              <Carousel.Item>
+                <img src={marca7} className="d-block img-fluid mx-auto" alt="..." />
+              </Carousel.Item>
+              <Carousel.Item>
+                <img src={marca8} className="d-block img-fluid mx-auto" alt="..." />
+              </Carousel.Item>
+              <Carousel.Item>
+                <img src={marca9} className="d-block img-fluid mx-auto" alt="..." />
+              </Carousel.Item>
+              <Carousel.Item>
+                <img src={marca10} className="d-block img-fluid mx-auto" alt="..." />
+              </Carousel.Item>
+            </Carousel>
+            <img src={imageF} className={`mx-auto ${style.imgCat}`} alt="img" />
+          </div>
+        </div>
     </section>
   );
 };

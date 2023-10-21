@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { ValidateProduct } from "../../Validate/Validate";
+import { validateProduct } from "../../Validate/Validate";
 import { getCategories } from "../../redux/Actions/Products/productsActions";
 import axios from "axios";
 import style from "./FomProductEdit.module.css";
@@ -123,7 +123,7 @@ setData((prevData) => ({
 [name]: value,
 }));
 
-    const newErrors = ValidateProduct({
+    const newErrors = validateProduct({
       ...data,
       [name]: value,
     });

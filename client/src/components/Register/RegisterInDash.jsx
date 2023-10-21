@@ -2,7 +2,6 @@ import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { validateRegister } from "../../Validate";
 
 import {
   getAllUsers,
@@ -11,6 +10,7 @@ import {
 } from "../../redux/Actions/Users/usersActions";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import style from "./Register.module.css";
+import { validateRegister } from "../../Validate/Validate";
 
 const RegisterInDash = ({ closeModal }) => {
   const navigate = useNavigate();

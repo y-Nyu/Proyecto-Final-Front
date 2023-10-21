@@ -1,16 +1,15 @@
 import Cart from "../../views/Cart/Cart";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import React, { useEffect, useState, useContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  createUserRole,
-  userLogOut,
-} from "../../redux/Actions/Users/usersActions";
-import { CartContext } from "../../contexts/ShoppingCartContext";
 import imagelogo from "../../assets/logo/Logo.png";
-import style from "./Navbar.module.css";
+
+import { useEffect, useState, useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createUserRole, getUserById, userLogOut } from "../../redux/Actions/Users/usersActions";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { CartContext } from "../../contexts/ShoppingCartContext";
 import { Modal } from "antd";
+
 import jwt_decode from "jwt-decode"
+import style from "./Navbar.module.css";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -19,7 +18,10 @@ const NavBar = () => {
   const [login, loginState] = useState(true);
   const [cart, setCart] = useContext(CartContext);
   const token = sessionStorage.getItem("jwt_session");
-  
+
+  const userData = useSelector(state => state.userLogged);
+  const { name } = userData;
+
   const userRole = useSelector((state) => state.userRole);
   const [isCartVisible, setIsCartVisible] = useState(false);
 
@@ -35,6 +37,7 @@ const NavBar = () => {
   };
   // const token = sessionStorage.getItem("jwt_session");
   useEffect(() => {
+    dispatch(getUserById(idUser))
     if (token) {
       loginState(false);
     }
@@ -81,7 +84,7 @@ const NavBar = () => {
               alt="Logo de la página"
             />
           </Link>
-
+          {/* Boton de despliegue para celular */}
           <button
             className={`navbar-toggler ${style.navbar_toggler}`}
             type="button"
@@ -105,18 +108,12 @@ const NavBar = () => {
                 </a>
               </li>
               <li className={style.nav_item}>
-                <a
-                  className={style.nav_link}
-                  onClick={() => navigate("/tienda")}
-                >
+                <a className={style.nav_link} onClick={() => navigate("/tienda")}>
                   Tienda
                 </a>
               </li>
               <li className={style.nav_item}>
-                <a
-                  className={style.nav_link}
-                  onClick={() => navigate("/sobreNosotros")}
-                >
+                <a className={style.nav_link} onClick={() => navigate("/sobre-nosotros")}>
                   Sobre nosotros
                 </a>
               </li>
@@ -150,17 +147,9 @@ const NavBar = () => {
                     className={`btn cart always-visible ${style.btn}`}
                     type="submit"
                   >
-                    {login ? (
-                      <Link to={`/detallesCuenta/${idUser()}`}>
-                        (<img src={userImage} />)
-                      </Link>
-                    ) : (
-                      <Link to={`/detallesCuenta/${idUser()}`}>
-                        <i
-                          className={`bi bi-person-circle ${style.custom_icon}`}
-                        ></i>
-                      </Link>
-                    )}
+                    <Link to={`/${name}`}>
+                      <i className={`bi bi-person-circle ${style.custom_icon}`}></i>
+                    </Link>
                   </button>
 
                   <button
@@ -192,12 +181,14 @@ const NavBar = () => {
           </div>
         </div>
       </nav>
+
       {isCartVisible && (
         <Cart
           isVisible={isCartVisible}
           onClose={() => setIsCartVisible(false)}
         />
       )}
+      
       <Modal
         title="Cierre de sesión"
         open={modalVisible}

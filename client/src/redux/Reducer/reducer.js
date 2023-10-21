@@ -26,6 +26,8 @@ import {
 const initialState = {
   products: [],
   productsCopy: [],
+  productsAdmin: [],
+  productsAdminCopy: [],
   categories: [],
   updatedProduct: [],
   userLogged: {},
@@ -36,8 +38,6 @@ const initialState = {
   searchType: "users",
   sales: [],
   salesByUser: [],
-  productsAdmin: [],
-  productsAdminCopy: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -109,12 +109,17 @@ const reducer = (state = initialState, action) => {
       return { ...state, userRole: action.payload };
 
     case SET_SEARCH_TYPE:
-      return { ...state, searchType: action.payload.component };
+      return {
+        ...state, 
+        searchType: action.payload.component
+      };
+
     case GET_USERS:
       return {
         ...state,
         users: action.payload,
       };
+
     case SEARCH_USERS:
       return {
         ...state,
@@ -134,61 +139,54 @@ const reducer = (state = initialState, action) => {
         ),
       };
 
-    case ORDERED: {
+    case ORDERED: 
       const sortedProducts = [...state.products].sort((a, b) => {
         if (action.payload) {
           return a.name.localeCompare(b.name);
         } else {
           return b.name.localeCompare(a.name);
         }
-      });
+      })
       return {
         ...state,
         products: sortedProducts,
       };
-    }
 
-    case SET_USER: {
+    case SET_USER:
       return {
         ...state,
         userLogged: action.payload,
       };
-    }
 
-    case GET_USER_BY_ID: {
+    case GET_USER_BY_ID:
       return {
         ...state,
-        //Se relaciona de nuevo para settear la información de las sales
         userLogged: action.payload,
       };
-    }
 
-    case USER_LOG_OUT: {
+    case USER_LOG_OUT:
       return {
         ...state,
         userLogged: [],
       };
-    }
-    case GET_SALES: {
+
+    case GET_SALES:
       return {
         ...state,
         sales: action.payload.sales,
       };
-    }
 
-    case SET_SALES_BY_USER: {
+    case SET_SALES_BY_USER:
       return {
         ...state,
         salesByUser: [action.payload],
       };
-    }
 
     default:
-      return { ...state };
+      return {
+      ...state
+    };
   }
 };
 
 export default reducer;
-
-// Reemplazar lógica case ORDERED para traerlo desde el back
-// Error búsqueda por nombre cuando se omiten la mayúscula inicial en cada palabra

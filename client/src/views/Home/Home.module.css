@@ -4,9 +4,11 @@
   align-items: center;
   justify-content: center;
 }
+
 h1 {
   font-size: 2.5rem;
 }
+
 .hero {
   text-align: center;   
 }
@@ -14,6 +16,7 @@ h1 {
 .imagen {
   display: inline-block;
 }
+
 .marcas_text {
   font-size: 35px; 
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -36,6 +39,7 @@ h1 {
 .img-fluid {
   margin-top: 20px;
 }
+
 .experiencia_titulo {
   font-size: 25px;
   font-weight: bold;
@@ -53,4 +57,7 @@ h1 {
   color: black;
   background-color: white;
   margin: 10px 0;
+}
+
+.imgCat {
 }

@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
 import { BrowserRouter, HashRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "./redux/store.js";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import App from "./App.jsx";
+import store from "./redux/store.js";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -16,7 +16,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <HashRouter>
         <App />
       </HashRouter>
-    </Provider>
-    ,
+    </Provider>,
   </GoogleOAuthProvider>
 );
+
+// HashRouter(/#/ruta): Se usa en situaciones donde el control del servidor es limitado o nulo, donde no se puede configurar una redireccion de URL(deploy)

@@ -1,32 +1,30 @@
-import NavBar from "./components/NavBar/NavBar";
-import FormProduct from "./components/FomProducto/FormProduct";
-import FormUser from "./components/FormUser/FormUser";
-import Home from "./views/Home/Home";
 import About from "./views/About/About";
-import LoginRegister from "./views/LoginRegister/LoginRegister";
 import AccountDetail from "./views/AccountDetail/AccountDetail";
-import Store from "./views/Store/Store";
+import Cart from "./views/Cart/Cart";
+import DashBoard from "./views/DashBoard/DashBoard";
 import Detail from "./views/Detail/Detail";
 import Faq from "./views/Faq/Faq";
+import Footer from "./components/Footer/Footer";
+import Home from "./views/Home/Home";
+import LoginRegister from "./views/LoginRegister/LoginRegister";
+import NavBar from "./components/NavBar/NavBar";
 import Privacy from "./views/PrivacyP/Privacy";
-import Users from "./views/Users/Users";
+import SaleDetail from "./views/SaleDetail/SaleDetail";
 import Sales from "./views/Sales/Sales";
-import Cart from "./views/Cart/Cart";
+import Store from "./views/Store/Store";
 import Success from "./components/Success/Success";
-import axios from "axios";
-import { Routes, Route, useLocation, Navigate } from "react-router-dom";
-import "./App.css";
+
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ShoppingCartProvider } from "./contexts/ShoppingCartContext";
 import { createUserRole, getUserById, setUser } from "./redux/Actions/Users/usersActions";
-import DashBoard from "./views/DashBoard/DashBoard";
-import jwtDecode from "jwt-decode";
-import Stars from "./components/Stars/Stars";
-import Footer from "./components/Footer/Footer";
-import SaleDetail from "./views/SaleDetail/SaleDetail";
+import { Route, Routes, useLocation, Navigate } from "react-router-dom";
+import { ShoppingCartProvider } from "./contexts/ShoppingCartContext";
 import { FloatButton } from "antd";
-import Icon, { WhatsAppOutlined } from '@ant-design/icons';
+import { WhatsAppOutlined } from '@ant-design/icons';
+
+import axios from "axios";
+import jwtDecode from "jwt-decode";
+import "./App.css";
 
 const App = () => {
   const location = useLocation();
@@ -34,7 +32,7 @@ const App = () => {
   const token = sessionStorage.getItem("jwt_session");
   const userRole = useSelector(state => state.userRole);
 
-  const whatsappURL = 'https://api.whatsapp.com/send?phone=TUNUMEROTELEFONO';
+  const whatsappURL = 'https://api.whatsapp.com/send?phone=1133532474';
   const iconStyle = {
   fontSize: '28px',
   color: 'white', 
@@ -108,50 +106,46 @@ const App = () => {
   return (
     <div>
       <ShoppingCartProvider>
-        <NavBar />
+        <NavBar/>
         <FloatButton
-     icon={<WhatsAppOutlined style={iconStyle} />}
-      style={{ bottom: 100, right: 100 }}
-      tooltip="WhatsApp"
-      className="miBotonPersonalizado"
-      onClick={redirigirAWhatsapp}
-      type="green"
-    />
+          icon={<WhatsAppOutlined style={iconStyle} />}
+          style={{ bottom: 100, right: 100 }}
+          tooltip="WhatsApp"
+          className="miBotonPersonalizado"
+          onClick={redirigirAWhatsapp}
+          type="green"
+        />
         <Routes>
-          <Route path="/success" element={<Success></Success>} />
-          <Route path="/" element={<Home />} />
-          <Route path="/tienda" element={<Store />} />
-          <Route path="/detalleProducto/:id" element={<Detail />} />
-          <Route path="/sobreNosotros" element={<About />} />
-          <Route path="/inicioSesionRegistro" element={<LoginRegister />} />
-          <Route path="/detallesCuenta/:id" element={!token ? <Navigate to="/" /> : <AccountDetail />} />
+          <Route path="/" element={<Home/>}/>
+          <Route path="/tienda" element={<Store/>}/>
+          <Route path="/detalleProducto/:id" element={<Detail/>}/>
+          <Route path="/sobre-nosotros" element={<About/>}/>
+          <Route path="/success" element={<Success/>}/>
+          <Route path="/inicioSesionRegistro" element={<LoginRegister/>}/>
+          <Route path="/:usuario" element={!token ? <Navigate to="/"/> : <AccountDetail/>}/>
           <Route path="/carritoCompras" element={<Cart/>}/>
-          {/* <Route path="/star" element={<Stars />} /> */}
-          <Route path="/compras" element={!token ? <Navigate to="/" /> : <Sales />} />
-          <Route path="/compra/:id" element={<SaleDetail/>} />
-          <Route path="/preguntas-frecuentes" element={<Faq />} />
-          <Route path="/politica-de-privacidad" element={<Privacy />} />
-          <Route path="/formUser" element={<FormUser />} />
-          <Route path="/formProduct" element={<FormProduct />} />
+          <Route path="/compras" element={!token ? <Navigate to="/"/> : <Sales/>}/>
+          <Route path="/compra/:id" element={<SaleDetail/>}/>
+          <Route path="/preguntas-frecuentes" element={<Faq/>}/>
+          <Route path="/politica-de-privacidad" element={<Privacy/>}/>
 
           {userRole === "ADMIN" 
           ? (
             <>
-            <Route path="/admin" element={<DashBoard />} />
-            <Route path="/adminLogin" element={<LoginRegister />} />
-            <Route path="/adminStore" element={<Store />} />
-            <Route path="/adminUsers" element={<Users />} />
-            <Route path="/adminSales" element={<Sales />} />
+            <Route path="/admin" element={<DashBoard/>}/>
+            <Route path="/adminLogin" element={<LoginRegister/>}/>
+            <Route path="/adminStore" element={<Store/>}/>
+            <Route path="/adminSales" element={<Sales/>}/>
             </>
           ) 
           : (
-            <Route path="*" element={<Navigate to="/" />} />
+            <Route path="*" element={<Navigate to="/"/>}/>
           )}
         </Routes>
-      <Footer />
+      <Footer/>
       </ShoppingCartProvider>
     </div>
-  );
+  )
 };
 
 export default App;

@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { validateLogin } from "../../Validate";
 import { createUserRole, setUser } from "../../redux/Actions/Users/usersActions";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import jwtDecode from 'jwt-decode'
 import style from './Login.module.css';
 import imgGoogle from "../../assets/iconos/google.png";
+import { validateLogin } from "../../Validate/Validate";
 
 // EXTRA: Recuperación de contraseña
 

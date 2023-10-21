@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { validateAccountDetail } from "../../Validate";
 import { setUser, getUserById } from "../../redux/Actions/Users/usersActions";
 import axios from "axios";
 import style from "./AccountDetail.module.css"
 import { useEffect } from "react";
 import jwtDecode from "jwt-decode";
+import { validateAccountDetail } from "../../Validate/Validate";
 
 const AccountDetail = () => {
   const dispatch = useDispatch();

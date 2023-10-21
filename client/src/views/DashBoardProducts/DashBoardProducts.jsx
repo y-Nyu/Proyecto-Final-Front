@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { Table, Button, Modal } from "antd";
 import { EditFilled, DeleteFilled } from "@ant-design/icons";
-import "./DashBoard.modules.css";
-import FormProduct from "../../components/FomProducto/FormProduct";
 import FormProductEdit from "../../components/FomProductEdit/FomProductEdit";
 import FormProductDel from "../../components/FomProductDel/FomProductDel";
 import {
@@ -142,7 +140,6 @@ const DashBoard = () => {
         okButtonProps={{ style: { display: "none" } }}
         cancelButtonProps={{ style: { display: "none" } }}
       >
-        <FormProduct closeModal={() => setModalIns(false)} />
       </Modal>
       <Modal
         open={modalEdit}

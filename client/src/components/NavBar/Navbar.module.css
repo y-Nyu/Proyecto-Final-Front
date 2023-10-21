@@ -53,7 +53,7 @@
     transition: background-color 0.3s ease;
     background-color: white !important;
     color: black !important;
-    border: 2px solid #6489D8;
+    /* border: 2px solid #6489D8; */
   }
   
   .custom_icon:hover {
