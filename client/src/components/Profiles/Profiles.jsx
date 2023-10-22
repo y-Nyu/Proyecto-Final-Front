@@ -1,4 +1,4 @@
-import style from './Profile.module.css'
+import style from './Profiles.module.css'
 
 const Profile = ( { id, name, github, linkedin, image } ) => {
   return (

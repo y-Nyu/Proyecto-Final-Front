@@ -1,5 +1,5 @@
+import Profile from "../../components/Profiles/Profiles";
 import profiles from "../../assets/profiles/profiles";
-import Profile from "../../components/Profiles/Profile";
 import style from "./About.module.css";
 
 const About = () => {
