@@ -1,31 +1,21 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { validateProduct } from "../../Validate/Validate";
 import {
   getAllProductsAdmin,
   getCategories,
 } from "../../redux/Actions/Products/productsActions";
+
 import axios from "axios";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+import { validateProduct } from "../../Validate/Validate";
 import style from "./FormProductEdit.module.css";
 
 const FormProductEdit = ({ productEdit, closeModal }) => {
   const dispatch = useDispatch();
-  const [isValid, setIsValid] = useState(true);
-
-  useEffect(() => {
-    dispatch(getCategories());
-  }, []);
-
+  const [ isValid, setIsValid ] = useState(true);
   const categories = useSelector((state) => state.categories);
-
-  useEffect(() => {
-    if (productEdit) {
-      setData(productEdit);
-    }
-  }, [productEdit]);
-
-  const [data, setData] = useState({
+  const [ data, setData ] = useState({
     name: "",
     image: "",
     brand: "",
@@ -35,8 +25,7 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
     stock: "",
     id: "",
   });
-
-  const [errors, setErrors] = useState({
+  const [ errors, setErrors ] = useState({
     name: "",
     image: "",
     brand: "",
@@ -46,12 +35,22 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
     stock: "",
   });
 
-  const handleImageUpload = async (e) => {
-    const file = e.target.files[0];
+  useEffect(() => {
+    dispatch(getCategories())
+  }, []);
 
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", "pf-image");
+  useEffect(() => {
+    if (productEdit) {
+      setData(productEdit)
+    }
+  }, [productEdit]);
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0]
+
+    const formData = new FormData()
+    formData.append("file", file)
+    formData.append("upload_preset", "pf-image")
 
     const response = await fetch(
       "https://api.cloudinary.com/v1_1/ddygbuhvi/image/upload",
@@ -59,34 +58,32 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
         method: "POST",
         body: formData,
       }
-    );
+    )
 
     if (response.ok) {
-      const imageUrl = await response.json();
+      const imageUrl = await response.json()
 
-      setData({ ...data, image: imageUrl.url });
+      setData({ ...data, image: imageUrl.url })
     } else {
-      console.error("Error al cargar la imagen a Cloudinary");
+      console.error("Error al cargar la imagen a Cloudinary")
     }
-    isFormValid();
+    isFormValid()
   };
 
   const submitHandler = (event) => {
-    event.preventDefault();
-    console.log(data);
+    event.preventDefault()
     axios
       .put(`https://pf-back-deploy.onrender.com/product/${data.id}`, data)
       .then((res) => {
-        alert("Producto actualizado exitosamente!");
-        dispatch(getAllProductsAdmin());
-        closeModal();
+        alert("Producto actualizado exitosamente!")
+        dispatch(getAllProductsAdmin())
+        closeModal()
       })
-
-      .catch((error) => alert(error));
+      .catch((error) => alert(error))
   };
 
   const handleChange = (event) => {
-    let { name, value } = event.target;
+    let { name, value } = event.target
     if (
       name === "name" ||
       name === "image" ||
@@ -97,21 +94,21 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
       setData({
         ...data,
         [name]: value,
-      });
+      })
     } else if (name === "price" || name === "stock") {
       if (!isNaN(value) && value != "") {
-        value = parseFloat(value);
+        value = parseFloat(value)
       }
       setData({
         ...data,
         [name]: value,
-      });
+      })
     }
   };
 
   // La función isFormValid verifica si no hay mensajes de error en el estado `errors`.
   const isFormValid = () => {
-    setIsValid(Object.values(errors).every((error) => error === ""));
+    setIsValid(Object.values(errors).every((error) => error === ""))
   };
 
   return (
@@ -279,6 +276,6 @@ const FormProductEdit = ({ productEdit, closeModal }) => {
         </form>
       </div>
     </div>
-  );
+  )
 };
 export default FormProductEdit;

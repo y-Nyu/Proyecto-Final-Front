@@ -1,19 +1,19 @@
-import Card from "../Card/Card";
 import { useEffect, useState } from "react";
-import style from "./cards.module.css";
 import PuffLoader from "react-spinners/PuffLoader";
 
+import Card from "../Card/Card";
+import style from "./cards.module.css";
+
 const Cards = ({ products }) => {
-    const [dataLoaded, setDataLoaded] = useState(false);
+    const [ dataLoaded, setDataLoaded ] = useState(false);
 
     useEffect(() => {
         if (products.length !== 0) {          
-            setDataLoaded(true); 
+            setDataLoaded(true)
         } else {
-            setDataLoaded(false);
+            setDataLoaded(false)
         }
       }, [products]);
-    console.log('productos Card' + products);
 
     return(
         <div className={style["container"]}>
@@ -40,7 +40,6 @@ const Cards = ({ products }) => {
                 <div className={style.loading}>
                     <PuffLoader size={150} data-testid="loader" />
                 </div>
-                
                 }
             </div>
         </div>

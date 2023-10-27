@@ -1,21 +1,22 @@
-import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-
 import {
   getAllUsers,
   createUserRole,
   setUser,
 } from "../../redux/Actions/Users/usersActions";
+
+import axios from "axios";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import style from "./Register.module.css";
+
 import { validateRegister } from "../../Validate/Validate";
+import style from "./Register.module.css";
 
 const RegisterInDash = ({ closeModal }) => {
-  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
   const roles = ["Select...", "USER", "ADMIN"];
-  const [data, setData] = useState({
+  const [ data, setData ] = useState({
     rol: "",
     name: "",
     email: "",
@@ -23,7 +24,6 @@ const RegisterInDash = ({ closeModal }) => {
     password: "",
     passwordConfirmation: "",
   });
-
   const [errors, setErrors] = useState({
     name: "",
     email: "",
@@ -44,27 +44,22 @@ const RegisterInDash = ({ closeModal }) => {
     setErrors(newErrors);
   };
 
-  const dispatch = useDispatch();
-
   //
   // USO, LO MISMO QUE EN EL LOGIN, UN DISPATCH CON LA ACTION setUser
   // PARA EVITAR DECODIFICAR EL TOKEN Y TENER QUE HACER OTRA REQUEST AL BACK
   //
-
   const register = (ev) => {
     ev.preventDefault();
-
     axios
       .post("https://pf-back-deploy.onrender.com/users", data)
       .then((res) => {
-        console.log("axios", data);
-        const { id, email, name, rol, celular, token } = res.data;
-        dispatch(setUser({ id, email, name, rol, celular }));
-        alert("Usuario creado");
-        dispatch(getAllUsers());
+        const { id, email, name, rol, celular, token } = res.data
+        dispatch(setUser({ id, email, name, rol, celular }))
+        alert("Usuario creado")
+        dispatch(getAllUsers())
         closeModal();
       })
-      .catch((error) => alert(error.response.data.error));
+      .catch((error) => alert(error.response.data.error))
   };
 
   return (
@@ -179,7 +174,6 @@ const RegisterInDash = ({ closeModal }) => {
             <p className={style["error-text"]}></p>
           )}
         </div>
-
         <div className="container w-100 py-2">
           <div className="row">
             <div className="col">
@@ -195,7 +189,7 @@ const RegisterInDash = ({ closeModal }) => {
         </div>
       </form>
     </div>
-  );
+  )
 };
 
 export default RegisterInDash;

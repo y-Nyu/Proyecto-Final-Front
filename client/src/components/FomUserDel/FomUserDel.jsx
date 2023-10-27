@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import style from "./FomProductDel.module.css";
 import { useDispatch } from "react-redux";
 import { getAllUsers } from "../../redux/Actions/Users/usersActions";
 
+import axios from "axios";
+import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+import style from "./FomProductDel.module.css";
+
 const FormUserDel = ({ userEdit, closeModal }) => {
+
   const [isValid, setIsValid] = useState(true);
   const activo = ["Seleccione...", "Activar", "Desactivar"];
   const dispatch = useDispatch();
@@ -16,6 +19,7 @@ const FormUserDel = ({ userEdit, closeModal }) => {
     password: "",
     passwordConfirmation: "",
   });
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (userEdit) {
@@ -24,34 +28,31 @@ const FormUserDel = ({ userEdit, closeModal }) => {
         ...userEdit,
         active: "",
       }));
-      console.log("sec ", data);
     }
   }, [userEdit]);
 
-  const [errors, setErrors] = useState({});
-
   const submitHandler = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     if (data.active !== "") {
       axios
         .put(`https://pf-back-deploy.onrender.com/users/${data.id}`, data)
         .then((res) => {
-          alert("Usuario actualizado exitosamente!");
-          dispatch(getAllUsers());
+          alert("Usuario actualizado exitosamente!")
+          dispatch(getAllUsers())
           closeModal();
         })
-        .catch((error) => alert(error));
+        .catch((error) => alert(error))
     } else {
-      alert("Seleccione una opción");
+      alert("Seleccione una opción")
     }
   };
 
   const handleChange = (event) => {
     if (event.target.name === "active") {
       if (event.target.value === "Activar") {
-        setData({ ...data, active: true });
+        setData({ ...data, active: true })
       } else {
-        setData({ ...data, active: false });
+        setData({ ...data, active: false })
       }
     }
   };
@@ -88,7 +89,6 @@ const FormUserDel = ({ userEdit, closeModal }) => {
               ))}
             </select>
           </div>
-
           <div>
             <button
               type="submit"
@@ -102,6 +102,6 @@ const FormUserDel = ({ userEdit, closeModal }) => {
         </form>
       </div>
     </div>
-  );
+  )
 };
 export default FormUserDel;

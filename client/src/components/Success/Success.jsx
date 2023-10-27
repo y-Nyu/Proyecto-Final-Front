@@ -1,18 +1,19 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { CartContext } from "../../contexts/ShoppingCartContext";
+import { useLocation } from "react-router-dom";
+
 import axios from "axios";
-import style from "./Success.module.css";
+import { CartContext } from "../../contexts/ShoppingCartContext";
+
 import corgi from "../../assets/img/corgi.png";
-import { useLocation, useParams } from "react-router-dom";
+import style from "./Success.module.css";
 
 const Success = () => {
+
   const [cart, setCart] = useContext(CartContext);
   const user = useSelector((state) => state.userLogged);
   const location = useLocation();
-
   const params = new URLSearchParams(location.search);
-
   const status = params.get("status");
 
   useEffect(() => {
@@ -22,7 +23,7 @@ const Success = () => {
           iduser: user.id,
           products: [...cart],
         })
-        .then((res) => setCart([]));
+        .then((res) => setCart([]))
     }
   }, [cart, user]);
 
@@ -45,6 +46,7 @@ const Success = () => {
         ¡Gracias por tu compra! Tú mascota estará muy feliz.
       </h4>
     </div>
-  );
+  )
 };
+
 export default Success;

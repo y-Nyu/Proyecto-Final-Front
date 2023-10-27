@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import style from "./FomProductEdit.module.css";
 import { useDispatch } from "react-redux";
 import { getAllUsers } from "../../redux/Actions/Users/usersActions";
 
-const FormUserEdit = ({ userEdit, closeModal }) => {
-  const [isValid, setIsValid] = useState(true);
+import axios from "axios";
+import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
+import style from "./FomProductEdit.module.css";
+
+const FormUserEdit = ({ userEdit, closeModal }) => {
+
+  const dispatch = useDispatch();
+  const [ isValid, setIsValid ] = useState(true);
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -15,42 +18,38 @@ const FormUserEdit = ({ userEdit, closeModal }) => {
     password: "",
     passwordConfirmation: "",
   });
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (userEdit) {
-      setData(userEdit);
+      setData(userEdit)
     }
   }, [userEdit]);
-  console.log("user", userEdit);
-  const [errors, setErrors] = useState({});
-  const dispatch = useDispatch();
+
   const submitHandler = (event) => {
-    event.preventDefault();
-    console.log(data);
+    event.preventDefault()
     axios
       .put(`https://pf-back-deploy.onrender.com/users/${data.id}`, data)
       .then((res) => {
-        alert("Usuario actualizado exitosamente!");
-        dispatch(getAllUsers());
-        closeModal();
+        alert("Usuario actualizado exitosamente!")
+        dispatch(getAllUsers())
+        closeModal()
       })
-
-      .catch((error) => alert(error));
+      .catch((error) => alert(error))
   };
 
   const handleChange = (event) => {
-    let { name, value } = event.target;
-    console.log("Data:...", data);
+    let { name, value } = event.target
     if (name === "name" || name === "email" || name === "celular") {
       setData({
         ...data,
         [name]: value,
-      });
+      })
     }
   };
 
   const isFormValid = () => {
-    setIsValid(Object.values(errors).every((error) => error === ""));
+    setIsValid(Object.values(errors).every((error) => error === ""))
   };
 
   return (
@@ -131,6 +130,7 @@ const FormUserEdit = ({ userEdit, closeModal }) => {
         </form>
       </div>
     </div>
-  );
+  )
 };
+
 export default FormUserEdit;

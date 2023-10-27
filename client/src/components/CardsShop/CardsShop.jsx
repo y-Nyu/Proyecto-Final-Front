@@ -1,10 +1,9 @@
 import CardShop from "../CardShop/CardShop"
 
 const CardsShop = ({compras}) => {
-  console.log('COMPRAS CARD', compras[0]);
+  
   return (
     <div>
-
         {compras
         ? (compras.map(compra => {
             return (
@@ -19,9 +18,8 @@ const CardsShop = ({compras}) => {
         }))
         : <h2>Sin compras</h2>
         }
-      
     </div>
   )
-}
+};
 
-export default CardsShop
+export default CardsShop;

@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategories, filterProducts, clearFilters, ordered } from '../../redux/Actions/Products/productsActions';
+
 import { Select, Button, Menu } from 'antd';
 import { FilterOutlined , AppstoreOutlined, UnorderedListOutlined } from '@ant-design/icons';
-import style from "./Filters.module.css";
+
 import Searchbar from '../SearchBar/SearchBar';
+import style from "./Filters.module.css";
 
 const { Option } = Select;
 const { SubMenu } = Menu;
@@ -15,17 +17,17 @@ const alphaSortTypes = {
 };
 
 const Filters = () => {
+
   const dispatch = useDispatch();
-  const allCategories = useSelector((state) => state.categories);
-
-  const prices = [5000, 7500, 10000, 25000];
-
   const [filters, setFilters] = useState({
     category: undefined,
     price: undefined,
     sort: undefined,
     name: undefined,
   });
+  const allCategories = useSelector((state) => state.categories);
+
+  const prices = [5000, 7500, 10000, 25000];
 
   useEffect(() => {
     dispatch(getCategories());
@@ -36,8 +38,8 @@ const Filters = () => {
       setFilters((prev) => ({
         ...prev,
         category: value,
-      }));
-      const filterString = createFilterString({ ...filters, category: value });
+      }))
+      const filterString = createFilterString({ ...filters, category: value })
       dispatch(filterProducts(filterString));
     } else if (name === 'clean') {
       setFilters({
@@ -46,54 +48,54 @@ const Filters = () => {
         sort: undefined,
         name: undefined,
       });
-      dispatch(clearFilters());
+      dispatch(clearFilters())
     }
   };
 
   const createFilterString = (filters_obj) => {
-    const filtersArr = [];
+    const filtersArr = []
 
     for (const key of Object.keys(filters_obj)) {
       if (filters_obj[key] !== undefined) {
-        filtersArr.push("" + key + "=" + filters_obj[key]);
+        filtersArr.push("" + key + "=" + filters_obj[key])
       }
     }
-    let filterString = "?";
-    filterString += filtersArr.join("&");
-    return filtersArr.length ? filterString : "";
+    let filterString = "?"
+    filterString += filtersArr.join("&")
+    return filtersArr.length ? filterString : ""
   };
 
   const changeMaxPrice = (value) => {
     setFilters((prev) => ({
       ...prev,
       price: value,
-    }));
-    const filterString = createFilterString({ ...filters, price: value });
-    dispatch(filterProducts(filterString));
+    }))
+    const filterString = createFilterString({ ...filters, price: value })
+    dispatch(filterProducts(filterString))
   };
 
   const changeSort = (value) => {
     if (alphaSortTypes[value]) {
-      const order = value === alphaSortTypes.alfa_asc;
-      dispatch(ordered(order));
+      const order = value === alphaSortTypes.alfa_asc
+      dispatch(ordered(order))
     }
 
     setFilters((prev) => ({
       ...prev,
       sort: value,
-    }));
+    }))
 
-    const filterString = createFilterString({ ...filters, sort: value });
-    dispatch(filterProducts(filterString));
+    const filterString = createFilterString({ ...filters, sort: value })
+    dispatch(filterProducts(filterString))
   };
 
   const searchByName = (name) => {
     setFilters((prev) => ({
       ...prev,
       name,
-    }));
-    const filterString = createFilterString({ ...filters, name });
-    dispatch(filterProducts(filterString));
+    }))
+    const filterString = createFilterString({ ...filters, name })
+    dispatch(filterProducts(filterString))
   };
 
   return (
@@ -145,7 +147,7 @@ const Filters = () => {
         </div>
       </div>
     </div>
-  );
+  )
 };
 
 export default Filters;

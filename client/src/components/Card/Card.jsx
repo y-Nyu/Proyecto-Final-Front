@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+
 import { CartContext } from "../../contexts/ShoppingCartContext";
+
 import style from "./card.module.css";
 
 const successBackgroundClass = "bg-success bg-opacity-75";
@@ -19,17 +21,17 @@ const Card = ({
   active,
   stock,
 }) => {
-  const [cart, setCart] = useContext(CartContext);
-  const [showToast, setShowToast] = useState(false);
-  const [toastPosition, setToastPosition] = useState("");
-  const [toastMessage, setToastMessage] = useState(
+  const [ cart, setCart ] = useContext(CartContext);
+  const [ showToast, setShowToast ] = useState(false);
+  const [ toastPosition, setToastPosition ] = useState("");
+  const [ toastMessage, setToastMessage ] = useState(
     "Producto añadido correctamente"
   );
-  const [toastClass, setToastClass] = useState("");
+  const [ toastClass, setToastClass ] = useState("");
 
   const toggleToast = () => {
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 3000);
+    setShowToast(true)
+    setTimeout(() => setShowToast(false), 3000)
   };
 
   const addToCart = (product) => {
@@ -43,27 +45,27 @@ const Card = ({
             <i className="bi bi-exclamation-triangle-fill"></i> Producto sin
             stock
           </span>
-        );
-        setToastClass(`${errorBackgroundClass} ${errorTextClass}`);
-        return currItems;
+        )
+        setToastClass(`${errorBackgroundClass} ${errorTextClass}`)
+        return currItems
       }
 
       if (isItemFound) {
         return currItems.map((item) => {
           if (item.id === id) {
-            return { ...item, quantity: item.quantity + 1 };
+            return { ...item, quantity: item.quantity + 1 }
           } else {
-            return item;
+            return item
           }
-        });
+        })
       } else {
         setToastMessage(
           <span>
             <i className="bi bi-check-circle"></i> Producto añadido
             correctamente
           </span>
-        );
-        setToastClass(`${successBackgroundClass} ${successTextClass}`); 
+        )
+        setToastClass(`${successBackgroundClass} ${successTextClass}`)
 
         return [
           ...currItems,
@@ -79,36 +81,9 @@ const Card = ({
             active,
             stock,
           },
-        ];
+        ]
       }
-    });
-  };
-
-  const removeItem = (id) => {
-    setCart((currItems) => {
-      if (currItems.find((item) => item.id === id)?.quantity === 1) {
-        return currItems.filter((item) => item.id !== id);
-      } else {
-        return currItems.map((item) => {
-          if (item.id === id) {
-            return {
-              ...item,
-              quantity: item.quantity - 1,
-              name,
-              price,
-              image,
-              brand,
-              category,
-              description,
-              active,
-              stock,
-            };
-          } else {
-            return item;
-          }
-        });
-      }
-    });
+    })
   };
 
   return (

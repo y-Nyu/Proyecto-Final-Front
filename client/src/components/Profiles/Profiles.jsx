@@ -1,6 +1,7 @@
 import style from './Profiles.module.css'
 
 const Profile = ( { id, name, github, linkedin, image } ) => {
+
   return (
     <div className="col-12 col-md-6 col-lg-3">
     <div className={`proyecto ${style.proyecto}`}>
@@ -36,6 +37,6 @@ const Profile = ( { id, name, github, linkedin, image } ) => {
     </div>
     </div>
   )
-}
+};
 
 export default Profile;

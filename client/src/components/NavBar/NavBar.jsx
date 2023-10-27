@@ -12,6 +12,7 @@ import jwt_decode from "jwt-decode"
 import style from "./Navbar.module.css";
 
 const NavBar = () => {
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
@@ -31,11 +32,11 @@ const NavBar = () => {
 
   const idUser = () => {
     if(token) {
-      const { id } = jwt_decode(token);
+      const { id } = jwt_decode(token)
       return id
     }
   };
-  // const token = sessionStorage.getItem("jwt_session");
+
   useEffect(() => {
     dispatch(getUserById(idUser))
     if (token) {
@@ -51,21 +52,20 @@ const NavBar = () => {
   };
 
   const handleCancel = () => {
-    setModalVisible(false);
+    setModalVisible(false)
   };
 
   const handleLogout = () => {
-    showConfirmModal();
+    showConfirmModal()
   };
 
   const confirmLogout = () => {
     setModalVisible(false);
-    sessionStorage.removeItem("jwt_session");
-    sessionStorage.removeItem("userRole");
-    dispatch(createUserRole(""));
-    dispatch(userLogOut());
-    loginState(true);
-
+    sessionStorage.removeItem("jwt_session")
+    sessionStorage.removeItem("userRole")
+    dispatch(createUserRole(""))
+    dispatch(userLogOut())
+    loginState(true)
     // Agrega un retraso breve antes de redirigir al usuario a la página de inicio
     setTimeout(() => {
       navigate('/');
@@ -198,7 +198,7 @@ const NavBar = () => {
         <p>Se cerrará la sesión. ¿Estás seguro?</p>
       </Modal>
     </div>
-  );
+  )
 };
 
 export default NavBar;

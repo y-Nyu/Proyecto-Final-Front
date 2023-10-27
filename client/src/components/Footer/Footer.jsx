@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
+
 import style from "./Footer.module.css";
 
 const Footer = () => {
-  const navigate = useNavigate();
+
+  const navigate = useNavigate()
 
   return (
     <div className={`mb-2 ${style.footer}`}>
@@ -61,7 +63,7 @@ const Footer = () => {
         </div>
       </footer>
     </div>
-  );
+  )
 };
 
 export default Footer;

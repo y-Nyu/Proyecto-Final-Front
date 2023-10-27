@@ -1,11 +1,8 @@
-import style from "./CardShop.module.css";
-import Rate from "../Rate/Rate";
-import { Modal, Button } from "antd";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import axios from "axios";
 import { Link } from "react-router-dom";
-import SaleDetail from "../../views/SaleDetail/SaleDetail";
+
+import { Button } from "antd";
+
+import style from "./CardShop.module.css";
 
 const CardShop = ({ id, total, date }) => {
   return (
@@ -29,10 +26,7 @@ const CardShop = ({ id, total, date }) => {
         </div>
       </div>
     </div>
-  );
+  )
 };
-
-
-
 
 export default CardShop;

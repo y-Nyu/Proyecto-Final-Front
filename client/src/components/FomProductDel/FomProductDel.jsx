@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { getAllProductsAdmin } from "../../redux/Actions/Products/productsActions";
+
 import axios from "axios";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
 import style from "./FomProductDel.module.css";
-import { getAllProductsAdmin } from "../../redux/Actions/Products/productsActions";
 
 const FormProductDel = ({ productEdit, closeModal }) => {
   const dispatch = useDispatch();
-  const [isValid, setIsValid] = useState(true);
+  const [ isValid, setIsValid ] = useState(true);
   const activo = ["Seleccione...", "Activar", "Desactivar"];
-
-  const [data, setData] = useState(
+  const [ data, setData ] = useState(
     productEdit || {
       name: "",
       image: "",
@@ -30,7 +31,7 @@ const FormProductDel = ({ productEdit, closeModal }) => {
         ...prevData,
         ...productEdit,
         active: "",
-      }));
+      }))
     }
   }, [productEdit]);
 
@@ -40,22 +41,22 @@ const FormProductDel = ({ productEdit, closeModal }) => {
       axios
         .put(`https://pf-back-deploy.onrender.com/product/${data.id}`, data)
         .then((res) => {
-          alert("Producto actualizado exitosamente!");
-          dispatch(getAllProductsAdmin());
+          alert("Producto actualizado exitosamente!")
+          dispatch(getAllProductsAdmin())
           closeModal();
         })
-        .catch((error) => alert(error));
+        .catch((error) => alert(error))
     } else {
-      alert("Seleccione una opción");
+      alert("Seleccione una opción")
     }
   };
 
   const handleChange = (event) => {
     if (event.target.name === "active") {
       if (event.target.value === "Activar") {
-        setData({ ...data, active: true });
+        setData({ ...data, active: true })
       } else {
-        setData({ ...data, active: false });
+        setData({ ...data, active: false })
       }
     }
   };
@@ -96,7 +97,7 @@ const FormProductDel = ({ productEdit, closeModal }) => {
         </form>
       </div>
     </div>
-  );
+  )
 };
 
 export default FormProductDel;

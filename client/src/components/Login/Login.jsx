@@ -1,85 +1,75 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { createUserRole, setUser } from "../../redux/Actions/Users/usersActions";
-import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import axios from "axios";
-import jwtDecode from 'jwt-decode'
-import style from './Login.module.css';
-import imgGoogle from "../../assets/iconos/google.png";
-import { validateLogin } from "../../Validate/Validate";
+import { useNavigate } from "react-router-dom";
 
-// EXTRA: Recuperación de contraseña
+import axios from "axios";
+import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+import { validateLogin } from "../../Validate/Validate";
+import imgGoogle from "../../assets/iconos/google.png";
+import style from './Login.module.css';
 
 const Login = ({ toggleComponent }) => {
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [showPassword, setShowPassword] = useState(false);
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
+  const [ showPassword, setShowPassword ] = useState(false);
   const [data, setData] = useState({
     email: "",
     password: "",
   });
-
   const [errors, setErrors] = useState({
     email: "",
     password: "",
   });
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword)
+  };
+
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value } = event.target
     setData({
       ...data,
       [name]: value,
-    });
+    })
     const newErrors = validateLogin({
       ...data,
       [name]: value,
-    });
-    setErrors(newErrors);
+    })
+    setErrors(newErrors)
   };
 
   const disableByEmptyProps = () => {
-    let disabledAux = true;
+    let disabledAux = true
     if (data.email === "" || data.password === "") {
-      disabledAux = true;
+      disabledAux = true
     } else {
-      disabledAux = false;
+      disabledAux = false
     }
-    return disabledAux;
+    return disabledAux
   };
 
-
-  //
-  // EN HANDLE SUBMIT EN VEZ DE HACER UN DISPATCH CON EL ID DE USUARIO
-  // USO LA ACCION setUser QUE CREE PARA USAR TODOS LOS DATOS QUE ME DEVUELVE EL BACK
-  // ASÍ QUE LA DECODIFICACIÓN DEL TOKEN JWT YA NO HACE FALTA TENERLA EN EL LOGIN
-  // NI EN EL REGISTRO
-
   const handleSubmit = (ev) => {
-    ev.preventDefault();
+    ev.preventDefault()
 
     axios.post("https://pf-back-deploy.onrender.com/login", data)
       .then(usrRes => {
-        const {id, email, name, rol, celular, address, token, sales} = usrRes.data;
+        const { id, email, name, rol, celular, address, token, sales } = usrRes.data;
 
         // Setteamos el token
-        sessionStorage.setItem("jwt_session", token);
-        sessionStorage.setItem("userRole", rol);
-        dispatch(createUserRole(rol));
-        dispatch(setUser({id, email, name, rol, celular, address, sales}));
-        navigate("/");
+        sessionStorage.setItem("jwt_session", token)
+        sessionStorage.setItem("userRole", rol)
+        dispatch(createUserRole(rol))
+        dispatch(setUser({id, email, name, rol, celular, address, sales}))
+        navigate("/")
       })
       .catch(error => {
         console.log(error);
         alert(error.response.data.error)
       })
   };
-
 
   const login = async () => {
     try
@@ -89,13 +79,11 @@ const Login = ({ toggleComponent }) => {
       //
       // ESTA URL ES EL FAMOSO POPUP QUE APARECE SIEMPRE QUE HACEMOS LOGIN CON GOOGLE
       //
-
       const { auth_url } = (
         await axios.post(
           "https://pf-back-deploy.onrender.com/login-google-init"
         )
       ).data;
-
       //
       // USANDO LA URL PROVISTA ABRIMOS UNA VENTANA QUE PIDE ESCOGER LA CUENTA DE MAIL
       // CON LA QUE VAMOS A HACER LOGIN
@@ -106,10 +94,7 @@ const Login = ({ toggleComponent }) => {
     {
       alert("Fallo al iniciar la autenticación con Google");
     }
-  
-  }
-
-  
+  };
 
   return (
     <div className="container">
@@ -215,7 +200,7 @@ const Login = ({ toggleComponent }) => {
         </div>
       </div>
     </div>
-  );
+  )
 };
 
 export default Login;
