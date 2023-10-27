@@ -1,24 +1,26 @@
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { setUser, getUserById } from "../../redux/Actions/Users/usersActions";
+
 import axios from "axios";
-import style from "./AccountDetail.module.css"
-import { useEffect } from "react";
 import jwtDecode from "jwt-decode";
+
 import { validateAccountDetail } from "../../Validate/Validate";
+import style from "./AccountDetail.module.css";
 
 const AccountDetail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const token = sessionStorage.getItem("jwt_session");
-  const userData = useSelector(state => state.userLogged)
-  const { id, name, email, celular, address } = userData
   const decodedToken = jwtDecode(token);
-  console.log('TOKEN', decodedToken);
   const userId = decodedToken.id;
 
+  const userData = useSelector(state => state.userLogged);
+  const { id, name, email, celular, address } = userData;
+  
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     dispatch(getUserById(userId));
@@ -49,8 +51,6 @@ const AccountDetail = () => {
     newPassword: "",
     passwordConfirmation: "",
   });
-
-  const [isEditing, setIsEditing] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -136,19 +136,19 @@ const AccountDetail = () => {
       <form className="w-75 mb-4" onSubmit={handleSubmit}>
         <fieldset disabled={!isEditing}>
           <legend className={`text-center mt-3" ${style.titulo}`}>
-              <h3><strong><ins>Detalles de mi cuenta</ins></strong></h3>
+            <h3><strong><ins>Detalles de mi cuenta</ins></strong></h3>
           </legend>
 
           <div className="row">
             <div className="col-md-6 mb-3">
-              <h5>Información personal</h5>
+              <h5>Perfil</h5>
               <div className={`mb-3 ${style.formElementLeft}`}>
                 <label htmlFor="name" className="form-label">
                   <em>Nombre</em>
                 </label>
                 <input
                   type="text"
-                  className="form-control"
+                  className={!isEditing || !errors.name ? `form-control ${style.input}` : `form-control ${style.inputE}`}
                   name="name"
                   value={isEditing ? userDetailCopy.name : userData.name}
                   onChange={handleChange}
@@ -162,7 +162,7 @@ const AccountDetail = () => {
                 </label>
                 <input
                   type="email"
-                  className="form-control"
+                  className={` ${style.input}`}
                   name="email"
                   value={isEditing ? userDetailCopy.email : userData.email}
                   onChange={handleChange}
@@ -253,26 +253,25 @@ const AccountDetail = () => {
           )}
 
           {!isEditing && (
-              <div className="d-flex">
-            <button
-              type="button"
-              className="btn btn-outline-primary"
-              onClick={() => setIsEditing(true)}
-            >
-             <i className="bi bi-pencil-square"></i> Modificar información
-            </button>
+            <div className="d-flex">
+              <button
+                type="button"
+                className="btn btn-outline-primary"
+                onClick={() => setIsEditing(true)}
+              >
+              <i className="bi bi-pencil-square"></i> Modificar información
+              </button>
 
-  
-        <button
-          type="button"
-          className="btn btn-outline-success ms-2"
-          onClick={() => {
-            navigate("/compras");
-          }}
-          >
-          <i className="bi bi-cart-check-fill"></i> Mis compras
-        </button>
-      </div>
+              <button
+                type="button"
+                className="btn btn-outline-success ms-2"
+                onClick={() => {
+                  navigate("/compras");
+                }}
+                >
+                <i className="bi bi-cart-check-fill"></i> Mis compras
+              </button>
+            </div>
           )}
         </div>
       </form>

@@ -1,3 +1,14 @@
 .titulo {
     font-family: 'Times New Roman', Times, serif;
 }
+
+
+
+.formElementLeft .input:focus {
+    border-color: rgb(221, 0, 255);
+}
+
+.formElementLeft .inputE:focus {
+    border-color: red;
+    border: 1px solid red;
+}

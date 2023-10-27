@@ -1,6 +1,7 @@
 import style from "./Privacy.module.css";
 
 const Privacy = () => {
+  
   return (
     <div className={`container text-center ${style.containerPrivacy}`}>
       <div className="row m-2 d-flex flex-column">

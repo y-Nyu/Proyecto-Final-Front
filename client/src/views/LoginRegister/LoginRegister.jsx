@@ -1,14 +1,17 @@
-import Login from "../../components/Login/Login";
-import Register from "../../components/Register/Register";
 import { useState } from "react";
+
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
+
+import Register from "../../components/Register/Register";
+import Login from "../../components/Login/Login";
 import style from './LoginRegister.module.css';
 
 const LoginRegister = () => {
-    const [showLogin, setShowLogin] = useState(true);
+
+    const [showLogin, setShowLogin] = useState(true)
 
     const toggleComponent = () => {
-      setShowLogin(!showLogin);
+      setShowLogin(!showLogin)
     };
 
     return(

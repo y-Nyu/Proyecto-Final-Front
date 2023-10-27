@@ -1,58 +1,60 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+
 import { CartContext } from "../../contexts/ShoppingCartContext";
-import style from "./Cart.module.css";
 import axios from "axios";
-import { PoweroffOutlined } from "@ant-design/icons";
 import { Modal, Button } from "antd";
+import { PoweroffOutlined } from "@ant-design/icons";
+
 import carritoVacio from "../../assets/img/Carritovacio3.png";
+import style from "./Cart.module.css";
 
 const Cart = ({ isVisible, onClose }) => {
-  const [cart, setCart] = useContext(CartContext);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [productToAdd, setProductToAdd] = useState(null);
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [loginMessage, setLoginMessage] = useState("");
+  const [ cart, setCart ] = useContext(CartContext);
+  const [ totalPrice, setTotalPrice ] = useState(0);
+  const [ productToAdd, setProductToAdd ] = useState(null);
+  const [ showLoginModal, setShowLoginModal ] = useState(false);
+  const [ loginMessage, setLoginMessage ] = useState("");
 
   useEffect(() => {
     const newTotalPrice = cart.reduce(
       (total, item) => total + item.price * item.quantity,
       0
-    );
-    setTotalPrice(newTotalPrice); 
+    )
+    setTotalPrice(newTotalPrice)
   }, [cart]);
 
   useEffect(() => {
     if (isVisible) {
-      document.body.classList.add("overlay");
+      document.body.classList.add("overlay")
     } else {
-      document.body.classList.remove("overlay");
+      document.body.classList.remove("overlay")
     }
   }, [isVisible]);
 
   const incrementAmount = (productId) => {
     const updatedCart = [...cart];
-    const product = updatedCart.find((p) => p.id === productId);
+    const product = updatedCart.find((p) => p.id === productId)
 
     if (product.quantity < product.stock) {
-      product.quantity += 1;
+      product.quantity += 1
     } else {
-      setProductToAdd(product);
+      setProductToAdd(product)
     }
-    setCart(updatedCart);
+    setCart(updatedCart)
   };
 
   const decrementAmount = (productId) => {
-    const updatedCart = [...cart];
-    const product = updatedCart.find((p) => p.id === productId);
+    const updatedCart = [...cart]
+    const product = updatedCart.find((p) => p.id === productId)
     if (product.quantity > 1) {
-      product.quantity -= 1;
+      product.quantity -= 1
     }
-    setCart(updatedCart);
+    setCart(updatedCart)
   };
 
   const removeItem = (productId) => {
-    const updatedCart = cart.filter((product) => product.id !== productId);
-    setCart(updatedCart);
+    const updatedCart = cart.filter((product) => product.id !== productId)
+    setCart(updatedCart)
   };
 
   const checkOut = async () => {
@@ -61,14 +63,14 @@ const Cart = ({ isVisible, onClose }) => {
       const { data } = await axios.post(
         "https://pf-back-deploy.onrender.com/create-order",
         cart
-      );
-      const initPoint = await data.body.init_point;
+      )
+      const initPoint = await data.body.init_point
   
-      window.location.href = initPoint;
+      window.location.href = initPoint
     } else {
-      setLoginMessage("Deberás ingresar o registrarte");
+      setLoginMessage("Deberás ingresar o registrarte")
       setShowLoginModal(true);
-      navigate("/inicioSesionRegistro");
+      navigate("/inicioSesionRegistro")
     }
   };
 
@@ -109,10 +111,7 @@ const Cart = ({ isVisible, onClose }) => {
               />
             </div>
           ) : (
-            <div
-              className={style.productoGrid}
-              style={{ maxHeight: "430px", overflowY: "auto" }}
-            >
+            <div className={style.productoGrid} style={{ maxHeight: "430px", overflowY: "auto" }}>
               {cart.map((item, index) => (
                 <div className={style.producto} key={item.id}>
                   <img
@@ -207,21 +206,18 @@ const Cart = ({ isVisible, onClose }) => {
         </Modal>
       )}
       <Modal
-  title="Para continuar..."
-  open={showLoginModal}
-  onOk={() => setShowLoginModal(false)}
-  onCancel={() => setShowLoginModal(false)}
-  footer={[
-    <Button key="ok" type="primary" onClick={() => setShowLoginModal(false)}>
-      OK
-    </Button>
-  ]}
->
-  {loginMessage}
-</Modal>
-
-      
-
+        title="Para continuar..."
+        open={showLoginModal}
+        onOk={() => setShowLoginModal(false)}
+        onCancel={() => setShowLoginModal(false)}
+        footer={[
+          <Button key="ok" type="primary" onClick={() => setShowLoginModal(false)}>
+            OK
+          </Button>
+        ]}
+      >
+        {loginMessage}
+      </Modal>
     </div>
   );
 };

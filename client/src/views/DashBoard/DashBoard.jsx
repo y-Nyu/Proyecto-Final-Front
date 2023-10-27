@@ -1,19 +1,23 @@
 import { useState } from "react";
+
+import { Button } from "antd";
+
 import DashBoardProducts from "../DashBoardProducts/DashBoardProducts";
 import DashBoardUsers from "../DashBoardUsers/DashBoardUsers";
 import DashBoardSales from "../DashBoardSales/DashBoardSales";
-import { Button } from "antd";
 import "./DashBoard.modules.css";
 
 function DashBoard() {
-  const [views, setViews] = useState("DashBoardProducts");
+
+  const [views, setViews] = useState("DashBoardProducts")
   const productSelect = (view) => {
-    setViews(view);
+    setViews(view)
   };
 
   const userSelect = (view) => {
     setViews(view);
   };
+
   return (
     <div>
       <div className="topButtons">
@@ -44,7 +48,7 @@ function DashBoard() {
       {views === "DashBoardUsers" && <DashBoardUsers />}
       {views === "DashBoardSales" && <DashBoardSales />}
     </div>
-  );
-}
+  )
+};
 
 export default DashBoard;

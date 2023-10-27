@@ -1,36 +1,40 @@
 import { useEffect, useState } from "react";
-import { Table, Button, Modal } from "antd";
-import { EditFilled, DeleteFilled } from "@ant-design/icons";
-import FormProductEdit from "../../components/FomProductEdit/FomProductEdit";
-import FormProductDel from "../../components/FomProductDel/FomProductDel";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getAllProductsAdmin,
   searchProducts,
 } from "../../redux/Actions/Products/productsActions";
-import { useDispatch, useSelector } from "react-redux";
+
+import { Table, Button, Modal } from "antd";
+import { EditFilled, DeleteFilled } from "@ant-design/icons";
+
+import FormProductEdit from "../../components/FomProductEdit/FomProductEdit";
+import FormProductDel from "../../components/FomProductDel/FomProductDel";
 import Searchbar from "../../components/SearchBar/SearchBar";
 import "./DashBoard.modules.css";
+
 const DashBoard = () => {
+
   const dispatch = useDispatch();
+  const [ selected, setSelected ] = useState({});
+  const [ modalIns, setModalIns ] = useState(false);
+  const [ modalEdit, setModalEdit ] = useState(false);
+  const [ modalDel, setModalDel ] = useState(false);
   const products = useSelector((state) => state.productsAdmin);
+
   useEffect(() => {
     if (products.length == 0) {
-      dispatch(getAllProductsAdmin());
+      dispatch(getAllProductsAdmin())
     }
   }, [dispatch]);
 
-  const [selected, setSelected] = useState({});
-  const [modalIns, setModalIns] = useState(false);
-  const [modalEdit, setModalEdit] = useState(false);
-  const [modalDel, setModalDel] = useState(false);
-
   const productSelect = (record, option) => {
     if (option === "Edit") {
-      setSelected(record);
-      handleModalEdit();
+      setSelected(record)
+      handleModalEdit()
     } else {
-      setSelected(record);
-      handleModalDel();
+      setSelected(record)
+      handleModalDel()
     }
   };
 
@@ -103,19 +107,18 @@ const DashBoard = () => {
   ];
 
   const handleModalIns = () => {
-    setModalIns(!modalIns);
+    setModalIns(!modalIns)
   };
 
   const handleModalEdit = () => {
-    setModalEdit(!modalEdit);
+    setModalEdit(!modalEdit)
   };
   const handleModalDel = () => {
-    setModalDel(!modalDel);
+    setModalDel(!modalDel)
   };
 
   const searchByName = (name) => {
-    console.log("Searching for:", name);
-    dispatch(searchProducts(name));
+    dispatch(searchProducts(name))
   };
 
   return (
@@ -168,7 +171,7 @@ const DashBoard = () => {
         />
       </Modal>
     </div>
-  );
+  )
 };
 
 export default DashBoard;

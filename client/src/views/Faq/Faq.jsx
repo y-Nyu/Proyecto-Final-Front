@@ -5,6 +5,7 @@ import imageMercado from "../../assets/tarj/mercadoPago1.png";
 import style from "./Faq.module.css";
 
 const Faq = () => {
+
   return (
     <div className="vh-100 bg-light d flex align-items-center">
       <div className="h-75 container-sm mx-auto">
@@ -248,7 +249,7 @@ const Faq = () => {
         </div>
       </div>
     </div>
-  );
+  )
 };
 
 export default Faq;

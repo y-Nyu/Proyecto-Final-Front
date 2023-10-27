@@ -1,30 +1,31 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSales } from "../../redux/Actions/Users/usersActions";
+
 import { Table, Button, Modal } from "antd";
 import { EyeOutlined } from "@ant-design/icons";
 
 function DashBoardSales() {
+
   const dispatch = useDispatch();
   const salesReport = useSelector((state) => state.sales);
+  const [ modalView, setModalView ] = useState(false);
+  const [ selected, setSelected ] = useState({});
 
   useEffect(() => {
     console.log("ventas:", salesReport);
     if (salesReport.length == 0) {
-      dispatch(getSales());
+      dispatch(getSales())
     }
   }, [dispatch]);
 
-  const [modalView, setModalView] = useState(false);
-  const [selected, setSelected] = useState({});
-
   const handleModalView = () => {
-    setModalView(!modalView);
+    setModalView(!modalView)
   };
 
   const viewSale = (record) => {
-    setSelected(record);
-    handleModalView();
+    setSelected(record)
+    handleModalView()
   };
 
   const columns = [
@@ -105,7 +106,7 @@ function DashBoardSales() {
         </div>
       </Modal>
     </div>
-  );
-}
+  )
+};
 
 export default DashBoardSales;

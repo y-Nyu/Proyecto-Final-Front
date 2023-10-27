@@ -16,41 +16,41 @@ const Store = () => {
 
   useEffect(() => {
     // if (allProducts.length == 0) {
-      dispatch(getAllProducts());
+      dispatch(getAllProducts())
     // }
   }, [dispatch]);
 
   // Verificar si solo hay una página y establecer la página actual en 1
   useEffect(() => {
     if (totalPages <= 3 && currentPage !== 1) {
-      dispatch(setPage(1));
+      dispatch(setPage(1))
     }
   }, [currentPage, totalPages, dispatch]);
 
   // Función para obtener los products de la página actual
   const getCurrentProducts = () => {
-    const startIndex = (currentPage - 1) * productsPerPage;
-    const endIndex = startIndex + productsPerPage;
-    return allProducts.slice(startIndex, endIndex);
+    const startIndex = (currentPage - 1) * productsPerPage
+    const endIndex = startIndex + productsPerPage
+    return allProducts.slice(startIndex, endIndex)
   };
 
   // Función para cambiar a la página anterior
   const handlePrevPage = () => {
     if (currentPage > 1) {
-      dispatch(setPage(currentPage - 1));
+      dispatch(setPage(currentPage - 1))
     }
   };
 
   // Función para cambiar a la página siguiente
   const handleNextPage = () => {
     if (currentPage < totalPages) {
-      dispatch(setPage(currentPage + 1));
+      dispatch(setPage(currentPage + 1))
     }
   };
 
   return (
     <div>
-      <Filters />
+      <Filters/>
       <nav aria-label="Page navigation example">
         <ul className="pagination justify-content-center">
           <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
@@ -86,7 +86,7 @@ const Store = () => {
         <Cards products={getCurrentProducts()} />
       </div>
     </div>
-  );
+  )
 };
 
 export default Store;
