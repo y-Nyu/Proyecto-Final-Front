@@ -162,7 +162,7 @@ const AccountDetail = () => {
                 </label>
                 <input
                   type="email"
-                  className={` ${style.input}`}
+                  className={`form-control ${style.input}`}
                   name="email"
                   value={isEditing ? userDetailCopy.email : userData.email}
                   onChange={handleChange}

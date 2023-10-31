@@ -6,9 +6,10 @@ import Detail from "./views/Detail/Detail";
 import Faq from "./views/Faq/Faq";
 import Footer from "./components/Footer/Footer";
 import Home from "./views/Home/Home";
-import LoginRegister from "./views/LoginRegister/LoginRegister";
+import Login from "./views/Login/Login";
 import NavBar from "./components/NavBar/NavBar";
 import Privacy from "./views/PrivacyP/Privacy";
+import Register from "./views/Register/Register";
 import SaleDetail from "./views/SaleDetail/SaleDetail";
 import Sales from "./views/Sales/Sales";
 import Store from "./views/Store/Store";
@@ -121,7 +122,8 @@ const App = () => {
           <Route path="/detalleProducto/:id" element={<Detail/>}/>
           <Route path="/sobre-nosotros" element={<About/>}/>
           <Route path="/success" element={<Success/>}/>
-          <Route path="/inicioSesionRegistro" element={<LoginRegister/>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/register" element={<Register/>}/>
           <Route path="/:usuario" element={!token ? <Navigate to="/"/> : <AccountDetail/>}/>
           <Route path="/carritoCompras" element={<Cart/>}/>
           <Route path="/compras" element={!token ? <Navigate to="/"/> : <Sales/>}/>

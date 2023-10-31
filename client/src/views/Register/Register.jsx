@@ -9,7 +9,7 @@ import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import { validateRegister } from "../../Validate/Validate";
 import style from './Register.module.css';
 
-const Register = ({ toggleComponent }) => {
+const Register = () => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate();
@@ -68,8 +68,10 @@ const Register = ({ toggleComponent }) => {
     
   return(
     <div className="container">
-      <h3 className='fw-bold text-center pt-3'>Crear nueva cuenta</h3>
-      <form onSubmit={register} className="col">
+      <div className='row'>
+        <div className={`col-md-6 ${style.backgroundLogin}`}></div>
+        <form onSubmit={register} className="col">
+        <h3 className='fw-bold text-center pt-3'>Crear nueva cuenta</h3>
         <div className="mb-4 pt-1">
             <label className="form-label"><strong>Nombre</strong></label>
             <input onChange={handleChange} type='text' name='name' value={data.name} placeholder="Ingresa tu nombre" className="form-control"/>
@@ -178,11 +180,20 @@ const Register = ({ toggleComponent }) => {
           </div>
           <div className="row my-3">
             <div className="col d-flex justify-content-center">
-                <p>¿Tienes una cuenta? <a onClick={toggleComponent} className='btn-outline-primary custom-button-height mx-2' style={{ cursor: "pointer" }}>Inicia sesión</a></p>
+                <p>¿Tienes una cuenta? 
+                  <a 
+                    onClick={() => navigate("/login")} 
+                    className='btn-outline-primary custom-button-height mx-2' 
+                    style={{ cursor: "pointer" }}
+                  >
+                    Inicia sesión
+                  </a>
+                </p>
             </div>
           </div>
         </div>
-      </form>
+        </form>
+      </div>
     </div>
   )
 };

@@ -130,16 +130,10 @@ const NavBar = () => {
                 <>
                   <button
                     className={`btn btn-sm ${style.btn}`}
-                    onClick={() => navigate("/inicioSesionRegistro")}
+                    onClick={() => navigate("/login")}
                   >
                     Ingresar
                   </button>
-                  {/* <button
-                    className={`btn btn-sm ${style.btn}`}
-                    onClick={() => navigate("/loginRegister")}
-                  >
-                    Registrarse
-                  </button> */}
                 </>
               ) : (
                 <>

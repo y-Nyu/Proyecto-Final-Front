@@ -7,8 +7,9 @@ import { EditFilled, DeleteFilled } from "@ant-design/icons";
 
 import FormUserDel from "../../components/FomUserDel/FomUserDel";
 import FormUserEdit from "../../components/FomUserEdit/FomUserEdit";
-import RegisterInDash from "../../components/Register/RegisterInDash";
+// import RegisterInDash from "../../components/Register/RegisterInDash";
 import "./DashBoard.modules.css";
+import RegisterInDash from "../Register/RegisterInDash";
 
 const DashBoardUsers = () => {
 
